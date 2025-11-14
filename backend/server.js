@@ -914,40 +914,9 @@ app.get('/api/search/suggestions', async (req, res) => {
 // ====================
 
 // Intégration paiement
-const paymentService = {
-  initOrangeMoneyPayment: async (paymentData) => {
-    // Intégration API Orange Money
-    const response = await fetch('https://api.orange.com/orange-money-webpay/dev/v1/webpayment', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${process.env.ORANGE_MONEY_TOKEN}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        merchant_key: process.env.ORANGE_MERCHANT_KEY,
-        currency: "XOF",
-        order_id: paymentData.orderId,
-        amount: paymentData.amount,
-        return_url: `${process.env.CLIENT_URL}/payment/success`,
-        cancel_url: `${process.env.CLIENT_URL}/payment/cancel`,
-        notify_url: `${process.env.API_URL}/api/payments/webhook`
-      })
-    });
-    
-    return await response.json();
-  },
-  
-  verifyPayment: async (transactionId) => {
-    // Vérification du statut du paiement
-    const response = await fetch(`https://api.orange.com/orange-money-webpay/dev/v1/transactionstatus/${transactionId}`, {
-      headers: {
-        'Authorization': `Bearer ${process.env.ORANGE_MONEY_TOKEN}`
-      }
-    });
-    
-    return await response.json();
-  }
-};
+// ====================
+// 💳 ROUTES PAIEMENT (SIMULATION) - UNE SEULE DÉCLARATION
+// ====================
 
 const paymentService = {
   processOrangeMoneyPayment: async (paymentData) => {
@@ -978,9 +947,34 @@ const paymentService = {
   }
 };
 
+// Gardez les routes de paiement existantes
 app.post('/api/payments/orange-money', async (req, res) => {
   try {
     const result = await paymentService.processOrangeMoneyPayment(req.body);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+});
+
+app.post('/api/payments/wave', async (req, res) => {
+  try {
+    const result = await paymentService.processWavePayment(req.body);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+});
+
+app.post('/api/payments/card', async (req, res) => {
+  try {
+    const result = await paymentService.processCardPayment(req.body);
     res.json(result);
   } catch (error) {
     res.status(500).json({
