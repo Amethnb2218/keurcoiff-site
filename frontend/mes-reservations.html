@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Réservations • KeurCoiff'</title>
+    
+    <!-- Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#7C3AED',
+                        secondary: '#F59E0B', 
+                        accent: '#10B981',
+                        dark: '#1F2937',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .loader-small {
+            border: 2px solid #f3f4f6;
+            border-top: 2px solid #7C3AED;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .reservation-card {
+            transition: all 0.3s ease;
+        }
+        
+        .reservation-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body class="font-inter bg-gray-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <a href="index.html" class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-gradient-to-r from-primary to-purple-600 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-crown text-white"></i>
+                        </div>
+                        <span class="text-xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">KeurCoiff'</span>
+                    </a>
+                </div>
+
+                <!-- Menu navigation -->
+                <div class="flex items-center space-x-6">
+                    <a href="index.html" class="text-gray-600 hover:text-primary transition-colors flex items-center space-x-2">
+                        <i class="fas fa-home"></i>
+                        <span class="hidden sm:inline">Accueil</span>
+                    </a>
+                    <a href="profile.html" class="text-gray-600 hover:text-primary transition-colors flex items-center space-x-2">
+                        <i class="fas fa-user"></i>
+                        <span class="hidden sm:inline">Mon profil</span>
+                    </a>
+                    <button onclick="logout()" class="text-gray-600 hover:text-primary transition-colors flex items-center space-x-2">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span class="hidden sm:inline">Déconnexion</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section Réservations -->
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- En-tête -->
+        <div class="text-center mb-8 fade-in">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Mes Réservations</h1>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                Gérez et suivez toutes vos réservations de coiffure
+            </p>
+        </div>
+
+        <!-- Filtres et statistiques -->
+        <div class="bg-white rounded-3xl shadow-lg p-6 mb-8 fade-in">
+            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+                <!-- Filtres -->
+                <div class="flex flex-wrap gap-3">
+                    <button class="filter-btn active bg-primary text-white px-4 py-2 rounded-xl font-medium transition-all" data-filter="all">
+                        Toutes
+                    </button>
+                    <button class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-xl font-medium transition-all hover:bg-gray-300" data-filter="confirmed">
+                        Confirmées
+                    </button>
+                    <button class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-xl font-medium transition-all hover:bg-gray-300" data-filter="completed">
+                        Terminées
+                    </button>
+                    <button class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-xl font-medium transition-all hover:bg-gray-300" data-filter="cancelled">
+                        Annulées
+                    </button>
+                </div>
+
+                <!-- Statistiques -->
+                <div class="flex items-center space-x-6 text-sm">
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-primary" id="totalReservations">0</div>
+                        <div class="text-gray-600">Total</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-green-600" id="upcomingReservations">0</div>
+                        <div class="text-gray-600">À venir</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenu principal -->
+        <div id="loadingSection" class="text-center py-12">
+            <div class="loader mx-auto mb-4"></div>
+            <div class="text-gray-600">Chargement de vos réservations...</div>
+        </div>
+
+        <!-- Liste des réservations -->
+        <div id="reservationsContent" class="hidden fade-in">
+            <div id="reservationsList" class="space-y-4">
+                <!-- Les réservations seront chargées ici -->
+            </div>
+
+            <!-- Message si aucune réservation -->
+            <div id="noReservations" class="hidden text-center py-12">
+                <div class="bg-white rounded-3xl shadow-lg p-8 max-w-md mx-auto">
+                    <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-calendar-times text-gray-400 text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">Aucune réservation</h2>
+                    <p class="text-gray-600 mb-6">Vous n'avez pas encore de réservation.</p>
+                    <a href="index.html" class="bg-primary text-white px-6 py-3 rounded-xl font-semibold hover:bg-purple-600 transition-colors inline-block">
+                        Réserver maintenant
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Message si non connecté -->
+        <div id="notLoggedIn" class="hidden text-center py-12">
+            <div class="bg-white rounded-3xl shadow-lg p-8 max-w-md mx-auto">
+                <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-exclamation-triangle text-red-600 text-2xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">Accès non autorisé</h2>
+                <p class="text-gray-600 mb-6">Vous devez être connecté pour voir vos réservations.</p>
+                <div class="flex space-x-4 justify-center">
+                    <a href="login.html" class="bg-primary text-white px-6 py-3 rounded-xl font-semibold hover:bg-purple-600 transition-colors">
+                        Se connecter
+                    </a>
+                    <a href="register.html" class="bg-gray-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-gray-600 transition-colors">
+                        S'inscrire
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de détails de réservation -->
+    <div id="reservationModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-3xl p-6 max-w-md w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold text-gray-900">Détails de la réservation</h3>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <div id="modalContent">
+                <!-- Contenu chargé dynamiquement -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Données de démonstration
+        const demoReservations = [
+            {
+                id: '1',
+                salonName: 'Salon Awa Beauty',
+                serviceName: 'Tresses vanilles',
+                price: 8000,
+                date: '2024-12-15',
+                time: '14:00',
+                status: 'completed',
+                statusText: 'Terminée',
+                statusColor: 'bg-green-100 text-green-800',
+                salonAddress: 'Plateau, Dakar',
+                duration: '2h 30min',
+                notes: 'Tresses vanilles moyennes avec perles',
+                rating: 5
+            },
+            {
+                id: '2',
+                salonName: 'Chez Ibra',
+                serviceName: 'Coupe homme + Barbe',
+                price: 4500,
+                date: '2024-12-20',
+                time: '16:30',
+                status: 'confirmed',
+                statusText: 'Confirmée',
+                statusColor: 'bg-blue-100 text-blue-800',
+                salonAddress: 'Ouakam, Dakar',
+                duration: '1h 15min',
+                notes: 'Dégradé moderne avec taille de barbe',
+                rating: null
+            },
+            {
+                id: '3',
+                salonName: 'Beauty Dakar',
+                serviceName: 'Coupe et brushing',
+                price: 7000,
+                date: '2024-12-10',
+                time: '11:00',
+                status: 'completed',
+                statusText: 'Terminée',
+                statusColor: 'bg-green-100 text-green-800',
+                salonAddress: 'Almadies, Dakar',
+                duration: '1h 30min',
+                notes: 'Coupe carrée avec brushing lisse',
+                rating: 4
+            },
+            {
+                id: '4',
+                salonName: 'Tresses&Déco',
+                serviceName: 'Tresses africaines',
+                price: 6000,
+                date: '2024-12-05',
+                time: '10:00',
+                status: 'cancelled',
+                statusText: 'Annulée',
+                statusColor: 'bg-red-100 text-red-800',
+                salonAddress: 'Medina, Dakar',
+                duration: '3h 00min',
+                notes: 'Tresses traditionnelles',
+                rating: null
+            }
+        ];
+
+        let currentFilter = 'all';
+        let currentReservations = [];
+
+        // Vérifier l'authentification au chargement
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📅 Chargement de la page réservations...');
+            checkAuthentication();
+            initializeFilters();
+        });
+
+        function checkAuthentication() {
+            const token = localStorage.getItem('keurcoiff_token');
+            const user = localStorage.getItem('keurcoiff_user');
+            
+            console.log('🔐 Vérification auth - Token:', !!token, 'User:', !!user);
+            
+            if (!token || !user) {
+                document.getElementById('loadingSection').classList.add('hidden');
+                document.getElementById('notLoggedIn').classList.remove('hidden');
+                return;
+            }
+            
+            loadReservations();
+        }
+
+        function initializeFilters() {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Retirer la classe active de tous les boutons
+                    document.querySelectorAll('.filter-btn').forEach(b => {
+                        b.classList.remove('active', 'bg-primary', 'text-white');
+                        b.classList.add('bg-gray-200', 'text-gray-700');
+                    });
+                    
+                    // Activer le bouton cliqué
+                    this.classList.add('active', 'bg-primary', 'text-white');
+                    this.classList.remove('bg-gray-200', 'text-gray-700');
+                    
+                    currentFilter = this.dataset.filter;
+                    filterReservations();
+                });
+            });
+        }
+
+        async function loadReservations() {
+            try {
+                // Simulation de chargement depuis l'API
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                // Pour l'instant, on utilise les données de démo
+                currentReservations = demoReservations;
+                
+                updateStatistics();
+                displayReservations();
+                
+                document.getElementById('loadingSection').classList.add('hidden');
+                document.getElementById('reservationsContent').classList.remove('hidden');
+                
+            } catch (error) {
+                console.error('❌ Erreur chargement réservations:', error);
+                showNotification('Erreur lors du chargement des réservations', 'error');
+            }
+        }
+
+        function updateStatistics() {
+            const total = currentReservations.length;
+            const upcoming = currentReservations.filter(r => 
+                r.status === 'confirmed' && new Date(r.date) > new Date()
+            ).length;
+            
+            document.getElementById('totalReservations').textContent = total;
+            document.getElementById('upcomingReservations').textContent = upcoming;
+        }
+
+        function filterReservations() {
+            let filteredReservations = currentReservations;
+            
+            if (currentFilter !== 'all') {
+                filteredReservations = currentReservations.filter(r => r.status === currentFilter);
+            }
+            
+            displayReservations(filteredReservations);
+        }
+
+        function displayReservations(reservations = currentReservations) {
+            const container = document.getElementById('reservationsList');
+            const noReservations = document.getElementById('noReservations');
+            
+            if (reservations.length === 0) {
+                container.innerHTML = '';
+                noReservations.classList.remove('hidden');
+                return;
+            }
+            
+            noReservations.classList.add('hidden');
+            
+            // Trier par date (plus récent en premier)
+            const sortedReservations = [...reservations].sort((a, b) => 
+                new Date(b.date) - new Date(a.date)
+            );
+            
+            container.innerHTML = sortedReservations.map(reservation => `
+                <div class="reservation-card bg-white rounded-2xl shadow-lg p-6 border border-gray-200">
+                    <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+                        <!-- Informations de base -->
+                        <div class="flex-1">
+                            <div class="flex items-start justify-between mb-3">
+                                <div>
+                                    <h3 class="text-lg font-semibold text-gray-900">${reservation.salonName}</h3>
+                                    <p class="text-gray-600">${reservation.serviceName}</p>
+                                </div>
+                                <span class="${reservation.statusColor} px-3 py-1 rounded-full text-sm font-medium">
+                                    ${reservation.statusText}
+                                </span>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
+                                <div class="flex items-center text-gray-600">
+                                    <i class="fas fa-calendar text-primary mr-2"></i>
+                                    <span>${formatDate(reservation.date)}</span>
+                                </div>
+                                <div class="flex items-center text-gray-600">
+                                    <i class="fas fa-clock text-primary mr-2"></i>
+                                    <span>${reservation.time}</span>
+                                </div>
+                                <div class="flex items-center text-gray-600">
+                                    <i class="fas fa-map-marker-alt text-primary mr-2"></i>
+                                    <span>${reservation.salonAddress}</span>
+                                </div>
+                                <div class="flex items-center text-gray-900 font-semibold">
+                                    <i class="fas fa-money-bill-wave text-primary mr-2"></i>
+                                    <span>${reservation.price.toLocaleString()} FCFA</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Actions -->
+                        <div class="flex items-center space-x-3">
+                            <button onclick="viewReservationDetails('${reservation.id}')" 
+                                    class="bg-primary text-white px-4 py-2 rounded-xl font-medium hover:bg-purple-600 transition-colors flex items-center space-x-2">
+                                <i class="fas fa-eye"></i>
+                                <span class="hidden sm:inline">Détails</span>
+                            </button>
+                            
+                            ${reservation.status === 'confirmed' ? `
+                                <button onclick="cancelReservation('${reservation.id}')" 
+                                        class="bg-red-500 text-white px-4 py-2 rounded-xl font-medium hover:bg-red-600 transition-colors flex items-center space-x-2">
+                                    <i class="fas fa-times"></i>
+                                    <span class="hidden sm:inline">Annuler</span>
+                                </button>
+                            ` : ''}
+                            
+                            ${reservation.status === 'completed' && !reservation.rating ? `
+                                <button onclick="rateReservation('${reservation.id}')" 
+                                        class="bg-secondary text-white px-4 py-2 rounded-xl font-medium hover:bg-orange-600 transition-colors flex items-center space-x-2">
+                                    <i class="fas fa-star"></i>
+                                    <span class="hidden sm:inline">Noter</span>
+                                </button>
+                            ` : ''}
+                        </div>
+                    </div>
+                    
+                    <!-- Note affichée si existante -->
+                    ${reservation.rating ? `
+                        <div class="mt-4 pt-4 border-t border-gray-200">
+                            <div class="flex items-center space-x-2 text-yellow-400">
+                                ${'★'.repeat(reservation.rating)}${'☆'.repeat(5 - reservation.rating)}
+                                <span class="text-gray-600 text-sm">Votre note</span>
+                            </div>
+                        </div>
+                    ` : ''}
+                </div>
+            `).join('');
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('fr-FR', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        function viewReservationDetails(reservationId) {
+            const reservation = currentReservations.find(r => r.id === reservationId);
+            if (!reservation) return;
+            
+            const modalContent = document.getElementById('modalContent');
+            modalContent.innerHTML = `
+                <div class="space-y-4">
+                    <!-- En-tête -->
+                    <div class="bg-gradient-to-r from-primary to-purple-600 text-white p-4 rounded-2xl">
+                        <h4 class="font-bold text-lg">${reservation.salonName}</h4>
+                        <p class="text-white/80">${reservation.serviceName}</p>
+                    </div>
+                    
+                    <!-- Informations détaillées -->
+                    <div class="grid gap-3 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Date et heure:</span>
+                            <span class="font-semibold">${formatDate(reservation.date)} à ${reservation.time}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Durée:</span>
+                            <span class="font-semibold">${reservation.duration}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Adresse:</span>
+                            <span class="font-semibold">${reservation.salonAddress}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Prix:</span>
+                            <span class="font-semibold text-primary">${reservation.price.toLocaleString()} FCFA</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Statut:</span>
+                            <span class="${reservation.statusColor} px-2 py-1 rounded-full text-xs font-medium">${reservation.statusText}</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Notes -->
+                    ${reservation.notes ? `
+                        <div>
+                            <h5 class="font-semibold text-gray-900 mb-2">Notes supplémentaires:</h5>
+                            <p class="text-gray-600 bg-gray-50 p-3 rounded-xl">${reservation.notes}</p>
+                        </div>
+                    ` : ''}
+                    
+                    <!-- Note -->
+                    ${reservation.rating ? `
+                        <div>
+                            <h5 class="font-semibold text-gray-900 mb-2">Votre note:</h5>
+                            <div class="flex items-center space-x-2 text-yellow-400">
+                                ${'★'.repeat(reservation.rating)}${'☆'.repeat(5 - reservation.rating)}
+                                <span class="text-gray-600">(${reservation.rating}/5)</span>
+                            </div>
+                        </div>
+                    ` : ''}
+                    
+                    <!-- Actions -->
+                    <div class="flex space-x-3 pt-4 border-t border-gray-200">
+                        ${reservation.status === 'confirmed' ? `
+                            <button onclick="cancelReservation('${reservation.id}')" class="flex-1 bg-red-500 text-white py-2 rounded-xl font-medium hover:bg-red-600 transition-colors">
+                                Annuler la réservation
+                            </button>
+                        ` : ''}
+                        
+                        ${reservation.status === 'completed' && !reservation.rating ? `
+                            <button onclick="rateReservation('${reservation.id}')" class="flex-1 bg-secondary text-white py-2 rounded-xl font-medium hover:bg-orange-600 transition-colors">
+                                Noter le service
+                            </button>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('reservationModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('reservationModal').classList.add('hidden');
+        }
+
+        function cancelReservation(reservationId) {
+            if (confirm('Êtes-vous sûr de vouloir annuler cette réservation ?')) {
+                // Simulation d'annulation
+                showNotification('Réservation annulée avec succès', 'success');
+                
+                // Recharger les réservations
+                setTimeout(() => {
+                    loadReservations();
+                    closeModal();
+                }, 1000);
+            }
+        }
+
+        function rateReservation(reservationId) {
+            const rating = prompt('Donnez une note de 1 à 5 étoiles:');
+            if (rating && rating >= 1 && rating <= 5) {
+                // Simulation de notation
+                showNotification('Merci pour votre note !', 'success');
+                
+                // Recharger les réservations
+                setTimeout(() => {
+                    loadReservations();
+                    closeModal();
+                }, 1000);
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('keurcoiff_token');
+            localStorage.removeItem('keurcoiff_user');
+            showNotification('Déconnexion réussie', 'success');
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1000);
+        }
+
+        // Fonction de notification
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            const bgColor = type === 'success' ? 'bg-green-500' : 
+                           type === 'error' ? 'bg-red-500' : 'bg-blue-500';
+            
+            notification.innerHTML = `
+                <div class="fixed top-4 right-4 ${bgColor} text-white px-6 py-4 rounded-2xl shadow-2xl z-50 max-w-sm animate-slideIn">
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'exclamation-triangle' : 'info'}"></i>
+                        <div class="font-medium">${message}</div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+        }
+
+        // Style d'animation pour la notification
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            
+            .animate-slideIn {
+                animation: slideIn 0.3s ease-out;
+            }
+            
+            .loader {
+                border: 3px solid #f3f4f6;
+                border-top: 3px solid #7C3AED;
+                border-radius: 50%;
+                width: 30px;
+                height: 30px;
+                animation: spin 1s linear infinite;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Profil • KeurCoiff'</title>
+    
+    <!-- Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#7C3AED',
+                        secondary: '#F59E0B', 
+                        accent: '#10B981',
+                        dark: '#1F2937',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .loader-small {
+            border: 2px solid #f3f4f6;
+            border-top: 2px solid #7C3AED;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .stats-card {
+            transition: all 0.3s ease;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body class="font-inter bg-gray-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <a href="index.html" class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-gradient-to-r from-primary to-purple-600 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-crown text-white"></i>
+                        </div>
+                        <span class="text-xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">KeurCoiff'</span>
+                    </a>
+                </div>
+
+                <!-- Menu navigation -->
+                <div class="flex items-center space-x-6">
+                    <a href="index.html" class="text-gray-600 hover:text-primary transition-colors flex items-center space-x-2">
+                        <i class="fas fa-home"></i>
+                        <span class="hidden sm:inline">Accueil</span>
+                    </a>
+                    <a href="mes-reservations.html" class="text-gray-600 hover:text-primary transition-colors flex items-center space-x-2">
+                        <i class="fas fa-calendar"></i>
+                        <span class="hidden sm:inline">Mes réservations</span>
+                    </a>
+                    <button onclick="logout()" class="text-gray-600 hover:text-primary transition-colors flex items-center space-x-2">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span class="hidden sm:inline">Déconnexion</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section Profil -->
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- En-tête avec chargement -->
+        <div id="loadingSection" class="text-center py-12">
+            <div class="loader mx-auto mb-4"></div>
+            <div class="text-gray-600">Chargement de votre profil...</div>
+        </div>
+
+        <!-- Contenu du profil (caché au début) -->
+        <div id="profileContent" class="hidden fade-in">
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Colonne gauche - Informations profil -->
+                <div class="lg:col-span-2 space-y-6">
+                    <!-- En-tête profil -->
+                    <div class="bg-white rounded-3xl shadow-lg p-8">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-20 h-20 bg-gradient-to-r from-primary to-purple-600 rounded-2xl flex items-center justify-center text-white text-2xl font-bold" id="userAvatar">
+                                    AD
+                                </div>
+                                <div>
+                                    <h1 class="text-2xl font-bold text-gray-900" id="userName">Chargement...</h1>
+                                    <p class="text-gray-600 flex items-center">
+                                        <i class="fas fa-map-marker-alt text-primary mr-2"></i>
+                                        <span id="userLocation">Chargement...</span>
+                                    </p>
+                                    <div class="flex items-center space-x-4 mt-2">
+                                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+                                            <i class="fas fa-check-circle mr-1"></i>Compte vérifié
+                                        </span>
+                                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium" id="memberSince">
+                                            Membre depuis 2024
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button onclick="editProfile()" class="bg-primary text-white px-6 py-3 rounded-xl font-semibold hover:bg-purple-600 transition-colors">
+                                <i class="fas fa-edit mr-2"></i>Modifier
+                            </button>
+                        </div>
+
+                        <!-- Statistiques -->
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="stats-card bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-2xl text-center">
+                                <div class="text-2xl font-bold text-blue-600" id="reservationsCount">0</div>
+                                <div class="text-sm text-blue-800">Réservations</div>
+                            </div>
+                            <div class="stats-card bg-gradient-to-r from-green-50 to-green-100 p-4 rounded-2xl text-center">
+                                <div class="text-2xl font-bold text-green-600" id="averageRating">0</div>
+                                <div class="text-sm text-green-800">Note moyenne</div>
+                            </div>
+                            <div class="stats-card bg-gradient-to-r from-purple-50 to-purple-100 p-4 rounded-2xl text-center">
+                                <div class="text-2xl font-bold text-purple-600" id="favoritesCount">0</div>
+                                <div class="text-sm text-purple-800">Favoris</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Informations personnelles -->
+                    <div class="bg-white rounded-3xl shadow-lg p-8">
+                        <h2 class="text-xl font-bold text-gray-900 mb-6">Informations personnelles</h2>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Nom complet</label>
+                                <div class="p-3 bg-gray-50 rounded-xl" id="displayFullName">Chargement...</div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Téléphone</label>
+                                <div class="p-3 bg-gray-50 rounded-xl" id="displayPhone">Chargement...</div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Email</label>
+                                <div class="p-3 bg-gray-50 rounded-xl" id="displayEmail">Chargement...</div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Quartier</label>
+                                <div class="p-3 bg-gray-50 rounded-xl" id="displayQuarter">Chargement...</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Formulaire d'édition (caché par défaut) -->
+                    <form id="editProfileForm" class="bg-white rounded-3xl shadow-lg p-8 hidden">
+                        <h2 class="text-xl font-bold text-gray-900 mb-6">Modifier le profil</h2>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Nom complet *</label>
+                                <input 
+                                    type="text" 
+                                    name="fullName" 
+                                    required 
+                                    class="w-full p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent"
+                                    id="editFullName"
+                                >
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Téléphone *</label>
+                                <input 
+                                    type="tel" 
+                                    name="phone" 
+                                    required 
+                                    class="w-full p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent"
+                                    id="editPhone"
+                                >
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Email</label>
+                                <input 
+                                    type="email" 
+                                    name="email" 
+                                    class="w-full p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent"
+                                    id="editEmail"
+                                >
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Quartier *</label>
+                                <select 
+                                    name="quarter" 
+                                    required 
+                                    class="w-full p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent"
+                                    id="editQuarter"
+                                >
+                                    <option value="Plateau">Plateau</option>
+                                    <option value="Ouakam">Ouakam</option>
+                                    <option value="Almadies">Almadies</option>
+                                    <option value="Mermoz">Mermoz</option>
+                                    <option value="Sacré-Coeur">Sacré-Coeur</option>
+                                    <option value="Fann">Fann</option>
+                                    <option value="Gueule Tapée">Gueule Tapée</option>
+                                    <option value="Medina">Medina</option>
+                                    <option value="Grand Dakar">Grand Dakar</option>
+                                    <option value="Parcelles Assainies">Parcelles Assainies</option>
+                                    <option value="autre">Autre</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="flex space-x-4 mt-6">
+                            <button type="submit" class="bg-primary text-white px-6 py-3 rounded-xl font-semibold hover:bg-purple-600 transition-colors">
+                                Enregistrer les modifications
+                            </button>
+                            <button type="button" onclick="cancelEdit()" class="bg-gray-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-gray-600 transition-colors">
+                                Annuler
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Dernières réservations -->
+                    <div class="bg-white rounded-3xl shadow-lg p-8">
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="text-xl font-bold text-gray-900">Dernières réservations</h2>
+                            <a href="mes-reservations.html" class="text-primary hover:underline">Voir tout</a>
+                        </div>
+                        
+                        <div id="recentReservations" class="space-y-4">
+                            <!-- Les réservations seront chargées ici -->
+                            <div class="text-center py-8">
+                                <div class="loader mx-auto mb-4"></div>
+                                <div class="text-gray-600">Chargement des réservations...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Colonne droite - Actions rapides -->
+                <div class="space-y-6">
+                    <!-- Carte sécurité -->
+                    <div class="bg-white rounded-3xl shadow-lg p-6">
+                        <h3 class="font-bold text-gray-900 mb-4">Sécurité</h3>
+                        <div class="space-y-3">
+                            <button onclick="changePassword()" class="w-full text-left p-3 rounded-xl border border-gray-200 hover:bg-gray-50 transition-colors flex items-center space-x-3">
+                                <i class="fas fa-lock text-gray-600"></i>
+                                <span>Changer le mot de passe</span>
+                            </button>
+                            <button class="w-full text-left p-3 rounded-xl border border-gray-200 hover:bg-gray-50 transition-colors flex items-center space-x-3">
+                                <i class="fas fa-bell text-gray-600"></i>
+                                <span>Notifications</span>
+                            </button>
+                            <button class="w-full text-left p-3 rounded-xl border border-gray-200 hover:bg-gray-50 transition-colors flex items-center space-x-3">
+                                <i class="fas fa-shield-alt text-gray-600"></i>
+                                <span>Confidentialité</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Carte préférences -->
+                    <div class="bg-white rounded-3xl shadow-lg p-6">
+                        <h3 class="font-bold text-gray-900 mb-4">Préférences</h3>
+                        <div class="space-y-3">
+                            <label class="flex items-center justify-between p-3 rounded-xl border border-gray-200 hover:bg-gray-50 cursor-pointer">
+                                <span class="flex items-center space-x-3">
+                                    <i class="fas fa-home text-gray-600"></i>
+                                    <span>Service à domicile</span>
+                                </span>
+                                <input type="checkbox" checked class="rounded text-primary focus:ring-primary">
+                            </label>
+                            <label class="flex items-center justify-between p-3 rounded-xl border border-gray-200 hover:bg-gray-50 cursor-pointer">
+                                <span class="flex items-center space-x-3">
+                                    <i class="fas fa-sms text-gray-600"></i>
+                                    <span>Notifications SMS</span>
+                                </span>
+                                <input type="checkbox" checked class="rounded text-primary focus:ring-primary">
+                            </label>
+                            <label class="flex items-center justify-between p-3 rounded-xl border border-gray-200 hover:bg-gray-50 cursor-pointer">
+                                <span class="flex items-center space-x-3">
+                                    <i class="fas fa-tag text-gray-600"></i>
+                                    <span>Promotions</span>
+                                </span>
+                                <input type="checkbox" class="rounded text-primary focus:ring-primary">
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Carte support -->
+                    <div class="bg-gradient-to-r from-primary to-purple-600 text-white rounded-3xl shadow-lg p-6">
+                        <h3 class="font-bold mb-3">Besoin d'aide ?</h3>
+                        <p class="text-white/80 text-sm mb-4">Notre équipe est là pour vous aider</p>
+                        <div class="space-y-2">
+                            <a href="#" class="flex items-center space-x-2 text-white/90 hover:text-white transition-colors">
+                                <i class="fas fa-phone"></i>
+                                <span>+221 77 123 45 67</span>
+                            </a>
+                            <a href="#" class="flex items-center space-x-2 text-white/90 hover:text-white transition-colors">
+                                <i class="fas fa-envelope"></i>
+                                <span>support@keurcoiff.sn</span>
+                            </a>
+                            <a href="#" class="flex items-center space-x-2 text-white/90 hover:text-white transition-colors">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Message si non connecté -->
+        <div id="notLoggedIn" class="hidden text-center py-12">
+            <div class="bg-white rounded-3xl shadow-lg p-8 max-w-md mx-auto">
+                <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-exclamation-triangle text-red-600 text-2xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">Accès non autorisé</h2>
+                <p class="text-gray-600 mb-6">Vous devez être connecté pour accéder à votre profil.</p>
+                <div class="flex space-x-4 justify-center">
+                    <a href="login.html" class="bg-primary text-white px-6 py-3 rounded-xl font-semibold hover:bg-purple-600 transition-colors">
+                        Se connecter
+                    </a>
+                    <a href="register.html" class="bg-gray-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-gray-600 transition-colors">
+                        S'inscrire
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Vérifier l'authentification au chargement
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Chargement de la page profil...');
+            checkAuthentication();
+        });
+
+        function checkAuthentication() {
+            const token = localStorage.getItem('keurcoiff_token');
+            const user = localStorage.getItem('keurcoiff_user');
+            
+            console.log('🔐 Vérification auth - Token:', !!token, 'User:', !!user);
+            
+            if (!token || !user) {
+                // Non connecté
+                document.getElementById('loadingSection').classList.add('hidden');
+                document.getElementById('notLoggedIn').classList.remove('hidden');
+                return;
+            }
+            
+            // Connecté, charger les données
+            loadUserProfile();
+        }
+
+        async function loadUserProfile() {
+            try {
+                const user = JSON.parse(localStorage.getItem('keurcoiff_user'));
+                console.log('👤 Chargement profil:', user);
+                
+                // Mettre à jour l'interface utilisateur
+                updateProfileUI(user);
+                
+                // Charger les statistiques
+                await loadUserStats();
+                
+                // Charger les réservations récentes
+                await loadRecentReservations();
+                
+                // Afficher le contenu
+                document.getElementById('loadingSection').classList.add('hidden');
+                document.getElementById('profileContent').classList.remove('hidden');
+                
+            } catch (error) {
+                console.error('❌ Erreur chargement profil:', error);
+                showNotification('Erreur lors du chargement du profil', 'error');
+            }
+        }
+
+        function updateProfileUI(user) {
+            // Avatar
+            document.getElementById('userAvatar').textContent = user.fullName ? user.fullName.charAt(0).toUpperCase() : 'U';
+            
+            // Informations de base
+            document.getElementById('userName').textContent = user.fullName || 'Utilisateur';
+            document.getElementById('userLocation').textContent = user.quarter ? `${user.quarter}, Dakar` : 'Dakar';
+            document.getElementById('memberSince').textContent = `Membre depuis ${new Date().getFullYear()}`;
+            
+            // Informations détaillées
+            document.getElementById('displayFullName').textContent = user.fullName || 'Non renseigné';
+            document.getElementById('displayPhone').textContent = user.phone ? `+221 ${user.phone}` : 'Non renseigné';
+            document.getElementById('displayEmail').textContent = user.email || 'Non renseigné';
+            document.getElementById('displayQuarter').textContent = user.quarter || 'Non renseigné';
+            
+            // Formulaire d'édition
+            document.getElementById('editFullName').value = user.fullName || '';
+            document.getElementById('editPhone').value = user.phone || '';
+            document.getElementById('editEmail').value = user.email || '';
+            document.getElementById('editQuarter').value = user.quarter || 'Dakar';
+        }
+
+        async function loadUserStats() {
+            // Simulation de données de statistiques
+            setTimeout(() => {
+                document.getElementById('reservationsCount').textContent = '12';
+                document.getElementById('averageRating').textContent = '4.8';
+                document.getElementById('favoritesCount').textContent = '3';
+            }, 1000);
+        }
+
+        async function loadRecentReservations() {
+            // Simulation de chargement des réservations
+            setTimeout(() => {
+                const reservationsHTML = `
+                    <div class="flex items-center justify-between p-4 border border-gray-200 rounded-2xl hover:bg-gray-50 transition-colors">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
+                                <i class="fas fa-scissors text-primary"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-gray-900">Salon Awa Beauty</div>
+                                <div class="text-sm text-gray-600">Tresses vanilles • 8 000 FCFA</div>
+                                <div class="text-xs text-gray-500">15 Déc 2024 • 14:00</div>
+                            </div>
+                        </div>
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+                            Terminée
+                        </span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between p-4 border border-gray-200 rounded-2xl hover:bg-gray-50 transition-colors">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                                <i class="fas fa-male text-blue-600"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-gray-900">Chez Ibra</div>
+                                <div class="text-sm text-gray-600">Coupe homme • 3 000 FCFA</div>
+                                <div class="text-xs text-gray-500">10 Déc 2024 • 16:30</div>
+                            </div>
+                        </div>
+                        <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">
+                            Confirmée
+                        </span>
+                    </div>
+                `;
+                
+                document.getElementById('recentReservations').innerHTML = reservationsHTML;
+            }, 1500);
+        }
+
+        function editProfile() {
+            document.querySelector('.bg-white.rounded-3xl.shadow-lg.p-8').classList.add('hidden');
+            document.getElementById('editProfileForm').classList.remove('hidden');
+        }
+
+        function cancelEdit() {
+            document.querySelector('.bg-white.rounded-3xl.shadow-lg.p-8').classList.remove('hidden');
+            document.getElementById('editProfileForm').classList.add('hidden');
+        }
+
+        // Gestion de l'édition du profil
+        document.getElementById('editProfileForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            try {
+                // Simulation mise à jour
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                // Mise à jour des données locales
+                const userData = {
+                    ...JSON.parse(localStorage.getItem('keurcoiff_user')),
+                    fullName: data.fullName,
+                    phone: data.phone,
+                    email: data.email,
+                    quarter: data.quarter
+                };
+                
+                localStorage.setItem('keurcoiff_user', JSON.stringify(userData));
+                
+                // Mise à jour de l'affichage
+                updateProfileUI(userData);
+                cancelEdit();
+                
+                showNotification('Profil mis à jour avec succès !', 'success');
+                
+            } catch (error) {
+                showNotification('Erreur lors de la mise à jour', 'error');
+            }
+        });
+
+        function changePassword() {
+            window.location.href = 'forgot-password.html';
+        }
+
+        function logout() {
+            localStorage.removeItem('keurcoiff_token');
+            localStorage.removeItem('keurcoiff_user');
+            showNotification('Déconnexion réussie', 'success');
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1000);
+        }
+
+        // Fonction de notification
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            const bgColor = type === 'success' ? 'bg-green-500' : 
+                           type === 'error' ? 'bg-red-500' : 'bg-blue-500';
+            
+            notification.innerHTML = `
+                <div class="fixed top-4 right-4 ${bgColor} text-white px-6 py-4 rounded-2xl shadow-2xl z-50 max-w-sm animate-slideIn">
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'exclamation-triangle' : 'info'}"></i>
+                        <div class="font-medium">${message}</div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+        }
+
+        // Style d'animation pour la notification
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            
+            .animate-slideIn {
+                animation: slideIn 0.3s ease-out;
+            }
+            
+            .loader {
+                border: 3px solid #f3f4f6;
+                border-top: 3px solid #7C3AED;
+                border-radius: 50%;
+                width: 30px;
+                height: 30px;
+                animation: spin 1s linear infinite;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

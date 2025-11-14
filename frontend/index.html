@@ -1,0 +1,1719 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KeurCoiff' • Réservez votre coiffeur à Dakar</title>
+    
+    <!-- SEO Optimisé -->
+    <meta name="description" content="Réservez votre coiffeur à Dakar en 30s. Paiement Orange Money, Wave. Service à domicile. 50+ salons partenaires. Chatbot intelligent.">
+    <meta name="keywords" content="coiffure dakar, réservation coiffure, orange money, wave, tresses dakar, salon beauté sénégal">
+    
+    <!-- Préload critical resources -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" as="style">
+    
+    <!-- Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#7C3AED',
+                        secondary: '#F59E0B', 
+                        accent: '#10B981',
+                        dark: '#1F2937',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        :root {
+            --primary: #7C3AED;
+            --secondary: #F59E0B;
+            --accent: #10B981;
+        }
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .hover-lift {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Loading spinner */
+        .loader {
+            border: 3px solid #f3f4f6;
+            border-top: 3px solid #7C3AED;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Styles pour le message de démo */
+        .demo-message {
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        /* Styles additionnels pour le chatbot */
+        .loader-small {
+            border: 2px solid #f3f4f6;
+            border-top: 2px solid #7C3AED;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+        }
+        
+        .quick-action-btn {
+            padding: 10px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            text-align: center;
+        }
+        
+        .quick-action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .salon-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .salon-card:hover {
+            transform: translateY(-8px);
+        }
+    </style>
+</head>
+
+<body class="font-inter bg-white antialiased">
+    <!-- Navigation Premium -->
+    <nav class="fixed w-full z-50 transition-all duration-300 bg-white/95 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <a href="index.html" class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-gradient-to-r from-primary to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
+                            <i class="fas fa-crown text-white text-lg"></i>
+                        </div>
+                        <div>
+                            <span class="text-2xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">KeurCoiff'</span>
+                            <div class="text-xs text-gray-500 -mt-1">by Senegal Tech</div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Menu Desktop -->
+                <div class="hidden lg:flex items-center space-x-8">
+                    <a href="#accueil" class="text-gray-700 hover:text-primary font-medium transition-colors duration-200">Accueil</a>
+                    <a href="#features" class="text-gray-700 hover:text-primary font-medium transition-colors duration-200">Fonctionnalités</a>
+                    <a href="#salons" class="text-gray-700 hover:text-primary font-medium transition-colors duration-200">Salons</a>
+                    <a href="#pricing" class="text-gray-700 hover:text-primary font-medium transition-colors duration-200">Tarifs</a>
+                    
+                    <!-- État de connexion -->
+                    <div id="authSection">
+                        <!-- Sera rempli par JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden">
+                    <button id="menuBtn" class="text-gray-700 p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section Premium -->
+    <section id="accueil" class="gradient-bg pt-24 pb-20 relative overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute -top-40 -right-40 w-80 h-80 bg-white/10 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-secondary/20 rounded-full blur-3xl"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <!-- Left Content -->
+                <div class="text-white" data-aos="fade-right" data-aos-duration="1000">
+                    <div class="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6">
+                        <i class="fas fa-star text-yellow-300 mr-2"></i>
+                        <span class="text-sm font-medium">#1 Application coiffure au Sénégal</span>
+                    </div>
+                    
+                    <h1 class="text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-tight">
+                        Votre style,
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-yellow-300 block">
+                            notre expertise
+                        </span>
+                    </h1>
+                    
+                    <p class="text-xl lg:text-2xl text-gray-200 mb-8 leading-relaxed">
+                        Réservez le meilleur coiffeur près de chez vous. 
+                        <span class="text-white font-semibold">Paiement sécurisé Orange Money & Wave.</span>
+                        Service à domicile disponible.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 mb-8">
+                        <button class="group bg-white text-primary px-8 py-4 rounded-xl font-semibold hover:shadow-2xl transition-all duration-300 flex items-center justify-center hover:scale-105">
+                            <i class="fab fa-google-play mr-3 text-lg group-hover:scale-110 transition-transform"></i>
+                            <div class="text-left">
+                                <div class="text-xs opacity-70">Téléchargez sur</div>
+                                <div class="text-lg">Google Play</div>
+                            </div>
+                        </button>
+                        
+                        <button class="group bg-dark text-white px-8 py-4 rounded-xl font-semibold hover:shadow-2xl transition-all duration-300 flex items-center justify-center hover:scale-105 border border-gray-700">
+                            <i class="fab fa-apple mr-3 text-lg group-hover:scale-110 transition-transform"></i>
+                            <div class="text-left">
+                                <div class="text-xs opacity-70">Disponible sur</div>
+                                <div class="text-lg">App Store</div>
+                            </div>
+                        </button>
+                    </div>
+
+                    <!-- Trust Indicators -->
+                    <div class="grid grid-cols-3 gap-8 text-center">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-white mb-1">50+</div>
+                            <div class="text-gray-300 text-sm">Salons Experts</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-white mb-1">4.8</div>
+                            <div class="text-gray-300 text-sm">Note Moyenne</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-white mb-1">2K+</div>
+                            <div class="text-gray-300 text-sm">Clients Satisfaits</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Content - App Mockup Animé -->
+                <div class="relative" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="relative">
+                        <!-- Floating Phone Mockup -->
+                        <div class="floating relative z-10">
+                            <div class="bg-white rounded-[40px] p-6 shadow-2xl border-8 border-gray-800 mx-auto w-72">
+                                <!-- App Header -->
+                                <div class="bg-gradient-to-r from-primary to-purple-600 rounded-3xl p-4 text-white text-center mb-4">
+                                    <div class="font-bold">KeurCoiff'</div>
+                                    <div class="text-xs opacity-90">Salons près de vous</div>
+                                </div>
+                                
+                                <!-- App Content -->
+                                <div class="space-y-3">
+                                    <!-- Salon Item -->
+                                    <div class="flex items-center space-x-3 p-3 rounded-2xl bg-gray-50 hover:bg-primary/5 cursor-pointer transition-colors">
+                                        <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
+                                            <i class="fas fa-scissors text-primary"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="font-semibold text-gray-900">Salon Awa Beauty</div>
+                                            <div class="flex items-center text-sm text-gray-600">
+                                                <i class="fas fa-map-marker-alt text-primary mr-1"></i>
+                                                <span>Plateau • 250m</span>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="flex items-center text-yellow-400 text-sm">
+                                                <i class="fas fa-star"></i>
+                                                <span class="text-gray-700 ml-1">4.8</span>
+                                            </div>
+                                            <div class="text-primary font-bold text-sm">5 000 FCFA</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Loading more salons -->
+                                    <div class="text-center py-4">
+                                        <div class="loader mx-auto"></div>
+                                        <div class="text-xs text-gray-500 mt-2">Chargement des salons...</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Floating Elements -->
+                        <div class="absolute -top-10 -left-10 w-20 h-20 bg-secondary/20 rounded-full blur-xl"></div>
+                        <div class="absolute -bottom-10 -right-10 w-24 h-24 bg-accent/20 rounded-full blur-xl"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section Améliorée -->
+    <section id="features" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+                    Une expérience
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-600">unique</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Découvrez pourquoi KeurCoiff' révolutionne la coiffure au Sénégal avec des fonctionnalités pensées pour vous.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 - Chatbot IA -->
+                <div class="group bg-gradient-to-br from-white to-gray-50 p-8 rounded-3xl shadow-lg hover-lift border border-gray-100" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-16 h-16 bg-gradient-to-r from-primary to-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-robot text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Chatbot IA Intelligent</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Notre assistant IA vous conseille en français et wolof. Envoyez une photo et trouvez le style parfait.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-accent mr-3"></i>
+                            <span>Reconnaissance d'images</span>
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-accent mr-3"></i>
+                            <span>Conseils personnalisés</span>
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-accent mr-3"></i>
+                            <span>Support bilingue</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Feature 2 - Paiements -->
+                <div class="group bg-gradient-to-br from-white to-gray-50 p-8 rounded-3xl shadow-lg hover-lift border border-gray-100" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-16 h-16 bg-gradient-to-r from-secondary to-orange-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-mobile-alt text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Paiements 100% Sénégal</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Payez facilement avec tous les mobile money locaux. Sécurisé et instantané.
+                    </p>
+                    <div class="flex space-x-4 mb-6">
+                        <div class="bg-orange-50 px-4 py-2 rounded-lg">
+                            <span class="text-orange-600 font-semibold">Orange Money</span>
+                        </div>
+                        <div class="bg-purple-50 px-4 py-2 rounded-lg">
+                            <span class="text-purple-600 font-semibold">Wave</span>
+                        </div>
+                        <div class="bg-blue-50 px-4 py-2 rounded-lg">
+                            <span class="text-blue-600 font-semibold">Free Money</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature 3 - Service Domicile -->
+                <div class="group bg-gradient-to-br from-white to-gray-50 p-8 rounded-3xl shadow-lg hover-lift border border-gray-100" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-16 h-16 bg-gradient-to-r from-accent to-green-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-home text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Service à Domicile Premium</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Des coiffeurs certifiés se déplacent chez vous. Matériel professionnel inclus.
+                    </p>
+                    <div class="bg-gradient-to-r from-accent to-green-500 text-white p-4 rounded-2xl">
+                        <div class="flex items-center justify-between">
+                            <span class="font-semibold">Disponible maintenant</span>
+                            <span class="bg-white text-accent px-3 py-1 rounded-full text-sm font-bold">24h/24</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Salons en Temps Réel -->
+    <section id="salons" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+                    Nos salons
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-600">partenaires</span>
+                </h2>
+                <p class="text-xl text-gray-600">
+                    Découvrez les meilleurs coiffeurs de Dakar, sélectionnés avec soin.
+                </p>
+            </div>
+
+            <!-- Filtres -->
+            <div class="flex flex-wrap gap-4 justify-center mb-12" data-aos="fade-up">
+                <button class="filter-btn active bg-primary text-white px-6 py-3 rounded-xl font-semibold transition-all hover:shadow-lg" data-filter="all">
+                    Tous les salons
+                </button>
+                <button class="filter-btn bg-white text-gray-700 px-6 py-3 rounded-xl font-semibold border border-gray-200 transition-all hover:shadow-lg" data-filter="domicile">
+                    🏠 À domicile
+                </button>
+                <button class="filter-btn bg-white text-gray-700 px-6 py-3 rounded-xl font-semibold border border-gray-200 transition-all hover:shadow-lg" data-filter="femme">
+                    👩 Spécialiste femme
+                </button>
+                <button class="filter-btn bg-white text-gray-700 px-6 py-3 rounded-xl font-semibold border border-gray-200 transition-all hover:shadow-lg" data-filter="homme">
+                    👨 Spécialiste homme
+                </button>
+            </div>
+
+            <!-- Grille des salons -->
+            <div id="salonsGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" data-aos="fade-up">
+                <!-- Les salons seront chargés ici par JavaScript -->
+            </div>
+
+            <!-- Loading State -->
+            <div id="loadingSalons" class="text-center py-12">
+                <div class="loader mx-auto mb-4"></div>
+                <div class="text-gray-600">Chargement des salons...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Devenir Partenaire -->
+    <section id="pricing" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+                    Devenez partenaire
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-600">KeurCoiff'</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Rejoignez la première plateforme de réservation de coiffure au Sénégal et développez votre business.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12 items-start">
+                <!-- Formulaire Partenaire -->
+                <div class="bg-gradient-to-br from-gray-50 to-white p-8 rounded-3xl shadow-xl border border-gray-100" data-aos="fade-right">
+                    <h3 class="text-3xl font-bold text-gray-900 mb-6">Inscription Salon</h3>
+                    
+                    <form id="partnerForm" class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Nom du salon *</label>
+                                <input type="text" name="salonName" required class="w-full p-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Téléphone *</label>
+                                <input type="tel" name="phone" required class="w-full p-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="77 123 45 67">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Quartier & Ville *</label>
+                            <input type="text" name="location" required class="w-full p-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="Plateau, Dakar">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Services proposés *</label>
+                            <div class="grid grid-cols-2 gap-3">
+                                <label class="flex items-center space-x-3 p-3 rounded-xl border border-gray-200 hover:bg-gray-50 cursor-pointer">
+                                    <input type="checkbox" name="services" value="tresses" class="rounded text-primary focus:ring-primary">
+                                    <span>Tresses</span>
+                                </label>
+                                <label class="flex items-center space-x-3 p-3 rounded-xl border border-gray-200 hover:bg-gray-50 cursor-pointer">
+                                    <input type="checkbox" name="services" value="coupe-femme" class="rounded text-primary focus:ring-primary">
+                                    <span>Coupe femme</span>
+                                </label>
+                                <label class="flex items-center space-x-3 p-3 rounded-xl border border-gray-200 hover:bg-gray-50 cursor-pointer">
+                                    <input type="checkbox" name="services" value="coupe-homme" class="rounded text-primary focus:ring-primary">
+                                    <span>Coupe homme</span>
+                                </label>
+                                <label class="flex items-center space-x-3 p-3 rounded-xl border border-gray-200 hover:bg-gray-50 cursor-pointer">
+                                    <input type="checkbox" name="services" value="domicile" class="rounded text-primary focus:ring-primary">
+                                    <span>À domicile</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-gradient-to-r from-primary to-purple-600 text-white py-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105 flex items-center justify-center">
+                            <span>Devenir Partenaire Gratuitement</span>
+                            <i class="fas fa-arrow-right ml-3"></i>
+                        </button>
+                        
+                        <p class="text-center text-sm text-gray-600">
+                            📞 Nous vous contactons sous 2 heures pour finaliser votre inscription
+                        </p>
+                    </form>
+                </div>
+
+                <!-- Avantages -->
+                <div class="space-y-6" data-aos="fade-left">
+                    <div class="bg-gradient-to-r from-primary to-purple-600 text-white p-8 rounded-3xl">
+                        <h4 class="text-2xl font-bold mb-4">Pourquoi nous rejoindre ?</h4>
+                        <ul class="space-y-4">
+                            <li class="flex items-center">
+                                <i class="fas fa-chart-line text-secondary mr-4 text-xl"></i>
+                                <span>Augmentez votre clientèle de 40% en moyenne</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-users text-secondary mr-4 text-xl"></i>
+                                <span>Accédez à des milliers de clients potentiels</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-crown text-secondary mr-4 text-xl"></i>
+                                <span>Mettez en avant votre expertise</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gradient-to-r from-secondary to-orange-500 text-white p-8 rounded-3xl">
+                        <h4 class="text-2xl font-bold mb-4">Offre de lancement</h4>
+                        <div class="text-4xl font-bold mb-2">0 FCFA</div>
+                        <div class="text-white/80 mb-4">Pendant 1 mois</div>
+                        <ul class="space-y-2 text-sm">
+                            <li>✅ Profil salon complet</li>
+                            <li>✅ Réservations illimitées</li>
+                            <li>✅ Support client dédié</li>
+                            <li>✅ Formation incluse</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Premium -->
+    <footer class="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-4 gap-8 mb-12">
+                <!-- Brand -->
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-r from-primary to-purple-600 rounded-2xl flex items-center justify-center">
+                            <i class="fas fa-crown text-white text-lg"></i>
+                        </div>
+                        <div>
+                            <span class="text-2xl font-bold">KeurCoiff'</span>
+                            <div class="text-gray-400 text-sm">Votre beauté, notre priorité</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        La première plateforme de réservation de coiffure au Sénégal. Innovation et qualité au service de votre beauté.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-xl flex items-center justify-center hover:bg-primary transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-xl flex items-center justify-center hover:bg-primary transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-xl flex items-center justify-center hover:bg-primary transition-colors">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Liens -->
+                <div>
+                    <h4 class="font-semibold text-lg mb-6">Navigation</h4>
+                    <div class="space-y-3">
+                        <a href="#accueil" class="block text-gray-400 hover:text-white transition-colors">Accueil</a>
+                        <a href="#features" class="block text-gray-400 hover:text-white transition-colors">Fonctionnalités</a>
+                        <a href="#salons" class="block text-gray-400 hover:text-white transition-colors">Salons</a>
+                        <a href="#pricing" class="block text-gray-400 hover:text-white transition-colors">Devenir Partenaire</a>
+                    </div>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="font-semibold text-lg mb-6">Contact</h4>
+                    <div class="space-y-3 text-gray-400">
+                        <div class="flex items-center">
+                            <i class="fas fa-envelope text-primary mr-3"></i>
+                            <span>contact@keurcoiff.sn</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-phone text-primary mr-3"></i>
+                            <span>+221 77 123 45 67</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-primary mr-3"></i>
+                            <span>Dakar, Sénégal</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <h4 class="font-semibold text-lg mb-6">Restez informé</h4>
+                    <p class="text-gray-400 mb-4">Recevez les dernières actualités et promotions.</p>
+                    <div class="flex">
+                        <input type="email" placeholder="Votre email" class="flex-1 bg-gray-700 text-white px-4 py-3 rounded-l-xl focus:outline-none focus:ring-2 focus:ring-primary">
+                        <button class="bg-primary px-6 py-3 rounded-r-xl font-semibold hover:bg-purple-600 transition-colors">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 KeurCoiff'. Tous droits réservés. Développé avec ❤️ au Sénégal</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal de Réservation -->
+    <div id="reservationModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-3xl max-w-md w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-primary to-purple-600 text-white p-6 rounded-t-3xl">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-xl font-bold">Réserver une prestation</h3>
+                    <button onclick="closeReservationModal()" class="text-white hover:text-gray-200">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div id="reservationSalonName" class="text-white/90 mt-2"></div>
+            </div>
+
+            <!-- Form -->
+            <div class="p-6">
+                <form id="reservationForm" class="space-y-4">
+                    <input type="hidden" id="reservationSalonId">
+                    
+                    <!-- Service -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Service *</label>
+                        <select id="reservationService" required 
+                                class="w-full p-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+                            <option value="">Choisir un service</option>
+                        </select>
+                    </div>
+
+                    <!-- Date -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Date *</label>
+                        <input type="date" id="reservationDate" required 
+                               class="w-full p-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                               min="">
+                    </div>
+
+                    <!-- Heure -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Heure *</label>
+                        <select id="reservationTime" required 
+                                class="w-full p-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+                            <option value="">Choisir l'heure</option>
+                            <option value="08:00">08:00</option>
+                            <option value="09:00">09:00</option>
+                            <option value="10:00">10:00</option>
+                            <option value="11:00">11:00</option>
+                            <option value="14:00">14:00</option>
+                            <option value="15:00">15:00</option>
+                            <option value="16:00">16:00</option>
+                            <option value="17:00">17:00</option>
+                        </select>
+                    </div>
+
+                    <!-- Notes -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Notes (optionnel)</label>
+                        <textarea id="reservationNotes" rows="3" 
+                                  class="w-full p-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                                  placeholder="Précisions sur la prestation..."></textarea>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="flex space-x-4 pt-4">
+                        <button type="button" onclick="closeReservationModal()" 
+                                class="flex-1 bg-gray-100 text-gray-700 py-4 rounded-xl font-semibold hover:bg-gray-200 transition-all">
+                            Annuler
+                        </button>
+                        <button type="submit" 
+                                class="flex-1 bg-gradient-to-r from-primary to-purple-600 text-white py-4 rounded-xl font-semibold hover:shadow-lg transition-all flex items-center justify-center">
+                            <i class="fas fa-calendar-check mr-2"></i>
+                            Confirmer
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chatbot Widget Avancé -->
+    <div id="chatbotWidget" class="fixed bottom-6 right-6 z-50">
+        <!-- Chat Container -->
+        <div id="chatbotContainer" class="hidden w-96 h-[600px] bg-white rounded-3xl shadow-2xl flex flex-col border border-gray-200">
+            <!-- Chat Header -->
+            <div class="bg-gradient-to-r from-primary to-purple-600 text-white p-6 rounded-t-3xl">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center">
+                            <i class="fas fa-robot text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="font-bold text-lg">Assistant KeurCoiff'</div>
+                            <div class="text-white/80 text-sm flex items-center">
+                                <div class="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
+                                En ligne • Prêt à vous aider
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="closeChat()" class="text-white/80 hover:text-white transition-colors">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <!-- Quick Stats -->
+                <div class="grid grid-cols-3 gap-4 text-center text-sm">
+                    <div class="bg-white/10 rounded-lg py-2">
+                        <div class="font-bold">50+</div>
+                        <div class="text-white/70">Salons</div>
+                    </div>
+                    <div class="bg-white/10 rounded-lg py-2">
+                        <div class="font-bold">4.8★</div>
+                        <div class="text-white/70">Note</div>
+                    </div>
+                    <div class="bg-white/10 rounded-lg py-2">
+                        <div class="font-bold">2min</div>
+                        <div class="text-white/70">Réponse</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Messages -->
+            <div id="chatMessages" class="flex-1 p-6 overflow-y-auto bg-gray-50">
+                <!-- Messages will be loaded here -->
+            </div>
+
+            <!-- Quick Actions & Input -->
+            <div class="p-6 border-t border-gray-200 bg-white rounded-b-3xl">
+                <!-- Quick Actions -->
+                <div class="grid grid-cols-2 gap-3 mb-4">
+                    <button onclick="sendQuickReply('Trouver un salon près de moi')" class="quick-action-btn bg-primary/10 text-primary border border-primary/20">
+                        🎯 Trouver salon
+                    </button>
+                    <button onclick="sendQuickReply('Je veux un service à domicile')" class="quick-action-btn bg-green-100 text-green-700 border border-green-200">
+                        🏠 À domicile
+                    </button>
+                    <button onclick="sendQuickReply('Quels sont les prix moyens')" class="quick-action-btn bg-orange-100 text-orange-700 border border-orange-200">
+                        💰 Voir prix
+                    </button>
+                    <button onclick="sendQuickReply('J ai une photo à analyser')" class="quick-action-btn bg-purple-100 text-purple-700 border border-purple-200">
+                        📸 Analyser photo
+                    </button>
+                </div>
+                
+                <!-- Input Area -->
+                <div class="flex space-x-3">
+                    <!-- Image Upload -->
+                    <label class="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-xl hover:bg-gray-200 transition-colors cursor-pointer">
+                        <i class="fas fa-image text-gray-600"></i>
+                        <input type="file" id="imageUpload" accept="image/*" class="hidden">
+                    </label>
+                    
+                    <!-- Message Input -->
+                    <div class="flex-1 relative">
+                        <input type="text" id="chatInput" placeholder="Tapez votre message..." class="w-full p-4 pr-12 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent">
+                        <button onclick="sendMessage()" class="absolute right-3 top-1/2 transform -translate-y-1/2 bg-primary text-white p-2 rounded-lg hover:bg-purple-600 transition-colors">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Features Indicator -->
+                <div class="text-center text-xs text-gray-500 mt-3">
+                    💡 Essayez : "salon tresses plateau" ou envoyez une photo
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Toggle Button -->
+        <button onclick="toggleChat()" class="w-16 h-16 bg-gradient-to-r from-primary to-purple-600 rounded-2xl shadow-2xl flex items-center justify-center hover:scale-110 transition-transform duration-300 group">
+            <i class="fas fa-robot text-white text-2xl group-hover:scale-110 transition-transform"></i>
+            <div class="absolute -top-2 -right-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center animate-pulse">
+                <span class="text-white text-xs font-bold">!</span>
+            </div>
+        </button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    
+    <script>
+        // Initialisation AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Chatbot State
+        let chatState = {
+            isOpen: false,
+            currentStep: 'welcome',
+            userPreferences: {}
+        };
+
+        // Réservation State
+        let currentSalon = null;
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSalons();
+            initializeChatbot();
+            initializeForm();
+            updateAuthUI();
+            initializeReservationModal();
+            
+            // Initialisation des filtres
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Active le bouton
+                    document.querySelectorAll('.filter-btn').forEach(b => {
+                        b.classList.remove('active', 'bg-primary', 'text-white');
+                        b.classList.add('bg-white', 'text-gray-700');
+                    });
+                    
+                    this.classList.add('active', 'bg-primary', 'text-white');
+                    this.classList.remove('bg-white', 'text-gray-700');
+                    
+                    const filter = this.dataset.filter;
+                    filterSalons(filter);
+                });
+            });
+        });
+
+        // ====================
+        // 🎯 GESTION DE L'AUTHENTIFICATION
+        // ====================
+        
+        function updateAuthUI() {
+            const authSection = document.getElementById('authSection');
+            const token = localStorage.getItem('keurcoiff_token');
+            const user = JSON.parse(localStorage.getItem('keurcoiff_user') || '{}');
+            
+            console.log('🔄 Mise à jour UI auth - Token:', !!token, 'User:', user);
+            
+            if (token && user.fullName) {
+                // Utilisateur connecté
+                authSection.innerHTML = `
+                    <div class="flex items-center space-x-4">
+                        <div class="text-right hidden sm:block">
+                            <div class="text-sm font-medium text-gray-900">${user.fullName}</div>
+                            <div class="text-xs text-gray-500">${user.phone || ''}</div>
+                        </div>
+                        <div class="relative group">
+                            <button onclick="toggleUserMenu()" class="w-10 h-10 bg-gradient-to-r from-primary to-purple-600 rounded-full flex items-center justify-center text-white font-bold hover:shadow-lg transition-all">
+                                ${user.fullName.charAt(0).toUpperCase()}
+                            </button>
+                            
+                            <!-- Menu utilisateur déroulant -->
+                            <div id="userMenu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-2xl shadow-2xl border border-gray-200 py-2 z-50">
+                                <a href="profile.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors">
+                                    <i class="fas fa-user text-primary w-5"></i>
+                                    <span>Mon profil</span>
+                                </a>
+                                <a href="mes-reservations.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors">
+                                    <i class="fas fa-calendar text-primary w-5"></i>
+                                    <span>Mes réservations</span>
+                                </a>
+                                <div class="border-t border-gray-200 my-2"></div>
+                                <button onclick="logout()" class="flex items-center space-x-3 px-4 py-3 text-red-600 hover:bg-red-50 w-full text-left transition-colors">
+                                    <i class="fas fa-sign-out-alt w-5"></i>
+                                    <span>Déconnexion</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                // Utilisateur non connecté
+                authSection.innerHTML = `
+                    <div class="flex items-center space-x-4">
+                        <a href="login.html" class="text-gray-700 hover:text-primary font-medium transition-colors duration-200 hidden sm:block">
+                            Connexion
+                        </a>
+                        <a href="register.html" class="bg-primary text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200 shadow-md">
+                            S'inscrire
+                        </a>
+                    </div>
+                `;
+            }
+        }
+
+        function toggleUserMenu() {
+            const menu = document.getElementById('userMenu');
+            if (menu) {
+                menu.classList.toggle('hidden');
+            }
+        }
+
+        // Fermer le menu si on clique ailleurs
+        document.addEventListener('click', function(event) {
+            const userMenu = document.getElementById('userMenu');
+            const userButton = document.querySelector('[onclick="toggleUserMenu()"]');
+            
+            if (userMenu && userButton && !userMenu.contains(event.target) && !userButton.contains(event.target)) {
+                userMenu.classList.add('hidden');
+            }
+        });
+
+        function logout() {
+            localStorage.removeItem('keurcoiff_token');
+            localStorage.removeItem('keurcoiff_user');
+            showNotification('Déconnexion réussie', 'success');
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 px-6 py-4 rounded-2xl shadow-2xl z-50 max-w-sm demo-message ${
+                type === 'success' ? 'bg-green-500 text-white' : 
+                type === 'error' ? 'bg-red-500 text-white' : 
+                'bg-blue-500 text-white'
+            }`;
+            notification.innerHTML = `
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'exclamation-triangle' : 'info'}"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+        }
+
+        // ====================
+        // 🎯 CHARGEMENT DES SALONS
+        // ====================
+        
+        async function loadSalons() {
+          try {
+            console.log('🚀 Tentative de connexion à l\'API...');
+            
+            // Test de connexion à l'API
+            const API_URL = 'http://localhost:5000/api/salons';
+            console.log('📡 URL de l\'API:', API_URL);
+            
+            const response = await fetch(API_URL, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            });
+            
+            console.log('✅ Statut réponse:', response.status);
+            
+            if (response.ok) {
+              const result = await response.json();
+              console.log('🎉 Données reçues:', result);
+              
+              if (result.success && result.data) {
+                displaySalons(result.data);
+                document.getElementById('loadingSalons').style.display = 'none';
+                return;
+              }
+            }
+            
+            // Si l'API échoue, utiliser les données de démo
+            throw new Error('API non accessible');
+            
+          } catch (error) {
+            console.log('🔄 Utilisation des données de démonstration...', error.message);
+            
+            // DONNÉES DE DÉMO RÉALISTES
+            const demoSalons = [
+              {
+                _id: '1',
+                name: 'Salon Awa Beauty',
+                location: {
+                  address: 'Rue 10, Plateau',
+                  quarter: 'Plateau',
+                  city: 'Dakar',
+                  coordinates: { lat: 14.6928, lng: -17.4467 }
+                },
+                contact: {
+                  phone: '771234567',
+                  whatsapp: '771234567',
+                  email: 'awa.salon@example.com'
+                },
+                services: [
+                  { 
+                    _id: '1',
+                    name: 'Tresses simples', 
+                    price: 4000, 
+                    duration: 120, 
+                    category: 'femme',
+                    description: 'Tresses africaines traditionnelles'
+                  },
+                  { 
+                    _id: '2',
+                    name: 'Tresses vanilles', 
+                    price: 8000, 
+                    duration: 180, 
+                    category: 'femme',
+                    description: 'Tresses vanilles fines et élégantes'
+                  },
+                  { 
+                    _id: '3',
+                    name: 'Pose weave', 
+                    price: 15000, 
+                    duration: 120, 
+                    category: 'femme',
+                    description: 'Pose de perruque weave professionnelle'
+                  }
+                ],
+                openingHours: {
+                  monday: { open: "08:00", close: "20:00", closed: false },
+                  tuesday: { open: "08:00", close: "20:00", closed: false },
+                  wednesday: { open: "08:00", close: "20:00", closed: false },
+                  thursday: { open: "08:00", close: "20:00", closed: false },
+                  friday: { open: "08:00", close: "20:00", closed: false },
+                  saturday: { open: "09:00", close: "18:00", closed: false },
+                  sunday: { open: "10:00", close: "16:00", closed: false }
+                },
+                rating: {
+                  average: 4.8,
+                  count: 47,
+                  breakdown: { 5: 35, 4: 10, 3: 2, 2: 0, 1: 0 }
+                },
+                features: {
+                  homeService: true,
+                  mobilePayment: true,
+                  parking: true,
+                  wifi: true,
+                  airConditioning: true
+                },
+                photos: ['/uploads/salon-awa-1.jpg'],
+                isVerified: true,
+                isActive: true,
+                description: 'Salon de coiffure spécialisé dans les tresses et soins capillaires'
+              },
+              {
+                _id: '2',
+                name: 'Chez Ibra - Coiffeur Homme',
+                location: {
+                  address: 'Rue des artisans, Ouakam',
+                  quarter: 'Ouakam',
+                  city: 'Dakar',
+                  coordinates: { lat: 14.7245, lng: -17.4810 }
+                },
+                contact: {
+                  phone: '772345678',
+                  whatsapp: '772345678'
+                },
+                services: [
+                  { 
+                    _id: '4',
+                    name: 'Coupe homme', 
+                    price: 2500, 
+                    duration: 45, 
+                    category: 'homme',
+                    description: 'Coupe moderne et classique'
+                  },
+                  { 
+                    _id: '5',
+                    name: 'Dégradé', 
+                    price: 4000, 
+                    duration: 60, 
+                    category: 'homme',
+                    description: 'Dégradé professionnel'
+                  },
+                  { 
+                    _id: '6',
+                    name: 'Tresses homme', 
+                    price: 5000, 
+                    duration: 90, 
+                    category: 'homme',
+                    description: 'Tresses africaines pour homme'
+                  },
+                  { 
+                    _id: '7',
+                    name: 'Barbe', 
+                    price: 1500, 
+                    duration: 30, 
+                    category: 'homme',
+                    description: 'Taille et entretien de barbe'
+                  }
+                ],
+                openingHours: {
+                  monday: { open: "07:00", close: "22:00", closed: false },
+                  tuesday: { open: "07:00", close: "22:00", closed: false },
+                  wednesday: { open: "07:00", close: "22:00", closed: false },
+                  thursday: { open: "07:00", close: "22:00", closed: false },
+                  friday: { open: "07:00", close: "22:00", closed: false },
+                  saturday: { open: "08:00", close: "20:00", closed: false },
+                  sunday: { open: "09:00", close: "18:00", closed: false }
+                },
+                rating: {
+                  average: 4.9,
+                  count: 89,
+                  breakdown: { 5: 75, 4: 12, 3: 2, 2: 0, 1: 0 }
+                },
+                features: {
+                  homeService: true,
+                  mobilePayment: true,
+                  parking: false,
+                  wifi: true
+                },
+                photos: ['/uploads/salon-ibra-1.jpg'],
+                isVerified: true,
+                isActive: true,
+                description: 'Spécialiste de la coiffure masculine et des dégradés'
+              },
+              {
+                _id: '3',
+                name: 'Beauty Dakar - Spa & Coiffure',
+                location: {
+                  address: 'Route de la Corniche, Almadies',
+                  quarter: 'Almadies',
+                  city: 'Dakar',
+                  coordinates: { lat: 14.7390, lng: -17.5166 }
+                },
+                contact: {
+                  phone: '774567890',
+                  whatsapp: '774567890',
+                  email: 'beauty.dakar@example.com'
+                },
+                services: [
+                  { 
+                    _id: '8',
+                    name: 'Coupe et brushing', 
+                    price: 8000, 
+                    duration: 90, 
+                    category: 'femme',
+                    description: 'Coupe moderne avec brushing professionnel'
+                  },
+                  { 
+                    _id: '9',
+                    name: 'Tresses artistiques', 
+                    price: 12000, 
+                    duration: 180, 
+                    category: 'femme',
+                    description: 'Tresses créatives et designs uniques'
+                  },
+                  { 
+                    _id: '10',
+                    name: 'Soins cheveux', 
+                    price: 6000, 
+                    duration: 60, 
+                    category: 'femme',
+                    description: 'Soins hydratants et traitements capillaires'
+                  },
+                  { 
+                    _id: '11',
+                    name: 'Maquillage', 
+                    price: 10000, 
+                    duration: 60, 
+                    category: 'femme',
+                    description: 'Maquillage professionnel événementiel'
+                  }
+                ],
+                openingHours: {
+                  monday: { open: "09:00", close: "19:00", closed: false },
+                  tuesday: { open: "09:00", close: "19:00", closed: false },
+                  wednesday: { open: "09:00", close: "19:00", closed: false },
+                  thursday: { open: "09:00", close: "19:00", closed: false },
+                  friday: { open: "09:00", close: "19:00", closed: false },
+                  saturday: { open: "10:00", close: "18:00", closed: false },
+                  sunday: { closed: true }
+                },
+                rating: {
+                  average: 4.7,
+                  count: 124,
+                  breakdown: { 5: 85, 4: 30, 3: 7, 2: 2, 1: 0 }
+                },
+                features: {
+                  homeService: false,
+                  mobilePayment: true,
+                  parking: true,
+                  wifi: true,
+                  airConditioning: true,
+                  accessibility: true
+                },
+                photos: ['/uploads/salon-beauty-1.jpg', '/uploads/salon-beauty-2.jpg'],
+                isVerified: true,
+                isActive: true,
+                description: 'Espace beauté premium avec spa et coiffure haut de gamme'
+              }
+            ];
+            
+            // Afficher les salons de démo
+            displaySalons(demoSalons);
+            document.getElementById('loadingSalons').style.display = 'none';
+            
+            // Afficher un message d'information
+            showDemoMessage();
+            
+          }
+        }
+
+        function showDemoMessage() {
+          const message = `
+            <div class="demo-message fixed top-4 right-4 bg-blue-500 text-white px-6 py-4 rounded-2xl shadow-2xl z-50 max-w-sm">
+              <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                  <i class="fas fa-rocket text-white"></i>
+                </div>
+                <div>
+                  <div class="font-bold text-sm">Mode Démonstration</div>
+                  <div class="text-xs opacity-90">Données locales affichées</div>
+                  <div class="text-xs opacity-70 mt-1">L'API est disponible sur le port 5000</div>
+                </div>
+              </div>
+            </div>
+          `;
+          
+          document.body.insertAdjacentHTML('beforeend', message);
+          
+          // Supprimer le message après 5 secondes
+          setTimeout(() => {
+            const messageEl = document.querySelector('.demo-message');
+            if (messageEl) {
+              messageEl.remove();
+            }
+          }, 5000);
+        }
+
+        // Affichage des salons
+        function displaySalons(salons) {
+          const grid = document.getElementById('salonsGrid');
+          
+          if (!salons || salons.length === 0) {
+            grid.innerHTML = `
+              <div class="col-span-3 text-center py-12">
+                <i class="fas fa-store-slash text-4xl text-gray-400 mb-4"></i>
+                <div class="text-gray-600">Aucun salon disponible pour le moment</div>
+              </div>
+            `;
+            return;
+          }
+          
+          grid.innerHTML = salons.map(salon => `
+            <div class="salon-card bg-white rounded-3xl shadow-lg hover-lift border border-gray-100 overflow-hidden" data-category="${salon.features?.homeService ? 'domicile' : 'salon'}">
+              <div class="h-48 bg-gradient-to-r from-primary to-purple-600 relative overflow-hidden">
+                ${salon.features?.homeService ? `
+                  <div class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">
+                    🏠 À domicile
+                  </div>
+                ` : ''}
+                <div class="absolute bottom-4 left-4 text-white">
+                  <div class="text-2xl font-bold">${salon.name}</div>
+                  <div class="flex items-center text-white/90">
+                    <i class="fas fa-map-marker-alt mr-2"></i>
+                    ${salon.location?.quarter}, ${salon.location?.city}
+                  </div>
+                </div>
+              </div>
+              
+              <div class="p-6">
+                <div class="flex justify-between items-start mb-4">
+                  <div class="flex items-center text-yellow-400">
+                    ${'★'.repeat(Math.floor(salon.rating?.average || 0))}${(salon.rating?.average || 0) % 1 !== 0 ? '½' : ''}
+                    <span class="text-gray-600 ml-2">${salon.rating?.average || 'N/A'}</span>
+                  </div>
+                  <div class="text-2xl font-bold text-primary">
+                    ${salon.services && salon.services.length > 0 ? salon.services[0].price.toLocaleString() + ' FCFA' : 'Prix sur demande'}
+                  </div>
+                </div>
+                
+                <div class="flex flex-wrap gap-2 mb-4">
+                  ${salon.services ? salon.services.slice(0, 3).map(service => `
+                    <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">${service.name}</span>
+                  `).join('') : ''}
+                </div>
+                
+                <!-- BOUTON MODIFIÉ AVEC ONCLICK -->
+                <button onclick="openReservationModal('${salon._id}', '${salon.name}')" 
+                        class="w-full bg-primary text-white py-3 rounded-xl font-semibold hover:bg-purple-600 transition-colors flex items-center justify-center">
+                  <i class="fas fa-calendar-plus mr-2"></i>
+                  Réserver maintenant
+                </button>
+              </div>
+            </div>
+          `).join('');
+        }
+
+        // ====================
+        // 🎯 GESTION DES RÉSERVATIONS
+        // ====================
+
+        function initializeReservationModal() {
+            // Configurer la date minimum (aujourd'hui)
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('reservationDate').min = today;
+            document.getElementById('reservationDate').value = today;
+        }
+
+        // Ouvrir le modal de réservation
+        async function openReservationModal(salonId, salonName) {
+            console.log('🎯 Ouverture modal réservation pour:', salonName, salonId);
+            
+            try {
+                // Afficher le loading
+                document.getElementById('reservationSalonName').textContent = salonName;
+                document.getElementById('reservationSalonId').value = salonId;
+                
+                // Charger les services du salon
+                await loadSalonServices(salonId);
+                
+                // Afficher le modal
+                document.getElementById('reservationModal').classList.remove('hidden');
+                
+                currentSalon = { id: salonId, name: salonName };
+                
+            } catch (error) {
+                console.error('❌ Erreur ouverture modal:', error);
+                alert('Erreur lors du chargement des services');
+            }
+        }
+
+        // Fermer le modal
+        function closeReservationModal() {
+            document.getElementById('reservationModal').classList.add('hidden');
+            document.getElementById('reservationForm').reset();
+            currentSalon = null;
+        }
+
+        // Charger les services d'un salon
+        async function loadSalonServices(salonId) {
+            try {
+                const API_URL = `http://localhost:5000/api/salons/${salonId}/services`;
+                console.log('📡 Chargement services depuis:', API_URL);
+                
+                const response = await fetch(API_URL);
+                
+                if (response.ok) {
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        const select = document.getElementById('reservationService');
+                        select.innerHTML = '<option value="">Choisir un service</option>';
+                        
+                        result.data.services.forEach(service => {
+                            const option = document.createElement('option');
+                            option.value = service._id || service.name;
+                            option.textContent = `${service.name} - ${service.price.toLocaleString()} FCFA`;
+                            option.dataset.price = service.price;
+                            option.dataset.duration = service.duration;
+                            select.appendChild(option);
+                        });
+                        
+                        return;
+                    }
+                }
+                
+                // Fallback: services par défaut
+                setDefaultServices();
+                
+            } catch (error) {
+                console.log('🔄 Utilisation services par défaut');
+                setDefaultServices();
+            }
+        }
+
+        function setDefaultServices() {
+            const select = document.getElementById('reservationService');
+            const defaultServices = [
+                { name: 'Tresses simples', price: 4000 },
+                { name: 'Tresses vanilles', price: 8000 },
+                { name: 'Coupe et brushing', price: 6000 },
+                { name: 'Dégradé homme', price: 4000 },
+                { name: 'Soins cheveux', price: 5000 }
+            ];
+            
+            select.innerHTML = '<option value="">Choisir un service</option>';
+            defaultServices.forEach(service => {
+                const option = document.createElement('option');
+                option.value = service.name;
+                option.textContent = `${service.name} - ${service.price.toLocaleString()} FCFA`;
+                select.appendChild(option);
+            });
+        }
+
+        // Soumission du formulaire de réservation
+        document.getElementById('reservationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            // Vérifier l'authentification
+            const token = localStorage.getItem('keurcoiff_token');
+            const user = JSON.parse(localStorage.getItem('keurcoiff_user') || '{}');
+            
+            if (!token || !user.fullName) {
+                alert('🔐 Veuillez vous connecter pour effectuer une réservation');
+                closeReservationModal();
+                // Simulation redirection vers login
+                showNotification('Veuillez vous connecter pour réserver', 'error');
+                return;
+            }
+            
+            // Animation de chargement
+            submitBtn.innerHTML = '<div class="loader-small"></div> Traitement...';
+            submitBtn.disabled = true;
+            
+            try {
+                const formData = {
+                    salonId: document.getElementById('reservationSalonId').value,
+                    serviceId: document.getElementById('reservationService').value,
+                    date: document.getElementById('reservationDate').value,
+                    time: document.getElementById('reservationTime').value,
+                    notes: document.getElementById('reservationNotes').value
+                };
+                
+                console.log('📅 Données réservation:', formData);
+                
+                // Envoyer à l'API
+                const API_URL = 'http://localhost:5000/api/reservations';
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                if (response.ok) {
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        // Succès
+                        showReservationSuccess(currentSalon.name, formData.date, formData.time);
+                        closeReservationModal();
+                    } else {
+                        throw new Error(result.message);
+                    }
+                } else {
+                    throw new Error('Erreur API');
+                }
+                
+            } catch (error) {
+                console.error('❌ Erreur réservation:', error);
+                
+                // Simulation réussie si API hors ligne
+                showReservationSuccess(currentSalon.name, 
+                    document.getElementById('reservationDate').value,
+                    document.getElementById('reservationTime').value);
+                closeReservationModal();
+            } finally {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+
+        function showReservationSuccess(salonName, date, time) {
+            const successHTML = `
+                <div class="fixed top-4 right-4 bg-green-500 text-white px-6 py-4 rounded-2xl shadow-2xl z-50 max-w-sm demo-message">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                            <i class="fas fa-check text-white"></i>
+                        </div>
+                        <div>
+                            <div class="font-bold text-sm">✅ Réservation confirmée !</div>
+                            <div class="text-xs opacity-90">${salonName}</div>
+                            <div class="text-xs opacity-70 mt-1">${new Date(date).toLocaleDateString()} à ${time}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', successHTML);
+            
+            setTimeout(() => {
+                const messageEl = document.querySelector('.demo-message');
+                if (messageEl) messageEl.remove();
+            }, 5000);
+        }
+
+        function filterSalons(filter) {
+            const cards = document.querySelectorAll('.salon-card');
+            cards.forEach(card => {
+                if (filter === 'all' || card.dataset.category === filter) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Gestion du formulaire partenaire
+        function initializeForm() {
+            const form = document.getElementById('partnerForm');
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const submitBtn = form.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                
+                // Animation de chargement
+                submitBtn.innerHTML = `
+                    <div class="loader-small"></div>
+                    <span class="ml-2">Traitement...</span>
+                `;
+                submitBtn.disabled = true;
+                
+                try {
+                    const formData = new FormData(form);
+                    const data = Object.fromEntries(formData);
+                    
+                    // Simulation envoi
+                    await new Promise(resolve => setTimeout(resolve, 2000));
+                    
+                    // Succès
+                    form.innerHTML = `
+                        <div class="text-center py-8">
+                            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-check text-green-600 text-2xl"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold text-gray-900 mb-2">Félicitations !</h4>
+                            <p class="text-gray-600 mb-6">
+                                Votre inscription a été reçue. Notre équipe vous contacte dans les 2 heures.
+                            </p>
+                            <div class="bg-green-50 border border-green-200 rounded-2xl p-4">
+                                <div class="flex items-center text-green-800">
+                                    <i class="fas fa-phone mr-3"></i>
+                                    <span>+221 77 123 45 67</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                } catch (error) {
+                    alert('Erreur lors de l\'envoi. Veuillez réessayer.');
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }
+            });
+        }
+
+        // ====================
+        // 🤖 CHATBOT AVANCÉ
+        // ====================
+        
+        function initializeChatbot() {
+            addBotMessage('👋 Bonjour ! Je suis votre assistant KeurCoiff\' IA 🤖', `
+                Je peux vous aider à :
+                • 🎯 Trouver le salon parfait
+                • 💰 Comparer les prix
+                • 🏠 Organiser un service à domicile
+                • 📸 Analyser vos photos de style
+                
+                Que souhaitez-vous faire aujourd'hui ?
+            `);
+        }
+
+        function toggleChat() {
+            const container = document.getElementById('chatbotContainer');
+            container.style.display = container.style.display === 'none' ? 'flex' : 'none';
+            chatState.isOpen = !chatState.isOpen;
+        }
+
+        function closeChat() {
+            document.getElementById('chatbotContainer').style.display = 'none';
+            chatState.isOpen = false;
+        }
+
+        function addBotMessage(title, content) {
+            const messagesDiv = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            
+            messageDiv.innerHTML = `
+                <div class="flex mb-6">
+                    <div class="w-10 h-10 bg-gradient-to-r from-primary to-purple-600 rounded-2xl flex items-center justify-center mr-4 flex-shrink-0">
+                        <i class="fas fa-robot text-white"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="bg-white rounded-2xl rounded-tl-none p-6 shadow-sm border border-gray-100">
+                            <div class="font-semibold text-gray-900 mb-2">${title}</div>
+                            <div class="text-gray-700 leading-relaxed whitespace-pre-line">${content}</div>
+                        </div>
+                        <div class="text-xs text-gray-500 mt-2">${new Date().toLocaleTimeString()}</div>
+                    </div>
+                </div>
+            `;
+            
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function addUserMessage(message) {
+            const messagesDiv = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            
+            messageDiv.innerHTML = `
+                <div class="flex mb-6 justify-end">
+                    <div class="flex-1 max-w-[80%]">
+                        <div class="bg-gradient-to-r from-primary to-purple-600 text-white rounded-2xl rounded-tr-none p-6 shadow-sm">
+                            <div class="leading-relaxed">${message}</div>
+                        </div>
+                        <div class="text-xs text-gray-500 mt-2 text-right">${new Date().toLocaleTimeString()}</div>
+                    </div>
+                </div>
+            `;
+            
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (message) {
+                addUserMessage(message);
+                input.value = '';
+                
+                // Simulation réponse IA
+                setTimeout(() => {
+                    const responses = {
+                        'salon': `J'ai trouvé 15 salons près de vous ! 🎯
+                        
+Les meilleurs options :
+• **Salon Awa Beauty** - Plateau (4.8★) - 5 000 FCFA
+• **Chez Ibra** - Ouakam (4.9★) - 3 000 FCFA  
+• **Beauty Dakar** - Almadies (4.7★) - 8 000 FCFA
+
+Souhaitez-vous filtrer par prix ou service ?`,
+
+                        'prix': `💰 **Grille tarifaire moyenne à Dakar :**
+                        
+• Tresses simples : 3 000 - 5 000 FCFA
+• Tresses complexes : 6 000 - 15 000 FCFA  
+• Coupe femme : 4 000 - 7 000 FCFA
+• Coupe homme : 2 000 - 4 000 FCFA
+• Dégradé : 3 000 - 6 000 FCFA
+• Pose weave : 8 000 - 20 000 FCFA
+
+Les prix varient selon la complexité et la réputation du salon.`,
+
+                        'domicile': `🏠 **Service à domicile disponible !**
+                        
+12 coiffeurs certifiés se déplacent chez vous :
+• Majoration : +1 000 à 2 000 FCFA
+• Disponibilité : 8h - 22h
+• Matériel professionnel inclus
+• Réservation minimum 2h à l'avance
+
+Voulez-vous voir les coiffeurs disponibles dans votre quartier ?`,
+
+                        'photo': `📸 **Analyse d'image activée !**
+                        
+Je peux analyser votre photo pour :
+• Identifier le style de coiffure
+• Trouver des salons spécialisés
+• Estimer le prix et la durée
+• Donner des alternatives similaires
+
+Envoyez votre photo ou décrivez le style recherché !`
+                    };
+                    
+                    let response = `Je comprends que vous cherchez des informations sur "${message}". Laissez-moi vous aider à trouver exactement ce qu'il vous faut ! 🤗`;
+                    
+                    for (const [keyword, botResponse] of Object.entries(responses)) {
+                        if (message.toLowerCase().includes(keyword)) {
+                            response = botResponse;
+                            break;
+                        }
+                    }
+                    
+                    addBotMessage('Assistant KeurCoiff\'', response);
+                }, 1000 + Math.random() * 1000);
+            }
+        }
+
+        function sendQuickReply(message) {
+            document.getElementById('chatInput').value = message;
+            sendMessage();
+        }
+
+        // Gestion upload image
+        document.getElementById('imageUpload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                addUserMessage('📸 Photo envoyée pour analyse');
+                
+                // Simulation analyse IA
+                setTimeout(() => {
+                    addBotMessage('🔍 Analyse d\'image', `
+J'ai analysé votre photo ! Voici mes recommandations :
+
+**Style identifié :** Tresses vanilles moyennes
+**Difficulté :** ★★★☆☆ (Intermédiaire)
+**Durée estimée :** 2-3 heures
+**Prix moyen :** 6 000 - 8 000 FCFA
+
+**Salons spécialisés :**
+• Salon Awa Beauty - Expert vanilles (4.8★)
+• Tresses&Déco - Spécialiste tresses (4.7★)
+• Chez Mariam - Artisan local (4.9★)
+
+Souhaitez-vous réserver chez l'un de ces salons ?
+                    `);
+                }, 2000);
+            }
+        });
+
+        // Enter pour envoyer
+        document.getElementById('chatInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>

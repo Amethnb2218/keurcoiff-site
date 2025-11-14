@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - KeurCoiff'</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <!-- Sidebar -->
+    <div class="flex h-screen">
+        <div class="w-64 bg-white shadow-lg">
+            <div class="p-6">
+                <h1 class="text-2xl font-bold text-primary">KeurCoiff' Admin</h1>
+                <p class="text-gray-600 text-sm">Panel d'administration</p>
+            </div>
+            
+            <nav class="mt-6">
+                <a href="#dashboard" class="admin-nav-item active">
+                    <i class="fas fa-chart-bar mr-3"></i>
+                    Tableau de bord
+                </a>
+                <a href="#salons" class="admin-nav-item">
+                    <i class="fas fa-store mr-3"></i>
+                    Gestion salons
+                </a>
+                <a href="#reservations" class="admin-nav-item">
+                    <i class="fas fa-calendar-alt mr-3"></i>
+                    Réservations
+                </a>
+                <a href="#users" class="admin-nav-item">
+                    <i class="fas fa-users mr-3"></i>
+                    Utilisateurs
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 overflow-auto">
+            <!-- Header -->
+            <header class="bg-white shadow-sm p-6">
+                <div class="flex justify-between items-center">
+                    <h2 id="pageTitle" class="text-xl font-semibold">Tableau de bord</h2>
+                    <div class="flex items-center space-x-4">
+                        <span id="adminName" class="text-gray-700"></span>
+                        <button onclick="logout()" class="bg-red-500 text-white px-4 py-2 rounded-lg">
+                            Déconnexion
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <main class="p-6">
+                <div id="dashboardContent">
+                    <!-- Statistiques -->
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                        <div class="bg-white p-6 rounded-xl shadow-sm">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fas fa-store text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <div class="text-2xl font-bold" id="totalSalons">0</div>
+                                    <div class="text-gray-600">Salons</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-xl shadow-sm">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fas fa-calendar-check text-green-600"></i>
+                                </div>
+                                <div>
+                                    <div class="text-2xl font-bold" id="totalReservations">0</div>
+                                    <div class="text-gray-600">Réservations</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-xl shadow-sm">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fas fa-users text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <div class="text-2xl font-bold" id="totalUsers">0</div>
+                                    <div class="text-gray-600">Utilisateurs</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-xl shadow-sm">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fas fa-money-bill-wave text-orange-600"></i>
+                                </div>
+                                <div>
+                                    <div class="text-2xl font-bold" id="totalRevenue">0 FCFA</div>
+                                    <div class="text-gray-600">Revenus</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dernières réservations -->
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <h3 class="text-lg font-semibold mb-4">Dernières réservations</h3>
+                        <div id="recentReservations" class="space-y-4">
+                            <!-- Réservations chargées dynamiquement -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gestion des salons -->
+                <div id="salonsContent" class="hidden">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-lg font-semibold">Gestion des salons</h3>
+                        <button onclick="showAddSalonModal()" class="bg-primary text-white px-4 py-2 rounded-lg">
+                            <i class="fas fa-plus mr-2"></i>
+                            Ajouter un salon
+                        </button>
+                    </div>
+                    <div id="salonsList" class="bg-white rounded-xl shadow-sm">
+                        <!-- Liste des salons -->
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Gestion de l'admin panel
+        const API_BASE_URL = 'http://localhost:5000/api';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAdminAuth();
+            loadDashboardStats();
+            setupNavigation();
+        });
+
+        async function checkAdminAuth() {
+            const token = localStorage.getItem('keurcoiff_token');
+            const user = JSON.parse(localStorage.getItem('keurcoiff_user') || '{}');
+            
+            if (!token || user.role !== 'admin') {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            document.getElementById('adminName').textContent = user.fullName;
+        }
+
+        async function loadDashboardStats() {
+            try {
+                const token = localStorage.getItem('keurcoiff_token');
+                
+                // Charger les statistiques
+                const [salonsRes, reservationsRes, usersRes] = await Promise.all([
+                    fetch(`${API_BASE_URL}/salons`),
+                    fetch(`${API_BASE_URL}/reservations`),
+                    fetch(`${API_BASE_URL}/admin/users`, {
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    })
+                ]);
+
+                const salons = await salonsRes.json();
+                const reservations = await reservationsRes.json();
+                const users = await usersRes.json();
+
+                if (salons.success) {
+                    document.getElementById('totalSalons').textContent = salons.count;
+                }
+                if (reservations.success) {
+                    document.getElementById('totalReservations').textContent = reservations.count;
+                }
+                if (users.success) {
+                    document.getElementById('totalUsers').textContent = users.count;
+                }
+
+            } catch (error) {
+                console.error('Erreur chargement stats:', error);
+            }
+        }
+
+        function setupNavigation() {
+            document.querySelectorAll('.admin-nav-item').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Mettre à jour l'active state
+                    document.querySelectorAll('.admin-nav-item').forEach(i => {
+                        i.classList.remove('active', 'bg-primary', 'text-white');
+                        i.classList.add('text-gray-700', 'hover:bg-gray-100');
+                    });
+                    
+                    this.classList.add('active', 'bg-primary', 'text-white');
+                    this.classList.remove('text-gray-700', 'hover:bg-gray-100');
+                    
+                    // Afficher le contenu correspondant
+                    const target = this.getAttribute('href').substring(1);
+                    showAdminSection(target);
+                });
+            });
+        }
+
+        function showAdminSection(section) {
+            // Cacher tous les contenus
+            document.querySelectorAll('[id$="Content"]').forEach(el => {
+                el.classList.add('hidden');
+            });
+            
+            // Afficher la section demandée
+            document.getElementById(section + 'Content').classList.remove('hidden');
+            document.getElementById('pageTitle').textContent = getSectionTitle(section);
+        }
+
+        function getSectionTitle(section) {
+            const titles = {
+                'dashboard': 'Tableau de bord',
+                'salons': 'Gestion des salons',
+                'reservations': 'Gestion des réservations',
+                'users': 'Gestion des utilisateurs'
+            };
+            return titles[section] || 'Admin';
+        }
+
+        function logout() {
+            localStorage.removeItem('keurcoiff_token');
+            localStorage.removeItem('keurcoiff_user');
+            window.location.href = 'login.html';
+        }
+    </script>
+
+    <style>
+        .admin-nav-item {
+            @apply block px-6 py-3 text-gray-700 hover:bg-gray-100 transition-colors;
+        }
+        .admin-nav-item.active {
+            @apply bg-primary text-white;
+        }
+    </style>
+</body>
+</html>

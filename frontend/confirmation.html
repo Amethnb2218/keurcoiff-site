@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation • KeurCoiff'</title>
+    
+    <!-- Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#7C3AED',
+                        secondary: '#F59E0B', 
+                        accent: '#10B981',
+                        dark: '#1F2937',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #7C3AED;
+            border-radius: 50%;
+            animation: confetti-fall 5s linear infinite;
+        }
+        
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: block;
+            stroke-width: 2;
+            stroke: #fff;
+            stroke-miterlimit: 10;
+            box-shadow: inset 0px 0px 0px #10B981;
+            animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+        }
+        
+        .checkmark__circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 2;
+            stroke-miterlimit: 10;
+            stroke: #10B981;
+            fill: none;
+            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        }
+        
+        .checkmark__check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+        }
+        
+        @keyframes stroke {
+            100% { stroke-dashoffset: 0; }
+        }
+        
+        @keyframes scale {
+            0%, 100% { transform: none; }
+            50% { transform: scale3d(1.1, 1.1, 1); }
+        }
+        
+        @keyframes fill {
+            100% { box-shadow: inset 0px 0px 0px 40px #10B981; }
+        }
+    </style>
+</head>
+
+<body class="font-inter bg-gradient-to-br from-green-50 to-accent/20 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white/80 backdrop-blur-sm border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <a href="index.html" class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-gradient-to-r from-primary to-purple-600 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-crown text-white"></i>
+                        </div>
+                        <span class="text-xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">KeurCoiff'</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section Confirmation -->
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="text-center">
+            <!-- Animation de succès -->
+            <div class="relative mb-8">
+                <div class="w-32 h-32 bg-green-100 rounded-full flex items-center justify-center mx-auto shadow-lg">
+                    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                        <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                    </svg>
+                </div>
+                
+                <!-- Confetti animation -->
+                <div id="confettiContainer" class="absolute inset-0 pointer-events-none"></div>
+            </div>
+
+            <!-- Message de confirmation -->
+            <div class="bg-white rounded-3xl shadow-xl p-8 max-w-2xl mx-auto">
+                <h1 class="text-4xl font-bold text-gray-900 mb-4">Réservation confirmée !</h1>
+                <p class="text-xl text-gray-600 mb-8">
+                    Votre réservation a été confirmée avec succès. Vous recevrez un SMS de confirmation dans quelques instants.
+                </p>
+
+                <!-- Détails de la réservation -->
+                <div class="bg-gray-50 rounded-2xl p-6 mb-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Détails de votre réservation</h2>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 text-left">
+                        <div class="space-y-4">
+                            <div>
+                                <div class="text-sm text-gray-600">Salon</div>
+                                <div class="font-semibold text-gray-900">Salon Awa Beauty</div>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-600">Service</div>
+                                <div class="font-semibold text-gray-900">Tresses vanilles</div>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-600">Prix</div>
+                                <div class="font-semibold text-primary">8 000 FCFA</div>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <div class="text-sm text-gray-600">Date</div>
+                                <div class="font-semibold text-gray-900">Lundi 15 Décembre 2024</div>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-600">Heure</div>
+                                <div class="font-semibold text-gray-900">14:00 - 16:30 (2h30)</div>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-600">N° Réservation</div>
+                                <div class="font-semibold text-gray-900">KC-2024-0012</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Instructions -->
+                <div class="bg-blue-50 border border-blue-200 rounded-2xl p-6 mb-8">
+                    <h3 class="text-lg font-semibold text-blue-900 mb-4 flex items-center">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        Prochaines étapes
+                    </h3>
+                    <ul class="space-y-3 text-blue-800 text-left">
+                        <li class="flex items-center space-x-3">
+                            <i class="fas fa-check text-green-500"></i>
+                            <span>Vous recevrez un SMS de confirmation</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fas fa-clock text-orange-500"></i>
+                            <span>Présentez-vous 10 minutes avant l'heure</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fas fa-map-marker-alt text-red-500"></i>
+                            <span>Adresse: Rue 10, Plateau, Dakar</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fas fa-phone text-purple-500"></i>
+                            <span>Contact: +221 77 123 45 67</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="mes-reservations.html" 
+                       class="bg-primary text-white px-8 py-4 rounded-xl font-semibold hover:bg-purple-600 transition-colors flex items-center justify-center space-x-2">
+                        <i class="fas fa-calendar"></i>
+                        <span>Voir mes réservations</span>
+                    </a>
+                    
+                    <a href="index.html" 
+                       class="bg-white text-gray-700 px-8 py-4 rounded-xl font-semibold border border-gray-300 hover:bg-gray-50 transition-colors flex items-center justify-center space-x-2">
+                        <i class="fas fa-home"></i>
+                        <span>Retour à l'accueil</span>
+                    </a>
+                </div>
+
+                <!-- Partage -->
+                <div class="mt-8 pt-8 border-t border-gray-200">
+                    <p class="text-gray-600 mb-4">Partagez votre expérience KeurCoiff'</p>
+                    <div class="flex justify-center space-x-4">
+                        <button onclick="shareOnWhatsApp()" class="w-12 h-12 bg-green-500 text-white rounded-xl flex items-center justify-center hover:bg-green-600 transition-colors">
+                            <i class="fab fa-whatsapp"></i>
+                        </button>
+                        <button onclick="shareOnFacebook()" class="w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center hover:bg-blue-700 transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </button>
+                        <button onclick="copyBookingLink()" class="w-12 h-12 bg-gray-600 text-white rounded-xl flex items-center justify-center hover:bg-gray-700 transition-colors">
+                            <i class="fas fa-link"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Offre spéciale -->
+            <div class="bg-gradient-to-r from-secondary to-orange-500 text-white rounded-3xl shadow-xl p-6 mt-8 max-w-2xl mx-auto">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold mb-2">🎁 Offre spéciale !</h3>
+                        <p class="text-white/90">Réservez à nouveau et obtenez 15% de réduction</p>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-2xl font-bold">CODE: KEUR15</div>
+                        <div class="text-white/80 text-sm">Valable 7 jours</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Données de la réservation
+        const bookingDetails = {
+            salon: "Salon Awa Beauty",
+            service: "Tresses vanilles",
+            date: "Lundi 15 Décembre 2024",
+            time: "14:00 - 16:30",
+            duration: "2h30",
+            price: "8 000 FCFA",
+            bookingNumber: "KC-2024-0012",
+            address: "Rue 10, Plateau, Dakar",
+            phone: "+221 77 123 45 67"
+        };
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('✅ Page de confirmation chargée');
+            createConfetti();
+            sendConfirmationSMS();
+            startCountdown();
+        });
+
+        function createConfetti() {
+            const container = document.getElementById('confettiContainer');
+            const colors = ['#7C3AED', '#10B981', '#F59E0B', '#EF4444', '#3B82F6'];
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.animationDelay = Math.random() * 5 + 's';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = (Math.random() * 10 + 5) + 'px';
+                confetti.style.height = (Math.random() * 10 + 5) + 'px';
+                container.appendChild(confetti);
+            }
+        }
+
+        function sendConfirmationSMS() {
+            // Simulation d'envoi de SMS
+            setTimeout(() => {
+                console.log('📱 SMS de confirmation envoyé');
+            }, 2000);
+        }
+
+        function startCountdown() {
+            // Compte à rebours pour le rappel
+            setTimeout(() => {
+                showNotification('📅 Rappel: Votre réservation est dans 24h', 'info');
+            }, 5000);
+        }
+
+        function shareOnWhatsApp() {
+            const text = `Je viens de réserver chez KeurCoiff' ! 🎉\n\n` +
+                        `Salon: ${bookingDetails.salon}\n` +
+                        `Service: ${bookingDetails.service}\n` +
+                        `Date: ${bookingDetails.date}\n` +
+                        `Heure: ${bookingDetails.time}\n\n` +
+                        `Réservez sur: keurcoiff.sn`;
+            
+            const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+            window.open(url, '_blank');
+            
+            showNotification('Partage WhatsApp ouvert', 'success');
+        }
+
+        function shareOnFacebook() {
+            const url = 'https://www.facebook.com/sharer/sharer.php?u=https://keurcoiff.sn';
+            window.open(url, '_blank');
+            
+            showNotification('Partage Facebook ouvert', 'success');
+        }
+
+        function copyBookingLink() {
+            const link = 'https://keurcoiff.sn/booking/KC-2024-0012';
+            navigator.clipboard.writeText(link).then(() => {
+                showNotification('Lien copié dans le presse-papier !', 'success');
+            });
+        }
+
+        // Fonction de notification
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            const bgColor = type === 'success' ? 'bg-green-500' : 
+                           type === 'error' ? 'bg-red-500' : 'bg-blue-500';
+            
+            notification.innerHTML = `
+                <div class="fixed top-4 right-4 ${bgColor} text-white px-6 py-4 rounded-2xl shadow-2xl z-50 max-w-sm animate-slideIn">
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'exclamation-triangle' : 'info'}"></i>
+                        <div class="font-medium">${message}</div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+        }
+
+        // Style d'animation pour la notification
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            
+            .animate-slideIn {
+                animation: slideIn 0.3s ease-out;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page non trouvée • KeurCoiff'</title>
+    
+    <!-- Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#7C3AED',
+                        secondary: '#F59E0B', 
+                        accent: '#10B981',
+                        dark: '#1F2937',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .pulse-slow {
+            animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
+</head>
+
+<body class="font-inter bg-gradient-to-br from-purple-50 to-primary/10 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white/80 backdrop-blur-sm border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <a href="index.html" class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-gradient-to-r from-primary to-purple-600 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-crown text-white"></i>
+                        </div>
+                        <span class="text-xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">KeurCoiff'</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section 404 -->
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div class="text-center">
+            <!-- Illustration animée -->
+            <div class="relative mb-8">
+                <div class="floating relative z-10">
+                    <div class="w-64 h-64 bg-gradient-to-r from-primary to-purple-600 rounded-full mx-auto flex items-center justify-center text-white text-8xl">
+                        404
+                    </div>
+                </div>
+                
+                <!-- Éléments décoratifs -->
+                <div class="absolute top-10 left-1/4 w-8 h-8 bg-secondary rounded-full pulse-slow"></div>
+                <div class="absolute top-20 right-1/4 w-6 h-6 bg-accent rounded-full pulse-slow" style="animation-delay: 1s;"></div>
+                <div class="absolute bottom-10 left-1/3 w-4 h-4 bg-primary rounded-full pulse-slow" style="animation-delay: 2s;"></div>
+            </div>
+
+            <!-- Message -->
+            <div class="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl p-8 max-w-2xl mx-auto">
+                <h1 class="text-5xl font-bold text-gray-900 mb-4">Oups ! Page non trouvée</h1>
+                <p class="text-xl text-gray-600 mb-8">
+                    La page que vous recherchez semble s'être envolée comme une mèche de cheveux au vent.
+                </p>
+
+                <!-- Suggestions -->
+                <div class="bg-blue-50 border border-blue-200 rounded-2xl p-6 mb-8">
+                    <h3 class="text-lg font-semibold text-blue-900 mb-4 flex items-center justify-center">
+                        <i class="fas fa-lightbulb mr-2"></i>
+                        Voici quelques suggestions
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-4 text-left">
+                        <div class="flex items-center space-x-3 text-blue-800">
+                            <i class="fas fa-search text-blue-500"></i>
+                            <span>Vérifiez l'URL</span>
+                        </div>
+                        <div class="flex items-center space-x-3 text-blue-800">
+                            <i class="fas fa-home text-blue-500"></i>
+                            <span>Retournez à l'accueil</span>
+                        </div>
+                        <div class="flex items-center space-x-3 text-blue-800">
+                            <i class="fas fa-redo text-blue-500"></i>
+                            <span>Rechargez la page</span>
+                        </div>
+                        <div class="flex items-center space-x-3 text-blue-800">
+                            <i class="fas fa-headset text-blue-500"></i>
+                            <span>Contactez le support</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="index.html" 
+                       class="bg-primary text-white px-8 py-4 rounded-xl font-semibold hover:bg-purple-600 transition-colors flex items-center justify-center space-x-2">
+                        <i class="fas fa-home"></i>
+                        <span>Retour à l'accueil</span>
+                    </a>
+                    
+                    <button onclick="goBack()" 
+                            class="bg-white text-gray-700 px-8 py-4 rounded-xl font-semibold border border-gray-300 hover:bg-gray-50 transition-colors flex items-center justify-center space-x-2">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Page précédente</span>
+                    </button>
+                </div>
+
+                <!-- Recherche -->
+                <div class="mt-8 pt-8 border-t border-gray-200">
+                    <p class="text-gray-600 mb-4">Ou recherchez ce que vous vouliez</p>
+                    <div class="flex max-w-md mx-auto">
+                        <input type="text" 
+                               placeholder="Rechercher un salon, service..."
+                               class="flex-1 p-4 rounded-l-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent">
+                        <button class="bg-primary text-white px-6 py-4 rounded-r-xl font-semibold hover:bg-purple-600 transition-colors">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Liens rapides -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 max-w-2xl mx-auto">
+                <a href="index.html" class="bg-white/80 backdrop-blur-sm rounded-2xl p-4 text-center hover:shadow-lg transition-all">
+                    <i class="fas fa-home text-primary text-xl mb-2"></i>
+                    <div class="font-semibold text-gray-900">Accueil</div>
+                </a>
+                <a href="reservation.html" class="bg-white/80 backdrop-blur-sm rounded-2xl p-4 text-center hover:shadow-lg transition-all">
+                    <i class="fas fa-calendar text-primary text-xl mb-2"></i>
+                    <div class="font-semibold text-gray-900">Réserver</div>
+                </a>
+                <a href="profile.html" class="bg-white/80 backdrop-blur-sm rounded-2xl p-4 text-center hover:shadow-lg transition-all">
+                    <i class="fas fa-user text-primary text-xl mb-2"></i>
+                    <div class="font-semibold text-gray-900">Profil</div>
+                </a>
+                <a href="mes-reservations.html" class="bg-white/80 backdrop-blur-sm rounded-2xl p-4 text-center hover:shadow-lg transition-all">
+                    <i class="fas fa-history text-primary text-xl mb-2"></i>
+                    <div class="font-semibold text-gray-900">Réservations</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white/80 backdrop-blur-sm border-t border-gray-200 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="text-center">
+                <p class="text-gray-600">
+                    Besoin d'aide ? Contactez-nous au 
+                    <a href="tel:+221771234567" class="text-primary hover:underline">+221 77 123 45 67</a>
+                </p>
+                <p class="text-gray-500 text-sm mt-2">
+                    &copy; 2024 KeurCoiff'. Tous droits réservés.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('❌ Page 404 chargée');
+            track404Error();
+        });
+
+        function track404Error() {
+            // Envoyer une notification d'erreur 404
+            console.log('📊 Erreur 404 trackée:', window.location.href);
+        }
+
+        function goBack() {
+            if (document.referrer) {
+                window.history.back();
+            } else {
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Recherche
+        document.querySelector('input[type="text"]').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch(this.value);
+            }
+        });
+
+        function performSearch(query) {
+            if (query.trim()) {
+                showNotification(`Recherche de "${query}"...`, 'info');
+                // Rediriger vers la page de recherche
+                setTimeout(() => {
+                    window.location.href = `index.html?search=${encodeURIComponent(query)}`;
+                }, 1000);
+            }
+        }
+
+        // Fonction de notification
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            const bgColor = type === 'success' ? 'bg-green-500' : 
+                           type === 'error' ? 'bg-red-500' : 'bg-blue-500';
+            
+            notification.innerHTML = `
+                <div class="fixed top-4 right-4 ${bgColor} text-white px-6 py-4 rounded-2xl shadow-2xl z-50 max-w-sm animate-slideIn">
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'exclamation-triangle' : 'info'}"></i>
+                        <div class="font-medium">${message}</div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+        }
+
+        // Style d'animation pour la notification
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            
+            .animate-slideIn {
+                animation: slideIn 0.3s ease-out;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

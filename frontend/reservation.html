@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Réserver • KeurCoiff'</title>
+    
+    <!-- Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#7C3AED',
+                        secondary: '#F59E0B', 
+                        accent: '#10B981',
+                        dark: '#1F2937',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .loader-small {
+            border: 2px solid #f3f4f6;
+            border-top: 2px solid #7C3AED;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .service-card {
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .selected-service {
+            border-color: #7C3AED;
+            background-color: #faf5ff;
+        }
+    </style>
+</head>
+
+<body class="font-inter bg-gray-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <a href="index.html" class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-gradient-to-r from-primary to-purple-600 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-crown text-white"></i>
+                        </div>
+                        <span class="text-xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">KeurCoiff'</span>
+                    </a>
+                </div>
+
+                <!-- Menu navigation -->
+                <div class="flex items-center space-x-6">
+                    <a href="index.html" class="text-gray-600 hover:text-primary transition-colors flex items-center space-x-2">
+                        <i class="fas fa-home"></i>
+                        <span class="hidden sm:inline">Accueil</span>
+                    </a>
+                    <a href="profile.html" class="text-gray-600 hover:text-primary transition-colors flex items-center space-x-2">
+                        <i class="fas fa-user"></i>
+                        <span class="hidden sm:inline">Mon profil</span>
+                    </a>
+                    <a href="mes-reservations.html" class="text-gray-600 hover:text-primary transition-colors flex items-center space-x-2">
+                        <i class="fas fa-calendar"></i>
+                        <span class="hidden sm:inline">Mes réservations</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section Réservation -->
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- En-tête -->
+        <div class="text-center mb-8 fade-in">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Réserver un service</h1>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                Choisissez votre salon, service et horaire en quelques clics
+            </p>
+        </div>
+
+        <!-- Processus de réservation -->
+        <div class="grid lg:grid-cols-3 gap-8">
+            <!-- Étapes de réservation -->
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-3xl shadow-lg p-8">
+                    <!-- Indicateur d'étapes -->
+                    <div class="flex justify-between items-center mb-8">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center font-semibold">1</div>
+                            <span class="font-semibold">Salon</span>
+                        </div>
+                        <div class="flex-1 h-1 bg-gray-200 mx-4"></div>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-8 h-8 bg-gray-200 text-gray-600 rounded-full flex items-center justify-center font-semibold">2</div>
+                            <span class="text-gray-600">Service</span>
+                        </div>
+                        <div class="flex-1 h-1 bg-gray-200 mx-4"></div>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-8 h-8 bg-gray-200 text-gray-600 rounded-full flex items-center justify-center font-semibold">3</div>
+                            <span class="text-gray-600">Horaire</span>
+                        </div>
+                    </div>
+
+                    <!-- Étape 1: Choix du salon -->
+                    <div id="step1" class="space-y-6">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-6">Choisissez votre salon</h2>
+                        
+                        <div class="grid md:grid-cols-2 gap-6" id="salonsList">
+                            <!-- Les salons seront chargés ici -->
+                        </div>
+                        
+                        <button onclick="nextStep(2)" class="w-full bg-primary text-white py-4 rounded-xl font-semibold hover:bg-purple-600 transition-colors">
+                            Continuer vers les services
+                        </button>
+                    </div>
+
+                    <!-- Étape 2: Choix du service -->
+                    <div id="step2" class="space-y-6 hidden">
+                        <div class="flex items-center space-x-4 mb-6">
+                            <button onclick="prevStep(1)" class="text-primary hover:text-purple-600">
+                                <i class="fas fa-arrow-left mr-2"></i>Retour
+                            </button>
+                            <h2 class="text-2xl font-bold text-gray-900">Choisissez votre service</h2>
+                        </div>
+                        
+                        <div id="servicesList" class="space-y-4">
+                            <!-- Les services seront chargés ici -->
+                        </div>
+                        
+                        <button onclick="nextStep(3)" class="w-full bg-primary text-white py-4 rounded-xl font-semibold hover:bg-purple-600 transition-colors">
+                            Continuer vers l'horaire
+                        </button>
+                    </div>
+
+                    <!-- Étape 3: Choix de l'horaire -->
+                    <div id="step3" class="space-y-6 hidden">
+                        <div class="flex items-center space-x-4 mb-6">
+                            <button onclick="prevStep(2)" class="text-primary hover:text-purple-600">
+                                <i class="fas fa-arrow-left mr-2"></i>Retour
+                            </button>
+                            <h2 class="text-2xl font-bold text-gray-900">Choisissez la date et l'heure</h2>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Date *</label>
+                                <input 
+                                    type="date" 
+                                    id="bookingDate"
+                                    min="<?php echo date('Y-m-d'); ?>"
+                                    class="w-full p-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent"
+                                >
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Heure *</label>
+                                <select 
+                                    id="bookingTime"
+                                    class="w-full p-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent"
+                                >
+                                    <option value="">Choisir l'heure</option>
+                                    <option value="08:00">08:00</option>
+                                    <option value="09:00">09:00</option>
+                                    <option value="10:00">10:00</option>
+                                    <option value="11:00">11:00</option>
+                                    <option value="14:00">14:00</option>
+                                    <option value="15:00">15:00</option>
+                                    <option value="16:00">16:00</option>
+                                    <option value="17:00">17:00</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Notes supplémentaires (optionnel)</label>
+                            <textarea 
+                                id="bookingNotes"
+                                rows="3"
+                                placeholder="Précisions sur le style souhaité, allergies, etc."
+                                class="w-full p-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent"
+                            ></textarea>
+                        </div>
+                        
+                        <button onclick="confirmBooking()" class="w-full bg-green-500 text-white py-4 rounded-xl font-semibold hover:bg-green-600 transition-colors">
+                            Confirmer la réservation
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Récapitulatif -->
+            <div class="space-y-6">
+                <div class="bg-white rounded-3xl shadow-lg p-6 sticky top-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Récapitulatif</h3>
+                    
+                    <div id="bookingSummary" class="space-y-4">
+                        <div class="text-center py-8">
+                            <i class="fas fa-shopping-cart text-gray-300 text-4xl mb-4"></i>
+                            <p class="text-gray-500">Votre sélection apparaîtra ici</p>
+                        </div>
+                    </div>
+                    
+                    <div id="bookingTotal" class="border-t border-gray-200 pt-4 mt-4 hidden">
+                        <div class="flex justify-between items-center text-lg font-semibold">
+                            <span>Total:</span>
+                            <span id="totalAmount" class="text-primary">0 FCFA</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Assistance -->
+                <div class="bg-gradient-to-r from-primary to-purple-600 text-white rounded-3xl shadow-lg p-6">
+                    <h3 class="font-bold mb-3">Besoin d'aide ?</h3>
+                    <p class="text-white/80 text-sm mb-4">Notre équipe vous assiste dans votre réservation</p>
+                    <div class="space-y-2">
+                        <a href="tel:+221771234567" class="flex items-center space-x-2 text-white/90 hover:text-white transition-colors">
+                            <i class="fas fa-phone"></i>
+                            <span>+221 77 123 45 67</span>
+                        </a>
+                        <a href="https://wa.me/221771234567" class="flex items-center space-x-2 text-white/90 hover:text-white transition-colors">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Données de démonstration
+        const demoSalons = [
+            {
+                id: '1',
+                name: 'Salon Awa Beauty',
+                address: 'Plateau, Dakar',
+                rating: 4.8,
+                image: '/api/placeholder/300/200',
+                services: [
+                    { id: '1', name: 'Tresses simples', price: 4000, duration: 120 },
+                    { id: '2', name: 'Tresses vanilles', price: 8000, duration: 180 },
+                    { id: '3', name: 'Pose weave', price: 15000, duration: 120 }
+                ]
+            },
+            {
+                id: '2',
+                name: 'Chez Ibra - Coiffeur Homme',
+                address: 'Ouakam, Dakar',
+                rating: 4.9,
+                image: '/api/placeholder/300/200',
+                services: [
+                    { id: '4', name: 'Coupe homme', price: 2500, duration: 45 },
+                    { id: '5', name: 'Dégradé', price: 4000, duration: 60 },
+                    { id: '6', name: 'Tresses homme', price: 5000, duration: 90 }
+                ]
+            }
+        ];
+
+        let selectedSalon = null;
+        let selectedService = null;
+        let selectedDate = null;
+        let selectedTime = null;
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📅 Initialisation de la page réservation...');
+            loadSalons();
+            setupDateValidation();
+        });
+
+        function loadSalons() {
+            // Simulation de chargement des salons
+            setTimeout(() => {
+                displaySalons(demoSalons);
+            }, 1000);
+        }
+
+        function displaySalons(salons) {
+            const container = document.getElementById('salonsList');
+            
+            container.innerHTML = salons.map(salon => `
+                <div class="service-card bg-white border-2 border-gray-200 rounded-2xl p-6 cursor-pointer hover:border-primary transition-all"
+                     onclick="selectSalon('${salon.id}')"
+                     id="salon-${salon.id}">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-16 h-16 bg-gradient-to-r from-primary to-purple-600 rounded-2xl flex items-center justify-center text-white text-xl">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-900 mb-1">${salon.name}</h3>
+                            <p class="text-gray-600 text-sm mb-2">${salon.address}</p>
+                            <div class="flex items-center text-yellow-400 text-sm">
+                                ${'★'.repeat(Math.floor(salon.rating))}${salon.rating % 1 !== 0 ? '½' : ''}
+                                <span class="text-gray-600 ml-1">${salon.rating}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function selectSalon(salonId) {
+            // Retirer la sélection précédente
+            document.querySelectorAll('.service-card').forEach(card => {
+                card.classList.remove('selected-service', 'border-primary');
+                card.classList.add('border-gray-200');
+            });
+            
+            // Ajouter la nouvelle sélection
+            const selectedCard = document.getElementById(`salon-${salonId}`);
+            selectedCard.classList.add('selected-service', 'border-primary');
+            selectedCard.classList.remove('border-gray-200');
+            
+            selectedSalon = demoSalons.find(s => s.id === salonId);
+            displayServices(selectedSalon.services);
+            updateBookingSummary();
+        }
+
+        function displayServices(services) {
+            const container = document.getElementById('servicesList');
+            
+            container.innerHTML = services.map(service => `
+                <div class="service-card bg-white border-2 border-gray-200 rounded-2xl p-6 cursor-pointer hover:border-primary transition-all"
+                     onclick="selectService('${service.id}')"
+                     id="service-${service.id}">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="font-semibold text-gray-900 mb-1">${service.name}</h3>
+                            <p class="text-gray-600 text-sm">${service.duration} min</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-lg font-bold text-primary">${service.price.toLocaleString()} FCFA</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function selectService(serviceId) {
+            if (!selectedSalon) return;
+            
+            // Retirer la sélection précédente
+            document.querySelectorAll('#servicesList .service-card').forEach(card => {
+                card.classList.remove('selected-service', 'border-primary');
+                card.classList.add('border-gray-200');
+            });
+            
+            // Ajouter la nouvelle sélection
+            const selectedCard = document.getElementById(`service-${serviceId}`);
+            selectedCard.classList.add('selected-service', 'border-primary');
+            selectedCard.classList.remove('border-gray-200');
+            
+            selectedService = selectedSalon.services.find(s => s.id === serviceId);
+            updateBookingSummary();
+        }
+
+        function setupDateValidation() {
+            const dateInput = document.getElementById('bookingDate');
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.min = today;
+            
+            dateInput.addEventListener('change', function() {
+                selectedDate = this.value;
+                updateBookingSummary();
+            });
+            
+            const timeSelect = document.getElementById('bookingTime');
+            timeSelect.addEventListener('change', function() {
+                selectedTime = this.value;
+                updateBookingSummary();
+            });
+        }
+
+        function updateBookingSummary() {
+            const summary = document.getElementById('bookingSummary');
+            const totalSection = document.getElementById('bookingTotal');
+            const totalAmount = document.getElementById('totalAmount');
+            
+            if (!selectedSalon && !selectedService) {
+                summary.innerHTML = `
+                    <div class="text-center py-4">
+                        <i class="fas fa-shopping-cart text-gray-300 text-2xl mb-2"></i>
+                        <p class="text-gray-500 text-sm">Votre sélection apparaîtra ici</p>
+                    </div>
+                `;
+                totalSection.classList.add('hidden');
+                return;
+            }
+            
+            let total = 0;
+            let summaryHTML = '';
+            
+            if (selectedSalon) {
+                summaryHTML += `
+                    <div class="flex justify-between items-start pb-3 border-b border-gray-200">
+                        <div>
+                            <div class="font-semibold text-gray-900">${selectedSalon.name}</div>
+                            <div class="text-sm text-gray-600">${selectedSalon.address}</div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            if (selectedService) {
+                summaryHTML += `
+                    <div class="flex justify-between items-start pb-3 border-b border-gray-200">
+                        <div>
+                            <div class="font-semibold text-gray-900">${selectedService.name}</div>
+                            <div class="text-sm text-gray-600">${selectedService.duration} min</div>
+                        </div>
+                        <div class="font-semibold text-primary">${selectedService.price.toLocaleString()} FCFA</div>
+                    </div>
+                `;
+                total += selectedService.price;
+            }
+            
+            if (selectedDate && selectedTime) {
+                summaryHTML += `
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="font-semibold text-gray-900">Date et heure</div>
+                            <div class="text-sm text-gray-600">${formatDate(selectedDate)} à ${selectedTime}</div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            summary.innerHTML = summaryHTML;
+            totalAmount.textContent = `${total.toLocaleString()} FCFA`;
+            totalSection.classList.remove('hidden');
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('fr-FR', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        function nextStep(step) {
+            // Validation avant de passer à l'étape suivante
+            if (step === 2 && !selectedSalon) {
+                showNotification('Veuillez sélectionner un salon', 'error');
+                return;
+            }
+            
+            if (step === 3 && !selectedService) {
+                showNotification('Veuillez sélectionner un service', 'error');
+                return;
+            }
+            
+            // Cacher toutes les étapes
+            document.querySelectorAll('[id^="step"]').forEach(step => {
+                step.classList.add('hidden');
+            });
+            
+            // Afficher l'étape courante
+            document.getElementById(`step${step}`).classList.remove('hidden');
+            
+            // Mettre à jour l'indicateur d'étapes
+            updateStepIndicator(step);
+        }
+
+        function prevStep(step) {
+            // Cacher toutes les étapes
+            document.querySelectorAll('[id^="step"]').forEach(step => {
+                step.classList.add('hidden');
+            });
+            
+            // Afficher l'étape précédente
+            document.getElementById(`step${step}`).classList.remove('hidden');
+            
+            // Mettre à jour l'indicateur d'étapes
+            updateStepIndicator(step);
+        }
+
+        function updateStepIndicator(currentStep) {
+            const steps = document.querySelectorAll('[id^="step"]');
+            steps.forEach((_, index) => {
+                const stepNumber = index + 1;
+                const indicator = document.querySelector(`.flex.items-center.space-x-2:nth-child(${stepNumber})`);
+                const number = indicator.querySelector('div');
+                const line = indicator.nextElementSibling;
+                
+                if (stepNumber <= currentStep) {
+                    number.classList.remove('bg-gray-200', 'text-gray-600');
+                    number.classList.add('bg-primary', 'text-white');
+                    indicator.querySelector('span').classList.remove('text-gray-600');
+                    indicator.querySelector('span').classList.add('font-semibold');
+                    if (line) line.classList.remove('bg-gray-200');
+                    if (line) line.classList.add('bg-primary');
+                } else {
+                    number.classList.remove('bg-primary', 'text-white');
+                    number.classList.add('bg-gray-200', 'text-gray-600');
+                    indicator.querySelector('span').classList.remove('font-semibold');
+                    indicator.querySelector('span').classList.add('text-gray-600');
+                    if (line) line.classList.remove('bg-primary');
+                    if (line) line.classList.add('bg-gray-200');
+                }
+            });
+        }
+
+        function confirmBooking() {
+            if (!selectedSalon || !selectedService || !selectedDate || !selectedTime) {
+                showNotification('Veuillez compléter toutes les informations', 'error');
+                return;
+            }
+
+            // Simulation de création de réservation
+            showNotification('Réservation en cours...', 'info');
+            
+            setTimeout(() => {
+                showNotification('Réservation confirmée avec succès !', 'success');
+                
+                // Redirection vers la page de confirmation
+                setTimeout(() => {
+                    window.location.href = 'confirmation.html';
+                }, 2000);
+            }, 2000);
+        }
+
+        // Fonction de notification
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            const bgColor = type === 'success' ? 'bg-green-500' : 
+                           type === 'error' ? 'bg-red-500' : 'bg-blue-500';
+            
+            notification.innerHTML = `
+                <div class="fixed top-4 right-4 ${bgColor} text-white px-6 py-4 rounded-2xl shadow-2xl z-50 max-w-sm animate-slideIn">
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'exclamation-triangle' : 'info'}"></i>
+                        <div class="font-medium">${message}</div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+        }
+
+        // Style d'animation pour la notification
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            
+            .animate-slideIn {
+                animation: slideIn 0.3s ease-out;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

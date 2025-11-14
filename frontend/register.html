@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription • KeurCoiff'</title>
+    
+    <!-- Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#7C3AED',
+                        secondary: '#F59E0B', 
+                        accent: '#10B981',
+                        dark: '#1F2937',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .loader-small {
+            border: 2px solid #f3f4f6;
+            border-top: 2px solid #7C3AED;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+
+<body class="font-inter bg-gray-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <a href="index.html" class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-gradient-to-r from-primary to-purple-600 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-crown text-white"></i>
+                        </div>
+                        <span class="text-xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">KeurCoiff'</span>
+                    </a>
+                </div>
+
+                <!-- Lien vers connexion -->
+                <div>
+                    <a href="login.html" class="text-gray-600 hover:text-primary font-medium transition-colors">
+                        Déjà un compte ? Se connecter
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section Inscription -->
+    <section class="min-h-[calc(100vh-80px)] flex items-center justify-center py-12">
+        <div class="max-w-md w-full mx-4">
+            <!-- Carte d'inscription -->
+            <div class="bg-white rounded-3xl shadow-xl p-8">
+                <div class="text-center mb-8">
+                    <h1 class="text-3xl font-bold text-gray-900 mb-2">Créez votre compte</h1>
+                    <p class="text-gray-600">Rejoignez la communauté KeurCoiff'</p>
+                </div>
+
+                <form id="registerForm" class="space-y-6">
+                    <!-- Nom Complet -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            Nom complet *
+                        </label>
+                        <input 
+                            type="text" 
+                            name="fullName" 
+                            required 
+                            class="w-full p-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                            placeholder="Awa Diop"
+                        >
+                    </div>
+
+                    <!-- Téléphone -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            Numéro de téléphone *
+                        </label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <span class="text-gray-500">+221</span>
+                            </div>
+                            <input 
+                                type="tel" 
+                                name="phone" 
+                                required 
+                                class="w-full p-4 pl-16 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                                placeholder="77 123 45 67"
+                                pattern="[0-9]{9}"
+                                title="9 chiffres sans espaces"
+                            >
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1">Format: 771234567</p>
+                    </div>
+
+                    <!-- Email -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            Email (optionnel)
+                        </label>
+                        <input 
+                            type="email" 
+                            name="email" 
+                            class="w-full p-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                            placeholder="awa@example.com"
+                        >
+                    </div>
+
+                    <!-- Quartier -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            Quartier *
+                        </label>
+                        <select 
+                            name="quarter" 
+                            required 
+                            class="w-full p-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                        >
+                            <option value="">Sélectionnez votre quartier</option>
+                            <option value="Plateau">Plateau</option>
+                            <option value="Ouakam">Ouakam</option>
+                            <option value="Almadies">Almadies</option>
+                            <option value="Mermoz">Mermoz</option>
+                            <option value="Sacré-Coeur">Sacré-Coeur</option>
+                            <option value="Fann">Fann</option>
+                            <option value="Gueule Tapée">Gueule Tapée</option>
+                            <option value="Medina">Medina</option>
+                            <option value="Grand Dakar">Grand Dakar</option>
+                            <option value="Parcelles Assainies">Parcelles Assainies</option>
+                            <option value="autre">Autre</option>
+                        </select>
+                    </div>
+
+                    <!-- Mot de passe -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            Mot de passe *
+                        </label>
+                        <div class="relative">
+                            <input 
+                                type="password" 
+                                name="password" 
+                                required 
+                                class="w-full p-4 pr-12 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                                placeholder="••••••••"
+                                minlength="6"
+                                id="passwordInput"
+                            >
+                            <button type="button" onclick="togglePassword()" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700">
+                                <i class="fas fa-eye" id="passwordToggle"></i>
+                            </button>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1">Minimum 6 caractères</p>
+                    </div>
+
+                    <!-- Confirmation mot de passe -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            Confirmer le mot de passe *
+                        </label>
+                        <input 
+                            type="password" 
+                            name="confirmPassword" 
+                            required 
+                            class="w-full p-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                            placeholder="••••••••"
+                            minlength="6"
+                        >
+                    </div>
+
+                    <!-- Type de compte -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            Je suis *
+                        </label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <label class="flex items-center space-x-3 p-4 rounded-xl border border-gray-200 hover:bg-gray-50 cursor-pointer">
+                                <input type="radio" name="userType" value="client" checked class="text-primary focus:ring-primary">
+                                <span>👤 Client</span>
+                            </label>
+                            <label class="flex items-center space-x-3 p-4 rounded-xl border border-gray-200 hover:bg-gray-50 cursor-pointer">
+                                <input type="radio" name="userType" value="coiffeur" class="text-primary focus:ring-primary">
+                                <span>💇 Coiffeur</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Conditions -->
+                    <div class="flex items-center space-x-3">
+                        <input 
+                            type="checkbox" 
+                            name="terms" 
+                            required 
+                            class="rounded text-primary focus:ring-primary"
+                            id="termsCheckbox"
+                        >
+                        <label for="termsCheckbox" class="text-sm text-gray-700">
+                            J'accepte les <a href="#" class="text-primary hover:underline">conditions d'utilisation</a> et la <a href="#" class="text-primary hover:underline">politique de confidentialité</a>
+                        </label>
+                    </div>
+
+                    <!-- Bouton d'inscription -->
+                    <button 
+                        type="submit" 
+                        class="w-full bg-gradient-to-r from-primary to-purple-600 text-white py-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105 flex items-center justify-center"
+                    >
+                        <span id="submitText">Créer mon compte</span>
+                        <div id="submitLoader" class="hidden">
+                            <div class="loader-small"></div>
+                        </div>
+                    </button>
+
+                    <!-- Lien connexion -->
+                    <div class="text-center">
+                        <p class="text-gray-600">
+                            Déjà inscrit ? 
+                            <a href="login.html" class="text-primary font-semibold hover:underline">Se connecter</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Informations supplémentaires -->
+            <div class="mt-8 text-center">
+                <div class="grid grid-cols-3 gap-6 text-center text-sm text-gray-600">
+                    <div>
+                        <div class="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-2">
+                            <i class="fas fa-shield-alt text-primary"></i>
+                        </div>
+                        <div>100% Sécurisé</div>
+                    </div>
+                    <div>
+                        <div class="w-12 h-12 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-2">
+                            <i class="fas fa-bolt text-green-600"></i>
+                        </div>
+                        <div>Inscription rapide</div>
+                    </div>
+                    <div>
+                        <div class="w-12 h-12 bg-orange-100 rounded-2xl flex items-center justify-center mx-auto mb-2">
+                            <i class="fas fa-users text-orange-600"></i>
+                        </div>
+                        <div>50+ Salons</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Toggle visibilité mot de passe
+        function togglePassword() {
+            const passwordInput = document.getElementById('passwordInput');
+            const passwordToggle = document.getElementById('passwordToggle');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                passwordToggle.classList.remove('fa-eye');
+                passwordToggle.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                passwordToggle.classList.remove('fa-eye-slash');
+                passwordToggle.classList.add('fa-eye');
+            }
+        }
+
+        // Gestion du formulaire
+        document.getElementById('registerForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const submitText = document.getElementById('submitText');
+            const submitLoader = document.getElementById('submitLoader');
+            
+            // Récupération des données
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Validation
+            if (data.password !== data.confirmPassword) {
+                showNotification('Les mots de passe ne correspondent pas', 'error');
+                return;
+            }
+            
+            if (data.password.length < 6) {
+                showNotification('Le mot de passe doit contenir au moins 6 caractères', 'error');
+                return;
+            }
+            
+            // Animation chargement
+            submitText.classList.add('hidden');
+            submitLoader.classList.remove('hidden');
+            submitBtn.disabled = true;
+            
+            try {
+                // Simulation appel API
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Stockage temporaire (à remplacer par appel API réel)
+                const userData = {
+                    fullName: data.fullName,
+                    phone: data.phone,
+                    email: data.email,
+                    quarter: data.quarter,
+                    userType: data.userType,
+                    createdAt: new Date().toISOString()
+                };
+                
+                localStorage.setItem('keurcoiff_user', JSON.stringify(userData));
+                localStorage.setItem('keurcoiff_token', 'demo_token_' + Date.now());
+                
+                showNotification('Compte créé avec succès !', 'success');
+                
+                // Redirection
+                setTimeout(() => {
+                    window.location.href = data.userType === 'coiffeur' ? 'profil-coiffeur.html' : 'index.html';
+                }, 1500);
+                
+            } catch (error) {
+                showNotification('Erreur lors de la création du compte', 'error');
+                submitText.classList.remove('hidden');
+                submitLoader.classList.add('hidden');
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Fonction de notification
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            const bgColor = type === 'success' ? 'bg-green-500' : 
+                           type === 'error' ? 'bg-red-500' : 'bg-blue-500';
+            
+            notification.innerHTML = `
+                <div class="fixed top-4 right-4 ${bgColor} text-white px-6 py-4 rounded-2xl shadow-2xl z-50 max-w-sm animate-slideIn">
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'exclamation-triangle' : 'info'}"></i>
+                        <div class="font-medium">${message}</div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+        }
+
+        // Style d'animation pour la notification
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            
+            .animate-slideIn {
+                animation: slideIn 0.3s ease-out;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
