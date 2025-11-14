@@ -1,4 +1,4 @@
-// server.js - VERSION COMPLÈTE AVEC AUTHENTIFICATION
+// server.js - VERSION COMPLÈTE CORRIGÉE
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
@@ -20,7 +20,8 @@ app.use(cors({
     'http://localhost:8080',
     'http://127.0.0.1:8080',
     'http://localhost:5000',
-    'http://127.0.0.1:5000'
+    'http://127.0.0.1:5000',
+    'https://keurcoiff-site.onrender.com'
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
@@ -42,61 +43,9 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Connexion MongoDB
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/keurcoiff')
-.then(() => {
-  console.log('✅ MongoDB Atlas connecté avec succès');
-  console.log(`📊 Base de données: ${mongoose.connection.db.databaseName}`);
-})
-.catch(err => {
-  console.error('❌ Erreur MongoDB:', err);
-  process.exit(1);
-});
-
-
-// Notifications en temps réel
-const notificationService = {
-  sendToUser: (userId, title, message) => {
-    io.to(`user-${userId}`).emit('notification', {
-      title,
-      message,
-      timestamp: new Date(),
-      type: 'info'
-    });
-  },
-  
-  sendToSalon: (salonId, title, message) => {
-    io.to(`salon-${salonId}`).emit('salon-notification', {
-      title,
-      message,
-      timestamp: new Date()
-    });
-  }
-};
-
-// Route pour les notifications
-app.get('/api/notifications', authenticateToken, async (req, res) => {
-  try {
-    const notifications = await Notification.find({ userId: req.user.userId })
-      .sort({ createdAt: -1 })
-      .limit(20);
-    
-    res.json({
-      success: true,
-      data: notifications
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: 'Erreur lors de la récupération des notifications'
-    });
-  }
-});
-
 // ====================
-// 🛡️ MIDDLEWARE D'AUTHENTIFICATION
+// 🛡️ MIDDLEWARE D'AUTHENTIFICATION - PLACÉ AVANT TOUTES LES ROUTES
 // ====================
-
 
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers['authorization'];
@@ -128,6 +77,17 @@ const authenticateToken = (req, res, next) => {
 app.use((req, res, next) => {
   console.log(`📨 ${req.method} ${req.path} - ${new Date().toISOString()}`);
   next();
+});
+
+// Connexion MongoDB
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/keurcoiff')
+.then(() => {
+  console.log('✅ MongoDB Atlas connecté avec succès');
+  console.log(`📊 Base de données: ${mongoose.connection.db.databaseName}`);
+})
+.catch(err => {
+  console.error('❌ Erreur MongoDB:', err);
+  process.exit(1);
 });
 
 // ====================
@@ -913,11 +873,6 @@ app.get('/api/search/suggestions', async (req, res) => {
 // 💳 ROUTES PAIEMENT (SIMULATION)
 // ====================
 
-// Intégration paiement
-// ====================
-// 💳 ROUTES PAIEMENT (SIMULATION) - UNE SEULE DÉCLARATION
-// ====================
-
 const paymentService = {
   processOrangeMoneyPayment: async (paymentData) => {
     // Simulation de paiement Orange Money
@@ -947,34 +902,9 @@ const paymentService = {
   }
 };
 
-// Gardez les routes de paiement existantes
 app.post('/api/payments/orange-money', async (req, res) => {
   try {
     const result = await paymentService.processOrangeMoneyPayment(req.body);
-    res.json(result);
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      error: error.message
-    });
-  }
-});
-
-app.post('/api/payments/wave', async (req, res) => {
-  try {
-    const result = await paymentService.processWavePayment(req.body);
-    res.json(result);
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      error: error.message
-    });
-  }
-});
-
-app.post('/api/payments/card', async (req, res) => {
-  try {
-    const result = await paymentService.processCardPayment(req.body);
     res.json(result);
   } catch (error) {
     res.status(500).json({
@@ -1048,7 +978,7 @@ app.use((error, req, res, next) => {
 // 🚀 DÉMARRAGE SERVEUR
 // ====================
 const PORT = process.env.PORT || 5000;
-server.listen(PORT, () => {
+server.listen(PORT, '0.0.0.0', () => {
   console.log('\n✨ ======================================');
   console.log(`🚀 Serveur KeurCoiff' démarré sur le port ${PORT}`);
   console.log(`📊 Environnement: ${process.env.NODE_ENV || 'development'}`);
