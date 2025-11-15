@@ -25,14 +25,16 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#8B7355',      // Marron chaleureux
-                        secondary: '#A67C52',    // Marron clair
-                        accent: '#C4A484',       // Beige
-                        dark: '#3E3E3E',         // Gris foncé
-                        light: '#F8F5F2',        // Beige très clair
-                        neutral: '#D4C9BC',      // Beige neutre
-                        text: '#2D2D2D',         // Gris très foncé pour le texte
-                        textLight: '#5A5A5A'     // Gris moyen pour le texte secondaire
+                        primary: '#FF6B6B',      // Corail attrayant
+                        secondary: '#4ECDC4',    // Turquoise rafraîchissant
+                        accent: '#FFD166',       // Jaune doré chaleureux
+                        dark: '#1A1A2E',         // Bleu nuit élégant
+                        light: '#F7F9FC',        // Blanc cassé doux
+                        neutral: '#E2E8F0',      // Gris clair
+                        text: '#2D3748',         // Gris foncé pour texte
+                        success: '#06D6A0',      // Vert de succès
+                        warning: '#FFD166',      // Jaune d'avertissement
+                        error: '#EF476F'         // Rouge d'erreur
                     },
                     fontFamily: {
                         'inter': ['Inter', 'sans-serif'],
@@ -46,7 +48,7 @@
                     },
                     backgroundImage: {
                         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-                        'premium-gradient': 'linear-gradient(135deg, #8B7355 0%, #A67C52 50%, #C4A484 100%)',
+                        'premium-gradient': 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #FFD166 100%)',
                     }
                 }
             }
@@ -55,11 +57,11 @@
     
     <style>
         :root {
-            --primary: #8B7355;
-            --secondary: #A67C52;
-            --accent: #C4A484;
-            --light: #F8F5F2;
-            --dark: #3E3E3E;
+            --primary: #FF6B6B;
+            --secondary: #4ECDC4;
+            --accent: #FFD166;
+            --light: #F7F9FC;
+            --dark: #1A1A2E;
         }
         
         * {
@@ -67,11 +69,11 @@
         }
         
         .gradient-bg {
-            background: linear-gradient(135deg, #8B7355 0%, #A67C52 100%);
+            background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
         }
         
         .premium-gradient {
-            background: linear-gradient(135deg, #8B7355 0%, #A67C52 50%, #C4A484 100%);
+            background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #FFD166 100%);
         }
         
         .glass-effect {
@@ -110,7 +112,7 @@
         }
         
         .gradient-animate {
-            background: linear-gradient(-45deg, #8B7355, #A67C52, #C4A484, #D4C9BC);
+            background: linear-gradient(-45deg, #FF6B6B, #4ECDC4, #FFD166, #06D6A0);
             background-size: 400% 400%;
             animation: gradient 15s ease infinite;
         }
@@ -118,7 +120,7 @@
         /* Loading spinner */
         .loader {
             border: 3px solid #f3f4f6;
-            border-top: 3px solid #8B7355;
+            border-top: 3px solid #FF6B6B;
             border-radius: 50%;
             width: 30px;
             height: 30px;
@@ -143,7 +145,7 @@
         /* Styles additionnels pour le chatbot */
         .loader-small {
             border: 2px solid #f3f4f6;
-            border-top: 2px solid #8B7355;
+            border-top: 2px solid #FF6B6B;
             border-radius: 50%;
             width: 20px;
             height: 20px;
@@ -182,7 +184,7 @@
         }
         
         .text-gradient {
-            background: linear-gradient(135deg, #8B7355 0%, #A67C52 100%);
+            background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -210,7 +212,7 @@
         
         .typewriter {
             overflow: hidden;
-            border-right: .15em solid #8B7355;
+            border-right: .15em solid #FF6B6B;
             white-space: nowrap;
             margin: 0 auto;
             animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
@@ -223,7 +225,7 @@
         
         @keyframes blink-caret {
             from, to { border-color: transparent }
-            50% { border-color: #8B7355; }
+            50% { border-color: #FF6B6B; }
         }
         
         .pulse-glow {
@@ -231,9 +233,9 @@
         }
         
         @keyframes pulse-glow {
-            0% { box-shadow: 0 0 5px rgba(139, 115, 85, 0.5); }
-            50% { box-shadow: 0 0 20px rgba(139, 115, 85, 0.8); }
-            100% { box-shadow: 0 0 5px rgba(139, 115, 85, 0.5); }
+            0% { box-shadow: 0 0 5px rgba(255, 107, 107, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(255, 107, 107, 0.8); }
+            100% { box-shadow: 0 0 5px rgba(255, 107, 107, 0.5); }
         }
         
         .shimmer-effect {
@@ -265,7 +267,7 @@
         }
         
         .distance-badge {
-            background: linear-gradient(135deg, #A67C52, #8B7355);
+            background: linear-gradient(135deg, #4ECDC4, #06D6A0);
             color: white;
             padding: 4px 8px;
             border-radius: 12px;
@@ -275,7 +277,7 @@
         
         /* Geolocation Button */
         .geolocation-btn {
-            background: linear-gradient(135deg, #8B7355, #A67C52);
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
             color: white;
             border: none;
             border-radius: 50px;
@@ -283,12 +285,12 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(139, 115, 85, 0.3);
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
         }
         
         .geolocation-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(139, 115, 85, 0.4);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
         }
         
         .geolocation-btn:active {
@@ -316,16 +318,16 @@
         .search-input {
             width: 100%;
             padding: 15px 50px 15px 20px;
-            border: 2px solid #D4C9BC;
+            border: 2px solid #E2E8F0;
             border-radius: 50px;
             font-size: 16px;
             transition: all 0.3s ease;
-            background-color: #F8F5F2;
+            background-color: #F7F9FC;
         }
         
         .search-input:focus {
-            border-color: #8B7355;
-            box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.1);
+            border-color: #FF6B6B;
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
         }
         
         .search-btn {
@@ -333,7 +335,7 @@
             right: 5px;
             top: 50%;
             transform: translateY(-50%);
-            background: #8B7355;
+            background: #FF6B6B;
             color: white;
             border: none;
             border-radius: 50%;
@@ -347,7 +349,7 @@
         }
         
         .search-btn:hover {
-            background: #A67C52;
+            background: #4ECDC4;
             transform: translateY(-50%) scale(1.05);
         }
         
@@ -369,7 +371,7 @@
         }
         
         .stat-card {
-            background: linear-gradient(135deg, #8B7355 0%, #A67C52 100%);
+            background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
             color: white;
             border-radius: 16px;
             padding: 24px;
@@ -395,7 +397,7 @@
         }
         
         .reservation-item {
-            border-left: 4px solid #8B7355;
+            border-left: 4px solid #FF6B6B;
             transition: all 0.3s ease;
         }
         
@@ -412,23 +414,152 @@
         }
         
         .status-confirmed {
-            background: #E8DFD4;
-            color: #5A5A5A;
+            background: #D1FAE5;
+            color: #065F46;
         }
         
         .status-pending {
-            background: #F5E9D9;
-            color: #5A5A5A;
+            background: #FEF3C7;
+            color: #92400E;
         }
         
         .status-completed {
-            background: #E8E2D6;
-            color: #5A5A5A;
+            background: #E0E7FF;
+            color: #3730A3;
         }
         
         .status-cancelled {
-            background: #E8D9D4;
-            color: #5A5A5A;
+            background: #FEE2E2;
+            color: #991B1B;
+        }
+        
+        /* Boutons améliorés */
+        .btn-primary {
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #4ECDC4, #06D6A0);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(78, 205, 196, 0.4);
+        }
+        
+        .btn-accent {
+            background: linear-gradient(135deg, #FFD166, #FFB347);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 209, 102, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-accent:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 209, 102, 0.4);
+        }
+        
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2D3748;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #E2E8F0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            border-color: #FF6B6B;
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+        }
+        
+        .form-input.error {
+            border-color: #EF476F;
+        }
+        
+        .error-message {
+            color: #EF476F;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        /* Social Login Buttons */
+        .btn-google {
+            background: white;
+            color: #2D3748;
+            border: 2px solid #E2E8F0;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn-google:hover {
+            border-color: #FF6B6B;
+            transform: translateY(-2px);
+        }
+        
+        .btn-facebook {
+            background: #1877F2;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn-facebook:hover {
+            background: #166FE5;
+            transform: translateY(-2px);
         }
         
         /* Responsive Design */
@@ -454,13 +585,18 @@
             .mobile-overlay.active {
                 display: block;
             }
+            
+            .btn-primary, .btn-secondary, .btn-accent {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
         }
     </style>
 </head>
 
 <body class="font-inter bg-light antialiased">
     <!-- Navigation Premium -->
-    <nav class="fixed w-full z-50 transition-all duration-300 bg-light/95 backdrop-blur-md border-b border-neutral shadow-sm">
+    <nav class="fixed w-full z-50 transition-all duration-300 bg-white/95 backdrop-blur-md border-b border-neutral shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-4">
                 <!-- Logo -->
@@ -470,8 +606,8 @@
                             <i class="fas fa-scissors text-white text-lg"></i>
                         </div>
                         <div>
-                            <span class="text-2xl font-bold text-text">KeurCoiff'</span>
-                            <div class="text-xs text-textLight -mt-1">by Senegal Tech</div>
+                            <span class="text-2xl font-bold text-gradient">KeurCoiff'</span>
+                            <div class="text-xs text-text -mt-1">by Senegal Tech</div>
                         </div>
                     </a>
                 </div>
@@ -514,176 +650,6 @@
             </div>
         </div>
     </nav>
-
-    <!-- Dashboard Coiffeur Section (Nouveau) -->
-    <section id="dashboard" class="pt-24 pb-20 bg-light min-h-screen hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Header Dashboard -->
-            <div class="mb-8" data-aos="fade-up">
-                <div class="flex justify-between items-center">
-                    <div>
-                        <h1 class="text-3xl lg:text-4xl font-bold text-text">
-                            Dashboard <span class="text-primary" id="dashboardSalonName">Salon</span>
-                        </h1>
-                        <p class="text-textLight mt-2" id="dashboardDate">Chargement...</p>
-                    </div>
-                    <div class="flex items-center space-x-4">
-                        <button onclick="toggleNotifications()" class="relative p-3 text-textLight hover:text-primary transition-colors">
-                            <i class="fas fa-bell text-xl"></i>
-                            <span class="absolute top-0 right-0 w-4 h-4 bg-primary text-white text-xs rounded-full flex items-center justify-center">3</span>
-                        </button>
-                        <button onclick="toggleDashboardMenu()" class="flex items-center space-x-3 bg-white p-3 rounded-2xl shadow-lg border border-neutral">
-                            <div class="w-10 h-10 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center text-white font-bold">
-                                <span id="userInitial">U</span>
-                            </div>
-                            <div class="text-left hidden lg:block">
-                                <div class="font-semibold text-text" id="userName">Utilisateur</div>
-                                <div class="text-sm text-textLight">Coiffeur</div>
-                            </div>
-                            <i class="fas fa-chevron-down text-textLight"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Menu déroulant utilisateur -->
-            <div id="dashboardMenu" class="hidden absolute right-4 mt-2 w-48 bg-white rounded-2xl shadow-2xl border border-neutral py-2 z-50">
-                <a href="profile.html" class="flex items-center space-x-3 px-4 py-3 text-text hover:bg-light transition-colors">
-                    <i class="fas fa-user text-primary w-5"></i>
-                    <span>Mon profil</span>
-                </a>
-                <a href="mes-reservations.html" class="flex items-center space-x-3 px-4 py-3 text-text hover:bg-light transition-colors">
-                    <i class="fas fa-calendar text-primary w-5"></i>
-                    <span>Mes réservations</span>
-                </a>
-                <div class="border-t border-neutral my-2"></div>
-                <button onclick="logout()" class="flex items-center space-x-3 px-4 py-3 text-red-600 hover:bg-red-50 w-full text-left transition-colors">
-                    <i class="fas fa-sign-out-alt w-5"></i>
-                    <span>Déconnexion</span>
-                </button>
-            </div>
-
-            <!-- Statistiques -->
-            <div class="dashboard-grid mb-8">
-                <!-- Carte Statistique 1 -->
-                <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <div class="text-white/80 text-sm">Réservations Aujourd'hui</div>
-                            <div class="text-3xl font-bold mt-2" id="todayBookings">8</div>
-                            <div class="text-accent text-sm mt-2 flex items-center">
-                                <i class="fas fa-arrow-up mr-1"></i>
-                                <span>+12% vs hier</span>
-                            </div>
-                        </div>
-                        <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center">
-                            <i class="fas fa-calendar-check text-white text-xl"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Carte Statistique 2 -->
-                <div class="stat-card bg-gradient-to-r from-secondary to-accent" data-aos="fade-up" data-aos-delay="200">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <div class="text-white/80 text-sm">Revenu Hebdomadaire</div>
-                            <div class="text-3xl font-bold mt-2" id="weeklyRevenue">125,400 FCFA</div>
-                            <div class="text-accent text-sm mt-2 flex items-center">
-                                <i class="fas fa-trending-up mr-1"></i>
-                                <span>+18% vs semaine dernière</span>
-                            </div>
-                        </div>
-                        <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center">
-                            <i class="fas fa-money-bill-wave text-white text-xl"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Carte Statistique 3 -->
-                <div class="stat-card bg-gradient-to-r from-accent to-primary" data-aos="fade-up" data-aos-delay="300">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <div class="text-white/80 text-sm">Clients Satisfaits</div>
-                            <div class="text-3xl font-bold mt-2" id="satisfiedClients">94%</div>
-                            <div class="text-accent text-sm mt-2 flex items-center">
-                                <i class="fas fa-star mr-1"></i>
-                                <span>4.8/5 étoiles</span>
-                            </div>
-                        </div>
-                        <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center">
-                            <i class="fas fa-smile text-white text-xl"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid lg:grid-cols-3 gap-8">
-                <!-- Réservations du jour -->
-                <div class="lg:col-span-2" data-aos="fade-up">
-                    <div class="bg-white rounded-3xl shadow-lg border border-neutral p-6">
-                        <div class="flex justify-between items-center mb-6">
-                            <h3 class="text-xl font-bold text-text">Réservations du Jour</h3>
-                            <button onclick="viewAllReservations()" class="text-primary hover:text-secondary font-semibold text-sm">
-                                Voir tout
-                            </button>
-                        </div>
-                        
-                        <div class="space-y-4" id="todayReservationsList">
-                            <!-- Les réservations seront chargées ici -->
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Actions rapides -->
-                <div class="space-y-6" data-aos="fade-up" data-aos-delay="200">
-                    <!-- Actions rapides -->
-                    <div class="bg-white rounded-3xl shadow-lg border border-neutral p-6">
-                        <h3 class="text-xl font-bold text-text mb-4">Actions Rapides</h3>
-                        <div class="grid grid-cols-2 gap-4">
-                            <button onclick="addReservation()" class="p-4 bg-primary/10 text-primary rounded-2xl hover:bg-primary hover:text-white transition-all flex flex-col items-center justify-center">
-                                <i class="fas fa-plus text-xl mb-2"></i>
-                                <span class="text-sm font-semibold">Nouvelle Réservation</span>
-                            </button>
-                            <button onclick="manageSalon()" class="p-4 bg-secondary/10 text-secondary rounded-2xl hover:bg-secondary hover:text-white transition-all flex flex-col items-center justify-center">
-                                <i class="fas fa-store text-xl mb-2"></i>
-                                <span class="text-sm font-semibold">Gérer Salon</span>
-                            </button>
-                            <button onclick="updateAvailability()" class="p-4 bg-accent/10 text-accent rounded-2xl hover:bg-accent hover:text-white transition-all flex flex-col items-center justify-center">
-                                <i class="fas fa-clock text-xl mb-2"></i>
-                                <span class="text-sm font-semibold">Horaires</span>
-                            </button>
-                            <button onclick="addService()" class="p-4 bg-primary/10 text-primary rounded-2xl hover:bg-primary hover:text-white transition-all flex flex-col items-center justify-center">
-                                <i class="fas fa-scissors text-xl mb-2"></i>
-                                <span class="text-sm font-semibold">Nouveau Service</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Statistiques rapides -->
-                    <div class="bg-gradient-to-r from-primary to-secondary text-white rounded-3xl p-6">
-                        <h3 class="text-xl font-bold mb-4">Performance</h3>
-                        <div class="space-y-3">
-                            <div class="flex justify-between items-center">
-                                <span>Taux de remplissage</span>
-                                <span class="font-bold">78%</span>
-                            </div>
-                            <div class="w-full bg-white/20 rounded-full h-2">
-                                <div class="bg-white h-2 rounded-full" style="width: 78%"></div>
-                            </div>
-                            
-                            <div class="flex justify-between items-center mt-4">
-                                <span>Clients fidèles</span>
-                                <span class="font-bold">65%</span>
-                            </div>
-                            <div class="w-full bg-white/20 rounded-full h-2">
-                                <div class="bg-white h-2 rounded-full" style="width: 65%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Hero Section Premium -->
     <section id="accueil" class="premium-gradient pt-24 pb-20 relative overflow-hidden min-h-screen flex items-center">
@@ -733,7 +699,7 @@
                     </div>
                     
                     <div class="flex flex-col sm:flex-row gap-4 mb-8">
-                        <button class="group bg-white text-primary px-8 py-4 rounded-xl font-semibold hover:shadow-2xl transition-all duration-300 flex items-center justify-center hover:scale-105 shine-effect">
+                        <button class="btn-primary group flex items-center justify-center">
                             <i class="fab fa-google-play mr-3 text-lg group-hover:scale-110 transition-transform"></i>
                             <div class="text-left">
                                 <div class="text-xs opacity-70">Téléchargez sur</div>
@@ -741,7 +707,7 @@
                             </div>
                         </button>
                         
-                        <button class="group bg-dark text-white px-8 py-4 rounded-xl font-semibold hover:shadow-2xl transition-all duration-300 flex items-center justify-center hover:scale-105 border border-gray-700 shine-effect">
+                        <button class="btn-secondary group flex items-center justify-center">
                             <i class="fab fa-apple mr-3 text-lg group-hover:scale-110 transition-transform"></i>
                             <div class="text-left">
                                 <div class="text-xs opacity-70">Disponible sur</div>
@@ -749,7 +715,7 @@
                             </div>
                         </button>
                         
-                        <button onclick="scrollToLocalisation()" class="group bg-transparent text-white border-2 border-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-primary transition-all duration-300 flex items-center justify-center">
+                        <button onclick="scrollToLocalisation()" class="btn-accent group flex items-center justify-center">
                             <i class="fas fa-map-marker-alt mr-3 group-hover:scale-110 transition-transform"></i>
                             <span>📍 Proche de moi</span>
                         </button>
@@ -793,7 +759,7 @@
                                         </div>
                                         <div class="flex-1">
                                             <div class="font-semibold text-text">Salon Awa Beauty</div>
-                                            <div class="flex items-center text-sm text-textLight">
+                                            <div class="flex items-center text-sm text-text">
                                                 <i class="fas fa-map-marker-alt text-primary mr-1"></i>
                                                 <span>Plateau • 250m</span>
                                             </div>
@@ -810,7 +776,7 @@
                                     <!-- Loading more salons -->
                                     <div class="text-center py-4">
                                         <div class="loader mx-auto"></div>
-                                        <div class="text-xs text-textLight mt-2">Chargement des salons...</div>
+                                        <div class="text-xs text-text mt-2">Chargement des salons...</div>
                                     </div>
                                 </div>
                             </div>
@@ -831,9 +797,9 @@
             <div class="text-center mb-16" data-aos="fade-up">
                 <h2 class="text-4xl lg:text-5xl font-bold text-text mb-6">
                     Une expérience
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">unique</span>
+                    <span class="text-gradient">unique</span>
                 </h2>
-                <p class="text-xl text-textLight max-w-3xl mx-auto">
+                <p class="text-xl text-text max-w-3xl mx-auto">
                     Découvrez pourquoi KeurCoiff' révolutionne la coiffure au Sénégal avec des fonctionnalités pensées pour vous.
                 </p>
             </div>
@@ -845,20 +811,20 @@
                         <i class="fas fa-robot text-white text-2xl"></i>
                     </div>
                     <h3 class="text-2xl font-bold text-text mb-4">Chatbot IA Intelligent</h3>
-                    <p class="text-textLight mb-6 leading-relaxed">
+                    <p class="text-text mb-6 leading-relaxed">
                         Notre assistant IA vous conseille en français et wolof. Envoyez une photo et trouvez le style parfait.
                     </p>
                     <ul class="space-y-3">
                         <li class="flex items-center text-text">
-                            <i class="fas fa-check text-accent mr-3"></i>
+                            <i class="fas fa-check text-success mr-3"></i>
                             <span>Reconnaissance d'images</span>
                         </li>
                         <li class="flex items-center text-text">
-                            <i class="fas fa-check text-accent mr-3"></i>
+                            <i class="fas fa-check text-success mr-3"></i>
                             <span>Conseils personnalisés</span>
                         </li>
                         <li class="flex items-center text-text">
-                            <i class="fas fa-check text-accent mr-3"></i>
+                            <i class="fas fa-check text-success mr-3"></i>
                             <span>Support bilingue</span>
                         </li>
                     </ul>
@@ -866,16 +832,16 @@
 
                 <!-- Feature 2 - Paiements -->
                 <div class="group bg-gradient-to-br from-white to-light p-8 rounded-3xl shadow-lg hover-lift border border-neutral" data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-16 h-16 bg-gradient-to-r from-secondary to-accent rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <div class="w-16 h-16 bg-gradient-to-r from-secondary to-success rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-mobile-alt text-white text-2xl"></i>
                     </div>
                     <h3 class="text-2xl font-bold text-text mb-4">Paiements 100% Sénégal</h3>
-                    <p class="text-textLight mb-6 leading-relaxed">
+                    <p class="text-text mb-6 leading-relaxed">
                         Payez facilement avec tous les mobile money locaux. Sécurisé et instantané.
                     </p>
                     <div class="flex space-x-4 mb-6">
-                        <div class="bg-accent/20 px-4 py-2 rounded-lg">
-                            <span class="text-secondary font-semibold">Orange Money</span>
+                        <div class="bg-success/20 px-4 py-2 rounded-lg">
+                            <span class="text-success font-semibold">Orange Money</span>
                         </div>
                         <div class="bg-primary/20 px-4 py-2 rounded-lg">
                             <span class="text-primary font-semibold">Wave</span>
@@ -888,17 +854,17 @@
 
                 <!-- Feature 3 - Géolocalisation -->
                 <div class="group bg-gradient-to-br from-white to-light p-8 rounded-3xl shadow-lg hover-lift border border-neutral" data-aos="fade-up" data-aos-delay="300">
-                    <div class="w-16 h-16 bg-gradient-to-r from-accent to-primary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <div class="w-16 h-16 bg-gradient-to-r from-success to-secondary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-map-marker-alt text-white text-2xl"></i>
                     </div>
                     <h3 class="text-2xl font-bold text-text mb-4">Géolocalisation Intelligente</h3>
-                    <p class="text-textLight mb-6 leading-relaxed">
+                    <p class="text-text mb-6 leading-relaxed">
                         Trouvez instantanément les salons les plus proches de vous avec notre système de géolocalisation avancé.
                     </p>
-                    <div class="bg-gradient-to-r from-accent to-primary text-white p-4 rounded-2xl">
+                    <div class="bg-gradient-to-r from-success to-secondary text-white p-4 rounded-2xl">
                         <div class="flex items-center justify-between">
                             <span class="font-semibold">📍 Proche de vous</span>
-                            <span class="bg-white text-accent px-3 py-1 rounded-full text-sm font-bold">GPS</span>
+                            <span class="bg-white text-success px-3 py-1 rounded-full text-sm font-bold">GPS</span>
                         </div>
                     </div>
                 </div>
@@ -912,9 +878,9 @@
             <div class="text-center mb-16" data-aos="fade-up">
                 <h2 class="text-4xl lg:text-5xl font-bold text-text mb-6">
                     Trouvez les salons
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">près de vous</span>
+                    <span class="text-gradient">près de vous</span>
                 </h2>
-                <p class="text-xl text-textLight max-w-3xl mx-auto">
+                <p class="text-xl text-text max-w-3xl mx-auto">
                     Notre système de géolocalisation intelligent vous montre les meilleurs salons dans votre quartier.
                 </p>
             </div>
@@ -979,15 +945,15 @@
                         <div class="grid grid-cols-3 gap-3">
                             <button onclick="filterByDistance(500)" class="p-3 text-center border border-neutral rounded-xl hover:bg-primary hover:text-white transition-all">
                                 <div class="font-semibold">500m</div>
-                                <div class="text-xs text-textLight">Très proche</div>
+                                <div class="text-xs text-text">Très proche</div>
                             </button>
                             <button onclick="filterByDistance(1000)" class="p-3 text-center border border-neutral rounded-xl hover:bg-primary hover:text-white transition-all">
                                 <div class="font-semibold">1km</div>
-                                <div class="text-xs text-textLight">Proche</div>
+                                <div class="text-xs text-text">Proche</div>
                             </button>
                             <button onclick="filterByDistance(5000)" class="p-3 text-center border border-neutral rounded-xl hover:bg-primary hover:text-white transition-all">
                                 <div class="font-semibold">5km</div>
-                                <div class="text-xs text-textLight">Secteur</div>
+                                <div class="text-xs text-text">Secteur</div>
                             </button>
                         </div>
                     </div>
@@ -1002,9 +968,9 @@
             <div class="text-center mb-16" data-aos="fade-up">
                 <h2 class="text-4xl lg:text-5xl font-bold text-text mb-6">
                     Nos salons
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">partenaires</span>
+                    <span class="text-gradient">partenaires</span>
                 </h2>
-                <p class="text-xl text-textLight">
+                <p class="text-xl text-text">
                     Découvrez les meilleurs coiffeurs de Dakar, sélectionnés avec soin.
                 </p>
             </div>
@@ -1033,7 +999,7 @@
             <!-- Loading State -->
             <div id="loadingSalons" class="text-center py-12">
                 <div class="loader mx-auto mb-4"></div>
-                <div class="text-textLight">Chargement des salons...</div>
+                <div class="text-text">Chargement des salons...</div>
             </div>
         </div>
     </section>
@@ -1044,9 +1010,9 @@
             <div class="text-center mb-16" data-aos="fade-up">
                 <h2 class="text-4xl lg:text-5xl font-bold text-text mb-6">
                     Devenez partenaire
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">KeurCoiff'</span>
+                    <span class="text-gradient">KeurCoiff'</span>
                 </h2>
-                <p class="text-xl text-textLight max-w-3xl mx-auto">
+                <p class="text-xl text-text max-w-3xl mx-auto">
                     Rejoignez la première plateforme de réservation de coiffure au Sénégal et développez votre business.
                 </p>
             </div>
@@ -1058,23 +1024,23 @@
                     
                     <form id="partnerForm" class="space-y-6">
                         <div class="grid md:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block text-sm font-semibold text-text mb-2">Nom du salon *</label>
-                                <input type="text" name="salonName" required class="w-full p-4 rounded-xl border border-neutral focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+                            <div class="form-group">
+                                <label class="form-label">Nom du salon *</label>
+                                <input type="text" name="salonName" required class="form-input">
                             </div>
-                            <div>
-                                <label class="block text-sm font-semibold text-text mb-2">Téléphone *</label>
-                                <input type="tel" name="phone" required class="w-full p-4 rounded-xl border border-neutral focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="77 123 45 67">
+                            <div class="form-group">
+                                <label class="form-label">Téléphone *</label>
+                                <input type="tel" name="phone" required class="form-input" placeholder="77 123 45 67">
                             </div>
                         </div>
                         
-                        <div>
-                            <label class="block text-sm font-semibold text-text mb-2">Quartier & Ville *</label>
-                            <input type="text" name="location" required class="w-full p-4 rounded-xl border border-neutral focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="Plateau, Dakar">
+                        <div class="form-group">
+                            <label class="form-label">Quartier & Ville *</label>
+                            <input type="text" name="location" required class="form-input" placeholder="Plateau, Dakar">
                         </div>
                         
-                        <div>
-                            <label class="block text-sm font-semibold text-text mb-2">Services proposés *</label>
+                        <div class="form-group">
+                            <label class="form-label">Services proposés *</label>
                             <div class="grid grid-cols-2 gap-3">
                                 <label class="flex items-center space-x-3 p-3 rounded-xl border border-neutral hover:bg-light cursor-pointer">
                                     <input type="checkbox" name="services" value="tresses" class="rounded text-primary focus:ring-primary">
@@ -1095,12 +1061,12 @@
                             </div>
                         </div>
                         
-                        <button type="submit" class="w-full bg-gradient-to-r from-primary to-secondary text-white py-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105 flex items-center justify-center">
+                        <button type="submit" class="btn-primary w-full flex items-center justify-center">
                             <span>Devenir Partenaire Gratuitement</span>
                             <i class="fas fa-arrow-right ml-3"></i>
                         </button>
                         
-                        <p class="text-center text-sm text-textLight">
+                        <p class="text-center text-sm text-text">
                             📞 Nous vous contactons sous 2 heures pour finaliser votre inscription
                         </p>
                     </form>
@@ -1126,7 +1092,7 @@
                         </ul>
                     </div>
                     
-                    <div class="bg-gradient-to-r from-secondary to-accent text-white p-8 rounded-3xl">
+                    <div class="bg-gradient-to-r from-secondary to-success text-white p-8 rounded-3xl">
                         <h4 class="text-2xl font-bold mb-4">Offre de lancement</h4>
                         <div class="text-4xl font-bold mb-2">0 FCFA</div>
                         <div class="text-white/80 mb-4">Pendant 1 mois</div>
@@ -1243,27 +1209,23 @@
                     <input type="hidden" id="reservationSalonId">
                     
                     <!-- Service -->
-                    <div>
-                        <label class="block text-sm font-semibold text-text mb-2">Service *</label>
-                        <select id="reservationService" required 
-                                class="w-full p-4 rounded-xl border border-neutral focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+                    <div class="form-group">
+                        <label class="form-label">Service *</label>
+                        <select id="reservationService" required class="form-input">
                             <option value="">Choisir un service</option>
                         </select>
                     </div>
 
                     <!-- Date -->
-                    <div>
-                        <label class="block text-sm font-semibold text-text mb-2">Date *</label>
-                        <input type="date" id="reservationDate" required 
-                               class="w-full p-4 rounded-xl border border-neutral focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                               min="">
+                    <div class="form-group">
+                        <label class="form-label">Date *</label>
+                        <input type="date" id="reservationDate" required class="form-input" min="">
                     </div>
 
                     <!-- Heure -->
-                    <div>
-                        <label class="block text-sm font-semibold text-text mb-2">Heure *</label>
-                        <select id="reservationTime" required 
-                                class="w-full p-4 rounded-xl border border-neutral focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+                    <div class="form-group">
+                        <label class="form-label">Heure *</label>
+                        <select id="reservationTime" required class="form-input">
                             <option value="">Choisir l'heure</option>
                             <option value="08:00">08:00</option>
                             <option value="09:00">09:00</option>
@@ -1277,24 +1239,169 @@
                     </div>
 
                     <!-- Notes -->
-                    <div>
-                        <label class="block text-sm font-semibold text-text mb-2">Notes (optionnel)</label>
-                        <textarea id="reservationNotes" rows="3" 
-                                  class="w-full p-4 rounded-xl border border-neutral focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                                  placeholder="Précisions sur la prestation..."></textarea>
+                    <div class="form-group">
+                        <label class="form-label">Notes (optionnel)</label>
+                        <textarea id="reservationNotes" rows="3" class="form-input" placeholder="Précisions sur la prestation..."></textarea>
                     </div>
 
                     <!-- Actions -->
                     <div class="flex space-x-4 pt-4">
-                        <button type="button" onclick="closeReservationModal()" 
-                                class="flex-1 bg-light text-text py-4 rounded-xl font-semibold hover:bg-neutral transition-all">
+                        <button type="button" onclick="closeReservationModal()" class="btn-secondary flex-1">
                             Annuler
                         </button>
-                        <button type="submit" 
-                                class="flex-1 bg-gradient-to-r from-primary to-secondary text-white py-4 rounded-xl font-semibold hover:shadow-lg transition-all flex items-center justify-center">
+                        <button type="submit" class="btn-primary flex-1 flex items-center justify-center">
                             <i class="fas fa-calendar-check mr-2"></i>
                             Confirmer
                         </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Connexion -->
+    <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-3xl max-w-md w-full mx-4">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-primary to-secondary text-white p-6 rounded-t-3xl">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-xl font-bold">Connexion</h3>
+                    <button onclick="closeLoginModal()" class="text-white hover:text-gray-200">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <div class="p-6">
+                <form id="loginForm" class="space-y-4">
+                    <div class="form-group">
+                        <label class="form-label">Email ou Téléphone *</label>
+                        <input type="text" id="loginEmail" required class="form-input">
+                        <div id="loginEmailError" class="error-message hidden"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Mot de passe *</label>
+                        <input type="password" id="loginPassword" required class="form-input">
+                        <div id="loginPasswordError" class="error-message hidden"></div>
+                    </div>
+
+                    <div class="flex justify-between items-center">
+                        <label class="flex items-center">
+                            <input type="checkbox" class="rounded text-primary focus:ring-primary">
+                            <span class="ml-2 text-sm text-text">Se souvenir de moi</span>
+                        </label>
+                        <a href="#" class="text-sm text-primary hover:text-secondary">Mot de passe oublié ?</a>
+                    </div>
+
+                    <!-- Social Login -->
+                    <div class="space-y-3">
+                        <div class="text-center text-text text-sm">Ou connectez-vous avec</div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button type="button" onclick="loginWithGoogle()" class="btn-google">
+                                <i class="fab fa-google text-red-500"></i>
+                                Google
+                            </button>
+                            <button type="button" onclick="loginWithFacebook()" class="btn-facebook">
+                                <i class="fab fa-facebook-f"></i>
+                                Facebook
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="pt-4">
+                        <button type="submit" class="btn-primary w-full">
+                            Se connecter
+                        </button>
+                    </div>
+
+                    <div class="text-center text-sm text-text">
+                        Pas de compte ? <a href="#" onclick="showRegisterModal()" class="text-primary hover:text-secondary">S'inscrire</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal d'Inscription -->
+    <div id="registerModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-3xl max-w-md w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-primary to-secondary text-white p-6 rounded-t-3xl">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-xl font-bold">Inscription</h3>
+                    <button onclick="closeRegisterModal()" class="text-white hover:text-gray-200">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <div class="p-6">
+                <form id="registerForm" class="space-y-4">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="form-group">
+                            <label class="form-label">Prénom *</label>
+                            <input type="text" id="registerFirstName" required class="form-input">
+                            <div id="registerFirstNameError" class="error-message hidden"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Nom *</label>
+                            <input type="text" id="registerLastName" required class="form-input">
+                            <div id="registerLastNameError" class="error-message hidden"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Email *</label>
+                        <input type="email" id="registerEmail" required class="form-input">
+                        <div id="registerEmailError" class="error-message hidden"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Téléphone *</label>
+                        <input type="tel" id="registerPhone" required class="form-input" placeholder="77 123 45 67">
+                        <div id="registerPhoneError" class="error-message hidden"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Mot de passe *</label>
+                        <input type="password" id="registerPassword" required class="form-input">
+                        <div id="registerPasswordError" class="error-message hidden"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Confirmer le mot de passe *</label>
+                        <input type="password" id="registerConfirmPassword" required class="form-input">
+                        <div id="registerConfirmPasswordError" class="error-message hidden"></div>
+                    </div>
+
+                    <!-- Social Register -->
+                    <div class="space-y-3">
+                        <div class="text-center text-text text-sm">Ou inscrivez-vous avec</div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button type="button" onclick="registerWithGoogle()" class="btn-google">
+                                <i class="fab fa-google text-red-500"></i>
+                                Google
+                            </button>
+                            <button type="button" onclick="registerWithFacebook()" class="btn-facebook">
+                                <i class="fab fa-facebook-f"></i>
+                                Facebook
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="pt-4">
+                        <button type="submit" class="btn-primary w-full">
+                            S'inscrire
+                        </button>
+                    </div>
+
+                    <div class="text-center text-sm text-text">
+                        Déjà un compte ? <a href="#" onclick="showLoginModal()" class="text-primary hover:text-secondary">Se connecter</a>
                     </div>
                 </form>
             </div>
@@ -1315,7 +1422,7 @@
                         <div>
                             <div class="font-bold text-lg">Assistant KeurCoiff'</div>
                             <div class="text-white/80 text-sm flex items-center">
-                                <div class="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
+                                <div class="w-2 h-2 bg-success rounded-full mr-2"></div>
                                 En ligne • Prêt à vous aider
                             </div>
                         </div>
@@ -1354,13 +1461,13 @@
                     <button onclick="sendQuickReply('Trouver un salon près de moi')" class="quick-action-btn bg-primary/10 text-primary border border-primary/20">
                         🎯 Trouver salon
                     </button>
-                    <button onclick="sendQuickReply('Je veux un service à domicile')" class="quick-action-btn bg-accent/10 text-accent border border-accent/20">
+                    <button onclick="sendQuickReply('Je veux un service à domicile')" class="quick-action-btn bg-success/10 text-success border border-success/20">
                         🏠 À domicile
                     </button>
-                    <button onclick="sendQuickReply('Quels sont les prix moyens')" class="quick-action-btn bg-secondary/10 text-secondary border border-secondary/20">
+                    <button onclick="sendQuickReply('Quels sont les prix moyens')" class="quick-action-btn bg-accent/10 text-accent border border-accent/20">
                         💰 Voir prix
                     </button>
-                    <button onclick="sendQuickReply('J ai une photo à analyser')" class="quick-action-btn bg-primary/10 text-primary border border-primary/20">
+                    <button onclick="sendQuickReply('J ai une photo à analyser')" class="quick-action-btn bg-secondary/10 text-secondary border border-secondary/20">
                         📸 Analyser photo
                     </button>
                 </div>
@@ -1383,7 +1490,7 @@
                 </div>
                 
                 <!-- Features Indicator -->
-                <div class="text-center text-xs text-textLight mt-3">
+                <div class="text-center text-xs text-text mt-3">
                     💡 Essayez : "salon tresses plateau" ou envoyez une photo
                 </div>
             </div>
@@ -1392,7 +1499,7 @@
         <!-- Chat Toggle Button -->
         <button onclick="toggleChat()" class="w-16 h-16 bg-gradient-to-r from-primary to-secondary rounded-2xl shadow-2xl flex items-center justify-center hover:scale-110 transition-transform duration-300 group">
             <i class="fas fa-robot text-white text-2xl group-hover:scale-110 transition-transform"></i>
-            <div class="absolute -top-2 -right-2 w-6 h-6 bg-primary rounded-full flex items-center justify-center animate-pulse">
+            <div class="absolute -top-2 -right-2 w-6 h-6 bg-accent rounded-full flex items-center justify-center animate-pulse">
                 <span class="text-white text-xs font-bold">!</span>
             </div>
         </button>
@@ -1453,142 +1560,6 @@
                 });
             });
         });
-
-        // ====================
-        // 🎯 DASHBOARD COIFFEUR
-        // ====================
-
-        function initializeDashboard() {
-            // Vérifier si l'utilisateur est un coiffeur
-            const user = JSON.parse(localStorage.getItem('keurcoiff_user') || '{}');
-            const token = localStorage.getItem('keurcoiff_token');
-            
-            if (token && user.role === 'coiffeur') {
-                showDashboard();
-                loadDashboardData();
-            }
-        }
-
-        function showDashboard() {
-            document.getElementById('dashboard').classList.remove('hidden');
-            document.getElementById('accueil').classList.add('hidden');
-            
-            // Mettre à jour l'interface utilisateur
-            const user = JSON.parse(localStorage.getItem('keurcoiff_user') || '{}');
-            document.getElementById('userName').textContent = user.fullName || 'Coiffeur';
-            document.getElementById('userInitial').textContent = (user.fullName || 'C').charAt(0).toUpperCase();
-            document.getElementById('dashboardSalonName').textContent = user.salonName || 'Votre Salon';
-            
-            // Mettre à jour la date
-            const now = new Date();
-            document.getElementById('dashboardDate').textContent = now.toLocaleDateString('fr-FR', { 
-                weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-            });
-        }
-
-        function loadDashboardData() {
-            // Données de démonstration pour le dashboard
-            const demoReservations = [
-                {
-                    id: 1,
-                    clientName: 'Awa Diop',
-                    service: 'Tresses vanilles',
-                    time: '10:00',
-                    status: 'confirmed',
-                    price: 8000,
-                    duration: 120
-                },
-                {
-                    id: 2,
-                    clientName: 'Marie Ndiaye',
-                    service: 'Coupe et brushing',
-                    time: '11:30',
-                    status: 'confirmed',
-                    price: 6000,
-                    duration: 90
-                },
-                {
-                    id: 3,
-                    clientName: 'Fatou Sow',
-                    service: 'Tresses simples',
-                    time: '14:00',
-                    status: 'pending',
-                    price: 4000,
-                    duration: 60
-                },
-                {
-                    id: 4,
-                    clientName: 'Sophie Diallo',
-                    service: 'Pose weave',
-                    time: '16:00',
-                    status: 'confirmed',
-                    price: 15000,
-                    duration: 120
-                }
-            ];
-
-            // Afficher les réservations
-            const reservationsList = document.getElementById('todayReservationsList');
-            reservationsList.innerHTML = demoReservations.map(reservation => `
-                <div class="reservation-item bg-white rounded-2xl p-4 border border-neutral shadow-sm">
-                    <div class="flex justify-between items-start mb-3">
-                        <div>
-                            <h4 class="font-semibold text-text">${reservation.clientName}</h4>
-                            <p class="text-sm text-textLight">${reservation.service}</p>
-                        </div>
-                        <span class="status-badge status-${reservation.status}">
-                            ${reservation.status === 'confirmed' ? 'Confirmé' : 
-                              reservation.status === 'pending' ? 'En attente' : 
-                              reservation.status === 'completed' ? 'Terminé' : 'Annulé'}
-                        </span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-center text-textLight">
-                            <i class="fas fa-clock mr-2"></i>
-                            <span>${reservation.time} • ${reservation.duration}min</span>
-                        </div>
-                        <div class="text-primary font-bold">
-                            ${reservation.price.toLocaleString()} FCFA
-                        </div>
-                    </div>
-                    <div class="flex space-x-2 mt-3">
-                        <button onclick="startReservation(${reservation.id})" class="flex-1 bg-primary text-white py-2 px-3 rounded-lg text-sm font-semibold hover:bg-secondary transition-colors">
-                            Démarrer
-                        </button>
-                        <button onclick="viewReservationDetails(${reservation.id})" class="flex-1 bg-light text-text py-2 px-3 rounded-lg text-sm font-semibold hover:bg-neutral transition-colors">
-                            Détails
-                        </button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function toggleDashboardMenu() {
-            const menu = document.getElementById('dashboardMenu');
-            menu.classList.toggle('hidden');
-        }
-
-        function toggleNotifications() {
-            showNotification('3 nouvelles notifications', 'info');
-        }
-
-        function viewAllReservations() {
-            showNotification('Ouverture de toutes les réservations', 'info');
-            // Logique pour afficher toutes les réservations
-        }
-
-        function startReservation(reservationId) {
-            showNotification(`Démarrage de la réservation #${reservationId}`, 'success');
-            // Logique pour démarrer une réservation
-        }
-
-        function viewReservationDetails(reservationId) {
-            showNotification(`Détails de la réservation #${reservationId}`, 'info');
-            // Logique pour afficher les détails
-        }
 
         // ====================
         // 🔧 FONCTIONS MANQUANTES AJOUTÉES
@@ -1709,165 +1680,6 @@
                 const next = input.nextElementSibling;
                 if (next) next.focus();
             }
-        }
-
-        // Dashboard coiffeur
-        function addReservation() {
-            showNotification('Ouverture du formulaire de réservation...', 'info');
-            setTimeout(() => {
-                window.location.href = 'reservation.html';
-            }, 1000);
-        }
-
-        function manageSalon() {
-            showNotification('Gestion du salon...', 'info');
-            // Logique pour gérer le salon
-        }
-
-        function updateAvailability() {
-            showNotification('Modification des horaires...', 'info');
-            // Logique pour modifier les horaires
-        }
-
-        function addService() {
-            showNotification('Ajout d\'un nouveau service...', 'info');
-            // Logique pour ajouter un service
-        }
-
-        function viewAnalytics() {
-            showNotification('Ouverture des statistiques détaillées...', 'info');
-            // Logique pour afficher les analytics
-        }
-
-        function manageStaff() {
-            showNotification('Gestion de l\'équipe...', 'info');
-            // Logique pour gérer le personnel
-        }
-
-        // Gestion des réservations utilisateur
-        function viewReservationDetails(reservationId) {
-            const reservation = currentReservations.find(r => r.id === reservationId);
-            if (reservation) {
-                showNotification(`Détails de la réservation ${reservationId}`, 'info');
-                // Logique pour afficher les détails
-            }
-        }
-
-        function cancelReservation(reservationId) {
-            if (confirm('Êtes-vous sûr de vouloir annuler cette réservation ?')) {
-                showNotification('Réservation annulée avec succès', 'success');
-                // Logique d'annulation
-            }
-        }
-
-        function rateReservation(reservationId) {
-            const rating = prompt('Donnez une note de 1 à 5 étoiles:');
-            if (rating && rating >= 1 && rating <= 5) {
-                showNotification('Merci pour votre note !', 'success');
-                // Logique de notation
-            }
-        }
-
-        // Gestion du profil utilisateur
-        function editProfile() {
-            showNotification('Mode édition du profil activé', 'info');
-            // Logique d'édition
-        }
-
-        function cancelEdit() {
-            showNotification('Modifications annulées', 'info');
-            // Logique d'annulation
-        }
-
-        function changePassword() {
-            showNotification('Redirection vers la page de changement de mot de passe', 'info');
-            setTimeout(() => {
-                window.location.href = 'forgot-password.html';
-            }, 1000);
-        }
-
-        // Paiement
-        let selectedPaymentMethod = null;
-
-        function selectPaymentMethod(method) {
-            selectedPaymentMethod = method;
-            showPaymentForm(method);
-            showNotification(`Méthode de paiement ${method} sélectionnée`, 'info');
-        }
-
-        function showPaymentForm(method) {
-            // Logique pour afficher le formulaire de paiement correspondant
-            showNotification(`Affichage du formulaire ${method}`, 'info');
-        }
-
-        function loadPaymentForms() {
-            // Chargement des formulaires de paiement
-            showNotification('Formulaires de paiement chargés', 'info');
-        }
-
-        function processPayment() {
-            if (!selectedPaymentMethod) {
-                showNotification('Veuillez sélectionner un moyen de paiement', 'error');
-                return;
-            }
-
-            showNotification('Traitement du paiement en cours...', 'info');
-            // Logique de traitement du paiement
-        }
-
-        function validatePaymentForm() {
-            // Validation du formulaire de paiement
-            return true;
-        }
-
-        // Processus de réservation
-        function nextStep(step) {
-            if (step === 2 && !selectedSalon) {
-                showNotification('Veuillez sélectionner un salon', 'error');
-                return;
-            }
-            
-            if (step === 3 && !selectedService) {
-                showNotification('Veuillez sélectionner un service', 'error');
-                return;
-            }
-            
-            currentStep = step;
-            updateStepIndicator(step);
-            showNotification(`Étape ${step}`, 'info');
-        }
-
-        function prevStep(step) {
-            currentStep = step;
-            updateStepIndicator(step);
-            showNotification(`Retour à l'étape ${step}`, 'info');
-        }
-
-        function updateStepIndicator(step) {
-            // Logique pour mettre à jour l'indicateur d'étapes
-            showNotification(`Indicateur mis à jour pour l'étape ${step}`, 'info');
-        }
-
-        let selectedService = null;
-
-        function selectSalon(salonId) {
-            selectedSalon = demoSalons.find(s => s._id === salonId);
-            showNotification(`Salon ${selectedSalon?.name} sélectionné`, 'success');
-        }
-
-        function selectService(serviceId) {
-            selectedService = selectedSalon?.services.find(s => s._id === serviceId);
-            showNotification(`Service ${selectedService?.name} sélectionné`, 'success');
-        }
-
-        function confirmBooking() {
-            if (!selectedSalon || !selectedService) {
-                showNotification('Veuillez sélectionner un salon et un service', 'error');
-                return;
-            }
-
-            showNotification('Confirmation de la réservation...', 'info');
-            // Logique de confirmation
         }
 
         // ====================
@@ -2050,7 +1862,7 @@
                 .bindPopup(`
                     <div class="p-2">
                         <h4 class="font-bold">${salon.name}</h4>
-                        <p class="text-sm text-textLight">${salon.location?.quarter}, ${salon.location?.city}</p>
+                        <p class="text-sm text-text">${salon.location?.quarter}, ${salon.location?.city}</p>
                         <div class="flex items-center text-accent text-sm">
                             ${'★'.repeat(Math.floor(salon.rating?.average || 0))}
                             <span class="text-text ml-1">${salon.rating?.average || 'N/A'}</span>
@@ -2124,7 +1936,7 @@
                     <div class="flex items-center space-x-4">
                         <div class="text-right hidden sm:block">
                             <div class="text-sm font-medium text-text">${user.fullName}</div>
-                            <div class="text-xs text-textLight">${user.phone || ''}</div>
+                            <div class="text-xs text-text">${user.phone || ''}</div>
                         </div>
                         <div class="relative group">
                             <button onclick="toggleUserMenu()" class="w-10 h-10 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center text-white font-bold hover:shadow-lg transition-all">
@@ -2142,7 +1954,7 @@
                                     <span>Mes réservations</span>
                                 </a>
                                 <div class="border-t border-neutral my-2"></div>
-                                <button onclick="logout()" class="flex items-center space-x-3 px-4 py-3 text-red-600 hover:bg-red-50 w-full text-left transition-colors">
+                                <button onclick="logout()" class="flex items-center space-x-3 px-4 py-3 text-error hover:bg-red-50 w-full text-left transition-colors">
                                     <i class="fas fa-sign-out-alt w-5"></i>
                                     <span>Déconnexion</span>
                                 </button>
@@ -2154,12 +1966,12 @@
                 // Utilisateur non connecté
                 authSection.innerHTML = `
                     <div class="flex items-center space-x-4">
-                        <a href="login.html" class="text-text hover:text-primary font-medium transition-colors duration-200 hidden sm:block">
+                        <button onclick="showLoginModal()" class="text-text hover:text-primary font-medium transition-colors duration-200 hidden sm:block">
                             Connexion
-                        </a>
-                        <a href="register.html" class="bg-primary text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200 shadow-md">
+                        </button>
+                        <button onclick="showRegisterModal()" class="btn-primary">
                             S'inscrire
-                        </a>
+                        </button>
                     </div>
                 `;
             }
@@ -2194,9 +2006,9 @@
         function showNotification(message, type = 'info') {
             const notification = document.createElement('div');
             notification.className = `fixed top-4 right-4 px-6 py-4 rounded-2xl shadow-2xl z-50 max-w-sm demo-message ${
-                type === 'success' ? 'bg-primary text-white' : 
-                type === 'error' ? 'bg-red-500 text-white' : 
-                'bg-secondary text-white'
+                type === 'success' ? 'bg-success text-white' : 
+                type === 'error' ? 'bg-error text-white' : 
+                'bg-primary text-white'
             }`;
             notification.innerHTML = `
                 <div class="flex items-center space-x-3">
@@ -2210,6 +2022,286 @@
             setTimeout(() => {
                 notification.remove();
             }, 5000);
+        }
+
+        // ====================
+        // 🔐 GESTION DES MODALES DE CONNEXION
+        // ====================
+
+        function showLoginModal() {
+            document.getElementById('loginModal').classList.remove('hidden');
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').classList.add('hidden');
+            document.getElementById('loginForm').reset();
+            clearErrors('login');
+        }
+
+        function showRegisterModal() {
+            document.getElementById('registerModal').classList.remove('hidden');
+            closeLoginModal();
+        }
+
+        function closeRegisterModal() {
+            document.getElementById('registerModal').classList.add('hidden');
+            document.getElementById('registerForm').reset();
+            clearErrors('register');
+        }
+
+        function clearErrors(formType) {
+            const errorElements = document.querySelectorAll(`#${formType}Form .error-message`);
+            errorElements.forEach(el => {
+                el.classList.add('hidden');
+                el.textContent = '';
+            });
+            
+            const inputElements = document.querySelectorAll(`#${formType}Form .form-input`);
+            inputElements.forEach(el => {
+                el.classList.remove('error');
+            });
+        }
+
+        function showError(inputId, message) {
+            const input = document.getElementById(inputId);
+            const errorElement = document.getElementById(inputId + 'Error');
+            
+            input.classList.add('error');
+            errorElement.textContent = message;
+            errorElement.classList.remove('hidden');
+        }
+
+        // Validation des formulaires
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value.trim();
+            let isValid = true;
+            
+            clearErrors('login');
+            
+            // Validation email/téléphone
+            if (!email) {
+                showError('loginEmail', 'L\'email ou téléphone est requis');
+                isValid = false;
+            } else if (!isValidEmail(email) && !isValidPhone(email)) {
+                showError('loginEmail', 'Veuillez entrer un email ou numéro de téléphone valide');
+                isValid = false;
+            }
+            
+            // Validation mot de passe
+            if (!password) {
+                showError('loginPassword', 'Le mot de passe est requis');
+                isValid = false;
+            } else if (password.length < 6) {
+                showError('loginPassword', 'Le mot de passe doit contenir au moins 6 caractères');
+                isValid = false;
+            }
+            
+            if (isValid) {
+                // Simulation de connexion
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                
+                submitBtn.innerHTML = '<div class="loader-small"></div> Connexion...';
+                submitBtn.disabled = true;
+                
+                setTimeout(() => {
+                    // Vérification des identifiants (simulation)
+                    const validUsers = [
+                        { email: 'test@example.com', phone: '771234567', password: 'password123' },
+                        { email: 'user@example.com', phone: '772345678', password: 'password123' }
+                    ];
+                    
+                    const user = validUsers.find(u => 
+                        (u.email === email || u.phone === email) && u.password === password
+                    );
+                    
+                    if (user) {
+                        // Connexion réussie
+                        localStorage.setItem('keurcoiff_token', 'demo_token_' + Date.now());
+                        localStorage.setItem('keurcoiff_user', JSON.stringify({
+                            fullName: 'Utilisateur Test',
+                            email: user.email,
+                            phone: user.phone
+                        }));
+                        
+                        showNotification('Connexion réussie !', 'success');
+                        closeLoginModal();
+                        updateAuthUI();
+                    } else {
+                        showError('loginEmail', 'Identifiants incorrects');
+                        showError('loginPassword', 'Identifiants incorrects');
+                    }
+                    
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }, 1500);
+            }
+        });
+
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const firstName = document.getElementById('registerFirstName').value.trim();
+            const lastName = document.getElementById('registerLastName').value.trim();
+            const email = document.getElementById('registerEmail').value.trim();
+            const phone = document.getElementById('registerPhone').value.trim();
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('registerConfirmPassword').value;
+            
+            let isValid = true;
+            clearErrors('register');
+            
+            // Validation prénom
+            if (!firstName) {
+                showError('registerFirstName', 'Le prénom est requis');
+                isValid = false;
+            }
+            
+            // Validation nom
+            if (!lastName) {
+                showError('registerLastName', 'Le nom est requis');
+                isValid = false;
+            }
+            
+            // Validation email
+            if (!email) {
+                showError('registerEmail', 'L\'email est requis');
+                isValid = false;
+            } else if (!isValidEmail(email)) {
+                showError('registerEmail', 'Veuillez entrer un email valide');
+                isValid = false;
+            }
+            
+            // Validation téléphone
+            if (!phone) {
+                showError('registerPhone', 'Le téléphone est requis');
+                isValid = false;
+            } else if (!isValidPhone(phone)) {
+                showError('registerPhone', 'Veuillez entrer un numéro de téléphone valide');
+                isValid = false;
+            }
+            
+            // Validation mot de passe
+            if (!password) {
+                showError('registerPassword', 'Le mot de passe est requis');
+                isValid = false;
+            } else if (password.length < 6) {
+                showError('registerPassword', 'Le mot de passe doit contenir au moins 6 caractères');
+                isValid = false;
+            }
+            
+            // Validation confirmation mot de passe
+            if (!confirmPassword) {
+                showError('registerConfirmPassword', 'Veuillez confirmer votre mot de passe');
+                isValid = false;
+            } else if (password !== confirmPassword) {
+                showError('registerConfirmPassword', 'Les mots de passe ne correspondent pas');
+                isValid = false;
+            }
+            
+            if (isValid) {
+                // Simulation d'inscription
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                
+                submitBtn.innerHTML = '<div class="loader-small"></div> Inscription...';
+                submitBtn.disabled = true;
+                
+                setTimeout(() => {
+                    // Enregistrement de l'utilisateur (simulation)
+                    localStorage.setItem('keurcoiff_token', 'demo_token_' + Date.now());
+                    localStorage.setItem('keurcoiff_user', JSON.stringify({
+                        fullName: `${firstName} ${lastName}`,
+                        email: email,
+                        phone: phone
+                    }));
+                    
+                    showNotification('Inscription réussie !', 'success');
+                    closeRegisterModal();
+                    updateAuthUI();
+                    
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }, 1500);
+            }
+        });
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function isValidPhone(phone) {
+            const phoneRegex = /^(77|76|70|78)\d{7}$/;
+            return phoneRegex.test(phone.replace(/\s/g, ''));
+        }
+
+        // Connexion sociale (simulation)
+        function loginWithGoogle() {
+            showNotification('Connexion avec Google en cours...', 'info');
+            // Simulation de connexion Google
+            setTimeout(() => {
+                localStorage.setItem('keurcoiff_token', 'google_token_' + Date.now());
+                localStorage.setItem('keurcoiff_user', JSON.stringify({
+                    fullName: 'Utilisateur Google',
+                    email: 'google@example.com'
+                }));
+                
+                showNotification('Connexion Google réussie !', 'success');
+                closeLoginModal();
+                updateAuthUI();
+            }, 1500);
+        }
+
+        function loginWithFacebook() {
+            showNotification('Connexion avec Facebook en cours...', 'info');
+            // Simulation de connexion Facebook
+            setTimeout(() => {
+                localStorage.setItem('keurcoiff_token', 'facebook_token_' + Date.now());
+                localStorage.setItem('keurcoiff_user', JSON.stringify({
+                    fullName: 'Utilisateur Facebook',
+                    email: 'facebook@example.com'
+                }));
+                
+                showNotification('Connexion Facebook réussie !', 'success');
+                closeLoginModal();
+                updateAuthUI();
+            }, 1500);
+        }
+
+        function registerWithGoogle() {
+            showNotification('Inscription avec Google en cours...', 'info');
+            // Simulation d'inscription Google
+            setTimeout(() => {
+                localStorage.setItem('keurcoiff_token', 'google_token_' + Date.now());
+                localStorage.setItem('keurcoiff_user', JSON.stringify({
+                    fullName: 'Utilisateur Google',
+                    email: 'google@example.com'
+                }));
+                
+                showNotification('Inscription Google réussie !', 'success');
+                closeRegisterModal();
+                updateAuthUI();
+            }, 1500);
+        }
+
+        function registerWithFacebook() {
+            showNotification('Inscription avec Facebook en cours...', 'info');
+            // Simulation d'inscription Facebook
+            setTimeout(() => {
+                localStorage.setItem('keurcoiff_token', 'facebook_token_' + Date.now());
+                localStorage.setItem('keurcoiff_user', JSON.stringify({
+                    fullName: 'Utilisateur Facebook',
+                    email: 'facebook@example.com'
+                }));
+                
+                showNotification('Inscription Facebook réussie !', 'success');
+                closeRegisterModal();
+                updateAuthUI();
+            }, 1500);
         }
 
         // ====================
@@ -2511,8 +2603,8 @@
           if (!salons || salons.length === 0) {
             grid.innerHTML = `
               <div class="col-span-3 text-center py-12">
-                <i class="fas fa-store-slash text-4xl text-textLight mb-4"></i>
-                <div class="text-textLight">Aucun salon disponible pour le moment</div>
+                <i class="fas fa-store-slash text-4xl text-text mb-4"></i>
+                <div class="text-text">Aucun salon disponible pour le moment</div>
               </div>
             `;
             return;
@@ -2522,7 +2614,7 @@
             <div class="salon-card bg-white rounded-3xl shadow-lg hover-lift border border-neutral overflow-hidden" data-category="${salon.features?.homeService ? 'domicile' : 'salon'}">
               <div class="h-48 bg-gradient-to-r from-primary to-secondary relative overflow-hidden">
                 ${salon.features?.homeService ? `
-                  <div class="absolute top-4 right-4 bg-accent text-white px-3 py-1 rounded-full text-sm font-bold">
+                  <div class="absolute top-4 right-4 bg-success text-white px-3 py-1 rounded-full text-sm font-bold">
                     🏠 À domicile
                   </div>
                 ` : ''}
@@ -2539,7 +2631,7 @@
                 <div class="flex justify-between items-start mb-4">
                   <div class="flex items-center text-accent">
                     ${'★'.repeat(Math.floor(salon.rating?.average || 0))}${(salon.rating?.average || 0) % 1 !== 0 ? '½' : ''}
-                    <span class="text-textLight ml-2">${salon.rating?.average || 'N/A'}</span>
+                    <span class="text-text ml-2">${salon.rating?.average || 'N/A'}</span>
                   </div>
                   <div class="text-2xl font-bold text-primary">
                     ${salon.services && salon.services.length > 0 ? salon.services[0].price.toLocaleString() + ' FCFA' : 'Prix sur demande'}
@@ -2554,7 +2646,7 @@
                 
                 <!-- BOUTON MODIFIÉ AVEC ONCLICK -->
                 <button onclick="openReservationModal('${salon._id}', '${salon.name}')" 
-                        class="w-full bg-primary text-white py-3 rounded-xl font-semibold hover:bg-secondary transition-colors flex items-center justify-center">
+                        class="btn-primary w-full flex items-center justify-center">
                   <i class="fas fa-calendar-plus mr-2"></i>
                   Réserver maintenant
                 </button>
@@ -2577,6 +2669,14 @@
         // Ouvrir le modal de réservation
         async function openReservationModal(salonId, salonName) {
             console.log('🎯 Ouverture modal réservation pour:', salonName, salonId);
+            
+            // Vérifier si l'utilisateur est connecté
+            const token = localStorage.getItem('keurcoiff_token');
+            if (!token) {
+                showNotification('Veuillez vous connecter pour réserver', 'error');
+                showLoginModal();
+                return;
+            }
             
             try {
                 // Afficher le loading
@@ -2674,7 +2774,6 @@
             if (!token || !user.fullName) {
                 alert('🔐 Veuillez vous connecter pour effectuer une réservation');
                 closeReservationModal();
-                // Simulation redirection vers login
                 showNotification('Veuillez vous connecter pour réserver', 'error');
                 return;
             }
@@ -2735,7 +2834,7 @@
 
         function showReservationSuccess(salonName, date, time) {
             const successHTML = `
-                <div class="fixed top-4 right-4 bg-primary text-white px-6 py-4 rounded-2xl shadow-2xl z-50 max-w-sm demo-message">
+                <div class="fixed top-4 right-4 bg-success text-white px-6 py-4 rounded-2xl shadow-2xl z-50 max-w-sm demo-message">
                     <div class="flex items-center space-x-3">
                         <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
                             <i class="fas fa-check text-white"></i>
@@ -2794,15 +2893,15 @@
                     // Succès
                     form.innerHTML = `
                         <div class="text-center py-8">
-                            <div class="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <i class="fas fa-check text-primary text-2xl"></i>
+                            <div class="w-16 h-16 bg-success/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-check text-success text-2xl"></i>
                             </div>
                             <h4 class="text-2xl font-bold text-text mb-2">Félicitations !</h4>
-                            <p class="text-textLight mb-6">
+                            <p class="text-text mb-6">
                                 Votre inscription a été reçue. Notre équipe vous contacte dans les 2 heures.
                             </p>
-                            <div class="bg-accent/20 border border-accent rounded-2xl p-4">
-                                <div class="flex items-center text-primary">
+                            <div class="bg-success/20 border border-success rounded-2xl p-4">
+                                <div class="flex items-center text-success">
                                     <i class="fas fa-phone mr-3"></i>
                                     <span>+221 77 123 45 67</span>
                                 </div>
@@ -2857,9 +2956,9 @@
                     <div class="flex-1">
                         <div class="bg-white rounded-2xl rounded-tl-none p-6 shadow-sm border border-neutral">
                             <div class="font-semibold text-text mb-2">${title}</div>
-                            <div class="text-textLight leading-relaxed whitespace-pre-line">${content}</div>
+                            <div class="text-text leading-relaxed whitespace-pre-line">${content}</div>
                         </div>
-                        <div class="text-xs text-textLight mt-2">${new Date().toLocaleTimeString()}</div>
+                        <div class="text-xs text-text mt-2">${new Date().toLocaleTimeString()}</div>
                     </div>
                 </div>
             `;
@@ -2878,7 +2977,7 @@
                         <div class="bg-gradient-to-r from-primary to-secondary text-white rounded-2xl rounded-tr-none p-6 shadow-sm">
                             <div class="leading-relaxed">${message}</div>
                         </div>
-                        <div class="text-xs text-textLight mt-2 text-right">${new Date().toLocaleTimeString()}</div>
+                        <div class="text-xs text-text mt-2 text-right">${new Date().toLocaleTimeString()}</div>
                     </div>
                 </div>
             `;
