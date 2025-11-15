@@ -25,15 +25,14 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#7C3AED',
-                        secondary: '#F59E0B', 
-                        accent: '#10B981',
-                        dark: '#1F2937',
-                        premium: {
-                            gold: '#FFD700',
-                            silver: '#C0C0C0',
-                            bronze: '#CD7F32'
-                        }
+                        primary: '#8B7355',      // Marron chaleureux
+                        secondary: '#A67C52',    // Marron clair
+                        accent: '#C4A484',       // Beige
+                        dark: '#3E3E3E',         // Gris foncé
+                        light: '#F8F5F2',        // Beige très clair
+                        neutral: '#D4C9BC',      // Beige neutre
+                        text: '#2D2D2D',         // Gris très foncé pour le texte
+                        textLight: '#5A5A5A'     // Gris moyen pour le texte secondaire
                     },
                     fontFamily: {
                         'inter': ['Inter', 'sans-serif'],
@@ -47,7 +46,7 @@
                     },
                     backgroundImage: {
                         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-                        'premium-gradient': 'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)',
+                        'premium-gradient': 'linear-gradient(135deg, #8B7355 0%, #A67C52 50%, #C4A484 100%)',
                     }
                 }
             }
@@ -56,9 +55,11 @@
     
     <style>
         :root {
-            --primary: #7C3AED;
-            --secondary: #F59E0B;
-            --accent: #10B981;
+            --primary: #8B7355;
+            --secondary: #A67C52;
+            --accent: #C4A484;
+            --light: #F8F5F2;
+            --dark: #3E3E3E;
         }
         
         * {
@@ -66,11 +67,11 @@
         }
         
         .gradient-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #8B7355 0%, #A67C52 100%);
         }
         
         .premium-gradient {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background: linear-gradient(135deg, #8B7355 0%, #A67C52 50%, #C4A484 100%);
         }
         
         .glass-effect {
@@ -85,7 +86,7 @@
         
         .hover-lift:hover {
             transform: translateY(-8px);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 15px 30px -12px rgba(0, 0, 0, 0.15);
         }
         
         @keyframes float {
@@ -109,7 +110,7 @@
         }
         
         .gradient-animate {
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background: linear-gradient(-45deg, #8B7355, #A67C52, #C4A484, #D4C9BC);
             background-size: 400% 400%;
             animation: gradient 15s ease infinite;
         }
@@ -117,7 +118,7 @@
         /* Loading spinner */
         .loader {
             border: 3px solid #f3f4f6;
-            border-top: 3px solid #7C3AED;
+            border-top: 3px solid #8B7355;
             border-radius: 50%;
             width: 30px;
             height: 30px;
@@ -142,7 +143,7 @@
         /* Styles additionnels pour le chatbot */
         .loader-small {
             border: 2px solid #f3f4f6;
-            border-top: 2px solid #7C3AED;
+            border-top: 2px solid #8B7355;
             border-radius: 50%;
             width: 20px;
             height: 20px;
@@ -181,7 +182,7 @@
         }
         
         .text-gradient {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #8B7355 0%, #A67C52 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -209,7 +210,7 @@
         
         .typewriter {
             overflow: hidden;
-            border-right: .15em solid #7C3AED;
+            border-right: .15em solid #8B7355;
             white-space: nowrap;
             margin: 0 auto;
             animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
@@ -222,7 +223,7 @@
         
         @keyframes blink-caret {
             from, to { border-color: transparent }
-            50% { border-color: #7C3AED; }
+            50% { border-color: #8B7355; }
         }
         
         .pulse-glow {
@@ -230,9 +231,9 @@
         }
         
         @keyframes pulse-glow {
-            0% { box-shadow: 0 0 5px rgba(124, 58, 237, 0.5); }
-            50% { box-shadow: 0 0 20px rgba(124, 58, 237, 0.8); }
-            100% { box-shadow: 0 0 5px rgba(124, 58, 237, 0.5); }
+            0% { box-shadow: 0 0 5px rgba(139, 115, 85, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(139, 115, 85, 0.8); }
+            100% { box-shadow: 0 0 5px rgba(139, 115, 85, 0.5); }
         }
         
         .shimmer-effect {
@@ -264,7 +265,7 @@
         }
         
         .distance-badge {
-            background: linear-gradient(135deg, #10B981, #059669);
+            background: linear-gradient(135deg, #A67C52, #8B7355);
             color: white;
             padding: 4px 8px;
             border-radius: 12px;
@@ -274,7 +275,7 @@
         
         /* Geolocation Button */
         .geolocation-btn {
-            background: linear-gradient(135deg, #7C3AED, #6D28D9);
+            background: linear-gradient(135deg, #8B7355, #A67C52);
             color: white;
             border: none;
             border-radius: 50px;
@@ -282,12 +283,12 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+            box-shadow: 0 4px 15px rgba(139, 115, 85, 0.3);
         }
         
         .geolocation-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4);
+            box-shadow: 0 8px 25px rgba(139, 115, 85, 0.4);
         }
         
         .geolocation-btn:active {
@@ -315,15 +316,16 @@
         .search-input {
             width: 100%;
             padding: 15px 50px 15px 20px;
-            border: 2px solid #e5e7eb;
+            border: 2px solid #D4C9BC;
             border-radius: 50px;
             font-size: 16px;
             transition: all 0.3s ease;
+            background-color: #F8F5F2;
         }
         
         .search-input:focus {
-            border-color: #7C3AED;
-            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+            border-color: #8B7355;
+            box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.1);
         }
         
         .search-btn {
@@ -331,7 +333,7 @@
             right: 5px;
             top: 50%;
             transform: translateY(-50%);
-            background: #7C3AED;
+            background: #8B7355;
             color: white;
             border: none;
             border-radius: 50%;
@@ -345,7 +347,7 @@
         }
         
         .search-btn:hover {
-            background: #6D28D9;
+            background: #A67C52;
             transform: translateY(-50%) scale(1.05);
         }
         
@@ -367,7 +369,7 @@
         }
         
         .stat-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #8B7355 0%, #A67C52 100%);
             color: white;
             border-radius: 16px;
             padding: 24px;
@@ -393,7 +395,7 @@
         }
         
         .reservation-item {
-            border-left: 4px solid #7C3AED;
+            border-left: 4px solid #8B7355;
             transition: all 0.3s ease;
         }
         
@@ -410,23 +412,23 @@
         }
         
         .status-confirmed {
-            background: #D1FAE5;
-            color: #065F46;
+            background: #E8DFD4;
+            color: #5A5A5A;
         }
         
         .status-pending {
-            background: #FEF3C7;
-            color: #92400E;
+            background: #F5E9D9;
+            color: #5A5A5A;
         }
         
         .status-completed {
-            background: #E0E7FF;
-            color: #3730A3;
+            background: #E8E2D6;
+            color: #5A5A5A;
         }
         
         .status-cancelled {
-            background: #FEE2E2;
-            color: #991B1B;
+            background: #E8D9D4;
+            color: #5A5A5A;
         }
         
         /* Responsive Design */
@@ -456,43 +458,43 @@
     </style>
 </head>
 
-<body class="font-inter bg-white antialiased">
+<body class="font-inter bg-light antialiased">
     <!-- Navigation Premium -->
-    <nav class="fixed w-full z-50 transition-all duration-300 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
+    <nav class="fixed w-full z-50 transition-all duration-300 bg-light/95 backdrop-blur-md border-b border-neutral shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-4">
                 <!-- Logo -->
                 <div class="flex items-center space-x-3">
                     <a href="index.html" class="flex items-center space-x-3 shine-effect">
-                        <div class="w-12 h-12 bg-gradient-to-r from-primary to-purple-600 rounded-2xl flex items-center justify-center shadow-lg pulse-glow">
-                            <i class="fas fa-crown text-white text-lg"></i>
+                        <div class="w-12 h-12 bg-gradient-to-r from-primary to-secondary rounded-2xl flex items-center justify-center shadow-lg pulse-glow">
+                            <i class="fas fa-scissors text-white text-lg"></i>
                         </div>
                         <div>
-                            <span class="text-2xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">KeurCoiff'</span>
-                            <div class="text-xs text-gray-500 -mt-1">by Senegal Tech</div>
+                            <span class="text-2xl font-bold text-text">KeurCoiff'</span>
+                            <div class="text-xs text-textLight -mt-1">by Senegal Tech</div>
                         </div>
                     </a>
                 </div>
 
                 <!-- Menu Desktop -->
                 <div class="hidden lg:flex items-center space-x-8">
-                    <a href="#accueil" class="text-gray-700 hover:text-primary font-medium transition-colors duration-200 relative group">
+                    <a href="#accueil" class="text-text hover:text-primary font-medium transition-colors duration-200 relative group">
                         Accueil
                         <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
                     </a>
-                    <a href="#features" class="text-gray-700 hover:text-primary font-medium transition-colors duration-200 relative group">
+                    <a href="#features" class="text-text hover:text-primary font-medium transition-colors duration-200 relative group">
                         Fonctionnalités
                         <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
                     </a>
-                    <a href="#salons" class="text-gray-700 hover:text-primary font-medium transition-colors duration-200 relative group">
+                    <a href="#salons" class="text-text hover:text-primary font-medium transition-colors duration-200 relative group">
                         Salons
                         <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
                     </a>
-                    <a href="#localisation" class="text-gray-700 hover:text-primary font-medium transition-colors duration-200 relative group">
+                    <a href="#localisation" class="text-text hover:text-primary font-medium transition-colors duration-200 relative group">
                         📍 Proche de moi
                         <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
                     </a>
-                    <a href="#pricing" class="text-gray-700 hover:text-primary font-medium transition-colors duration-200 relative group">
+                    <a href="#pricing" class="text-text hover:text-primary font-medium transition-colors duration-200 relative group">
                         Devenir Partenaire
                         <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
                     </a>
@@ -505,7 +507,7 @@
 
                 <!-- Mobile Menu Button -->
                 <div class="lg:hidden">
-                    <button id="menuBtn" class="text-gray-700 p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                    <button id="menuBtn" class="text-text p-2 rounded-lg hover:bg-neutral transition-colors">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
                 </div>
@@ -514,47 +516,47 @@
     </nav>
 
     <!-- Dashboard Coiffeur Section (Nouveau) -->
-    <section id="dashboard" class="pt-24 pb-20 bg-gray-50 min-h-screen hidden">
+    <section id="dashboard" class="pt-24 pb-20 bg-light min-h-screen hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Header Dashboard -->
             <div class="mb-8" data-aos="fade-up">
                 <div class="flex justify-between items-center">
                     <div>
-                        <h1 class="text-3xl lg:text-4xl font-bold text-gray-900">
+                        <h1 class="text-3xl lg:text-4xl font-bold text-text">
                             Dashboard <span class="text-primary" id="dashboardSalonName">Salon</span>
                         </h1>
-                        <p class="text-gray-600 mt-2" id="dashboardDate">Chargement...</p>
+                        <p class="text-textLight mt-2" id="dashboardDate">Chargement...</p>
                     </div>
                     <div class="flex items-center space-x-4">
-                        <button onclick="toggleNotifications()" class="relative p-3 text-gray-600 hover:text-primary transition-colors">
+                        <button onclick="toggleNotifications()" class="relative p-3 text-textLight hover:text-primary transition-colors">
                             <i class="fas fa-bell text-xl"></i>
-                            <span class="absolute top-0 right-0 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">3</span>
+                            <span class="absolute top-0 right-0 w-4 h-4 bg-primary text-white text-xs rounded-full flex items-center justify-center">3</span>
                         </button>
-                        <button onclick="toggleDashboardMenu()" class="flex items-center space-x-3 bg-white p-3 rounded-2xl shadow-lg border border-gray-100">
-                            <div class="w-10 h-10 bg-gradient-to-r from-primary to-purple-600 rounded-full flex items-center justify-center text-white font-bold">
+                        <button onclick="toggleDashboardMenu()" class="flex items-center space-x-3 bg-white p-3 rounded-2xl shadow-lg border border-neutral">
+                            <div class="w-10 h-10 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center text-white font-bold">
                                 <span id="userInitial">U</span>
                             </div>
                             <div class="text-left hidden lg:block">
-                                <div class="font-semibold text-gray-900" id="userName">Utilisateur</div>
-                                <div class="text-sm text-gray-500">Coiffeur</div>
+                                <div class="font-semibold text-text" id="userName">Utilisateur</div>
+                                <div class="text-sm text-textLight">Coiffeur</div>
                             </div>
-                            <i class="fas fa-chevron-down text-gray-400"></i>
+                            <i class="fas fa-chevron-down text-textLight"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- Menu déroulant utilisateur -->
-            <div id="dashboardMenu" class="hidden absolute right-4 mt-2 w-48 bg-white rounded-2xl shadow-2xl border border-gray-200 py-2 z-50">
-                <a href="profile.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors">
+            <div id="dashboardMenu" class="hidden absolute right-4 mt-2 w-48 bg-white rounded-2xl shadow-2xl border border-neutral py-2 z-50">
+                <a href="profile.html" class="flex items-center space-x-3 px-4 py-3 text-text hover:bg-light transition-colors">
                     <i class="fas fa-user text-primary w-5"></i>
                     <span>Mon profil</span>
                 </a>
-                <a href="mes-reservations.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors">
+                <a href="mes-reservations.html" class="flex items-center space-x-3 px-4 py-3 text-text hover:bg-light transition-colors">
                     <i class="fas fa-calendar text-primary w-5"></i>
                     <span>Mes réservations</span>
                 </a>
-                <div class="border-t border-gray-200 my-2"></div>
+                <div class="border-t border-neutral my-2"></div>
                 <button onclick="logout()" class="flex items-center space-x-3 px-4 py-3 text-red-600 hover:bg-red-50 w-full text-left transition-colors">
                     <i class="fas fa-sign-out-alt w-5"></i>
                     <span>Déconnexion</span>
@@ -569,7 +571,7 @@
                         <div>
                             <div class="text-white/80 text-sm">Réservations Aujourd'hui</div>
                             <div class="text-3xl font-bold mt-2" id="todayBookings">8</div>
-                            <div class="text-green-300 text-sm mt-2 flex items-center">
+                            <div class="text-accent text-sm mt-2 flex items-center">
                                 <i class="fas fa-arrow-up mr-1"></i>
                                 <span>+12% vs hier</span>
                             </div>
@@ -581,12 +583,12 @@
                 </div>
 
                 <!-- Carte Statistique 2 -->
-                <div class="stat-card bg-gradient-to-r from-secondary to-orange-500" data-aos="fade-up" data-aos-delay="200">
+                <div class="stat-card bg-gradient-to-r from-secondary to-accent" data-aos="fade-up" data-aos-delay="200">
                     <div class="flex justify-between items-start">
                         <div>
                             <div class="text-white/80 text-sm">Revenu Hebdomadaire</div>
                             <div class="text-3xl font-bold mt-2" id="weeklyRevenue">125,400 FCFA</div>
-                            <div class="text-orange-200 text-sm mt-2 flex items-center">
+                            <div class="text-accent text-sm mt-2 flex items-center">
                                 <i class="fas fa-trending-up mr-1"></i>
                                 <span>+18% vs semaine dernière</span>
                             </div>
@@ -598,12 +600,12 @@
                 </div>
 
                 <!-- Carte Statistique 3 -->
-                <div class="stat-card bg-gradient-to-r from-accent to-green-500" data-aos="fade-up" data-aos-delay="300">
+                <div class="stat-card bg-gradient-to-r from-accent to-primary" data-aos="fade-up" data-aos-delay="300">
                     <div class="flex justify-between items-start">
                         <div>
                             <div class="text-white/80 text-sm">Clients Satisfaits</div>
                             <div class="text-3xl font-bold mt-2" id="satisfiedClients">94%</div>
-                            <div class="text-green-200 text-sm mt-2 flex items-center">
+                            <div class="text-accent text-sm mt-2 flex items-center">
                                 <i class="fas fa-star mr-1"></i>
                                 <span>4.8/5 étoiles</span>
                             </div>
@@ -618,10 +620,10 @@
             <div class="grid lg:grid-cols-3 gap-8">
                 <!-- Réservations du jour -->
                 <div class="lg:col-span-2" data-aos="fade-up">
-                    <div class="bg-white rounded-3xl shadow-lg border border-gray-100 p-6">
+                    <div class="bg-white rounded-3xl shadow-lg border border-neutral p-6">
                         <div class="flex justify-between items-center mb-6">
-                            <h3 class="text-xl font-bold text-gray-900">Réservations du Jour</h3>
-                            <button onclick="viewAllReservations()" class="text-primary hover:text-purple-600 font-semibold text-sm">
+                            <h3 class="text-xl font-bold text-text">Réservations du Jour</h3>
+                            <button onclick="viewAllReservations()" class="text-primary hover:text-secondary font-semibold text-sm">
                                 Voir tout
                             </button>
                         </div>
@@ -635,8 +637,8 @@
                 <!-- Actions rapides -->
                 <div class="space-y-6" data-aos="fade-up" data-aos-delay="200">
                     <!-- Actions rapides -->
-                    <div class="bg-white rounded-3xl shadow-lg border border-gray-100 p-6">
-                        <h3 class="text-xl font-bold text-gray-900 mb-4">Actions Rapides</h3>
+                    <div class="bg-white rounded-3xl shadow-lg border border-neutral p-6">
+                        <h3 class="text-xl font-bold text-text mb-4">Actions Rapides</h3>
                         <div class="grid grid-cols-2 gap-4">
                             <button onclick="addReservation()" class="p-4 bg-primary/10 text-primary rounded-2xl hover:bg-primary hover:text-white transition-all flex flex-col items-center justify-center">
                                 <i class="fas fa-plus text-xl mb-2"></i>
@@ -650,7 +652,7 @@
                                 <i class="fas fa-clock text-xl mb-2"></i>
                                 <span class="text-sm font-semibold">Horaires</span>
                             </button>
-                            <button onclick="addService()" class="p-4 bg-purple-500/10 text-purple-600 rounded-2xl hover:bg-purple-500 hover:text-white transition-all flex flex-col items-center justify-center">
+                            <button onclick="addService()" class="p-4 bg-primary/10 text-primary rounded-2xl hover:bg-primary hover:text-white transition-all flex flex-col items-center justify-center">
                                 <i class="fas fa-scissors text-xl mb-2"></i>
                                 <span class="text-sm font-semibold">Nouveau Service</span>
                             </button>
@@ -658,7 +660,7 @@
                     </div>
 
                     <!-- Statistiques rapides -->
-                    <div class="bg-gradient-to-r from-primary to-purple-600 text-white rounded-3xl p-6">
+                    <div class="bg-gradient-to-r from-primary to-secondary text-white rounded-3xl p-6">
                         <h3 class="text-xl font-bold mb-4">Performance</h3>
                         <div class="space-y-3">
                             <div class="flex justify-between items-center">
@@ -688,14 +690,14 @@
         <!-- Background Elements Animés -->
         <div class="absolute inset-0 overflow-hidden">
             <div class="absolute -top-40 -right-40 w-80 h-80 bg-white/10 rounded-full blur-3xl floating"></div>
-            <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-secondary/20 rounded-full blur-3xl floating" style="animation-delay: 2s;"></div>
-            <div class="absolute top-1/2 left-1/4 w-60 h-60 bg-accent/10 rounded-full blur-3xl floating" style="animation-delay: 4s;"></div>
+            <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-accent/20 rounded-full blur-3xl floating" style="animation-delay: 2s;"></div>
+            <div class="absolute top-1/2 left-1/4 w-60 h-60 bg-primary/10 rounded-full blur-3xl floating" style="animation-delay: 4s;"></div>
             
             <!-- Particules animées -->
             <div class="particles-container absolute inset-0">
                 <div class="particle absolute w-2 h-2 bg-white/30 rounded-full" style="top: 20%; left: 10%; animation: float 8s ease-in-out infinite;"></div>
-                <div class="particle absolute w-3 h-3 bg-secondary/40 rounded-full" style="top: 60%; left: 80%; animation: float 6s ease-in-out infinite reverse;"></div>
-                <div class="particle absolute w-1 h-1 bg-accent/50 rounded-full" style="top: 80%; left: 30%; animation: float 10s ease-in-out infinite;"></div>
+                <div class="particle absolute w-3 h-3 bg-accent/40 rounded-full" style="top: 60%; left: 80%; animation: float 6s ease-in-out infinite reverse;"></div>
+                <div class="particle absolute w-1 h-1 bg-primary/50 rounded-full" style="top: 80%; left: 30%; animation: float 10s ease-in-out infinite;"></div>
                 <div class="particle absolute w-2 h-2 bg-white/20 rounded-full" style="top: 40%; left: 60%; animation: float 7s ease-in-out infinite reverse;"></div>
             </div>
         </div>
@@ -705,20 +707,20 @@
                 <!-- Left Content -->
                 <div class="text-white" data-aos="fade-right" data-aos-duration="1000">
                     <div class="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6 shine-effect">
-                        <i class="fas fa-star text-yellow-300 mr-2 animate-pulse"></i>
+                        <i class="fas fa-star text-accent mr-2 animate-pulse"></i>
                         <span class="text-sm font-medium">#1 Application coiffure au Sénégal</span>
                     </div>
                     
                     <h1 class="text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-tight">
                         Votre style,
-                        <span class="typewriter text-transparent bg-clip-text bg-gradient-to-r from-secondary to-yellow-300 block">
+                        <span class="typewriter text-transparent bg-clip-text bg-gradient-to-r from-accent to-white block">
                             notre expertise
                         </span>
                     </h1>
                     
                     <p class="text-xl lg:text-2xl text-gray-200 mb-8 leading-relaxed">
                         Réservez le meilleur coiffeur près de chez vous. 
-                        <span class="text-white font-semibold bg-gradient-to-r from-yellow-400 to-yellow-200 bg-clip-text text-transparent">Paiement sécurisé Orange Money & Wave.</span>
+                        <span class="text-white font-semibold bg-gradient-to-r from-accent to-white bg-clip-text text-transparent">Paiement sécurisé Orange Money & Wave.</span>
                         Service à domicile disponible.
                     </p>
                     
@@ -760,7 +762,7 @@
                             <div class="text-gray-300 text-sm">Salons Experts</div>
                         </div>
                         <div class="text-center transform hover:scale-110 transition-transform duration-300">
-                            <div class="text-3xl font-bold text-white mb-1">4.8<span class="text-yellow-300">★</span></div>
+                            <div class="text-3xl font-bold text-white mb-1">4.8<span class="text-accent">★</span></div>
                             <div class="text-gray-300 text-sm">Note Moyenne</div>
                         </div>
                         <div class="text-center transform hover:scale-110 transition-transform duration-300">
@@ -775,9 +777,9 @@
                     <div class="relative">
                         <!-- Floating Phone Mockup -->
                         <div class="floating relative z-10">
-                            <div class="bg-white rounded-[40px] p-6 shadow-2xl border-8 border-gray-800 mx-auto w-72 shimmer-effect">
+                            <div class="bg-white rounded-[40px] p-6 shadow-2xl border-8 border-dark mx-auto w-72 shimmer-effect">
                                 <!-- App Header -->
-                                <div class="bg-gradient-to-r from-primary to-purple-600 rounded-3xl p-4 text-white text-center mb-4">
+                                <div class="bg-gradient-to-r from-primary to-secondary rounded-3xl p-4 text-white text-center mb-4">
                                     <div class="font-bold">KeurCoiff'</div>
                                     <div class="text-xs opacity-90">Salons près de vous</div>
                                 </div>
@@ -785,21 +787,21 @@
                                 <!-- App Content -->
                                 <div class="space-y-3">
                                     <!-- Salon Item -->
-                                    <div class="flex items-center space-x-3 p-3 rounded-2xl bg-gray-50 hover:bg-primary/5 cursor-pointer transition-colors">
+                                    <div class="flex items-center space-x-3 p-3 rounded-2xl bg-light hover:bg-primary/5 cursor-pointer transition-colors">
                                         <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
                                             <i class="fas fa-scissors text-primary"></i>
                                         </div>
                                         <div class="flex-1">
-                                            <div class="font-semibold text-gray-900">Salon Awa Beauty</div>
-                                            <div class="flex items-center text-sm text-gray-600">
+                                            <div class="font-semibold text-text">Salon Awa Beauty</div>
+                                            <div class="flex items-center text-sm text-textLight">
                                                 <i class="fas fa-map-marker-alt text-primary mr-1"></i>
                                                 <span>Plateau • 250m</span>
                                             </div>
                                         </div>
                                         <div class="text-right">
-                                            <div class="flex items-center text-yellow-400 text-sm">
+                                            <div class="flex items-center text-accent text-sm">
                                                 <i class="fas fa-star"></i>
-                                                <span class="text-gray-700 ml-1">4.8</span>
+                                                <span class="text-text ml-1">4.8</span>
                                             </div>
                                             <div class="text-primary font-bold text-sm">5 000 FCFA</div>
                                         </div>
@@ -808,15 +810,15 @@
                                     <!-- Loading more salons -->
                                     <div class="text-center py-4">
                                         <div class="loader mx-auto"></div>
-                                        <div class="text-xs text-gray-500 mt-2">Chargement des salons...</div>
+                                        <div class="text-xs text-textLight mt-2">Chargement des salons...</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         
                         <!-- Floating Elements -->
-                        <div class="absolute -top-10 -left-10 w-20 h-20 bg-secondary/20 rounded-full blur-xl"></div>
-                        <div class="absolute -bottom-10 -right-10 w-24 h-24 bg-accent/20 rounded-full blur-xl"></div>
+                        <div class="absolute -top-10 -left-10 w-20 h-20 bg-accent/20 rounded-full blur-xl"></div>
+                        <div class="absolute -bottom-10 -right-10 w-24 h-24 bg-primary/20 rounded-full blur-xl"></div>
                     </div>
                 </div>
             </div>
@@ -824,38 +826,38 @@
     </section>
 
     <!-- Features Section Améliorée -->
-    <section id="features" class="py-20 bg-gradient-to-b from-white to-gray-50">
+    <section id="features" class="py-20 bg-gradient-to-b from-white to-light">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+                <h2 class="text-4xl lg:text-5xl font-bold text-text mb-6">
                     Une expérience
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-600">unique</span>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">unique</span>
                 </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                <p class="text-xl text-textLight max-w-3xl mx-auto">
                     Découvrez pourquoi KeurCoiff' révolutionne la coiffure au Sénégal avec des fonctionnalités pensées pour vous.
                 </p>
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Feature 1 - Chatbot IA -->
-                <div class="group bg-gradient-to-br from-white to-gray-50 p-8 rounded-3xl shadow-lg hover-lift border border-gray-100" data-aos="fade-up" data-aos-delay="100">
-                    <div class="w-16 h-16 bg-gradient-to-r from-primary to-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <div class="group bg-gradient-to-br from-white to-light p-8 rounded-3xl shadow-lg hover-lift border border-neutral" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-16 h-16 bg-gradient-to-r from-primary to-secondary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-robot text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Chatbot IA Intelligent</h3>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
+                    <h3 class="text-2xl font-bold text-text mb-4">Chatbot IA Intelligent</h3>
+                    <p class="text-textLight mb-6 leading-relaxed">
                         Notre assistant IA vous conseille en français et wolof. Envoyez une photo et trouvez le style parfait.
                     </p>
                     <ul class="space-y-3">
-                        <li class="flex items-center text-gray-700">
+                        <li class="flex items-center text-text">
                             <i class="fas fa-check text-accent mr-3"></i>
                             <span>Reconnaissance d'images</span>
                         </li>
-                        <li class="flex items-center text-gray-700">
+                        <li class="flex items-center text-text">
                             <i class="fas fa-check text-accent mr-3"></i>
                             <span>Conseils personnalisés</span>
                         </li>
-                        <li class="flex items-center text-gray-700">
+                        <li class="flex items-center text-text">
                             <i class="fas fa-check text-accent mr-3"></i>
                             <span>Support bilingue</span>
                         </li>
@@ -863,37 +865,37 @@
                 </div>
 
                 <!-- Feature 2 - Paiements -->
-                <div class="group bg-gradient-to-br from-white to-gray-50 p-8 rounded-3xl shadow-lg hover-lift border border-gray-100" data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-16 h-16 bg-gradient-to-r from-secondary to-orange-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <div class="group bg-gradient-to-br from-white to-light p-8 rounded-3xl shadow-lg hover-lift border border-neutral" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-16 h-16 bg-gradient-to-r from-secondary to-accent rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-mobile-alt text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Paiements 100% Sénégal</h3>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
+                    <h3 class="text-2xl font-bold text-text mb-4">Paiements 100% Sénégal</h3>
+                    <p class="text-textLight mb-6 leading-relaxed">
                         Payez facilement avec tous les mobile money locaux. Sécurisé et instantané.
                     </p>
                     <div class="flex space-x-4 mb-6">
-                        <div class="bg-orange-50 px-4 py-2 rounded-lg">
-                            <span class="text-orange-600 font-semibold">Orange Money</span>
+                        <div class="bg-accent/20 px-4 py-2 rounded-lg">
+                            <span class="text-secondary font-semibold">Orange Money</span>
                         </div>
-                        <div class="bg-purple-50 px-4 py-2 rounded-lg">
-                            <span class="text-purple-600 font-semibold">Wave</span>
+                        <div class="bg-primary/20 px-4 py-2 rounded-lg">
+                            <span class="text-primary font-semibold">Wave</span>
                         </div>
-                        <div class="bg-blue-50 px-4 py-2 rounded-lg">
-                            <span class="text-blue-600 font-semibold">Free Money</span>
+                        <div class="bg-secondary/20 px-4 py-2 rounded-lg">
+                            <span class="text-secondary font-semibold">Free Money</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Feature 3 - Géolocalisation -->
-                <div class="group bg-gradient-to-br from-white to-gray-50 p-8 rounded-3xl shadow-lg hover-lift border border-gray-100" data-aos="fade-up" data-aos-delay="300">
-                    <div class="w-16 h-16 bg-gradient-to-r from-accent to-green-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <div class="group bg-gradient-to-br from-white to-light p-8 rounded-3xl shadow-lg hover-lift border border-neutral" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-16 h-16 bg-gradient-to-r from-accent to-primary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-map-marker-alt text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Géolocalisation Intelligente</h3>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
+                    <h3 class="text-2xl font-bold text-text mb-4">Géolocalisation Intelligente</h3>
+                    <p class="text-textLight mb-6 leading-relaxed">
                         Trouvez instantanément les salons les plus proches de vous avec notre système de géolocalisation avancé.
                     </p>
-                    <div class="bg-gradient-to-r from-accent to-green-500 text-white p-4 rounded-2xl">
+                    <div class="bg-gradient-to-r from-accent to-primary text-white p-4 rounded-2xl">
                         <div class="flex items-center justify-between">
                             <span class="font-semibold">📍 Proche de vous</span>
                             <span class="bg-white text-accent px-3 py-1 rounded-full text-sm font-bold">GPS</span>
@@ -908,11 +910,11 @@
     <section id="localisation" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+                <h2 class="text-4xl lg:text-5xl font-bold text-text mb-6">
                     Trouvez les salons
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-600">près de vous</span>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">près de vous</span>
                 </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                <p class="text-xl text-textLight max-w-3xl mx-auto">
                     Notre système de géolocalisation intelligent vous montre les meilleurs salons dans votre quartier.
                 </p>
             </div>
@@ -920,9 +922,9 @@
             <div class="grid lg:grid-cols-2 gap-12 items-start">
                 <!-- Carte Interactive -->
                 <div class="space-y-6" data-aos="fade-right">
-                    <div class="bg-gradient-to-br from-gray-50 to-white p-8 rounded-3xl shadow-xl border border-gray-100">
+                    <div class="bg-gradient-to-br from-light to-white p-8 rounded-3xl shadow-xl border border-neutral">
                         <div class="flex items-center justify-between mb-6">
-                            <h3 class="text-2xl font-bold text-gray-900">Carte Interactive</h3>
+                            <h3 class="text-2xl font-bold text-text">Carte Interactive</h3>
                             <button onclick="getUserLocation()" class="geolocation-btn flex items-center space-x-2">
                                 <i class="fas fa-location-arrow"></i>
                                 <span>Me localiser</span>
@@ -934,17 +936,17 @@
                         
                         <!-- Statistiques de localisation -->
                         <div class="grid grid-cols-3 gap-4 mt-6 text-center">
-                            <div class="bg-blue-50 p-4 rounded-2xl">
-                                <div class="text-2xl font-bold text-blue-600" id="nearbyCount">0</div>
-                                <div class="text-sm text-blue-800">À proximité</div>
+                            <div class="bg-primary/10 p-4 rounded-2xl">
+                                <div class="text-2xl font-bold text-primary" id="nearbyCount">0</div>
+                                <div class="text-sm text-primary">À proximité</div>
                             </div>
-                            <div class="bg-green-50 p-4 rounded-2xl">
-                                <div class="text-2xl font-bold text-green-600" id="distanceAvg">0m</div>
-                                <div class="text-sm text-green-800">Distance moyenne</div>
+                            <div class="bg-secondary/10 p-4 rounded-2xl">
+                                <div class="text-2xl font-bold text-secondary" id="distanceAvg">0m</div>
+                                <div class="text-sm text-secondary">Distance moyenne</div>
                             </div>
-                            <div class="bg-purple-50 p-4 rounded-2xl">
-                                <div class="text-2xl font-bold text-purple-600" id="topRated">4.8★</div>
-                                <div class="text-sm text-purple-800">Meilleure note</div>
+                            <div class="bg-accent/10 p-4 rounded-2xl">
+                                <div class="text-2xl font-bold text-accent" id="topRated">4.8★</div>
+                                <div class="text-sm text-accent">Meilleure note</div>
                             </div>
                         </div>
                     </div>
@@ -952,7 +954,7 @@
 
                 <!-- Liste des salons proches -->
                 <div class="space-y-6" data-aos="fade-left">
-                    <div class="bg-gradient-to-br from-primary to-purple-600 text-white p-8 rounded-3xl shadow-xl">
+                    <div class="bg-gradient-to-br from-primary to-secondary text-white p-8 rounded-3xl shadow-xl">
                         <h3 class="text-2xl font-bold mb-6">📍 Salons les plus proches</h3>
                         
                         <div id="nearbySalons" class="space-y-4 max-h-96 overflow-y-auto">
@@ -965,27 +967,27 @@
                         
                         <div class="mt-6 p-4 bg-white/10 rounded-2xl">
                             <div class="flex items-center space-x-3 text-sm">
-                                <i class="fas fa-info-circle text-yellow-300"></i>
+                                <i class="fas fa-info-circle text-accent"></i>
                                 <span>Activez votre géolocalisation pour des résultats plus précis</span>
                             </div>
                         </div>
                     </div>
 
                     <!-- Filtres rapides -->
-                    <div class="bg-white p-6 rounded-3xl shadow-lg border border-gray-100">
-                        <h4 class="font-semibold text-gray-900 mb-4">Filtrer par distance</h4>
+                    <div class="bg-white p-6 rounded-3xl shadow-lg border border-neutral">
+                        <h4 class="font-semibold text-text mb-4">Filtrer par distance</h4>
                         <div class="grid grid-cols-3 gap-3">
-                            <button onclick="filterByDistance(500)" class="p-3 text-center border border-gray-200 rounded-xl hover:bg-primary hover:text-white transition-all">
+                            <button onclick="filterByDistance(500)" class="p-3 text-center border border-neutral rounded-xl hover:bg-primary hover:text-white transition-all">
                                 <div class="font-semibold">500m</div>
-                                <div class="text-xs text-gray-500">Très proche</div>
+                                <div class="text-xs text-textLight">Très proche</div>
                             </button>
-                            <button onclick="filterByDistance(1000)" class="p-3 text-center border border-gray-200 rounded-xl hover:bg-primary hover:text-white transition-all">
+                            <button onclick="filterByDistance(1000)" class="p-3 text-center border border-neutral rounded-xl hover:bg-primary hover:text-white transition-all">
                                 <div class="font-semibold">1km</div>
-                                <div class="text-xs text-gray-500">Proche</div>
+                                <div class="text-xs text-textLight">Proche</div>
                             </button>
-                            <button onclick="filterByDistance(5000)" class="p-3 text-center border border-gray-200 rounded-xl hover:bg-primary hover:text-white transition-all">
+                            <button onclick="filterByDistance(5000)" class="p-3 text-center border border-neutral rounded-xl hover:bg-primary hover:text-white transition-all">
                                 <div class="font-semibold">5km</div>
-                                <div class="text-xs text-gray-500">Secteur</div>
+                                <div class="text-xs text-textLight">Secteur</div>
                             </button>
                         </div>
                     </div>
@@ -995,14 +997,14 @@
     </section>
 
     <!-- Section Salons en Temps Réel -->
-    <section id="salons" class="py-20 bg-gray-50">
+    <section id="salons" class="py-20 bg-light">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+                <h2 class="text-4xl lg:text-5xl font-bold text-text mb-6">
                     Nos salons
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-600">partenaires</span>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">partenaires</span>
                 </h2>
-                <p class="text-xl text-gray-600">
+                <p class="text-xl text-textLight">
                     Découvrez les meilleurs coiffeurs de Dakar, sélectionnés avec soin.
                 </p>
             </div>
@@ -1012,13 +1014,13 @@
                 <button class="filter-btn active bg-primary text-white px-6 py-3 rounded-xl font-semibold transition-all hover:shadow-lg" data-filter="all">
                     Tous les salons
                 </button>
-                <button class="filter-btn bg-white text-gray-700 px-6 py-3 rounded-xl font-semibold border border-gray-200 transition-all hover:shadow-lg" data-filter="domicile">
+                <button class="filter-btn bg-white text-text px-6 py-3 rounded-xl font-semibold border border-neutral transition-all hover:shadow-lg" data-filter="domicile">
                     🏠 À domicile
                 </button>
-                <button class="filter-btn bg-white text-gray-700 px-6 py-3 rounded-xl font-semibold border border-gray-200 transition-all hover:shadow-lg" data-filter="femme">
+                <button class="filter-btn bg-white text-text px-6 py-3 rounded-xl font-semibold border border-neutral transition-all hover:shadow-lg" data-filter="femme">
                     👩 Spécialiste femme
                 </button>
-                <button class="filter-btn bg-white text-gray-700 px-6 py-3 rounded-xl font-semibold border border-gray-200 transition-all hover:shadow-lg" data-filter="homme">
+                <button class="filter-btn bg-white text-text px-6 py-3 rounded-xl font-semibold border border-neutral transition-all hover:shadow-lg" data-filter="homme">
                     👨 Spécialiste homme
                 </button>
             </div>
@@ -1031,7 +1033,7 @@
             <!-- Loading State -->
             <div id="loadingSalons" class="text-center py-12">
                 <div class="loader mx-auto mb-4"></div>
-                <div class="text-gray-600">Chargement des salons...</div>
+                <div class="text-textLight">Chargement des salons...</div>
             </div>
         </div>
     </section>
@@ -1040,65 +1042,65 @@
     <section id="pricing" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+                <h2 class="text-4xl lg:text-5xl font-bold text-text mb-6">
                     Devenez partenaire
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-600">KeurCoiff'</span>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">KeurCoiff'</span>
                 </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                <p class="text-xl text-textLight max-w-3xl mx-auto">
                     Rejoignez la première plateforme de réservation de coiffure au Sénégal et développez votre business.
                 </p>
             </div>
 
             <div class="grid lg:grid-cols-2 gap-12 items-start">
                 <!-- Formulaire Partenaire -->
-                <div class="bg-gradient-to-br from-gray-50 to-white p-8 rounded-3xl shadow-xl border border-gray-100" data-aos="fade-right">
-                    <h3 class="text-3xl font-bold text-gray-900 mb-6">Inscription Salon</h3>
+                <div class="bg-gradient-to-br from-light to-white p-8 rounded-3xl shadow-xl border border-neutral" data-aos="fade-right">
+                    <h3 class="text-3xl font-bold text-text mb-6">Inscription Salon</h3>
                     
                     <form id="partnerForm" class="space-y-6">
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-2">Nom du salon *</label>
-                                <input type="text" name="salonName" required class="w-full p-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+                                <label class="block text-sm font-semibold text-text mb-2">Nom du salon *</label>
+                                <input type="text" name="salonName" required class="w-full p-4 rounded-xl border border-neutral focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
                             </div>
                             <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-2">Téléphone *</label>
-                                <input type="tel" name="phone" required class="w-full p-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="77 123 45 67">
+                                <label class="block text-sm font-semibold text-text mb-2">Téléphone *</label>
+                                <input type="tel" name="phone" required class="w-full p-4 rounded-xl border border-neutral focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="77 123 45 67">
                             </div>
                         </div>
                         
                         <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-2">Quartier & Ville *</label>
-                            <input type="text" name="location" required class="w-full p-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="Plateau, Dakar">
+                            <label class="block text-sm font-semibold text-text mb-2">Quartier & Ville *</label>
+                            <input type="text" name="location" required class="w-full p-4 rounded-xl border border-neutral focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="Plateau, Dakar">
                         </div>
                         
                         <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-2">Services proposés *</label>
+                            <label class="block text-sm font-semibold text-text mb-2">Services proposés *</label>
                             <div class="grid grid-cols-2 gap-3">
-                                <label class="flex items-center space-x-3 p-3 rounded-xl border border-gray-200 hover:bg-gray-50 cursor-pointer">
+                                <label class="flex items-center space-x-3 p-3 rounded-xl border border-neutral hover:bg-light cursor-pointer">
                                     <input type="checkbox" name="services" value="tresses" class="rounded text-primary focus:ring-primary">
                                     <span>Tresses</span>
                                 </label>
-                                <label class="flex items-center space-x-3 p-3 rounded-xl border border-gray-200 hover:bg-gray-50 cursor-pointer">
+                                <label class="flex items-center space-x-3 p-3 rounded-xl border border-neutral hover:bg-light cursor-pointer">
                                     <input type="checkbox" name="services" value="coupe-femme" class="rounded text-primary focus:ring-primary">
                                     <span>Coupe femme</span>
                                 </label>
-                                <label class="flex items-center space-x-3 p-3 rounded-xl border border-gray-200 hover:bg-gray-50 cursor-pointer">
+                                <label class="flex items-center space-x-3 p-3 rounded-xl border border-neutral hover:bg-light cursor-pointer">
                                     <input type="checkbox" name="services" value="coupe-homme" class="rounded text-primary focus:ring-primary">
                                     <span>Coupe homme</span>
                                 </label>
-                                <label class="flex items-center space-x-3 p-3 rounded-xl border border-gray-200 hover:bg-gray-50 cursor-pointer">
+                                <label class="flex items-center space-x-3 p-3 rounded-xl border border-neutral hover:bg-light cursor-pointer">
                                     <input type="checkbox" name="services" value="domicile" class="rounded text-primary focus:ring-primary">
                                     <span>À domicile</span>
                                 </label>
                             </div>
                         </div>
                         
-                        <button type="submit" class="w-full bg-gradient-to-r from-primary to-purple-600 text-white py-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105 flex items-center justify-center">
+                        <button type="submit" class="w-full bg-gradient-to-r from-primary to-secondary text-white py-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105 flex items-center justify-center">
                             <span>Devenir Partenaire Gratuitement</span>
                             <i class="fas fa-arrow-right ml-3"></i>
                         </button>
                         
-                        <p class="text-center text-sm text-gray-600">
+                        <p class="text-center text-sm text-textLight">
                             📞 Nous vous contactons sous 2 heures pour finaliser votre inscription
                         </p>
                     </form>
@@ -1106,25 +1108,25 @@
 
                 <!-- Avantages -->
                 <div class="space-y-6" data-aos="fade-left">
-                    <div class="bg-gradient-to-r from-primary to-purple-600 text-white p-8 rounded-3xl">
+                    <div class="bg-gradient-to-r from-primary to-secondary text-white p-8 rounded-3xl">
                         <h4 class="text-2xl font-bold mb-4">Pourquoi nous rejoindre ?</h4>
                         <ul class="space-y-4">
                             <li class="flex items-center">
-                                <i class="fas fa-chart-line text-secondary mr-4 text-xl"></i>
+                                <i class="fas fa-chart-line text-accent mr-4 text-xl"></i>
                                 <span>Augmentez votre clientèle de 40% en moyenne</span>
                             </li>
                             <li class="flex items-center">
-                                <i class="fas fa-users text-secondary mr-4 text-xl"></i>
+                                <i class="fas fa-users text-accent mr-4 text-xl"></i>
                                 <span>Accédez à des milliers de clients potentiels</span>
                             </li>
                             <li class="flex items-center">
-                                <i class="fas fa-crown text-secondary mr-4 text-xl"></i>
+                                <i class="fas fa-crown text-accent mr-4 text-xl"></i>
                                 <span>Mettez en avant votre expertise</span>
                             </li>
                         </ul>
                     </div>
                     
-                    <div class="bg-gradient-to-r from-secondary to-orange-500 text-white p-8 rounded-3xl">
+                    <div class="bg-gradient-to-r from-secondary to-accent text-white p-8 rounded-3xl">
                         <h4 class="text-2xl font-bold mb-4">Offre de lancement</h4>
                         <div class="text-4xl font-bold mb-2">0 FCFA</div>
                         <div class="text-white/80 mb-4">Pendant 1 mois</div>
@@ -1141,14 +1143,14 @@
     </section>
 
     <!-- Footer Premium -->
-    <footer class="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-16">
+    <footer class="bg-gradient-to-br from-dark to-text text-white py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid lg:grid-cols-4 gap-8 mb-12">
                 <!-- Brand -->
                 <div>
                     <div class="flex items-center space-x-3 mb-6">
-                        <div class="w-12 h-12 bg-gradient-to-r from-primary to-purple-600 rounded-2xl flex items-center justify-center">
-                            <i class="fas fa-crown text-white text-lg"></i>
+                        <div class="w-12 h-12 bg-gradient-to-r from-primary to-secondary rounded-2xl flex items-center justify-center">
+                            <i class="fas fa-scissors text-white text-lg"></i>
                         </div>
                         <div>
                             <span class="text-2xl font-bold">KeurCoiff'</span>
@@ -1208,7 +1210,7 @@
                     <p class="text-gray-400 mb-4">Recevez les dernières actualités et promotions.</p>
                     <div class="flex">
                         <input type="email" placeholder="Votre email" class="flex-1 bg-gray-700 text-white px-4 py-3 rounded-l-xl focus:outline-none focus:ring-2 focus:ring-primary">
-                        <button class="bg-primary px-6 py-3 rounded-r-xl font-semibold hover:bg-purple-600 transition-colors">
+                        <button class="bg-primary px-6 py-3 rounded-r-xl font-semibold hover:bg-secondary transition-colors">
                             <i class="fas fa-paper-plane"></i>
                         </button>
                     </div>
@@ -1225,7 +1227,7 @@
     <div id="reservationModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
         <div class="bg-white rounded-3xl max-w-md w-full mx-4 max-h-[90vh] overflow-y-auto">
             <!-- Header -->
-            <div class="bg-gradient-to-r from-primary to-purple-600 text-white p-6 rounded-t-3xl">
+            <div class="bg-gradient-to-r from-primary to-secondary text-white p-6 rounded-t-3xl">
                 <div class="flex justify-between items-center">
                     <h3 class="text-xl font-bold">Réserver une prestation</h3>
                     <button onclick="closeReservationModal()" class="text-white hover:text-gray-200">
@@ -1242,26 +1244,26 @@
                     
                     <!-- Service -->
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Service *</label>
+                        <label class="block text-sm font-semibold text-text mb-2">Service *</label>
                         <select id="reservationService" required 
-                                class="w-full p-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+                                class="w-full p-4 rounded-xl border border-neutral focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
                             <option value="">Choisir un service</option>
                         </select>
                     </div>
 
                     <!-- Date -->
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Date *</label>
+                        <label class="block text-sm font-semibold text-text mb-2">Date *</label>
                         <input type="date" id="reservationDate" required 
-                               class="w-full p-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                               class="w-full p-4 rounded-xl border border-neutral focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                                min="">
                     </div>
 
                     <!-- Heure -->
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Heure *</label>
+                        <label class="block text-sm font-semibold text-text mb-2">Heure *</label>
                         <select id="reservationTime" required 
-                                class="w-full p-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+                                class="w-full p-4 rounded-xl border border-neutral focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
                             <option value="">Choisir l'heure</option>
                             <option value="08:00">08:00</option>
                             <option value="09:00">09:00</option>
@@ -1276,20 +1278,20 @@
 
                     <!-- Notes -->
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Notes (optionnel)</label>
+                        <label class="block text-sm font-semibold text-text mb-2">Notes (optionnel)</label>
                         <textarea id="reservationNotes" rows="3" 
-                                  class="w-full p-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                                  class="w-full p-4 rounded-xl border border-neutral focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                                   placeholder="Précisions sur la prestation..."></textarea>
                     </div>
 
                     <!-- Actions -->
                     <div class="flex space-x-4 pt-4">
                         <button type="button" onclick="closeReservationModal()" 
-                                class="flex-1 bg-gray-100 text-gray-700 py-4 rounded-xl font-semibold hover:bg-gray-200 transition-all">
+                                class="flex-1 bg-light text-text py-4 rounded-xl font-semibold hover:bg-neutral transition-all">
                             Annuler
                         </button>
                         <button type="submit" 
-                                class="flex-1 bg-gradient-to-r from-primary to-purple-600 text-white py-4 rounded-xl font-semibold hover:shadow-lg transition-all flex items-center justify-center">
+                                class="flex-1 bg-gradient-to-r from-primary to-secondary text-white py-4 rounded-xl font-semibold hover:shadow-lg transition-all flex items-center justify-center">
                             <i class="fas fa-calendar-check mr-2"></i>
                             Confirmer
                         </button>
@@ -1302,9 +1304,9 @@
     <!-- Chatbot Widget Avancé -->
     <div id="chatbotWidget" class="fixed bottom-6 right-6 z-50">
         <!-- Chat Container -->
-        <div id="chatbotContainer" class="hidden w-96 h-[600px] bg-white rounded-3xl shadow-2xl flex flex-col border border-gray-200">
+        <div id="chatbotContainer" class="hidden w-96 h-[600px] bg-white rounded-3xl shadow-2xl flex flex-col border border-neutral">
             <!-- Chat Header -->
-            <div class="bg-gradient-to-r from-primary to-purple-600 text-white p-6 rounded-t-3xl">
+            <div class="bg-gradient-to-r from-primary to-secondary text-white p-6 rounded-t-3xl">
                 <div class="flex justify-between items-center mb-4">
                     <div class="flex items-center space-x-3">
                         <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center">
@@ -1341,24 +1343,24 @@
             </div>
 
             <!-- Chat Messages -->
-            <div id="chatMessages" class="flex-1 p-6 overflow-y-auto bg-gray-50">
+            <div id="chatMessages" class="flex-1 p-6 overflow-y-auto bg-light">
                 <!-- Messages will be loaded here -->
             </div>
 
             <!-- Quick Actions & Input -->
-            <div class="p-6 border-t border-gray-200 bg-white rounded-b-3xl">
+            <div class="p-6 border-t border-neutral bg-white rounded-b-3xl">
                 <!-- Quick Actions -->
                 <div class="grid grid-cols-2 gap-3 mb-4">
                     <button onclick="sendQuickReply('Trouver un salon près de moi')" class="quick-action-btn bg-primary/10 text-primary border border-primary/20">
                         🎯 Trouver salon
                     </button>
-                    <button onclick="sendQuickReply('Je veux un service à domicile')" class="quick-action-btn bg-green-100 text-green-700 border border-green-200">
+                    <button onclick="sendQuickReply('Je veux un service à domicile')" class="quick-action-btn bg-accent/10 text-accent border border-accent/20">
                         🏠 À domicile
                     </button>
-                    <button onclick="sendQuickReply('Quels sont les prix moyens')" class="quick-action-btn bg-orange-100 text-orange-700 border border-orange-200">
+                    <button onclick="sendQuickReply('Quels sont les prix moyens')" class="quick-action-btn bg-secondary/10 text-secondary border border-secondary/20">
                         💰 Voir prix
                     </button>
-                    <button onclick="sendQuickReply('J ai une photo à analyser')" class="quick-action-btn bg-purple-100 text-purple-700 border border-purple-200">
+                    <button onclick="sendQuickReply('J ai une photo à analyser')" class="quick-action-btn bg-primary/10 text-primary border border-primary/20">
                         📸 Analyser photo
                     </button>
                 </div>
@@ -1366,31 +1368,31 @@
                 <!-- Input Area -->
                 <div class="flex space-x-3">
                     <!-- Image Upload -->
-                    <label class="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-xl hover:bg-gray-200 transition-colors cursor-pointer">
-                        <i class="fas fa-image text-gray-600"></i>
+                    <label class="flex items-center justify-center w-12 h-12 bg-light rounded-xl hover:bg-neutral transition-colors cursor-pointer">
+                        <i class="fas fa-image text-text"></i>
                         <input type="file" id="imageUpload" accept="image/*" class="hidden">
                     </label>
                     
                     <!-- Message Input -->
                     <div class="flex-1 relative">
-                        <input type="text" id="chatInput" placeholder="Tapez votre message..." class="w-full p-4 pr-12 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent">
-                        <button onclick="sendMessage()" class="absolute right-3 top-1/2 transform -translate-y-1/2 bg-primary text-white p-2 rounded-lg hover:bg-purple-600 transition-colors">
+                        <input type="text" id="chatInput" placeholder="Tapez votre message..." class="w-full p-4 pr-12 rounded-xl border border-neutral focus:ring-2 focus:ring-primary focus:border-transparent">
+                        <button onclick="sendMessage()" class="absolute right-3 top-1/2 transform -translate-y-1/2 bg-primary text-white p-2 rounded-lg hover:bg-secondary transition-colors">
                             <i class="fas fa-paper-plane"></i>
                         </button>
                     </div>
                 </div>
                 
                 <!-- Features Indicator -->
-                <div class="text-center text-xs text-gray-500 mt-3">
+                <div class="text-center text-xs text-textLight mt-3">
                     💡 Essayez : "salon tresses plateau" ou envoyez une photo
                 </div>
             </div>
         </div>
 
         <!-- Chat Toggle Button -->
-        <button onclick="toggleChat()" class="w-16 h-16 bg-gradient-to-r from-primary to-purple-600 rounded-2xl shadow-2xl flex items-center justify-center hover:scale-110 transition-transform duration-300 group">
+        <button onclick="toggleChat()" class="w-16 h-16 bg-gradient-to-r from-primary to-secondary rounded-2xl shadow-2xl flex items-center justify-center hover:scale-110 transition-transform duration-300 group">
             <i class="fas fa-robot text-white text-2xl group-hover:scale-110 transition-transform"></i>
-            <div class="absolute -top-2 -right-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center animate-pulse">
+            <div class="absolute -top-2 -right-2 w-6 h-6 bg-primary rounded-full flex items-center justify-center animate-pulse">
                 <span class="text-white text-xs font-bold">!</span>
             </div>
         </button>
@@ -1440,11 +1442,11 @@
                     // Active le bouton
                     document.querySelectorAll('.filter-btn').forEach(b => {
                         b.classList.remove('active', 'bg-primary', 'text-white');
-                        b.classList.add('bg-white', 'text-gray-700');
+                        b.classList.add('bg-white', 'text-text');
                     });
                     
                     this.classList.add('active', 'bg-primary', 'text-white');
-                    this.classList.remove('bg-white', 'text-gray-700');
+                    this.classList.remove('bg-white', 'text-text');
                     
                     const filter = this.dataset.filter;
                     filterSalons(filter);
@@ -1531,11 +1533,11 @@
             // Afficher les réservations
             const reservationsList = document.getElementById('todayReservationsList');
             reservationsList.innerHTML = demoReservations.map(reservation => `
-                <div class="reservation-item bg-white rounded-2xl p-4 border border-gray-100 shadow-sm">
+                <div class="reservation-item bg-white rounded-2xl p-4 border border-neutral shadow-sm">
                     <div class="flex justify-between items-start mb-3">
                         <div>
-                            <h4 class="font-semibold text-gray-900">${reservation.clientName}</h4>
-                            <p class="text-sm text-gray-600">${reservation.service}</p>
+                            <h4 class="font-semibold text-text">${reservation.clientName}</h4>
+                            <p class="text-sm text-textLight">${reservation.service}</p>
                         </div>
                         <span class="status-badge status-${reservation.status}">
                             ${reservation.status === 'confirmed' ? 'Confirmé' : 
@@ -1544,7 +1546,7 @@
                         </span>
                     </div>
                     <div class="flex justify-between items-center">
-                        <div class="flex items-center text-gray-600">
+                        <div class="flex items-center text-textLight">
                             <i class="fas fa-clock mr-2"></i>
                             <span>${reservation.time} • ${reservation.duration}min</span>
                         </div>
@@ -1553,10 +1555,10 @@
                         </div>
                     </div>
                     <div class="flex space-x-2 mt-3">
-                        <button onclick="startReservation(${reservation.id})" class="flex-1 bg-primary text-white py-2 px-3 rounded-lg text-sm font-semibold hover:bg-purple-600 transition-colors">
+                        <button onclick="startReservation(${reservation.id})" class="flex-1 bg-primary text-white py-2 px-3 rounded-lg text-sm font-semibold hover:bg-secondary transition-colors">
                             Démarrer
                         </button>
-                        <button onclick="viewReservationDetails(${reservation.id})" class="flex-1 bg-gray-100 text-gray-700 py-2 px-3 rounded-lg text-sm font-semibold hover:bg-gray-200 transition-colors">
+                        <button onclick="viewReservationDetails(${reservation.id})" class="flex-1 bg-light text-text py-2 px-3 rounded-lg text-sm font-semibold hover:bg-neutral transition-colors">
                             Détails
                         </button>
                     </div>
@@ -2018,7 +2020,7 @@
                         <span class="distance-badge">${Math.round(salon.distance)}m</span>
                     </div>
                     <div class="flex items-center justify-between text-sm">
-                        <div class="flex items-center text-yellow-300">
+                        <div class="flex items-center text-accent">
                             ${'★'.repeat(Math.floor(salon.rating?.average || 0))}
                             <span class="text-white/80 ml-1">${salon.rating?.average || 'N/A'}</span>
                         </div>
@@ -2048,15 +2050,15 @@
                 .bindPopup(`
                     <div class="p-2">
                         <h4 class="font-bold">${salon.name}</h4>
-                        <p class="text-sm text-gray-600">${salon.location?.quarter}, ${salon.location?.city}</p>
-                        <div class="flex items-center text-yellow-400 text-sm">
+                        <p class="text-sm text-textLight">${salon.location?.quarter}, ${salon.location?.city}</p>
+                        <div class="flex items-center text-accent text-sm">
                             ${'★'.repeat(Math.floor(salon.rating?.average || 0))}
-                            <span class="text-gray-700 ml-1">${salon.rating?.average || 'N/A'}</span>
+                            <span class="text-text ml-1">${salon.rating?.average || 'N/A'}</span>
                         </div>
                         <div class="text-primary font-bold mt-2">
                             ${salon.services && salon.services.length > 0 ? salon.services[0].price.toLocaleString() + ' FCFA' : 'Prix sur demande'}
                         </div>
-                        <button onclick="openReservationModal('${salon._id}', '${salon.name}')" class="w-full mt-2 bg-primary text-white py-2 px-4 rounded-lg text-sm hover:bg-purple-600 transition-colors">
+                        <button onclick="openReservationModal('${salon._id}', '${salon.name}')" class="w-full mt-2 bg-primary text-white py-2 px-4 rounded-lg text-sm hover:bg-secondary transition-colors">
                             Réserver
                         </button>
                     </div>
@@ -2121,25 +2123,25 @@
                 authSection.innerHTML = `
                     <div class="flex items-center space-x-4">
                         <div class="text-right hidden sm:block">
-                            <div class="text-sm font-medium text-gray-900">${user.fullName}</div>
-                            <div class="text-xs text-gray-500">${user.phone || ''}</div>
+                            <div class="text-sm font-medium text-text">${user.fullName}</div>
+                            <div class="text-xs text-textLight">${user.phone || ''}</div>
                         </div>
                         <div class="relative group">
-                            <button onclick="toggleUserMenu()" class="w-10 h-10 bg-gradient-to-r from-primary to-purple-600 rounded-full flex items-center justify-center text-white font-bold hover:shadow-lg transition-all">
+                            <button onclick="toggleUserMenu()" class="w-10 h-10 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center text-white font-bold hover:shadow-lg transition-all">
                                 ${user.fullName.charAt(0).toUpperCase()}
                             </button>
                             
                             <!-- Menu utilisateur déroulant -->
-                            <div id="userMenu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-2xl shadow-2xl border border-gray-200 py-2 z-50">
-                                <a href="profile.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors">
+                            <div id="userMenu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-2xl shadow-2xl border border-neutral py-2 z-50">
+                                <a href="profile.html" class="flex items-center space-x-3 px-4 py-3 text-text hover:bg-light transition-colors">
                                     <i class="fas fa-user text-primary w-5"></i>
                                     <span>Mon profil</span>
                                 </a>
-                                <a href="mes-reservations.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors">
+                                <a href="mes-reservations.html" class="flex items-center space-x-3 px-4 py-3 text-text hover:bg-light transition-colors">
                                     <i class="fas fa-calendar text-primary w-5"></i>
                                     <span>Mes réservations</span>
                                 </a>
-                                <div class="border-t border-gray-200 my-2"></div>
+                                <div class="border-t border-neutral my-2"></div>
                                 <button onclick="logout()" class="flex items-center space-x-3 px-4 py-3 text-red-600 hover:bg-red-50 w-full text-left transition-colors">
                                     <i class="fas fa-sign-out-alt w-5"></i>
                                     <span>Déconnexion</span>
@@ -2152,7 +2154,7 @@
                 // Utilisateur non connecté
                 authSection.innerHTML = `
                     <div class="flex items-center space-x-4">
-                        <a href="login.html" class="text-gray-700 hover:text-primary font-medium transition-colors duration-200 hidden sm:block">
+                        <a href="login.html" class="text-text hover:text-primary font-medium transition-colors duration-200 hidden sm:block">
                             Connexion
                         </a>
                         <a href="register.html" class="bg-primary text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200 shadow-md">
@@ -2192,9 +2194,9 @@
         function showNotification(message, type = 'info') {
             const notification = document.createElement('div');
             notification.className = `fixed top-4 right-4 px-6 py-4 rounded-2xl shadow-2xl z-50 max-w-sm demo-message ${
-                type === 'success' ? 'bg-green-500 text-white' : 
+                type === 'success' ? 'bg-primary text-white' : 
                 type === 'error' ? 'bg-red-500 text-white' : 
-                'bg-blue-500 text-white'
+                'bg-secondary text-white'
             }`;
             notification.innerHTML = `
                 <div class="flex items-center space-x-3">
@@ -2477,7 +2479,7 @@
 
         function showDemoMessage() {
           const message = `
-            <div class="demo-message fixed top-4 right-4 bg-blue-500 text-white px-6 py-4 rounded-2xl shadow-2xl z-50 max-w-sm">
+            <div class="demo-message fixed top-4 right-4 bg-primary text-white px-6 py-4 rounded-2xl shadow-2xl z-50 max-w-sm">
               <div class="flex items-center space-x-3">
                 <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
                   <i class="fas fa-rocket text-white"></i>
@@ -2509,18 +2511,18 @@
           if (!salons || salons.length === 0) {
             grid.innerHTML = `
               <div class="col-span-3 text-center py-12">
-                <i class="fas fa-store-slash text-4xl text-gray-400 mb-4"></i>
-                <div class="text-gray-600">Aucun salon disponible pour le moment</div>
+                <i class="fas fa-store-slash text-4xl text-textLight mb-4"></i>
+                <div class="text-textLight">Aucun salon disponible pour le moment</div>
               </div>
             `;
             return;
           }
           
           grid.innerHTML = salons.map(salon => `
-            <div class="salon-card bg-white rounded-3xl shadow-lg hover-lift border border-gray-100 overflow-hidden" data-category="${salon.features?.homeService ? 'domicile' : 'salon'}">
-              <div class="h-48 bg-gradient-to-r from-primary to-purple-600 relative overflow-hidden">
+            <div class="salon-card bg-white rounded-3xl shadow-lg hover-lift border border-neutral overflow-hidden" data-category="${salon.features?.homeService ? 'domicile' : 'salon'}">
+              <div class="h-48 bg-gradient-to-r from-primary to-secondary relative overflow-hidden">
                 ${salon.features?.homeService ? `
-                  <div class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">
+                  <div class="absolute top-4 right-4 bg-accent text-white px-3 py-1 rounded-full text-sm font-bold">
                     🏠 À domicile
                   </div>
                 ` : ''}
@@ -2535,9 +2537,9 @@
               
               <div class="p-6">
                 <div class="flex justify-between items-start mb-4">
-                  <div class="flex items-center text-yellow-400">
+                  <div class="flex items-center text-accent">
                     ${'★'.repeat(Math.floor(salon.rating?.average || 0))}${(salon.rating?.average || 0) % 1 !== 0 ? '½' : ''}
-                    <span class="text-gray-600 ml-2">${salon.rating?.average || 'N/A'}</span>
+                    <span class="text-textLight ml-2">${salon.rating?.average || 'N/A'}</span>
                   </div>
                   <div class="text-2xl font-bold text-primary">
                     ${salon.services && salon.services.length > 0 ? salon.services[0].price.toLocaleString() + ' FCFA' : 'Prix sur demande'}
@@ -2546,13 +2548,13 @@
                 
                 <div class="flex flex-wrap gap-2 mb-4">
                   ${salon.services ? salon.services.slice(0, 3).map(service => `
-                    <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">${service.name}</span>
+                    <span class="bg-light text-text px-3 py-1 rounded-full text-sm">${service.name}</span>
                   `).join('') : ''}
                 </div>
                 
                 <!-- BOUTON MODIFIÉ AVEC ONCLICK -->
                 <button onclick="openReservationModal('${salon._id}', '${salon.name}')" 
-                        class="w-full bg-primary text-white py-3 rounded-xl font-semibold hover:bg-purple-600 transition-colors flex items-center justify-center">
+                        class="w-full bg-primary text-white py-3 rounded-xl font-semibold hover:bg-secondary transition-colors flex items-center justify-center">
                   <i class="fas fa-calendar-plus mr-2"></i>
                   Réserver maintenant
                 </button>
@@ -2733,7 +2735,7 @@
 
         function showReservationSuccess(salonName, date, time) {
             const successHTML = `
-                <div class="fixed top-4 right-4 bg-green-500 text-white px-6 py-4 rounded-2xl shadow-2xl z-50 max-w-sm demo-message">
+                <div class="fixed top-4 right-4 bg-primary text-white px-6 py-4 rounded-2xl shadow-2xl z-50 max-w-sm demo-message">
                     <div class="flex items-center space-x-3">
                         <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
                             <i class="fas fa-check text-white"></i>
@@ -2792,15 +2794,15 @@
                     // Succès
                     form.innerHTML = `
                         <div class="text-center py-8">
-                            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <i class="fas fa-check text-green-600 text-2xl"></i>
+                            <div class="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-check text-primary text-2xl"></i>
                             </div>
-                            <h4 class="text-2xl font-bold text-gray-900 mb-2">Félicitations !</h4>
-                            <p class="text-gray-600 mb-6">
+                            <h4 class="text-2xl font-bold text-text mb-2">Félicitations !</h4>
+                            <p class="text-textLight mb-6">
                                 Votre inscription a été reçue. Notre équipe vous contacte dans les 2 heures.
                             </p>
-                            <div class="bg-green-50 border border-green-200 rounded-2xl p-4">
-                                <div class="flex items-center text-green-800">
+                            <div class="bg-accent/20 border border-accent rounded-2xl p-4">
+                                <div class="flex items-center text-primary">
                                     <i class="fas fa-phone mr-3"></i>
                                     <span>+221 77 123 45 67</span>
                                 </div>
@@ -2849,15 +2851,15 @@
             
             messageDiv.innerHTML = `
                 <div class="flex mb-6">
-                    <div class="w-10 h-10 bg-gradient-to-r from-primary to-purple-600 rounded-2xl flex items-center justify-center mr-4 flex-shrink-0">
+                    <div class="w-10 h-10 bg-gradient-to-r from-primary to-secondary rounded-2xl flex items-center justify-center mr-4 flex-shrink-0">
                         <i class="fas fa-robot text-white"></i>
                     </div>
                     <div class="flex-1">
-                        <div class="bg-white rounded-2xl rounded-tl-none p-6 shadow-sm border border-gray-100">
-                            <div class="font-semibold text-gray-900 mb-2">${title}</div>
-                            <div class="text-gray-700 leading-relaxed whitespace-pre-line">${content}</div>
+                        <div class="bg-white rounded-2xl rounded-tl-none p-6 shadow-sm border border-neutral">
+                            <div class="font-semibold text-text mb-2">${title}</div>
+                            <div class="text-textLight leading-relaxed whitespace-pre-line">${content}</div>
                         </div>
-                        <div class="text-xs text-gray-500 mt-2">${new Date().toLocaleTimeString()}</div>
+                        <div class="text-xs text-textLight mt-2">${new Date().toLocaleTimeString()}</div>
                     </div>
                 </div>
             `;
@@ -2873,10 +2875,10 @@
             messageDiv.innerHTML = `
                 <div class="flex mb-6 justify-end">
                     <div class="flex-1 max-w-[80%]">
-                        <div class="bg-gradient-to-r from-primary to-purple-600 text-white rounded-2xl rounded-tr-none p-6 shadow-sm">
+                        <div class="bg-gradient-to-r from-primary to-secondary text-white rounded-2xl rounded-tr-none p-6 shadow-sm">
                             <div class="leading-relaxed">${message}</div>
                         </div>
-                        <div class="text-xs text-gray-500 mt-2 text-right">${new Date().toLocaleTimeString()}</div>
+                        <div class="text-xs text-textLight mt-2 text-right">${new Date().toLocaleTimeString()}</div>
                     </div>
                 </div>
             `;
