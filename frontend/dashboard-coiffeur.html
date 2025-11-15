@@ -55,6 +55,15 @@
             font-size: 0.75rem;
             padding: 0.25rem 0.5rem;
         }
+        
+        .animate-slideIn {
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
     </style>
 </head>
 
@@ -71,7 +80,9 @@
                         </div>
                         <span class="text-xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">KeurCoiff'</span>
                     </a>
-                    <span class="bg-primary text-white px-3 py-1 rounded-full text-sm font-medium">Coiffeur</span>
+                    <span class="bg-purple-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                        <i class="fas fa-scissors mr-1"></i>Coiffeur
+                    </span>
                 </div>
 
                 <!-- Menu navigation -->
@@ -96,6 +107,10 @@
             <div>
                 <h1 class="text-4xl font-bold text-gray-900 mb-2">Tableau de bord</h1>
                 <p class="text-xl text-gray-600">Gérez votre salon et vos réservations</p>
+                <div class="flex items-center mt-2 text-sm text-gray-500">
+                    <i class="fas fa-store mr-2"></i>
+                    <span id="salonName">Salon Awa Beauty</span>
+                </div>
             </div>
             <div class="flex space-x-4 mt-4 lg:mt-0">
                 <button onclick="addReservation()" class="bg-primary text-white px-6 py-3 rounded-xl font-semibold hover:bg-purple-600 transition-colors">
@@ -112,7 +127,7 @@
             <div class="stats-card bg-white rounded-2xl shadow-lg p-6">
                 <div class="flex items-center justify-between">
                     <div>
-                        <div class="text-2xl font-bold text-primary">12</div>
+                        <div class="text-2xl font-bold text-primary" id="todayBookings">12</div>
                         <div class="text-gray-600">Réservations aujourd'hui</div>
                     </div>
                     <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
@@ -127,20 +142,20 @@
             <div class="stats-card bg-white rounded-2xl shadow-lg p-6">
                 <div class="flex items-center justify-between">
                     <div>
-                        <div class="text-2xl font-bold text-green-600">4.8</div>
+                        <div class="text-2xl font-bold text-green-600" id="averageRating">4.8</div>
                         <div class="text-gray-600">Note moyenne</div>
                     </div>
                     <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
                         <i class="fas fa-star text-green-600 text-xl"></i>
                     </div>
                 </div>
-                <div class="mt-2 text-sm text-gray-600">47 avis clients</div>
+                <div class="mt-2 text-sm text-gray-600" id="reviewCount">47 avis clients</div>
             </div>
 
             <div class="stats-card bg-white rounded-2xl shadow-lg p-6">
                 <div class="flex items-center justify-between">
                     <div>
-                        <div class="text-2xl font-bold text-blue-600">8 500 FCFA</div>
+                        <div class="text-2xl font-bold text-blue-600" id="todayRevenue">8 500 FCFA</div>
                         <div class="text-gray-600">Revenu du jour</div>
                     </div>
                     <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
@@ -155,7 +170,7 @@
             <div class="stats-card bg-white rounded-2xl shadow-lg p-6">
                 <div class="flex items-center justify-between">
                     <div>
-                        <div class="text-2xl font-bold text-orange-600">3</div>
+                        <div class="text-2xl font-bold text-orange-600" id="pendingBookings">3</div>
                         <div class="text-gray-600">Réservations en attente</div>
                     </div>
                     <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
@@ -179,69 +194,11 @@
                         </div>
                     </div>
 
-                    <div class="space-y-4">
-                        <!-- Réservation 1 -->
-                        <div class="flex items-center justify-between p-4 border border-gray-200 rounded-2xl hover:bg-gray-50 transition-colors">
-                            <div class="flex items-center space-x-4">
-                                <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
-                                    <i class="fas fa-user text-primary"></i>
-                                </div>
-                                <div>
-                                    <div class="font-semibold text-gray-900">Awa Diop</div>
-                                    <div class="text-sm text-gray-600">Tresses vanilles • 8 000 FCFA</div>
-                                    <div class="text-xs text-gray-500">14:00 - 16:30 (2h30)</div>
-                                </div>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <span class="bg-green-100 text-green-800 reservation-badge rounded-full">Confirmée</span>
-                                <button class="text-primary hover:text-purple-600">
-                                    <i class="fas fa-ellipsis-v"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Réservation 2 -->
-                        <div class="flex items-center justify-between p-4 border border-gray-200 rounded-2xl hover:bg-gray-50 transition-colors">
-                            <div class="flex items-center space-x-4">
-                                <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                                    <i class="fas fa-user text-blue-600"></i>
-                                </div>
-                                <div>
-                                    <div class="font-semibold text-gray-900">Ibrahima Ndiaye</div>
-                                    <div class="text-sm text-gray-600">Coupe homme • 3 000 FCFA</div>
-                                    <div class="text-xs text-gray-500">16:30 - 17:15 (45min)</div>
-                                </div>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <span class="bg-yellow-100 text-yellow-800 reservation-badge rounded-full">En attente</span>
-                                <button class="text-primary hover:text-purple-600">
-                                    <i class="fas fa-ellipsis-v"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Réservation 3 -->
-                        <div class="flex items-center justify-between p-4 border border-gray-200 rounded-2xl hover:bg-gray-50 transition-colors">
-                            <div class="flex items-center space-x-4">
-                                <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
-                                    <i class="fas fa-user text-purple-600"></i>
-                                </div>
-                                <div>
-                                    <div class="font-semibold text-gray-900">Mariama Sow</div>
-                                    <div class="text-sm text-gray-600">Pose weave • 15 000 FCFA</div>
-                                    <div class="text-xs text-gray-500">10:00 - 12:00 (2h)</div>
-                                </div>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <span class="bg-green-100 text-green-800 reservation-badge rounded-full">Confirmée</span>
-                                <button class="text-primary hover:text-purple-600">
-                                    <i class="fas fa-ellipsis-v"></i>
-                                </button>
-                            </div>
-                        </div>
+                    <div class="space-y-4" id="todayReservations">
+                        <!-- Les réservations seront chargées ici -->
                     </div>
 
-                    <button class="w-full mt-6 bg-gray-100 text-gray-700 py-3 rounded-xl font-semibold hover:bg-gray-200 transition-colors">
+                    <button onclick="viewAllReservations()" class="w-full mt-6 bg-gray-100 text-gray-700 py-3 rounded-xl font-semibold hover:bg-gray-200 transition-colors">
                         Voir toutes les réservations
                     </button>
                 </div>
@@ -250,44 +207,8 @@
                 <div class="bg-white rounded-3xl shadow-lg p-6 mt-6">
                     <h2 class="text-2xl font-bold text-gray-900 mb-6">Avis récents</h2>
                     
-                    <div class="space-y-4">
-                        <!-- Avis 1 -->
-                        <div class="border border-gray-200 rounded-2xl p-4">
-                            <div class="flex items-center justify-between mb-3">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary font-semibold">
-                                        AD
-                                    </div>
-                                    <div>
-                                        <div class="font-semibold text-gray-900">Awa Diop</div>
-                                        <div class="flex items-center text-yellow-400 text-sm">
-                                            ★★★★★
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="text-sm text-gray-500">Il y a 2 jours</div>
-                            </div>
-                            <p class="text-gray-600">"Service exceptionnel ! Les tresses sont parfaites et le salon est très propre. Je recommande !"</p>
-                        </div>
-
-                        <!-- Avis 2 -->
-                        <div class="border border-gray-200 rounded-2xl p-4">
-                            <div class="flex items-center justify-between mb-3">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-semibold">
-                                        IN
-                                    </div>
-                                    <div>
-                                        <div class="font-semibold text-gray-900">Ibrahima Ndiaye</div>
-                                        <div class="flex items-center text-yellow-400 text-sm">
-                                            ★★★★☆
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="text-sm text-gray-500">Il y a 1 semaine</div>
-                            </div>
-                            <p class="text-gray-600">"Très bon coiffeur, à l'écoute et professionnel. Mon dégradé est parfait !"</p>
-                        </div>
+                    <div class="space-y-4" id="recentReviews">
+                        <!-- Les avis seront chargés ici -->
                     </div>
                 </div>
             </div>
@@ -308,12 +229,12 @@
                         
                         <div class="flex items-center justify-between">
                             <span class="text-gray-600">Prochain créneau</span>
-                            <span class="font-semibold">14:00</span>
+                            <span class="font-semibold" id="nextSlot">14:00</span>
                         </div>
                         
                         <div class="flex items-center justify-between">
                             <span class="text-gray-600">Clients aujourd'hui</span>
-                            <span class="font-semibold">8/12</span>
+                            <span class="font-semibold" id="todayClients">8/12</span>
                         </div>
                     </div>
                     
@@ -357,22 +278,22 @@
                     <div class="space-y-3">
                         <div class="flex justify-between items-center">
                             <span>Réservations</span>
-                            <span class="font-semibold">124</span>
+                            <span class="font-semibold" id="monthlyBookings">124</span>
                         </div>
                         <div class="flex justify-between items-center">
                             <span>Revenu total</span>
-                            <span class="font-semibold">892 000 FCFA</span>
+                            <span class="font-semibold" id="monthlyRevenue">892 000 FCFA</span>
                         </div>
                         <div class="flex justify-between items-center">
                             <span>Taux de remplissage</span>
-                            <span class="font-semibold">78%</span>
+                            <span class="font-semibold" id="occupancyRate">78%</span>
                         </div>
                     </div>
                     
                     <div class="mt-4 pt-4 border-t border-white/20">
                         <div class="text-sm opacity-80">Objectif du mois: 150 réservations</div>
                         <div class="w-full bg-white/20 rounded-full h-2 mt-2">
-                            <div class="bg-white h-2 rounded-full" style="width: 82%"></div>
+                            <div class="bg-white h-2 rounded-full" id="goalProgress" style="width: 82%"></div>
                         </div>
                     </div>
                 </div>
@@ -388,25 +309,193 @@
             todayBookings: 12,
             monthlyRevenue: 892000,
             rating: 4.8,
-            reviewCount: 47
+            reviewCount: 47,
+            pendingBookings: 3,
+            todayRevenue: 8500,
+            monthlyBookings: 124,
+            occupancyRate: 78
         };
+
+        const todayReservations = [
+            {
+                id: 1,
+                clientName: 'Awa Diop',
+                service: 'Tresses vanilles',
+                time: '14:00 - 16:30',
+                duration: '2h30',
+                price: 8000,
+                status: 'confirmed'
+            },
+            {
+                id: 2,
+                clientName: 'Ibrahima Ndiaye',
+                service: 'Coupe homme',
+                time: '16:30 - 17:15',
+                duration: '45min',
+                price: 3000,
+                status: 'pending'
+            },
+            {
+                id: 3,
+                clientName: 'Mariama Sow',
+                service: 'Pose weave',
+                time: '10:00 - 12:00',
+                duration: '2h',
+                price: 15000,
+                status: 'confirmed'
+            }
+        ];
+
+        const recentReviews = [
+            {
+                id: 1,
+                clientName: 'Awa Diop',
+                initials: 'AD',
+                rating: 5,
+                date: 'Il y a 2 jours',
+                comment: '"Service exceptionnel ! Les tresses sont parfaites et le salon est très propre. Je recommande !"'
+            },
+            {
+                id: 2,
+                clientName: 'Ibrahima Ndiaye',
+                initials: 'IN',
+                rating: 4,
+                date: 'Il y a 1 semaine',
+                comment: '"Très bon coiffeur, à l\'écoute et professionnel. Mon dégradé est parfait !"'
+            }
+        ];
 
         // Initialisation
         document.addEventListener('DOMContentLoaded', function() {
             console.log('💇 Initialisation du dashboard coiffeur...');
+            
+            // Vérifier que l'utilisateur est un coiffeur
+            const user = JSON.parse(localStorage.getItem('keurcoiff_user') || '{}');
+            if (user.role !== 'coiffeur') {
+                showNotification('Accès réservé aux coiffeurs', 'error');
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 2000);
+                return;
+            }
+            
             loadDashboardData();
         });
 
         function loadDashboardData() {
-            // Simulation de chargement des données
-            setTimeout(() => {
-                updateDashboardUI();
-            }, 1000);
+            // Mettre à jour les données du salon
+            updateSalonInfo();
+            
+            // Charger les réservations du jour
+            loadTodayReservations();
+            
+            // Charger les avis récents
+            loadRecentReviews();
+            
+            // Mettre à jour les statistiques
+            updateStatistics();
         }
 
-        function updateDashboardUI() {
-            // Mettre à jour l'interface avec les données du salon
-            console.log('📊 Mise à jour du dashboard avec les données:', salonData);
+        function updateSalonInfo() {
+            const user = JSON.parse(localStorage.getItem('keurcoiff_user') || '{}');
+            document.getElementById('salonName').textContent = user.salonName || user.fullName || 'Votre Salon';
+        }
+
+        function updateStatistics() {
+            document.getElementById('todayBookings').textContent = salonData.todayBookings;
+            document.getElementById('averageRating').textContent = salonData.rating;
+            document.getElementById('reviewCount').textContent = salonData.reviewCount + ' avis clients';
+            document.getElementById('todayRevenue').textContent = salonData.todayRevenue.toLocaleString() + ' FCFA';
+            document.getElementById('pendingBookings').textContent = salonData.pendingBookings;
+            document.getElementById('monthlyBookings').textContent = salonData.monthlyBookings;
+            document.getElementById('monthlyRevenue').textContent = salonData.monthlyRevenue.toLocaleString() + ' FCFA';
+            document.getElementById('occupancyRate').textContent = salonData.occupancyRate + '%';
+            
+            // Calcul du prochain créneau
+            const now = new Date();
+            const nextHour = now.getHours() + 1;
+            document.getElementById('nextSlot').textContent = nextHour + ':00';
+            
+            // Clients aujourd'hui
+            document.getElementById('todayClients').textContent = '8/12';
+        }
+
+        function loadTodayReservations() {
+            const container = document.getElementById('todayReservations');
+            
+            if (todayReservations.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-8 text-gray-500">
+                        <i class="fas fa-calendar-times text-4xl mb-4"></i>
+                        <div>Aucune réservation aujourd'hui</div>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = todayReservations.map(reservation => `
+                <div class="flex items-center justify-between p-4 border border-gray-200 rounded-2xl hover:bg-gray-50 transition-colors">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 ${reservation.status === 'confirmed' ? 'bg-primary/10' : 'bg-orange-100'} rounded-xl flex items-center justify-center">
+                            <i class="fas fa-user ${reservation.status === 'confirmed' ? 'text-primary' : 'text-orange-600'}"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-gray-900">${reservation.clientName}</div>
+                            <div class="text-sm text-gray-600">${reservation.service} • ${reservation.price.toLocaleString()} FCFA</div>
+                            <div class="text-xs text-gray-500">${reservation.time} (${reservation.duration})</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="${reservation.status === 'confirmed' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'} reservation-badge rounded-full">
+                            ${reservation.status === 'confirmed' ? 'Confirmée' : 'En attente'}
+                        </span>
+                        <button class="text-primary hover:text-purple-600" onclick="showReservationDetails(${reservation.id})">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function loadRecentReviews() {
+            const container = document.getElementById('recentReviews');
+            
+            if (recentReviews.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-8 text-gray-500">
+                        <i class="fas fa-star text-4xl mb-4"></i>
+                        <div>Aucun avis pour le moment</div>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = recentReviews.map(review => `
+                <div class="border border-gray-200 rounded-2xl p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary font-semibold">
+                                ${review.initials}
+                            </div>
+                            <div>
+                                <div class="font-semibold text-gray-900">${review.clientName}</div>
+                                <div class="flex items-center text-yellow-400 text-sm">
+                                    ${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-sm text-gray-500">${review.date}</div>
+                    </div>
+                    <p class="text-gray-600">${review.comment}</p>
+                </div>
+            `).join('');
+        }
+
+        function showReservationDetails(reservationId) {
+            const reservation = todayReservations.find(r => r.id === reservationId);
+            if (reservation) {
+                showNotification(`Détails de la réservation de ${reservation.clientName}`, 'info');
+            }
         }
 
         function addReservation() {
@@ -442,6 +531,11 @@
             // Logique pour gérer le personnel
         }
 
+        function viewAllReservations() {
+            showNotification('Ouverture de toutes les réservations...', 'info');
+            // Logique pour afficher toutes les réservations
+        }
+
         function logout() {
             localStorage.removeItem('keurcoiff_token');
             localStorage.removeItem('keurcoiff_user');
@@ -472,20 +566,6 @@
                 notification.remove();
             }, 5000);
         }
-
-        // Style d'animation pour la notification
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideIn {
-                from { transform: translateX(100%); opacity: 0; }
-                to { transform: translateX(0); opacity: 1; }
-            }
-            
-            .animate-slideIn {
-                animation: slideIn 0.3s ease-out;
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 </body>
 </html>

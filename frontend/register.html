@@ -29,10 +29,6 @@
     </script>
     
     <style>
-        .gradient-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-        
         .loader-small {
             border: 2px solid #f3f4f6;
             border-top: 2px solid #7C3AED;
@@ -46,6 +42,29 @@
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+        
+        .profile-selection {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .profile-selection:hover {
+            transform: translateY(-2px);
+        }
+        
+        .profile-selection input:checked + div {
+            border-color: #7C3AED;
+            background: rgba(124, 58, 237, 0.05);
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.15);
+        }
+        
+        .animate-slideIn {
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
     </style>
 </head>
@@ -194,22 +213,44 @@
                             class="w-full p-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                             placeholder="••••••••"
                             minlength="6"
+                            id="confirmPasswordInput"
                         >
                     </div>
 
-                    <!-- Type de compte -->
+                    <!-- Type de compte - VERSION AMÉLIORÉE -->
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                        <label class="block text-sm font-semibold text-gray-700 mb-3">
                             Je suis *
                         </label>
-                        <div class="grid grid-cols-2 gap-3">
-                            <label class="flex items-center space-x-3 p-4 rounded-xl border border-gray-200 hover:bg-gray-50 cursor-pointer">
-                                <input type="radio" name="userType" value="client" checked class="text-primary focus:ring-primary">
-                                <span>👤 Client</span>
+                        <div class="grid grid-cols-2 gap-4">
+                            <!-- Client -->
+                            <label class="relative cursor-pointer profile-selection">
+                                <input type="radio" name="userType" value="client" class="hidden peer" checked>
+                                <div class="border-2 border-gray-200 rounded-2xl p-4 text-center transition-all duration-300 peer-checked:border-primary peer-checked:bg-primary/5 peer-checked:shadow-lg">
+                                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                                        <i class="fas fa-user text-blue-600 text-xl"></i>
+                                    </div>
+                                    <div class="font-semibold text-gray-900">Client</div>
+                                    <div class="text-xs text-gray-600 mt-1">Réserver des prestations</div>
+                                </div>
+                                <div class="absolute top-3 right-3 w-5 h-5 border-2 border-gray-300 rounded-full peer-checked:border-primary peer-checked:bg-primary transition-all duration-300">
+                                    <div class="w-2 h-2 bg-primary rounded-full mx-auto mt-1 opacity-0 peer-checked:opacity-100 transition-opacity"></div>
+                                </div>
                             </label>
-                            <label class="flex items-center space-x-3 p-4 rounded-xl border border-gray-200 hover:bg-gray-50 cursor-pointer">
-                                <input type="radio" name="userType" value="coiffeur" class="text-primary focus:ring-primary">
-                                <span>💇 Coiffeur</span>
+
+                            <!-- Coiffeur -->
+                            <label class="relative cursor-pointer profile-selection">
+                                <input type="radio" name="userType" value="coiffeur" class="hidden peer">
+                                <div class="border-2 border-gray-200 rounded-2xl p-4 text-center transition-all duration-300 peer-checked:border-primary peer-checked:bg-primary/5 peer-checked:shadow-lg">
+                                    <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                                        <i class="fas fa-scissors text-purple-600 text-xl"></i>
+                                    </div>
+                                    <div class="font-semibold text-gray-900">Coiffeur</div>
+                                    <div class="text-xs text-gray-600 mt-1">Gérer mon salon</div>
+                                </div>
+                                <div class="absolute top-3 right-3 w-5 h-5 border-2 border-gray-300 rounded-full peer-checked:border-primary peer-checked:bg-primary transition-all duration-300">
+                                    <div class="w-2 h-2 bg-primary rounded-full mx-auto mt-1 opacity-0 peer-checked:opacity-100 transition-opacity"></div>
+                                </div>
                             </label>
                         </div>
                     </div>
@@ -292,6 +333,70 @@
             }
         }
 
+        // Toggle visibilité confirmation mot de passe
+        function toggleConfirmPassword() {
+            const confirmPasswordInput = document.getElementById('confirmPasswordInput');
+            const confirmPasswordToggle = document.getElementById('confirmPasswordToggle');
+            
+            if (confirmPasswordInput.type === 'password') {
+                confirmPasswordInput.type = 'text';
+                confirmPasswordToggle.classList.remove('fa-eye');
+                confirmPasswordToggle.classList.add('fa-eye-slash');
+            } else {
+                confirmPasswordInput.type = 'password';
+                confirmPasswordToggle.classList.remove('fa-eye-slash');
+                confirmPasswordToggle.classList.add('fa-eye');
+            }
+        }
+
+        // Ajouter le bouton pour la confirmation du mot de passe
+        document.addEventListener('DOMContentLoaded', function() {
+            const confirmPasswordDiv = document.querySelector('input[name="confirmPassword"]').parentElement;
+            confirmPasswordDiv.classList.add('relative');
+            
+            const toggleButton = document.createElement('button');
+            toggleButton.type = 'button';
+            toggleButton.onclick = toggleConfirmPassword;
+            toggleButton.className = 'absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700';
+            toggleButton.innerHTML = '<i class="fas fa-eye" id="confirmPasswordToggle"></i>';
+            
+            confirmPasswordDiv.appendChild(toggleButton);
+        });
+
+        // Validation en temps réel
+        function validateForm() {
+            const password = document.getElementById('passwordInput').value;
+            const confirmPassword = document.getElementById('confirmPasswordInput').value;
+            const phone = document.querySelector('input[name="phone"]').value;
+            
+            // Validation mot de passe
+            if (confirmPassword && password !== confirmPassword) {
+                document.getElementById('confirmPasswordInput').classList.add('border-red-300');
+                return false;
+            } else {
+                document.getElementById('confirmPasswordInput').classList.remove('border-red-300');
+            }
+            
+            // Validation téléphone
+            if (phone && !phone.match(/^[0-9]{9}$/)) {
+                document.querySelector('input[name="phone"]').classList.add('border-red-300');
+                return false;
+            } else {
+                document.querySelector('input[name="phone"]').classList.remove('border-red-300');
+            }
+            
+            return true;
+        }
+
+        // Écouteurs d'événements pour la validation en temps réel
+        document.getElementById('passwordInput').addEventListener('input', validateForm);
+        document.getElementById('confirmPasswordInput').addEventListener('input', validateForm);
+        document.querySelector('input[name="phone"]').addEventListener('input', function(e) {
+            // Nettoyer le numéro de téléphone
+            e.target.value = e.target.value.replace(/\D/g, '');
+            validateForm();
+        });
+
         // Gestion du formulaire
         document.getElementById('registerForm').addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -304,14 +409,9 @@
             const formData = new FormData(this);
             const data = Object.fromEntries(formData);
             
-            // Validation
-            if (data.password !== data.confirmPassword) {
-                showNotification('Les mots de passe ne correspondent pas', 'error');
-                return;
-            }
-            
-            if (data.password.length < 6) {
-                showNotification('Le mot de passe doit contenir au moins 6 caractères', 'error');
+            // Validation finale
+            if (!validateForm()) {
+                showNotification('Veuillez corriger les erreurs dans le formulaire', 'error');
                 return;
             }
             
@@ -321,34 +421,72 @@
             submitBtn.disabled = true;
             
             try {
-                // Simulation appel API
-                await new Promise(resolve => setTimeout(resolve, 2000));
+                // Appel API réel
+                const response = await fetch('http://localhost:5000/api/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        fullName: data.fullName,
+                        phone: data.phone,
+                        email: data.email || '',
+                        quarter: data.quarter,
+                        password: data.password,
+                        userType: data.userType
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // Stocker les informations utilisateur
+                    localStorage.setItem('keurcoiff_user', JSON.stringify(result.data.user));
+                    localStorage.setItem('keurcoiff_token', result.data.token);
+                    
+                    showNotification('Compte créé avec succès !', 'success');
+                    
+                    // Redirection selon le type d'utilisateur
+                    setTimeout(() => {
+                        if (data.userType === 'coiffeur') {
+                            window.location.href = 'dashboard-coiffeur.html';
+                        } else {
+                            window.location.href = 'index.html';
+                        }
+                    }, 1500);
+                } else {
+                    throw new Error(result.message);
+                }
                 
-                // Stockage temporaire (à remplacer par appel API réel)
+            } catch (error) {
+                console.error('Erreur inscription:', error);
+                
+                // Fallback avec données de démo si l'API n'est pas disponible
                 const userData = {
+                    id: 'demo_' + Date.now(),
                     fullName: data.fullName,
                     phone: data.phone,
-                    email: data.email,
+                    email: data.email || '',
                     quarter: data.quarter,
                     userType: data.userType,
+                    role: data.userType,
+                    salonName: data.userType === 'coiffeur' ? data.fullName : undefined,
                     createdAt: new Date().toISOString()
                 };
                 
                 localStorage.setItem('keurcoiff_user', JSON.stringify(userData));
-                localStorage.setItem('keurcoiff_token', 'demo_token_' + Date.now());
+                localStorage.setItem('keurcoiff_token', 'demo_token_' + data.userType + '_' + Date.now());
                 
-                showNotification('Compte créé avec succès !', 'success');
+                showNotification('Compte créé avec succès ! (Mode démo)', 'success');
                 
-                // Redirection
+                // Redirection selon le type d'utilisateur
                 setTimeout(() => {
-                    window.location.href = data.userType === 'coiffeur' ? 'profil-coiffeur.html' : 'index.html';
+                    if (data.userType === 'coiffeur') {
+                        window.location.href = 'dashboard-coiffeur.html';
+                    } else {
+                        window.location.href = 'index.html';
+                    }
                 }, 1500);
-                
-            } catch (error) {
-                showNotification('Erreur lors de la création du compte', 'error');
-                submitText.classList.remove('hidden');
-                submitLoader.classList.add('hidden');
-                submitBtn.disabled = false;
             }
         });
 
@@ -373,20 +511,6 @@
                 notification.remove();
             }, 5000);
         }
-
-        // Style d'animation pour la notification
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideIn {
-                from { transform: translateX(100%); opacity: 0; }
-                to { transform: translateX(0); opacity: 1; }
-            }
-            
-            .animate-slideIn {
-                animation: slideIn 0.3s ease-out;
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 </body>
 </html>

@@ -18,6 +18,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet">
     
     <script>
         tailwind.config = {
@@ -28,6 +29,11 @@
                         secondary: '#F59E0B', 
                         accent: '#10B981',
                         dark: '#1F2937',
+                        premium: {
+                            gold: '#FFD700',
+                            silver: '#C0C0C0',
+                            bronze: '#CD7F32'
+                        }
                     },
                     fontFamily: {
                         'inter': ['Inter', 'sans-serif'],
@@ -35,6 +41,13 @@
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
                         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'bounce-slow': 'bounce 3s infinite',
+                        'gradient': 'gradient 3s ease infinite',
+                        'shimmer': 'shimmer 2s infinite',
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                        'premium-gradient': 'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)',
                     }
                 }
             }
@@ -54,6 +67,10 @@
         
         .gradient-bg {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .premium-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
         }
         
         .glass-effect {
@@ -76,8 +93,25 @@
             50% { transform: translateY(-20px); }
         }
         
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
         .floating {
             animation: float 6s ease-in-out infinite;
+        }
+        
+        .gradient-animate {
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
         }
         
         /* Loading spinner */
@@ -138,18 +172,299 @@
         .salon-card:hover {
             transform: translateY(-8px);
         }
+        
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .shine-effect {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .shine-effect::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .shine-effect:hover::before {
+            left: 100%;
+        }
+        
+        .typewriter {
+            overflow: hidden;
+            border-right: .15em solid #7C3AED;
+            white-space: nowrap;
+            margin: 0 auto;
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #7C3AED; }
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 2s infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 5px rgba(124, 58, 237, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(124, 58, 237, 0.8); }
+            100% { box-shadow: 0 0 5px rgba(124, 58, 237, 0.5); }
+        }
+        
+        .shimmer-effect {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .shimmer-effect::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        /* Map Styles */
+        #map {
+            height: 500px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+        
+        .leaflet-popup-content {
+            margin: 15px;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .distance-badge {
+            background: linear-gradient(135deg, #10B981, #059669);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        /* Geolocation Button */
+        .geolocation-btn {
+            background: linear-gradient(135deg, #7C3AED, #6D28D9);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 24px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+        }
+        
+        .geolocation-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4);
+        }
+        
+        .geolocation-btn:active {
+            transform: translateY(0);
+        }
+        
+        /* Location Pin Animation */
+        .location-pin {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+        
+        /* Search Bar Styles */
+        .search-container {
+            position: relative;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 50px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            border-color: #7C3AED;
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+        }
+        
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #7C3AED;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .search-btn:hover {
+            background: #6D28D9;
+            transform: translateY(-50%) scale(1.05);
+        }
+        
+        /* Dashboard Styles */
+        .sidebar {
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar.collapsed {
+            width: 80px;
+        }
+        
+        .sidebar.collapsed .sidebar-text {
+            display: none;
+        }
+        
+        .main-content {
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.1);
+            transform: rotate(30deg);
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        
+        .reservation-item {
+            border-left: 4px solid #7C3AED;
+            transition: all 0.3s ease;
+        }
+        
+        .reservation-item:hover {
+            transform: translateX(8px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .status-confirmed {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+        
+        .status-pending {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+        
+        .status-completed {
+            background: #E0E7FF;
+            color: #3730A3;
+        }
+        
+        .status-cancelled {
+            background: #FEE2E2;
+            color: #991B1B;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            #map {
+                height: 300px;
+            }
+            
+            .sidebar {
+                position: fixed;
+                left: -100%;
+                z-index: 40;
+            }
+            
+            .sidebar.mobile-open {
+                left: 0;
+            }
+            
+            .mobile-overlay {
+                display: none;
+            }
+            
+            .mobile-overlay.active {
+                display: block;
+            }
+        }
     </style>
 </head>
 
 <body class="font-inter bg-white antialiased">
     <!-- Navigation Premium -->
-    <nav class="fixed w-full z-50 transition-all duration-300 bg-white/95 backdrop-blur-md border-b border-gray-100">
+    <nav class="fixed w-full z-50 transition-all duration-300 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-4">
                 <!-- Logo -->
                 <div class="flex items-center space-x-3">
-                    <a href="index.html" class="flex items-center space-x-3">
-                        <div class="w-12 h-12 bg-gradient-to-r from-primary to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
+                    <a href="index.html" class="flex items-center space-x-3 shine-effect">
+                        <div class="w-12 h-12 bg-gradient-to-r from-primary to-purple-600 rounded-2xl flex items-center justify-center shadow-lg pulse-glow">
                             <i class="fas fa-crown text-white text-lg"></i>
                         </div>
                         <div>
@@ -161,10 +476,26 @@
 
                 <!-- Menu Desktop -->
                 <div class="hidden lg:flex items-center space-x-8">
-                    <a href="#accueil" class="text-gray-700 hover:text-primary font-medium transition-colors duration-200">Accueil</a>
-                    <a href="#features" class="text-gray-700 hover:text-primary font-medium transition-colors duration-200">Fonctionnalités</a>
-                    <a href="#salons" class="text-gray-700 hover:text-primary font-medium transition-colors duration-200">Salons</a>
-                    <a href="#pricing" class="text-gray-700 hover:text-primary font-medium transition-colors duration-200">Tarifs</a>
+                    <a href="#accueil" class="text-gray-700 hover:text-primary font-medium transition-colors duration-200 relative group">
+                        Accueil
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#features" class="text-gray-700 hover:text-primary font-medium transition-colors duration-200 relative group">
+                        Fonctionnalités
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#salons" class="text-gray-700 hover:text-primary font-medium transition-colors duration-200 relative group">
+                        Salons
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#localisation" class="text-gray-700 hover:text-primary font-medium transition-colors duration-200 relative group">
+                        📍 Proche de moi
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#pricing" class="text-gray-700 hover:text-primary font-medium transition-colors duration-200 relative group">
+                        Devenir Partenaire
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </a>
                     
                     <!-- État de connexion -->
                     <div id="authSection">
@@ -182,38 +513,225 @@
         </div>
     </nav>
 
+    <!-- Dashboard Coiffeur Section (Nouveau) -->
+    <section id="dashboard" class="pt-24 pb-20 bg-gray-50 min-h-screen hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Header Dashboard -->
+            <div class="mb-8" data-aos="fade-up">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h1 class="text-3xl lg:text-4xl font-bold text-gray-900">
+                            Dashboard <span class="text-primary" id="dashboardSalonName">Salon</span>
+                        </h1>
+                        <p class="text-gray-600 mt-2" id="dashboardDate">Chargement...</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button onclick="toggleNotifications()" class="relative p-3 text-gray-600 hover:text-primary transition-colors">
+                            <i class="fas fa-bell text-xl"></i>
+                            <span class="absolute top-0 right-0 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">3</span>
+                        </button>
+                        <button onclick="toggleDashboardMenu()" class="flex items-center space-x-3 bg-white p-3 rounded-2xl shadow-lg border border-gray-100">
+                            <div class="w-10 h-10 bg-gradient-to-r from-primary to-purple-600 rounded-full flex items-center justify-center text-white font-bold">
+                                <span id="userInitial">U</span>
+                            </div>
+                            <div class="text-left hidden lg:block">
+                                <div class="font-semibold text-gray-900" id="userName">Utilisateur</div>
+                                <div class="text-sm text-gray-500">Coiffeur</div>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-400"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Menu déroulant utilisateur -->
+            <div id="dashboardMenu" class="hidden absolute right-4 mt-2 w-48 bg-white rounded-2xl shadow-2xl border border-gray-200 py-2 z-50">
+                <a href="profile.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors">
+                    <i class="fas fa-user text-primary w-5"></i>
+                    <span>Mon profil</span>
+                </a>
+                <a href="mes-reservations.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors">
+                    <i class="fas fa-calendar text-primary w-5"></i>
+                    <span>Mes réservations</span>
+                </a>
+                <div class="border-t border-gray-200 my-2"></div>
+                <button onclick="logout()" class="flex items-center space-x-3 px-4 py-3 text-red-600 hover:bg-red-50 w-full text-left transition-colors">
+                    <i class="fas fa-sign-out-alt w-5"></i>
+                    <span>Déconnexion</span>
+                </button>
+            </div>
+
+            <!-- Statistiques -->
+            <div class="dashboard-grid mb-8">
+                <!-- Carte Statistique 1 -->
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="text-white/80 text-sm">Réservations Aujourd'hui</div>
+                            <div class="text-3xl font-bold mt-2" id="todayBookings">8</div>
+                            <div class="text-green-300 text-sm mt-2 flex items-center">
+                                <i class="fas fa-arrow-up mr-1"></i>
+                                <span>+12% vs hier</span>
+                            </div>
+                        </div>
+                        <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center">
+                            <i class="fas fa-calendar-check text-white text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carte Statistique 2 -->
+                <div class="stat-card bg-gradient-to-r from-secondary to-orange-500" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="text-white/80 text-sm">Revenu Hebdomadaire</div>
+                            <div class="text-3xl font-bold mt-2" id="weeklyRevenue">125,400 FCFA</div>
+                            <div class="text-orange-200 text-sm mt-2 flex items-center">
+                                <i class="fas fa-trending-up mr-1"></i>
+                                <span>+18% vs semaine dernière</span>
+                            </div>
+                        </div>
+                        <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center">
+                            <i class="fas fa-money-bill-wave text-white text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carte Statistique 3 -->
+                <div class="stat-card bg-gradient-to-r from-accent to-green-500" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="text-white/80 text-sm">Clients Satisfaits</div>
+                            <div class="text-3xl font-bold mt-2" id="satisfiedClients">94%</div>
+                            <div class="text-green-200 text-sm mt-2 flex items-center">
+                                <i class="fas fa-star mr-1"></i>
+                                <span>4.8/5 étoiles</span>
+                            </div>
+                        </div>
+                        <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center">
+                            <i class="fas fa-smile text-white text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Réservations du jour -->
+                <div class="lg:col-span-2" data-aos="fade-up">
+                    <div class="bg-white rounded-3xl shadow-lg border border-gray-100 p-6">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-xl font-bold text-gray-900">Réservations du Jour</h3>
+                            <button onclick="viewAllReservations()" class="text-primary hover:text-purple-600 font-semibold text-sm">
+                                Voir tout
+                            </button>
+                        </div>
+                        
+                        <div class="space-y-4" id="todayReservationsList">
+                            <!-- Les réservations seront chargées ici -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Actions rapides -->
+                <div class="space-y-6" data-aos="fade-up" data-aos-delay="200">
+                    <!-- Actions rapides -->
+                    <div class="bg-white rounded-3xl shadow-lg border border-gray-100 p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Actions Rapides</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <button onclick="addReservation()" class="p-4 bg-primary/10 text-primary rounded-2xl hover:bg-primary hover:text-white transition-all flex flex-col items-center justify-center">
+                                <i class="fas fa-plus text-xl mb-2"></i>
+                                <span class="text-sm font-semibold">Nouvelle Réservation</span>
+                            </button>
+                            <button onclick="manageSalon()" class="p-4 bg-secondary/10 text-secondary rounded-2xl hover:bg-secondary hover:text-white transition-all flex flex-col items-center justify-center">
+                                <i class="fas fa-store text-xl mb-2"></i>
+                                <span class="text-sm font-semibold">Gérer Salon</span>
+                            </button>
+                            <button onclick="updateAvailability()" class="p-4 bg-accent/10 text-accent rounded-2xl hover:bg-accent hover:text-white transition-all flex flex-col items-center justify-center">
+                                <i class="fas fa-clock text-xl mb-2"></i>
+                                <span class="text-sm font-semibold">Horaires</span>
+                            </button>
+                            <button onclick="addService()" class="p-4 bg-purple-500/10 text-purple-600 rounded-2xl hover:bg-purple-500 hover:text-white transition-all flex flex-col items-center justify-center">
+                                <i class="fas fa-scissors text-xl mb-2"></i>
+                                <span class="text-sm font-semibold">Nouveau Service</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Statistiques rapides -->
+                    <div class="bg-gradient-to-r from-primary to-purple-600 text-white rounded-3xl p-6">
+                        <h3 class="text-xl font-bold mb-4">Performance</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span>Taux de remplissage</span>
+                                <span class="font-bold">78%</span>
+                            </div>
+                            <div class="w-full bg-white/20 rounded-full h-2">
+                                <div class="bg-white h-2 rounded-full" style="width: 78%"></div>
+                            </div>
+                            
+                            <div class="flex justify-between items-center mt-4">
+                                <span>Clients fidèles</span>
+                                <span class="font-bold">65%</span>
+                            </div>
+                            <div class="w-full bg-white/20 rounded-full h-2">
+                                <div class="bg-white h-2 rounded-full" style="width: 65%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Hero Section Premium -->
-    <section id="accueil" class="gradient-bg pt-24 pb-20 relative overflow-hidden">
-        <!-- Background Elements -->
+    <section id="accueil" class="premium-gradient pt-24 pb-20 relative overflow-hidden min-h-screen flex items-center">
+        <!-- Background Elements Animés -->
         <div class="absolute inset-0 overflow-hidden">
-            <div class="absolute -top-40 -right-40 w-80 h-80 bg-white/10 rounded-full blur-3xl"></div>
-            <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-secondary/20 rounded-full blur-3xl"></div>
+            <div class="absolute -top-40 -right-40 w-80 h-80 bg-white/10 rounded-full blur-3xl floating"></div>
+            <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-secondary/20 rounded-full blur-3xl floating" style="animation-delay: 2s;"></div>
+            <div class="absolute top-1/2 left-1/4 w-60 h-60 bg-accent/10 rounded-full blur-3xl floating" style="animation-delay: 4s;"></div>
+            
+            <!-- Particules animées -->
+            <div class="particles-container absolute inset-0">
+                <div class="particle absolute w-2 h-2 bg-white/30 rounded-full" style="top: 20%; left: 10%; animation: float 8s ease-in-out infinite;"></div>
+                <div class="particle absolute w-3 h-3 bg-secondary/40 rounded-full" style="top: 60%; left: 80%; animation: float 6s ease-in-out infinite reverse;"></div>
+                <div class="particle absolute w-1 h-1 bg-accent/50 rounded-full" style="top: 80%; left: 30%; animation: float 10s ease-in-out infinite;"></div>
+                <div class="particle absolute w-2 h-2 bg-white/20 rounded-full" style="top: 40%; left: 60%; animation: float 7s ease-in-out infinite reverse;"></div>
+            </div>
         </div>
         
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
             <div class="grid lg:grid-cols-2 gap-16 items-center">
                 <!-- Left Content -->
                 <div class="text-white" data-aos="fade-right" data-aos-duration="1000">
-                    <div class="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6">
-                        <i class="fas fa-star text-yellow-300 mr-2"></i>
+                    <div class="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6 shine-effect">
+                        <i class="fas fa-star text-yellow-300 mr-2 animate-pulse"></i>
                         <span class="text-sm font-medium">#1 Application coiffure au Sénégal</span>
                     </div>
                     
                     <h1 class="text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-tight">
                         Votre style,
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-yellow-300 block">
+                        <span class="typewriter text-transparent bg-clip-text bg-gradient-to-r from-secondary to-yellow-300 block">
                             notre expertise
                         </span>
                     </h1>
                     
                     <p class="text-xl lg:text-2xl text-gray-200 mb-8 leading-relaxed">
                         Réservez le meilleur coiffeur près de chez vous. 
-                        <span class="text-white font-semibold">Paiement sécurisé Orange Money & Wave.</span>
+                        <span class="text-white font-semibold bg-gradient-to-r from-yellow-400 to-yellow-200 bg-clip-text text-transparent">Paiement sécurisé Orange Money & Wave.</span>
                         Service à domicile disponible.
                     </p>
                     
+                    <!-- Barre de recherche améliorée -->
+                    <div class="search-container mb-8">
+                        <input type="text" id="globalSearch" placeholder="🔍 Rechercher un salon, service, coiffeur..." class="search-input">
+                        <button onclick="performSearch()" class="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    
                     <div class="flex flex-col sm:flex-row gap-4 mb-8">
-                        <button class="group bg-white text-primary px-8 py-4 rounded-xl font-semibold hover:shadow-2xl transition-all duration-300 flex items-center justify-center hover:scale-105">
+                        <button class="group bg-white text-primary px-8 py-4 rounded-xl font-semibold hover:shadow-2xl transition-all duration-300 flex items-center justify-center hover:scale-105 shine-effect">
                             <i class="fab fa-google-play mr-3 text-lg group-hover:scale-110 transition-transform"></i>
                             <div class="text-left">
                                 <div class="text-xs opacity-70">Téléchargez sur</div>
@@ -221,26 +739,31 @@
                             </div>
                         </button>
                         
-                        <button class="group bg-dark text-white px-8 py-4 rounded-xl font-semibold hover:shadow-2xl transition-all duration-300 flex items-center justify-center hover:scale-105 border border-gray-700">
+                        <button class="group bg-dark text-white px-8 py-4 rounded-xl font-semibold hover:shadow-2xl transition-all duration-300 flex items-center justify-center hover:scale-105 border border-gray-700 shine-effect">
                             <i class="fab fa-apple mr-3 text-lg group-hover:scale-110 transition-transform"></i>
                             <div class="text-left">
                                 <div class="text-xs opacity-70">Disponible sur</div>
                                 <div class="text-lg">App Store</div>
                             </div>
                         </button>
+                        
+                        <button onclick="scrollToLocalisation()" class="group bg-transparent text-white border-2 border-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-primary transition-all duration-300 flex items-center justify-center">
+                            <i class="fas fa-map-marker-alt mr-3 group-hover:scale-110 transition-transform"></i>
+                            <span>📍 Proche de moi</span>
+                        </button>
                     </div>
 
                     <!-- Trust Indicators -->
                     <div class="grid grid-cols-3 gap-8 text-center">
-                        <div class="text-center">
-                            <div class="text-3xl font-bold text-white mb-1">50+</div>
+                        <div class="text-center transform hover:scale-110 transition-transform duration-300">
+                            <div class="text-3xl font-bold text-white mb-1 pulse-glow">50+</div>
                             <div class="text-gray-300 text-sm">Salons Experts</div>
                         </div>
-                        <div class="text-center">
-                            <div class="text-3xl font-bold text-white mb-1">4.8</div>
+                        <div class="text-center transform hover:scale-110 transition-transform duration-300">
+                            <div class="text-3xl font-bold text-white mb-1">4.8<span class="text-yellow-300">★</span></div>
                             <div class="text-gray-300 text-sm">Note Moyenne</div>
                         </div>
-                        <div class="text-center">
+                        <div class="text-center transform hover:scale-110 transition-transform duration-300">
                             <div class="text-3xl font-bold text-white mb-1">2K+</div>
                             <div class="text-gray-300 text-sm">Clients Satisfaits</div>
                         </div>
@@ -252,7 +775,7 @@
                     <div class="relative">
                         <!-- Floating Phone Mockup -->
                         <div class="floating relative z-10">
-                            <div class="bg-white rounded-[40px] p-6 shadow-2xl border-8 border-gray-800 mx-auto w-72">
+                            <div class="bg-white rounded-[40px] p-6 shadow-2xl border-8 border-gray-800 mx-auto w-72 shimmer-effect">
                                 <!-- App Header -->
                                 <div class="bg-gradient-to-r from-primary to-purple-600 rounded-3xl p-4 text-white text-center mb-4">
                                     <div class="font-bold">KeurCoiff'</div>
@@ -301,7 +824,7 @@
     </section>
 
     <!-- Features Section Améliorée -->
-    <section id="features" class="py-20 bg-white">
+    <section id="features" class="py-20 bg-gradient-to-b from-white to-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16" data-aos="fade-up">
                 <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
@@ -361,19 +884,109 @@
                     </div>
                 </div>
 
-                <!-- Feature 3 - Service Domicile -->
+                <!-- Feature 3 - Géolocalisation -->
                 <div class="group bg-gradient-to-br from-white to-gray-50 p-8 rounded-3xl shadow-lg hover-lift border border-gray-100" data-aos="fade-up" data-aos-delay="300">
                     <div class="w-16 h-16 bg-gradient-to-r from-accent to-green-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-home text-white text-2xl"></i>
+                        <i class="fas fa-map-marker-alt text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Service à Domicile Premium</h3>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Géolocalisation Intelligente</h3>
                     <p class="text-gray-600 mb-6 leading-relaxed">
-                        Des coiffeurs certifiés se déplacent chez vous. Matériel professionnel inclus.
+                        Trouvez instantanément les salons les plus proches de vous avec notre système de géolocalisation avancé.
                     </p>
                     <div class="bg-gradient-to-r from-accent to-green-500 text-white p-4 rounded-2xl">
                         <div class="flex items-center justify-between">
-                            <span class="font-semibold">Disponible maintenant</span>
-                            <span class="bg-white text-accent px-3 py-1 rounded-full text-sm font-bold">24h/24</span>
+                            <span class="font-semibold">📍 Proche de vous</span>
+                            <span class="bg-white text-accent px-3 py-1 rounded-full text-sm font-bold">GPS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Géolocalisation Avancée -->
+    <section id="localisation" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+                    Trouvez les salons
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-600">près de vous</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Notre système de géolocalisation intelligent vous montre les meilleurs salons dans votre quartier.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12 items-start">
+                <!-- Carte Interactive -->
+                <div class="space-y-6" data-aos="fade-right">
+                    <div class="bg-gradient-to-br from-gray-50 to-white p-8 rounded-3xl shadow-xl border border-gray-100">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-2xl font-bold text-gray-900">Carte Interactive</h3>
+                            <button onclick="getUserLocation()" class="geolocation-btn flex items-center space-x-2">
+                                <i class="fas fa-location-arrow"></i>
+                                <span>Me localiser</span>
+                            </button>
+                        </div>
+                        
+                        <!-- Carte Leaflet -->
+                        <div id="map" class="w-full"></div>
+                        
+                        <!-- Statistiques de localisation -->
+                        <div class="grid grid-cols-3 gap-4 mt-6 text-center">
+                            <div class="bg-blue-50 p-4 rounded-2xl">
+                                <div class="text-2xl font-bold text-blue-600" id="nearbyCount">0</div>
+                                <div class="text-sm text-blue-800">À proximité</div>
+                            </div>
+                            <div class="bg-green-50 p-4 rounded-2xl">
+                                <div class="text-2xl font-bold text-green-600" id="distanceAvg">0m</div>
+                                <div class="text-sm text-green-800">Distance moyenne</div>
+                            </div>
+                            <div class="bg-purple-50 p-4 rounded-2xl">
+                                <div class="text-2xl font-bold text-purple-600" id="topRated">4.8★</div>
+                                <div class="text-sm text-purple-800">Meilleure note</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Liste des salons proches -->
+                <div class="space-y-6" data-aos="fade-left">
+                    <div class="bg-gradient-to-br from-primary to-purple-600 text-white p-8 rounded-3xl shadow-xl">
+                        <h3 class="text-2xl font-bold mb-6">📍 Salons les plus proches</h3>
+                        
+                        <div id="nearbySalons" class="space-y-4 max-h-96 overflow-y-auto">
+                            <!-- Les salons proches seront chargés ici -->
+                            <div class="text-center py-8">
+                                <div class="loader mx-auto mb-4"></div>
+                                <div class="text-white/80">Recherche des salons près de vous...</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 p-4 bg-white/10 rounded-2xl">
+                            <div class="flex items-center space-x-3 text-sm">
+                                <i class="fas fa-info-circle text-yellow-300"></i>
+                                <span>Activez votre géolocalisation pour des résultats plus précis</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filtres rapides -->
+                    <div class="bg-white p-6 rounded-3xl shadow-lg border border-gray-100">
+                        <h4 class="font-semibold text-gray-900 mb-4">Filtrer par distance</h4>
+                        <div class="grid grid-cols-3 gap-3">
+                            <button onclick="filterByDistance(500)" class="p-3 text-center border border-gray-200 rounded-xl hover:bg-primary hover:text-white transition-all">
+                                <div class="font-semibold">500m</div>
+                                <div class="text-xs text-gray-500">Très proche</div>
+                            </button>
+                            <button onclick="filterByDistance(1000)" class="p-3 text-center border border-gray-200 rounded-xl hover:bg-primary hover:text-white transition-all">
+                                <div class="font-semibold">1km</div>
+                                <div class="text-xs text-gray-500">Proche</div>
+                            </button>
+                            <button onclick="filterByDistance(5000)" class="p-3 text-center border border-gray-200 rounded-xl hover:bg-primary hover:text-white transition-all">
+                                <div class="font-semibold">5km</div>
+                                <div class="text-xs text-gray-500">Secteur</div>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -565,6 +1178,7 @@
                         <a href="#accueil" class="block text-gray-400 hover:text-white transition-colors">Accueil</a>
                         <a href="#features" class="block text-gray-400 hover:text-white transition-colors">Fonctionnalités</a>
                         <a href="#salons" class="block text-gray-400 hover:text-white transition-colors">Salons</a>
+                        <a href="#localisation" class="block text-gray-400 hover:text-white transition-colors">📍 Proche de moi</a>
                         <a href="#pricing" class="block text-gray-400 hover:text-white transition-colors">Devenir Partenaire</a>
                     </div>
                 </div>
@@ -785,6 +1399,7 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
     <script>
         // Initialisation AOS
@@ -794,15 +1409,19 @@
             offset: 100
         });
 
-        // Chatbot State
+        // Variables globales
         let chatState = {
             isOpen: false,
             currentStep: 'welcome',
             userPreferences: {}
         };
 
-        // Réservation State
         let currentSalon = null;
+        let userLocation = null;
+        let map = null;
+        let userMarker = null;
+        let salonMarkers = [];
+        let currentStep = 1;
 
         // Initialisation
         document.addEventListener('DOMContentLoaded', function() {
@@ -811,6 +1430,9 @@
             initializeForm();
             updateAuthUI();
             initializeReservationModal();
+            initializeMap();
+            initializeSearch();
+            initializeDashboard();
             
             // Initialisation des filtres
             document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -829,6 +1451,659 @@
                 });
             });
         });
+
+        // ====================
+        // 🎯 DASHBOARD COIFFEUR
+        // ====================
+
+        function initializeDashboard() {
+            // Vérifier si l'utilisateur est un coiffeur
+            const user = JSON.parse(localStorage.getItem('keurcoiff_user') || '{}');
+            const token = localStorage.getItem('keurcoiff_token');
+            
+            if (token && user.role === 'coiffeur') {
+                showDashboard();
+                loadDashboardData();
+            }
+        }
+
+        function showDashboard() {
+            document.getElementById('dashboard').classList.remove('hidden');
+            document.getElementById('accueil').classList.add('hidden');
+            
+            // Mettre à jour l'interface utilisateur
+            const user = JSON.parse(localStorage.getItem('keurcoiff_user') || '{}');
+            document.getElementById('userName').textContent = user.fullName || 'Coiffeur';
+            document.getElementById('userInitial').textContent = (user.fullName || 'C').charAt(0).toUpperCase();
+            document.getElementById('dashboardSalonName').textContent = user.salonName || 'Votre Salon';
+            
+            // Mettre à jour la date
+            const now = new Date();
+            document.getElementById('dashboardDate').textContent = now.toLocaleDateString('fr-FR', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+        }
+
+        function loadDashboardData() {
+            // Données de démonstration pour le dashboard
+            const demoReservations = [
+                {
+                    id: 1,
+                    clientName: 'Awa Diop',
+                    service: 'Tresses vanilles',
+                    time: '10:00',
+                    status: 'confirmed',
+                    price: 8000,
+                    duration: 120
+                },
+                {
+                    id: 2,
+                    clientName: 'Marie Ndiaye',
+                    service: 'Coupe et brushing',
+                    time: '11:30',
+                    status: 'confirmed',
+                    price: 6000,
+                    duration: 90
+                },
+                {
+                    id: 3,
+                    clientName: 'Fatou Sow',
+                    service: 'Tresses simples',
+                    time: '14:00',
+                    status: 'pending',
+                    price: 4000,
+                    duration: 60
+                },
+                {
+                    id: 4,
+                    clientName: 'Sophie Diallo',
+                    service: 'Pose weave',
+                    time: '16:00',
+                    status: 'confirmed',
+                    price: 15000,
+                    duration: 120
+                }
+            ];
+
+            // Afficher les réservations
+            const reservationsList = document.getElementById('todayReservationsList');
+            reservationsList.innerHTML = demoReservations.map(reservation => `
+                <div class="reservation-item bg-white rounded-2xl p-4 border border-gray-100 shadow-sm">
+                    <div class="flex justify-between items-start mb-3">
+                        <div>
+                            <h4 class="font-semibold text-gray-900">${reservation.clientName}</h4>
+                            <p class="text-sm text-gray-600">${reservation.service}</p>
+                        </div>
+                        <span class="status-badge status-${reservation.status}">
+                            ${reservation.status === 'confirmed' ? 'Confirmé' : 
+                              reservation.status === 'pending' ? 'En attente' : 
+                              reservation.status === 'completed' ? 'Terminé' : 'Annulé'}
+                        </span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center text-gray-600">
+                            <i class="fas fa-clock mr-2"></i>
+                            <span>${reservation.time} • ${reservation.duration}min</span>
+                        </div>
+                        <div class="text-primary font-bold">
+                            ${reservation.price.toLocaleString()} FCFA
+                        </div>
+                    </div>
+                    <div class="flex space-x-2 mt-3">
+                        <button onclick="startReservation(${reservation.id})" class="flex-1 bg-primary text-white py-2 px-3 rounded-lg text-sm font-semibold hover:bg-purple-600 transition-colors">
+                            Démarrer
+                        </button>
+                        <button onclick="viewReservationDetails(${reservation.id})" class="flex-1 bg-gray-100 text-gray-700 py-2 px-3 rounded-lg text-sm font-semibold hover:bg-gray-200 transition-colors">
+                            Détails
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleDashboardMenu() {
+            const menu = document.getElementById('dashboardMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        function toggleNotifications() {
+            showNotification('3 nouvelles notifications', 'info');
+        }
+
+        function viewAllReservations() {
+            showNotification('Ouverture de toutes les réservations', 'info');
+            // Logique pour afficher toutes les réservations
+        }
+
+        function startReservation(reservationId) {
+            showNotification(`Démarrage de la réservation #${reservationId}`, 'success');
+            // Logique pour démarrer une réservation
+        }
+
+        function viewReservationDetails(reservationId) {
+            showNotification(`Détails de la réservation #${reservationId}`, 'info');
+            // Logique pour afficher les détails
+        }
+
+        // ====================
+        // 🔧 FONCTIONS MANQUANTES AJOUTÉES
+        // ====================
+
+        // Navigation entre pages
+        function goBack() {
+            if (document.referrer) {
+                window.history.back();
+            } else {
+                window.location.href = 'index.html';
+            }
+        }
+
+        function performSearch() {
+            const query = document.getElementById('globalSearch').value.trim();
+            if (query) {
+                showNotification(`Recherche de "${query}" en cours...`, 'info');
+                // Simulation de recherche
+                setTimeout(() => {
+                    const results = demoSalons.filter(salon => 
+                        salon.name.toLowerCase().includes(query.toLowerCase()) ||
+                        salon.location.quarter.toLowerCase().includes(query.toLowerCase()) ||
+                        salon.services.some(service => service.name.toLowerCase().includes(query.toLowerCase()))
+                    );
+                    
+                    if (results.length > 0) {
+                        displaySalons(results);
+                        showNotification(`${results.length} résultats trouvés pour "${query}"`, 'success');
+                    } else {
+                        showNotification(`Aucun résultat trouvé pour "${query}"`, 'error');
+                    }
+                }, 1000);
+            }
+        }
+
+        function initializeSearch() {
+            const searchInput = document.getElementById('globalSearch');
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+        }
+
+        // Partage sur réseaux sociaux
+        function shareOnWhatsApp() {
+            const text = `Je viens de réserver chez KeurCoiff' ! 🎉\n\nDécouvrez cette application incroyable pour réserver votre coiffeur à Dakar.`;
+            const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+            window.open(url, '_blank');
+            showNotification('Partage WhatsApp ouvert', 'success');
+        }
+
+        function shareOnFacebook() {
+            const url = 'https://www.facebook.com/sharer/sharer.php?u=https://keurcoiff.sn';
+            window.open(url, '_blank');
+            showNotification('Partage Facebook ouvert', 'success');
+        }
+
+        function copyBookingLink() {
+            const link = 'https://keurcoiff.sn';
+            navigator.clipboard.writeText(link).then(() => {
+                showNotification('Lien copié dans le presse-papier !', 'success');
+            });
+        }
+
+        // Gestion des mots de passe
+        function togglePassword(inputId, toggleId) {
+            const passwordInput = document.getElementById(inputId);
+            const passwordToggle = document.getElementById(toggleId);
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                passwordToggle.classList.remove('fa-eye');
+                passwordToggle.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                passwordToggle.classList.remove('fa-eye-slash');
+                passwordToggle.classList.add('fa-eye');
+            }
+        }
+
+        let countdownInterval;
+        let countdownTime = 60;
+
+        function resendCode() {
+            const resendText = document.getElementById('resendText');
+            const countdown = document.getElementById('countdown');
+            
+            resendText.classList.add('hidden');
+            countdown.classList.remove('hidden');
+            countdownTime = 60;
+            
+            updateCountdown();
+            
+            countdownInterval = setInterval(updateCountdown, 1000);
+            
+            showNotification('Code renvoyé !', 'success');
+        }
+
+        function updateCountdown() {
+            const countdown = document.getElementById('countdown');
+            if (countdown) {
+                countdown.textContent = ` (${countdownTime}s)`;
+                
+                if (countdownTime <= 0) {
+                    clearInterval(countdownInterval);
+                    document.getElementById('resendText').classList.remove('hidden');
+                    countdown.classList.add('hidden');
+                } else {
+                    countdownTime--;
+                }
+            }
+        }
+
+        function moveToNext(input) {
+            if (input.value.length === 1) {
+                const next = input.nextElementSibling;
+                if (next) next.focus();
+            }
+        }
+
+        // Dashboard coiffeur
+        function addReservation() {
+            showNotification('Ouverture du formulaire de réservation...', 'info');
+            setTimeout(() => {
+                window.location.href = 'reservation.html';
+            }, 1000);
+        }
+
+        function manageSalon() {
+            showNotification('Gestion du salon...', 'info');
+            // Logique pour gérer le salon
+        }
+
+        function updateAvailability() {
+            showNotification('Modification des horaires...', 'info');
+            // Logique pour modifier les horaires
+        }
+
+        function addService() {
+            showNotification('Ajout d\'un nouveau service...', 'info');
+            // Logique pour ajouter un service
+        }
+
+        function viewAnalytics() {
+            showNotification('Ouverture des statistiques détaillées...', 'info');
+            // Logique pour afficher les analytics
+        }
+
+        function manageStaff() {
+            showNotification('Gestion de l\'équipe...', 'info');
+            // Logique pour gérer le personnel
+        }
+
+        // Gestion des réservations utilisateur
+        function viewReservationDetails(reservationId) {
+            const reservation = currentReservations.find(r => r.id === reservationId);
+            if (reservation) {
+                showNotification(`Détails de la réservation ${reservationId}`, 'info');
+                // Logique pour afficher les détails
+            }
+        }
+
+        function cancelReservation(reservationId) {
+            if (confirm('Êtes-vous sûr de vouloir annuler cette réservation ?')) {
+                showNotification('Réservation annulée avec succès', 'success');
+                // Logique d'annulation
+            }
+        }
+
+        function rateReservation(reservationId) {
+            const rating = prompt('Donnez une note de 1 à 5 étoiles:');
+            if (rating && rating >= 1 && rating <= 5) {
+                showNotification('Merci pour votre note !', 'success');
+                // Logique de notation
+            }
+        }
+
+        // Gestion du profil utilisateur
+        function editProfile() {
+            showNotification('Mode édition du profil activé', 'info');
+            // Logique d'édition
+        }
+
+        function cancelEdit() {
+            showNotification('Modifications annulées', 'info');
+            // Logique d'annulation
+        }
+
+        function changePassword() {
+            showNotification('Redirection vers la page de changement de mot de passe', 'info');
+            setTimeout(() => {
+                window.location.href = 'forgot-password.html';
+            }, 1000);
+        }
+
+        // Paiement
+        let selectedPaymentMethod = null;
+
+        function selectPaymentMethod(method) {
+            selectedPaymentMethod = method;
+            showPaymentForm(method);
+            showNotification(`Méthode de paiement ${method} sélectionnée`, 'info');
+        }
+
+        function showPaymentForm(method) {
+            // Logique pour afficher le formulaire de paiement correspondant
+            showNotification(`Affichage du formulaire ${method}`, 'info');
+        }
+
+        function loadPaymentForms() {
+            // Chargement des formulaires de paiement
+            showNotification('Formulaires de paiement chargés', 'info');
+        }
+
+        function processPayment() {
+            if (!selectedPaymentMethod) {
+                showNotification('Veuillez sélectionner un moyen de paiement', 'error');
+                return;
+            }
+
+            showNotification('Traitement du paiement en cours...', 'info');
+            // Logique de traitement du paiement
+        }
+
+        function validatePaymentForm() {
+            // Validation du formulaire de paiement
+            return true;
+        }
+
+        // Processus de réservation
+        function nextStep(step) {
+            if (step === 2 && !selectedSalon) {
+                showNotification('Veuillez sélectionner un salon', 'error');
+                return;
+            }
+            
+            if (step === 3 && !selectedService) {
+                showNotification('Veuillez sélectionner un service', 'error');
+                return;
+            }
+            
+            currentStep = step;
+            updateStepIndicator(step);
+            showNotification(`Étape ${step}`, 'info');
+        }
+
+        function prevStep(step) {
+            currentStep = step;
+            updateStepIndicator(step);
+            showNotification(`Retour à l'étape ${step}`, 'info');
+        }
+
+        function updateStepIndicator(step) {
+            // Logique pour mettre à jour l'indicateur d'étapes
+            showNotification(`Indicateur mis à jour pour l'étape ${step}`, 'info');
+        }
+
+        let selectedService = null;
+
+        function selectSalon(salonId) {
+            selectedSalon = demoSalons.find(s => s._id === salonId);
+            showNotification(`Salon ${selectedSalon?.name} sélectionné`, 'success');
+        }
+
+        function selectService(serviceId) {
+            selectedService = selectedSalon?.services.find(s => s._id === serviceId);
+            showNotification(`Service ${selectedService?.name} sélectionné`, 'success');
+        }
+
+        function confirmBooking() {
+            if (!selectedSalon || !selectedService) {
+                showNotification('Veuillez sélectionner un salon et un service', 'error');
+                return;
+            }
+
+            showNotification('Confirmation de la réservation...', 'info');
+            // Logique de confirmation
+        }
+
+        // ====================
+        // 🗺️ GÉOLOCALISATION AVANCÉE
+        // ====================
+
+        function initializeMap() {
+            // Initialiser la carte centrée sur Dakar
+            map = L.map('map').setView([14.6928, -17.4467], 12);
+            
+            // Ajouter la couche de tuiles
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+        }
+
+        function getUserLocation() {
+            if (!navigator.geolocation) {
+                showNotification('La géolocalisation n\'est pas supportée par votre navigateur', 'error');
+                return;
+            }
+
+            showNotification('Localisation en cours...', 'info');
+
+            navigator.geolocation.getCurrentPosition(
+                function(position) {
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
+                    
+                    userLocation = { lat, lng };
+                    
+                    // Centrer la carte sur la position de l'utilisateur
+                    map.setView([lat, lng], 14);
+                    
+                    // Ajouter ou mettre à jour le marqueur utilisateur
+                    if (userMarker) {
+                        userMarker.setLatLng([lat, lng]);
+                    } else {
+                        userMarker = L.marker([lat, lng], {
+                            icon: L.divIcon({
+                                html: '<div class="location-pin bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center shadow-lg"><i class="fas fa-user"></i></div>',
+                                className: 'user-location-marker',
+                                iconSize: [32, 32],
+                                iconAnchor: [16, 16]
+                            })
+                        }).addTo(map)
+                        .bindPopup('Votre position actuelle')
+                        .openPopup();
+                    }
+                    
+                    // Mettre à jour les salons proches
+                    updateNearbySalons();
+                    
+                    showNotification('Localisation trouvée ! Affichage des salons proches.', 'success');
+                },
+                function(error) {
+                    console.error('Erreur de géolocalisation:', error);
+                    let message = 'Impossible de récupérer votre position. ';
+                    
+                    switch(error.code) {
+                        case error.PERMISSION_DENIED:
+                            message += 'Veuillez autoriser l\'accès à votre position.';
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            message += 'Les informations de localisation ne sont pas disponibles.';
+                            break;
+                        case error.TIMEOUT:
+                            message += 'La demande de localisation a expiré.';
+                            break;
+                        default:
+                            message += 'Une erreur inconnue est survenue.';
+                    }
+                    
+                    showNotification(message, 'error');
+                    
+                    // Utiliser une position par défaut (Dakar)
+                    userLocation = { lat: 14.6928, lng: -17.4467 };
+                    updateNearbySalons();
+                },
+                {
+                    enableHighAccuracy: true,
+                    timeout: 10000,
+                    maximumAge: 60000
+                }
+            );
+        }
+
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371; // Rayon de la Terre en km
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = 
+                Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+                Math.sin(dLon/2) * Math.sin(dLon/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            const distance = R * c;
+            return distance * 1000; // Convertir en mètres
+        }
+
+        function updateNearbySalons() {
+            if (!userLocation) return;
+
+            // Nettoyer les anciens marqueurs
+            salonMarkers.forEach(marker => map.removeLayer(marker));
+            salonMarkers = [];
+
+            const nearbyContainer = document.getElementById('nearbySalons');
+            const nearbyCount = document.getElementById('nearbyCount');
+            const distanceAvg = document.getElementById('distanceAvg');
+            const topRated = document.getElementById('topRated');
+
+            let totalDistance = 0;
+            let salonCount = 0;
+            let maxRating = 0;
+
+            // Simulation de données de salons avec coordonnées
+            const salonsWithCoords = [
+                {
+                    ...demoSalons[0],
+                    coordinates: { lat: 14.6928 + (Math.random() - 0.5) * 0.02, lng: -17.4467 + (Math.random() - 0.5) * 0.02 }
+                },
+                {
+                    ...demoSalons[1],
+                    coordinates: { lat: 14.6928 + (Math.random() - 0.5) * 0.02, lng: -17.4467 + (Math.random() - 0.5) * 0.02 }
+                },
+                {
+                    ...demoSalons[2],
+                    coordinates: { lat: 14.6928 + (Math.random() - 0.5) * 0.02, lng: -17.4467 + (Math.random() - 0.5) * 0.02 }
+                }
+            ];
+
+            // Trier les salons par distance
+            const nearbySalons = salonsWithCoords
+                .map(salon => {
+                    const distance = calculateDistance(
+                        userLocation.lat, userLocation.lng,
+                        salon.coordinates.lat, salon.coordinates.lng
+                    );
+                    return { ...salon, distance };
+                })
+                .sort((a, b) => a.distance - b.distance)
+                .slice(0, 5); // Top 5 plus proches
+
+            // Mettre à jour l'interface
+            nearbyContainer.innerHTML = nearbySalons.map(salon => `
+                <div class="bg-white/10 rounded-2xl p-4 hover:bg-white/20 transition-all cursor-pointer" onclick="openReservationModal('${salon._id}', '${salon.name}')">
+                    <div class="flex items-center justify-between mb-2">
+                        <h4 class="font-semibold">${salon.name}</h4>
+                        <span class="distance-badge">${Math.round(salon.distance)}m</span>
+                    </div>
+                    <div class="flex items-center justify-between text-sm">
+                        <div class="flex items-center text-yellow-300">
+                            ${'★'.repeat(Math.floor(salon.rating?.average || 0))}
+                            <span class="text-white/80 ml-1">${salon.rating?.average || 'N/A'}</span>
+                        </div>
+                        <div class="text-white/80">
+                            ${salon.services && salon.services.length > 0 ? salon.services[0].price.toLocaleString() + ' FCFA' : 'Prix sur demande'}
+                        </div>
+                    </div>
+                    <div class="text-xs text-white/60 mt-2">
+                        <i class="fas fa-map-marker-alt mr-1"></i>
+                        ${salon.location?.quarter}, ${salon.location?.city}
+                    </div>
+                </div>
+            `).join('');
+
+            // Ajouter les marqueurs sur la carte
+            nearbySalons.forEach(salon => {
+                const marker = L.marker([salon.coordinates.lat, salon.coordinates.lng], {
+                    icon: L.divIcon({
+                        html: `<div class="bg-white text-primary w-10 h-10 rounded-full flex items-center justify-center shadow-lg border-2 border-primary">
+                                <i class="fas fa-scissors"></i>
+                              </div>`,
+                        className: 'salon-marker',
+                        iconSize: [40, 40],
+                        iconAnchor: [20, 20]
+                    })
+                }).addTo(map)
+                .bindPopup(`
+                    <div class="p-2">
+                        <h4 class="font-bold">${salon.name}</h4>
+                        <p class="text-sm text-gray-600">${salon.location?.quarter}, ${salon.location?.city}</p>
+                        <div class="flex items-center text-yellow-400 text-sm">
+                            ${'★'.repeat(Math.floor(salon.rating?.average || 0))}
+                            <span class="text-gray-700 ml-1">${salon.rating?.average || 'N/A'}</span>
+                        </div>
+                        <div class="text-primary font-bold mt-2">
+                            ${salon.services && salon.services.length > 0 ? salon.services[0].price.toLocaleString() + ' FCFA' : 'Prix sur demande'}
+                        </div>
+                        <button onclick="openReservationModal('${salon._id}', '${salon.name}')" class="w-full mt-2 bg-primary text-white py-2 px-4 rounded-lg text-sm hover:bg-purple-600 transition-colors">
+                            Réserver
+                        </button>
+                    </div>
+                `);
+
+                salonMarkers.push(marker);
+                totalDistance += salon.distance;
+                salonCount++;
+                maxRating = Math.max(maxRating, salon.rating?.average || 0);
+            });
+
+            // Mettre à jour les statistiques
+            nearbyCount.textContent = salonCount;
+            distanceAvg.textContent = salonCount > 0 ? Math.round(totalDistance / salonCount) + 'm' : '0m';
+            topRated.textContent = maxRating > 0 ? maxRating + '★' : 'N/A';
+        }
+
+        function filterByDistance(maxDistance) {
+            if (!userLocation) {
+                showNotification('Veuillez d\'abord activer votre géolocalisation', 'error');
+                return;
+            }
+
+            const nearbyContainer = document.getElementById('nearbySalons');
+            const salons = Array.from(nearbyContainer.children);
+            
+            salons.forEach(salon => {
+                const distanceText = salon.querySelector('.distance-badge').textContent;
+                const distance = parseInt(distanceText.replace('m', ''));
+                
+                if (distance <= maxDistance) {
+                    salon.style.display = 'block';
+                } else {
+                    salon.style.display = 'none';
+                }
+            });
+        }
+
+        function scrollToLocalisation() {
+            document.getElementById('localisation').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+            // Déclencher automatiquement la géolocalisation
+            setTimeout(() => {
+                getUserLocation();
+            }, 1000);
+        }
 
         // ====================
         // 🎯 GESTION DE L'AUTHENTIFICATION
@@ -939,6 +2214,223 @@
         // 🎯 CHARGEMENT DES SALONS
         // ====================
         
+        // DONNÉES DE DÉMO RÉALISTES
+        const demoSalons = [
+          {
+            _id: '1',
+            name: 'Salon Awa Beauty',
+            location: {
+              address: 'Rue 10, Plateau',
+              quarter: 'Plateau',
+              city: 'Dakar',
+              coordinates: { lat: 14.6928, lng: -17.4467 }
+            },
+            contact: {
+              phone: '771234567',
+              whatsapp: '771234567',
+              email: 'awa.salon@example.com'
+            },
+            services: [
+              { 
+                _id: '1',
+                name: 'Tresses simples', 
+                price: 4000, 
+                duration: 120, 
+                category: 'femme',
+                description: 'Tresses africaines traditionnelles'
+              },
+              { 
+                _id: '2',
+                name: 'Tresses vanilles', 
+                price: 8000, 
+                duration: 180, 
+                category: 'femme',
+                description: 'Tresses vanilles fines et élégantes'
+              },
+              { 
+                _id: '3',
+                name: 'Pose weave', 
+                price: 15000, 
+                duration: 120, 
+                category: 'femme',
+                description: 'Pose de perruque weave professionnelle'
+              }
+            ],
+            openingHours: {
+              monday: { open: "08:00", close: "20:00", closed: false },
+              tuesday: { open: "08:00", close: "20:00", closed: false },
+              wednesday: { open: "08:00", close: "20:00", closed: false },
+              thursday: { open: "08:00", close: "20:00", closed: false },
+              friday: { open: "08:00", close: "20:00", closed: false },
+              saturday: { open: "09:00", close: "18:00", closed: false },
+              sunday: { open: "10:00", close: "16:00", closed: false }
+            },
+            rating: {
+              average: 4.8,
+              count: 47,
+              breakdown: { 5: 35, 4: 10, 3: 2, 2: 0, 1: 0 }
+            },
+            features: {
+              homeService: true,
+              mobilePayment: true,
+              parking: true,
+              wifi: true,
+              airConditioning: true
+            },
+            photos: ['/uploads/salon-awa-1.jpg'],
+            isVerified: true,
+            isActive: true,
+            description: 'Salon de coiffure spécialisé dans les tresses et soins capillaires'
+          },
+          {
+            _id: '2',
+            name: 'Chez Ibra - Coiffeur Homme',
+            location: {
+              address: 'Rue des artisans, Ouakam',
+              quarter: 'Ouakam',
+              city: 'Dakar',
+              coordinates: { lat: 14.7245, lng: -17.4810 }
+            },
+            contact: {
+              phone: '772345678',
+              whatsapp: '772345678'
+            },
+            services: [
+              { 
+                _id: '4',
+                name: 'Coupe homme', 
+                price: 2500, 
+                duration: 45, 
+                category: 'homme',
+                description: 'Coupe moderne et classique'
+              },
+              { 
+                _id: '5',
+                name: 'Dégradé', 
+                price: 4000, 
+                duration: 60, 
+                category: 'homme',
+                description: 'Dégradé professionnel'
+              },
+              { 
+                _id: '6',
+                name: 'Tresses homme', 
+                price: 5000, 
+                duration: 90, 
+                category: 'homme',
+                description: 'Tresses africaines pour homme'
+              },
+              { 
+                _id: '7',
+                name: 'Barbe', 
+                price: 1500, 
+                duration: 30, 
+                category: 'homme',
+                description: 'Taille et entretien de barbe'
+              }
+            ],
+            openingHours: {
+              monday: { open: "07:00", close: "22:00", closed: false },
+              tuesday: { open: "07:00", close: "22:00", closed: false },
+              wednesday: { open: "07:00", close: "22:00", closed: false },
+              thursday: { open: "07:00", close: "22:00", closed: false },
+              friday: { open: "07:00", close: "22:00", closed: false },
+              saturday: { open: "08:00", close: "20:00", closed: false },
+              sunday: { open: "09:00", close: "18:00", closed: false }
+            },
+            rating: {
+              average: 4.9,
+              count: 89,
+              breakdown: { 5: 75, 4: 12, 3: 2, 2: 0, 1: 0 }
+            },
+            features: {
+              homeService: true,
+              mobilePayment: true,
+              parking: false,
+              wifi: true
+            },
+            photos: ['/uploads/salon-ibra-1.jpg'],
+            isVerified: true,
+            isActive: true,
+            description: 'Spécialiste de la coiffure masculine et des dégradés'
+          },
+          {
+            _id: '3',
+            name: 'Beauty Dakar - Spa & Coiffure',
+            location: {
+              address: 'Route de la Corniche, Almadies',
+              quarter: 'Almadies',
+              city: 'Dakar',
+              coordinates: { lat: 14.7390, lng: -17.5166 }
+            },
+            contact: {
+              phone: '774567890',
+              whatsapp: '774567890',
+              email: 'beauty.dakar@example.com'
+            },
+            services: [
+              { 
+                _id: '8',
+                name: 'Coupe et brushing', 
+                price: 8000, 
+                duration: 90, 
+                category: 'femme',
+                description: 'Coupe moderne avec brushing professionnel'
+              },
+              { 
+                _id: '9',
+                name: 'Tresses artistiques', 
+                price: 12000, 
+                duration: 180, 
+                category: 'femme',
+                description: 'Tresses créatives et designs uniques'
+              },
+              { 
+                _id: '10',
+                name: 'Soins cheveux', 
+                price: 6000, 
+                duration: 60, 
+                category: 'femme',
+                description: 'Soins hydratants et traitements capillaires'
+              },
+              { 
+                _id: '11',
+                name: 'Maquillage', 
+                price: 10000, 
+                duration: 60, 
+                category: 'femme',
+                description: 'Maquillage professionnel événementiel'
+              }
+            ],
+            openingHours: {
+              monday: { open: "09:00", close: "19:00", closed: false },
+              tuesday: { open: "09:00", close: "19:00", closed: false },
+              wednesday: { open: "09:00", close: "19:00", closed: false },
+              thursday: { open: "09:00", close: "19:00", closed: false },
+              friday: { open: "09:00", close: "19:00", closed: false },
+              saturday: { open: "10:00", close: "18:00", closed: false },
+              sunday: { closed: true }
+            },
+            rating: {
+              average: 4.7,
+              count: 124,
+              breakdown: { 5: 85, 4: 30, 3: 7, 2: 2, 1: 0 }
+            },
+            features: {
+              homeService: false,
+              mobilePayment: true,
+              parking: true,
+              wifi: true,
+              airConditioning: true,
+              accessibility: true
+            },
+            photos: ['/uploads/salon-beauty-1.jpg', '/uploads/salon-beauty-2.jpg'],
+            isVerified: true,
+            isActive: true,
+            description: 'Espace beauté premium avec spa et coiffure haut de gamme'
+          }
+        ];
+
         async function loadSalons() {
           try {
             console.log('🚀 Tentative de connexion à l\'API...');
@@ -972,223 +2464,6 @@
             
           } catch (error) {
             console.log('🔄 Utilisation des données de démonstration...', error.message);
-            
-            // DONNÉES DE DÉMO RÉALISTES
-            const demoSalons = [
-              {
-                _id: '1',
-                name: 'Salon Awa Beauty',
-                location: {
-                  address: 'Rue 10, Plateau',
-                  quarter: 'Plateau',
-                  city: 'Dakar',
-                  coordinates: { lat: 14.6928, lng: -17.4467 }
-                },
-                contact: {
-                  phone: '771234567',
-                  whatsapp: '771234567',
-                  email: 'awa.salon@example.com'
-                },
-                services: [
-                  { 
-                    _id: '1',
-                    name: 'Tresses simples', 
-                    price: 4000, 
-                    duration: 120, 
-                    category: 'femme',
-                    description: 'Tresses africaines traditionnelles'
-                  },
-                  { 
-                    _id: '2',
-                    name: 'Tresses vanilles', 
-                    price: 8000, 
-                    duration: 180, 
-                    category: 'femme',
-                    description: 'Tresses vanilles fines et élégantes'
-                  },
-                  { 
-                    _id: '3',
-                    name: 'Pose weave', 
-                    price: 15000, 
-                    duration: 120, 
-                    category: 'femme',
-                    description: 'Pose de perruque weave professionnelle'
-                  }
-                ],
-                openingHours: {
-                  monday: { open: "08:00", close: "20:00", closed: false },
-                  tuesday: { open: "08:00", close: "20:00", closed: false },
-                  wednesday: { open: "08:00", close: "20:00", closed: false },
-                  thursday: { open: "08:00", close: "20:00", closed: false },
-                  friday: { open: "08:00", close: "20:00", closed: false },
-                  saturday: { open: "09:00", close: "18:00", closed: false },
-                  sunday: { open: "10:00", close: "16:00", closed: false }
-                },
-                rating: {
-                  average: 4.8,
-                  count: 47,
-                  breakdown: { 5: 35, 4: 10, 3: 2, 2: 0, 1: 0 }
-                },
-                features: {
-                  homeService: true,
-                  mobilePayment: true,
-                  parking: true,
-                  wifi: true,
-                  airConditioning: true
-                },
-                photos: ['/uploads/salon-awa-1.jpg'],
-                isVerified: true,
-                isActive: true,
-                description: 'Salon de coiffure spécialisé dans les tresses et soins capillaires'
-              },
-              {
-                _id: '2',
-                name: 'Chez Ibra - Coiffeur Homme',
-                location: {
-                  address: 'Rue des artisans, Ouakam',
-                  quarter: 'Ouakam',
-                  city: 'Dakar',
-                  coordinates: { lat: 14.7245, lng: -17.4810 }
-                },
-                contact: {
-                  phone: '772345678',
-                  whatsapp: '772345678'
-                },
-                services: [
-                  { 
-                    _id: '4',
-                    name: 'Coupe homme', 
-                    price: 2500, 
-                    duration: 45, 
-                    category: 'homme',
-                    description: 'Coupe moderne et classique'
-                  },
-                  { 
-                    _id: '5',
-                    name: 'Dégradé', 
-                    price: 4000, 
-                    duration: 60, 
-                    category: 'homme',
-                    description: 'Dégradé professionnel'
-                  },
-                  { 
-                    _id: '6',
-                    name: 'Tresses homme', 
-                    price: 5000, 
-                    duration: 90, 
-                    category: 'homme',
-                    description: 'Tresses africaines pour homme'
-                  },
-                  { 
-                    _id: '7',
-                    name: 'Barbe', 
-                    price: 1500, 
-                    duration: 30, 
-                    category: 'homme',
-                    description: 'Taille et entretien de barbe'
-                  }
-                ],
-                openingHours: {
-                  monday: { open: "07:00", close: "22:00", closed: false },
-                  tuesday: { open: "07:00", close: "22:00", closed: false },
-                  wednesday: { open: "07:00", close: "22:00", closed: false },
-                  thursday: { open: "07:00", close: "22:00", closed: false },
-                  friday: { open: "07:00", close: "22:00", closed: false },
-                  saturday: { open: "08:00", close: "20:00", closed: false },
-                  sunday: { open: "09:00", close: "18:00", closed: false }
-                },
-                rating: {
-                  average: 4.9,
-                  count: 89,
-                  breakdown: { 5: 75, 4: 12, 3: 2, 2: 0, 1: 0 }
-                },
-                features: {
-                  homeService: true,
-                  mobilePayment: true,
-                  parking: false,
-                  wifi: true
-                },
-                photos: ['/uploads/salon-ibra-1.jpg'],
-                isVerified: true,
-                isActive: true,
-                description: 'Spécialiste de la coiffure masculine et des dégradés'
-              },
-              {
-                _id: '3',
-                name: 'Beauty Dakar - Spa & Coiffure',
-                location: {
-                  address: 'Route de la Corniche, Almadies',
-                  quarter: 'Almadies',
-                  city: 'Dakar',
-                  coordinates: { lat: 14.7390, lng: -17.5166 }
-                },
-                contact: {
-                  phone: '774567890',
-                  whatsapp: '774567890',
-                  email: 'beauty.dakar@example.com'
-                },
-                services: [
-                  { 
-                    _id: '8',
-                    name: 'Coupe et brushing', 
-                    price: 8000, 
-                    duration: 90, 
-                    category: 'femme',
-                    description: 'Coupe moderne avec brushing professionnel'
-                  },
-                  { 
-                    _id: '9',
-                    name: 'Tresses artistiques', 
-                    price: 12000, 
-                    duration: 180, 
-                    category: 'femme',
-                    description: 'Tresses créatives et designs uniques'
-                  },
-                  { 
-                    _id: '10',
-                    name: 'Soins cheveux', 
-                    price: 6000, 
-                    duration: 60, 
-                    category: 'femme',
-                    description: 'Soins hydratants et traitements capillaires'
-                  },
-                  { 
-                    _id: '11',
-                    name: 'Maquillage', 
-                    price: 10000, 
-                    duration: 60, 
-                    category: 'femme',
-                    description: 'Maquillage professionnel événementiel'
-                  }
-                ],
-                openingHours: {
-                  monday: { open: "09:00", close: "19:00", closed: false },
-                  tuesday: { open: "09:00", close: "19:00", closed: false },
-                  wednesday: { open: "09:00", close: "19:00", closed: false },
-                  thursday: { open: "09:00", close: "19:00", closed: false },
-                  friday: { open: "09:00", close: "19:00", closed: false },
-                  saturday: { open: "10:00", close: "18:00", closed: false },
-                  sunday: { closed: true }
-                },
-                rating: {
-                  average: 4.7,
-                  count: 124,
-                  breakdown: { 5: 85, 4: 30, 3: 7, 2: 2, 1: 0 }
-                },
-                features: {
-                  homeService: false,
-                  mobilePayment: true,
-                  parking: true,
-                  wifi: true,
-                  airConditioning: true,
-                  accessibility: true
-                },
-                photos: ['/uploads/salon-beauty-1.jpg', '/uploads/salon-beauty-2.jpg'],
-                isVerified: true,
-                isActive: true,
-                description: 'Espace beauté premium avec spa et coiffure haut de gamme'
-              }
-            ];
             
             // Afficher les salons de démo
             displaySalons(demoSalons);

@@ -1,4 +1,4 @@
-// server.js - VERSION COMPLÈTE CORRIGÉE
+// server.js - VERSION COMPLÈTE POUR VOTRE STRUCTURE
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
@@ -10,7 +10,7 @@ const socketIo = require('socket.io');
 const app = express();
 const server = http.createServer(app);
 
-// ✅ CONFIGURATION CORS COMPLÈTE ET CORRIGÉE
+// ✅ CONFIGURATION CORS COMPLÈTE
 app.use(cors({
   origin: [
     'http://localhost:3000', 
@@ -43,8 +43,11 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+// ✅ SERVIR LES FICHIERS STATIQUES DU FRONTEND
+app.use(express.static(path.join(__dirname, '../frontend')));
+
 // ====================
-// 🛡️ MIDDLEWARE D'AUTHENTIFICATION - PLACÉ AVANT TOUTES LES ROUTES
+// 🛡️ MIDDLEWARE D'AUTHENTIFICATION
 // ====================
 
 const authenticateToken = (req, res, next) => {
@@ -59,8 +62,6 @@ const authenticateToken = (req, res, next) => {
   }
 
   try {
-    // Pour l'instant, on utilise une vérification simple
-    // Dans une vraie app, on utiliserait JWT
     const userData = JSON.parse(Buffer.from(token, 'base64').toString());
     req.user = userData;
     next();
@@ -93,6 +94,205 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/keurcoiff
 // ====================
 // 🎯 ROUTES PUBLIQUES
 // ====================
+
+// Ajoutez ces routes dans votre server.js existant
+
+// ====================
+// 🏪 ROUTES POUR COIFFEURS
+// ====================
+
+// Route pour créer un salon (pour coiffeurs)
+app.post('/api/salons', authenticateToken, async (req, res) => {
+  try {
+    if (req.user.role !== 'coiffeur') {
+      return res.status(403).json({
+        success: false,
+        message: 'Accès réservé aux coiffeurs'
+      });
+    }
+
+    const { name, location, services, features, description, openingHours } = req.body;
+
+    const salon = new Salon({
+      name,
+      location,
+      services,
+      features,
+      description,
+      openingHours,
+      owner: req.user.userId,
+      isVerified: true // Pour la démo, en production ça serait false initialement
+    });
+
+    await salon.save();
+
+    // Mettre à jour l'utilisateur avec le nom du salon
+    await User.findByIdAndUpdate(req.user.userId, {
+      salonName: name
+    });
+
+    res.status(201).json({
+      success: true,
+      message: 'Salon créé avec succès',
+      data: { salon }
+    });
+  } catch (error) {
+    console.error('❌ Erreur création salon:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Erreur lors de la création du salon',
+      error: error.message
+    });
+  }
+});
+
+// Route pour récupérer les réservations d'un salon (pour coiffeurs)
+app.get('/api/coiffeur/reservations', authenticateToken, async (req, res) => {
+  try {
+    if (req.user.role !== 'coiffeur') {
+      return res.status(403).json({
+        success: false,
+        message: 'Accès réservé aux coiffeurs'
+      });
+    }
+
+    // Trouver le salon du coiffeur
+    const salon = await Salon.findOne({ owner: req.user.userId });
+    if (!salon) {
+      return res.status(404).json({
+        success: false,
+        message: 'Aucun salon trouvé pour ce coiffeur'
+      });
+    }
+
+    const reservations = await Reservation.find({ salon: salon._id })
+      .populate('user', 'fullName phone')
+      .sort({ date: -1, time: -1 });
+
+    res.json({
+      success: true,
+      data: { reservations },
+      count: reservations.length
+    });
+  } catch (error) {
+    console.error('❌ Erreur récupération réservations coiffeur:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Erreur lors de la récupération des réservations',
+      error: error.message
+    });
+  }
+});
+
+// Route pour mettre à jour le statut d'une réservation
+app.put('/api/reservations/:id/status', authenticateToken, async (req, res) => {
+  try {
+    if (req.user.role !== 'coiffeur') {
+      return res.status(403).json({
+        success: false,
+        message: 'Accès réservé aux coiffeurs'
+      });
+    }
+
+    const { status } = req.body;
+    const validStatuses = ['pending', 'confirmed', 'completed', 'cancelled'];
+
+    if (!validStatuses.includes(status)) {
+      return res.status(400).json({
+        success: false,
+        message: 'Statut invalide'
+      });
+    }
+
+    const reservation = await Reservation.findByIdAndUpdate(
+      req.params.id,
+      { status },
+      { new: true }
+    ).populate('user', 'fullName phone');
+
+    if (!reservation) {
+      return res.status(404).json({
+        success: false,
+        message: 'Réservation non trouvée'
+      });
+    }
+
+    res.json({
+      success: true,
+      message: 'Statut de réservation mis à jour',
+      data: { reservation }
+    });
+  } catch (error) {
+    console.error('❌ Erreur mise à jour statut réservation:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Erreur lors de la mise à jour du statut',
+      error: error.message
+    });
+  }
+});
+
+// Route pour récupérer les statistiques du coiffeur
+app.get('/api/coiffeur/stats', authenticateToken, async (req, res) => {
+  try {
+    if (req.user.role !== 'coiffeur') {
+      return res.status(403).json({
+        success: false,
+        message: 'Accès réservé aux coiffeurs'
+      });
+    }
+
+    const salon = await Salon.findOne({ owner: req.user.userId });
+    if (!salon) {
+      return res.status(404).json({
+        success: false,
+        message: 'Aucun salon trouvé'
+      });
+    }
+
+    // Statistiques des réservations du jour
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    const todayReservations = await Reservation.find({
+      salon: salon._id,
+      date: { $gte: today }
+    });
+
+    // Statistiques du mois
+    const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+    const monthlyReservations = await Reservation.find({
+      salon: salon._id,
+      date: { $gte: startOfMonth }
+    });
+
+    const stats = {
+      today: {
+        bookings: todayReservations.length,
+        revenue: todayReservations.reduce((sum, r) => sum + r.servicePrice, 0),
+        pending: todayReservations.filter(r => r.status === 'pending').length
+      },
+      monthly: {
+        bookings: monthlyReservations.length,
+        revenue: monthlyReservations.reduce((sum, r) => sum + r.servicePrice, 0),
+        completed: monthlyReservations.filter(r => r.status === 'completed').length
+      },
+      rating: salon.rating || { average: 4.8, count: 47 }
+    };
+
+    res.json({
+      success: true,
+      data: stats
+    });
+  } catch (error) {
+    console.error('❌ Erreur récupération stats coiffeur:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Erreur lors de la récupération des statistiques',
+      error: error.message
+    });
+  }
+});
 
 // Route de statut
 app.get('/api/status', (req, res) => {
@@ -265,7 +465,6 @@ app.post('/api/auth/register', async (req, res) => {
     const { phone, fullName, password, email, quarter, userType } = req.body;
     console.log(`👤 Tentative d'inscription: ${phone} - ${fullName}`);
 
-    // Validation des données requises
     if (!phone || !fullName || !password) {
       return res.status(400).json({
         success: false,
@@ -273,7 +472,6 @@ app.post('/api/auth/register', async (req, res) => {
       });
     }
 
-    // Validation format téléphone (9 chiffres)
     const phoneRegex = /^[0-9]{9}$/;
     if (!phoneRegex.test(phone)) {
       return res.status(400).json({
@@ -304,7 +502,6 @@ app.post('/api/auth/register', async (req, res) => {
     await user.save();
     console.log('✅ Nouvel utilisateur créé:', user.fullName);
 
-    // Génération d'un token simple (à remplacer par JWT en production)
     const tokenData = {
       userId: user._id.toString(),
       phone: user.phone,
@@ -313,7 +510,6 @@ app.post('/api/auth/register', async (req, res) => {
       userType: user.userType
     };
 
-    // Token simple encodé en base64 (remplacer par JWT)
     const token = Buffer.from(JSON.stringify(tokenData)).toString('base64');
 
     res.status(201).json({
@@ -373,7 +569,6 @@ app.post('/api/auth/login', async (req, res) => {
       });
     }
 
-    // Génération du token
     const tokenData = {
       userId: user._id.toString(),
       phone: user.phone,
@@ -543,7 +738,6 @@ app.post('/api/reservations', authenticateToken, async (req, res) => {
       time
     });
 
-    // Vérifier que le salon existe
     const salon = await Salon.findById(salonId);
     if (!salon) {
       return res.status(404).json({
@@ -552,7 +746,6 @@ app.post('/api/reservations', authenticateToken, async (req, res) => {
       });
     }
 
-    // Trouver le service
     const service = salon.services.id(serviceId);
     if (!service) {
       return res.status(404).json({
@@ -575,7 +768,6 @@ app.post('/api/reservations', authenticateToken, async (req, res) => {
 
     await reservation.save();
 
-    // Émettre un événement WebSocket
     io.emit('new-reservation', {
       reservationId: reservation._id,
       salonId,
@@ -644,7 +836,7 @@ app.post('/api/salons', authenticateToken, async (req, res) => {
       features,
       description,
       owner: req.user.userId,
-      isVerified: false // À vérifier par l'admin
+      isVerified: false
     });
 
     await salon.save();
@@ -690,7 +882,6 @@ io.on('connection', (socket) => {
 // 🗺️ ROUTES GÉOLOCALISATION
 // ====================
 
-// Service de géolocalisation simplifié
 const geolocationService = {
   findNearbySalons: async (req, res) => {
     try {
@@ -709,7 +900,6 @@ const geolocationService = {
         'location.coordinates': { $exists: true }
       });
 
-      // Simulation calcul distance
       const nearbySalons = salons.map(salon => {
         const distance = (Math.random() * 10).toFixed(1);
         return {
@@ -737,14 +927,12 @@ const geolocationService = {
   }
 };
 
-// Route pour les salons proches
 app.get('/api/salons/nearby', geolocationService.findNearbySalons);
 
 // ====================
 // 🔍 ROUTES RECHERCHE AVANCÉE
 // ====================
 
-// Service de recherche simplifié
 const searchService = {
   search: async (query, filters) => {
     try {
@@ -875,7 +1063,6 @@ app.get('/api/search/suggestions', async (req, res) => {
 
 const paymentService = {
   processOrangeMoneyPayment: async (paymentData) => {
-    // Simulation de paiement Orange Money
     return {
       success: true,
       transactionId: 'OM_' + Date.now(),
@@ -884,7 +1071,6 @@ const paymentService = {
   },
   
   processWavePayment: async (paymentData) => {
-    // Simulation de paiement Wave
     return {
       success: true,
       transactionId: 'WAVE_' + Date.now(),
@@ -893,7 +1079,6 @@ const paymentService = {
   },
   
   processCardPayment: async (paymentData) => {
-    // Simulation de paiement par carte
     return {
       success: true,
       transactionId: 'CARD_' + Date.now(),
@@ -954,14 +1139,21 @@ app.get('/manifest.json', (req, res) => {
 // 🚨 GESTION D'ERREURS
 // ====================
 
-// Route 404
+// ✅ ROUTE CATCH-ALL POUR SERVIR LE FRONTEND
 app.use('*', (req, res) => {
-  console.log('❌ Route non trouvée:', req.originalUrl);
-  res.status(404).json({
-    success: false,
-    message: 'Route non trouvée',
-    path: req.originalUrl
-  });
+  // Si c'est une route API, retourner une erreur 404
+  if (req.originalUrl.startsWith('/api/')) {
+    console.log('❌ Route API non trouvée:', req.originalUrl);
+    return res.status(404).json({
+      success: false,
+      message: 'Route API non trouvée',
+      path: req.originalUrl
+    });
+  }
+  
+  // Sinon, servir le fichier index.html du frontend
+  console.log('🌐 Servir frontend pour:', req.originalUrl);
+  res.sendFile(path.join(__dirname, '../frontend', 'index.html'));
 });
 
 // Gestion des erreurs globale
@@ -983,13 +1175,12 @@ server.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Serveur KeurCoiff' démarré sur le port ${PORT}`);
   console.log(`📊 Environnement: ${process.env.NODE_ENV || 'development'}`);
   console.log(`🌐 API: http://localhost:${PORT}/api`);
+  console.log(`🏠 Frontend: http://localhost:${PORT}`);
   console.log(`🔗 Status: http://localhost:${PORT}/api/status`);
-  console.log(`💇 Salons: http://localhost:${PORT}/api/salons`);
-  console.log(`🔐 Auth: http://localhost:${PORT}/api/auth`);
   console.log('✨ ======================================');
-  console.log('📍 URLs de test Frontend:');
-  console.log('   • http://127.0.0.1:5500/index.html');
-  console.log('   • http://localhost:5500/index.html');
+  console.log('📁 Structure détectée:');
+  console.log('   • backend/ → API Server');
+  console.log('   • frontend/ → Application Web');
   console.log('✨ ======================================');
   console.log('🛡️  Routes protégées disponibles:');
   console.log('   • GET  /api/auth/profile');
@@ -998,7 +1189,7 @@ server.listen(PORT, '0.0.0.0', () => {
   console.log('   • POST /api/reservations');
   console.log('   • GET  /api/reservations');
   console.log('✨ ======================================');
-  console.log('🗺️  Nouvelles routes disponibles:');
+  console.log('🗺️  Routes disponibles:');
   console.log('   • GET  /api/salons/nearby');
   console.log('   • GET  /api/search/salons');
   console.log('   • GET  /api/search/suggestions');
@@ -1006,7 +1197,11 @@ server.listen(PORT, '0.0.0.0', () => {
   console.log('   • POST /api/payments/wave');
   console.log('   • POST /api/payments/card');
   console.log('✨ ======================================');
-  console.log('🎯 NOUVELLE ROUTE:');
-  console.log('   • GET  /api/salons/:id/services');
+  console.log('🎯 Pages frontend:');
+  console.log('   • / → index.html');
+  console.log('   • /login.html → Connexion');
+  console.log('   • /profile.html → Profil');
+  console.log('   • /mes-reservations.html → Réservations');
+  console.log('   • /dashboard-coiffeur.html → Dashboard coiffeur');
   console.log('✨ ======================================\n');
 });

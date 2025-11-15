@@ -46,6 +46,20 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        
+        .profile-selection {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .profile-selection:hover {
+            transform: translateY(-2px);
+        }
+        
+        .profile-selection input:checked + div {
+            border-color: #7C3AED;
+            background: rgba(124, 58, 237, 0.05);
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.15);
+        }
     </style>
 </head>
 
@@ -82,6 +96,42 @@
                 <div class="text-center mb-8">
                     <h1 class="text-3xl font-bold text-gray-900 mb-2">Content de vous revoir !</h1>
                     <p class="text-gray-600">Connectez-vous à votre compte KeurCoiff'</p>
+                </div>
+
+                <!-- Section Sélection du Profil -->
+                <div class="mb-6">
+                    <label class="block text-sm font-semibold text-gray-700 mb-3">Je me connecte en tant que :</label>
+                    <div class="grid grid-cols-2 gap-4">
+                        <!-- Client -->
+                        <label class="relative cursor-pointer profile-selection">
+                            <input type="radio" name="userType" value="client" class="hidden peer" checked>
+                            <div class="border-2 border-gray-200 rounded-2xl p-4 text-center transition-all duration-300 peer-checked:border-primary peer-checked:bg-primary/5 peer-checked:shadow-lg">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-user text-blue-600 text-xl"></i>
+                                </div>
+                                <div class="font-semibold text-gray-900">Client</div>
+                                <div class="text-xs text-gray-600 mt-1">Réserver des prestations</div>
+                            </div>
+                            <div class="absolute top-3 right-3 w-5 h-5 border-2 border-gray-300 rounded-full peer-checked:border-primary peer-checked:bg-primary transition-all duration-300">
+                                <div class="w-2 h-2 bg-primary rounded-full mx-auto mt-1 opacity-0 peer-checked:opacity-100 transition-opacity"></div>
+                            </div>
+                        </label>
+
+                        <!-- Coiffeur -->
+                        <label class="relative cursor-pointer profile-selection">
+                            <input type="radio" name="userType" value="coiffeur" class="hidden peer">
+                            <div class="border-2 border-gray-200 rounded-2xl p-4 text-center transition-all duration-300 peer-checked:border-primary peer-checked:bg-primary/5 peer-checked:shadow-lg">
+                                <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-scissors text-purple-600 text-xl"></i>
+                                </div>
+                                <div class="font-semibold text-gray-900">Coiffeur</div>
+                                <div class="text-xs text-gray-600 mt-1">Gérer mon salon</div>
+                            </div>
+                            <div class="absolute top-3 right-3 w-5 h-5 border-2 border-gray-300 rounded-full peer-checked:border-primary peer-checked:bg-primary transition-all duration-300">
+                                <div class="w-2 h-2 bg-primary rounded-full mx-auto mt-1 opacity-0 peer-checked:opacity-100 transition-opacity"></div>
+                            </div>
+                        </label>
+                    </div>
                 </div>
 
                 <form id="loginForm" class="space-y-6">
@@ -221,6 +271,11 @@
             const submitText = document.getElementById('submitText');
             const submitLoader = document.getElementById('submitLoader');
             
+            // Récupération des données
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            const userType = document.querySelector('input[name="userType"]:checked').value;
+            
             // Animation chargement
             submitText.classList.add('hidden');
             submitLoader.classList.remove('hidden');
@@ -230,24 +285,36 @@
                 // Simulation appel API
                 await new Promise(resolve => setTimeout(resolve, 1500));
                 
-                // Données de démo (à remplacer par appel API réel)
-                const userData = {
+                // Données de démo selon le type d'utilisateur
+                const userData = userType === 'coiffeur' ? {
+                    fullName: "Salon Awa Beauty",
+                    phone: data.phone,
+                    email: "awa@salon.sn",
+                    quarter: "Plateau",
+                    userType: "coiffeur",
+                    role: "coiffeur",
+                    salonName: "Salon Awa Beauty"
+                } : {
                     fullName: "Awa Diop",
-                    phone: "771234567",
-                    email: "awa@example.com",
+                    phone: data.phone,
+                    email: "awa@client.sn",
                     quarter: "Plateau",
                     userType: "client",
-                    createdAt: new Date().toISOString()
+                    role: "client"
                 };
                 
                 localStorage.setItem('keurcoiff_user', JSON.stringify(userData));
-                localStorage.setItem('keurcoiff_token', 'demo_token_' + Date.now());
+                localStorage.setItem('keurcoiff_token', 'demo_token_' + userType + '_' + Date.now());
                 
-                showNotification('Connexion réussie !', 'success');
+                showNotification(`Connexion réussie - ${userType === 'coiffeur' ? 'Mode Coiffeur' : 'Mode Client'}`, 'success');
                 
-                // Redirection
+                // Redirection selon le type d'utilisateur
                 setTimeout(() => {
-                    window.location.href = 'index.html';
+                    if (userType === 'coiffeur') {
+                        window.location.href = 'dashboard-coiffeur.html';
+                    } else {
+                        window.location.href = 'index.html';
+                    }
                 }, 1000);
                 
             } catch (error) {
