@@ -3,7 +3,18 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
 // Clé secrète (à mettre dans les variables d'environnement)
-const JWT_SECRET = process.env.JWT_SECRET || 'votre_cle_secrete_super_securisee';
+const JWT_SECRET = process.env.JWT_SECRET;
+
+if (!JWT_SECRET) {
+    console.error('❌ JWT_SECRET non défini');
+    throw new Error('JWT_SECRET must be defined in environment variables');
+}
+// Exporter si nécessaire
+module.exports = {
+    JWT_SECRET,
+    authenticateToken,
+    // ... autres fonctions
+};
 
 // Middleware d'authentification
 const authenticateToken = async (req, res, next) => {
