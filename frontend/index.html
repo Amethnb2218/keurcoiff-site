@@ -497,6 +497,189 @@
             border: 1px solid rgba(229, 231, 235, 0.8);
         }
         
+        /* Améliorations spécifiques pour les zones de texte */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--gray-700);
+            font-size: 0.875rem;
+        }
+        
+        /* Zone de texte améliorée */
+        .textarea-group {
+            position: relative;
+        }
+        
+        .textarea-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: white;
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .textarea-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+        }
+        
+        .textarea-group textarea::placeholder {
+            color: #9ca3af;
+        }
+        
+        /* Indicateur de caractères */
+        .char-count {
+            position: absolute;
+            right: 0.75rem;
+            bottom: 0.75rem;
+            font-size: 0.75rem;
+            color: #9ca3af;
+        }
+        
+        /* Conteneur amélioré pour les formulaires */
+        .form-container {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(229, 231, 235, 0.8);
+        }
+        
+        /* Input group amélioré */
+        .input-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--gray-700);
+            font-size: 0.875rem;
+        }
+        
+        .input-group .input-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            z-index: 10;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 2.5rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: white;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+        }
+        
+        /* User profile styles */
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), #6d28d9);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+        
+        .user-menu {
+            position: absolute;
+            right: 0;
+            top: 100%;
+            margin-top: 0.5rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(229, 231, 235, 0.8);
+            min-width: 200px;
+            z-index: 100;
+            overflow: hidden;
+        }
+        
+        .user-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            color: var(--gray-700);
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .user-menu-item:hover {
+            background: var(--gray-50);
+            color: var(--primary);
+        }
+        
+        .user-menu-item i {
+            width: 20px;
+            margin-right: 0.75rem;
+        }
+        
+        .user-menu-divider {
+            height: 1px;
+            background: var(--gray-200);
+            margin: 0.5rem 0;
+        }
+        
+        /* Notification styles */
+        .notification {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            padding: 1rem 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            max-width: 350px;
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        .notification.success {
+            background: #10b981;
+            color: white;
+        }
+        
+        .notification.error {
+            background: #ef4444;
+            color: white;
+        }
+        
+        .notification.info {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .notification.warning {
+            background: #f59e0b;
+            color: white;
+        }
+        
         /* ========== AMÉLIORATIONS MOBILE ========== */
         @media (max-width: 768px) {
             /* Navigation mobile */
@@ -555,16 +738,17 @@
             
             /* Filtres mobile */
             .filter-btn {
-                padding: 0.75rem 1rem;
-                font-size: 0.875rem;
-                width: 100%;
+                padding: 0.5rem 0.75rem !important;
+                font-size: 0.75rem !important;
                 margin-bottom: 0.5rem;
+                width: calc(50% - 0.5rem) !important;
             }
             
             /* Modal mobile */
             #reservationModal > div {
                 margin: 1rem;
                 max-height: 85vh;
+                width: 95% !important;
             }
             
             /* Stat cards mobile */
@@ -609,6 +793,31 @@
                 padding-top: 3rem;
                 padding-bottom: 3rem;
             }
+            
+            /* User menu mobile */
+            .user-avatar {
+                width: 32px;
+                height: 32px;
+                font-size: 0.875rem;
+            }
+            
+            .user-menu {
+                position: fixed;
+                top: auto;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin-top: 0;
+                border-radius: 1rem 1rem 0 0;
+                max-height: 80vh;
+                overflow-y: auto;
+            }
+            
+            .notification {
+                left: 1rem;
+                right: 1rem;
+                max-width: none;
+            }
         }
         
         /* Très petits écrans */
@@ -628,6 +837,11 @@
             .btn-primary, .btn-secondary {
                 padding: 0.75rem 1rem;
                 font-size: 0.875rem;
+            }
+            
+            .filter-btn {
+                font-size: 0.7rem !important;
+                padding: 0.4rem 0.5rem !important;
             }
         }
         
@@ -733,6 +947,106 @@
         .animate-slide-in-up {
             animation: slideInUp 0.5s ease-out;
         }
+        
+        /* Styles pour les formulaires de connexion/inscription */
+        .auth-form {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(229, 231, 235, 0.5);
+        }
+        
+        .auth-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .auth-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--gray-700);
+        }
+        
+        .auth-form input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .auth-form input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+        }
+        
+        .auth-form input.error {
+            border-color: #ef4444;
+        }
+        
+        .error-message {
+            color: #ef4444;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+        
+        /* Styles pour les onglets */
+        .tab-container {
+            display: flex;
+            border-bottom: 2px solid #e5e7eb;
+            margin-bottom: 2rem;
+        }
+        
+        .tab {
+            padding: 1rem 2rem;
+            cursor: pointer;
+            font-weight: 600;
+            color: #6b7280;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Styles pour les messages de statut */
+        .status-message {
+            padding: 1rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        
+        .status-message.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+        
+        .status-message.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+        
+        .status-message.info {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 1px solid #bfdbfe;
+        }
     </style>
 </head>
 
@@ -765,7 +1079,7 @@
                     <a href="#contact" class="nav-link">Contact</a>
                     
                     <!-- État de connexion -->
-                    <div id="authSection">
+                    <div id="authSection" class="flex items-center space-x-4">
                         <!-- Sera rempli par JavaScript -->
                     </div>
                 </div>
@@ -1002,19 +1316,19 @@
                 </p>
             </div>
 
-            <!-- Filtres -->
-            <div class="flex flex-col sm:flex-row flex-wrap gap-3 md:gap-4 justify-center mb-8 md:mb-12" data-aos="fade-up">
-                <button class="filter-btn active bg-primary-600 text-white px-4 py-3 md:px-6 md:py-3 rounded-xl font-semibold transition-all hover:shadow-md text-sm md:text-base" data-filter="all">
+            <!-- Filtres améliorés -->
+            <div class="flex flex-col sm:flex-row flex-wrap gap-2 md:gap-3 justify-center mb-8 md:mb-12" data-aos="fade-up">
+                <button class="filter-btn active bg-primary-600 text-white px-4 py-2.5 md:px-6 md:py-3 rounded-xl font-semibold transition-all hover:shadow-md text-xs md:text-sm" data-filter="all">
                     Tous les salons
                 </button>
-                <button class="filter-btn bg-white text-gray-700 px-4 py-3 md:px-6 md:py-3 rounded-xl font-semibold border border-gray-200 transition-all hover:border-primary-400 text-sm md:text-base" data-filter="femme">
-                    👩 Spécialiste femme
+                <button class="filter-btn bg-white text-gray-700 px-4 py-2.5 md:px-6 md:py-3 rounded-xl font-semibold border border-gray-200 transition-all hover:border-primary-400 hover:bg-primary-50 text-xs md:text-sm" data-filter="femme">
+                    <i class="fas fa-female mr-1.5"></i>Femme
                 </button>
-                <button class="filter-btn bg-white text-gray-700 px-4 py-3 md:px-6 md:py-3 rounded-xl font-semibold border border-gray-200 transition-all hover:border-primary-400 text-sm md:text-base" data-filter="homme">
-                    👨 Spécialiste homme
+                <button class="filter-btn bg-white text-gray-700 px-4 py-2.5 md:px-6 md:py-3 rounded-xl font-semibold border border-gray-200 transition-all hover:border-primary-400 hover:bg-primary-50 text-xs md:text-sm" data-filter="homme">
+                    <i class="fas fa-male mr-1.5"></i>Homme
                 </button>
-                <button class="filter-btn bg-white text-gray-700 px-4 py-3 md:px-6 md:py-3 rounded-xl font-semibold border border-gray-200 transition-all hover:border-primary-400 text-sm md:text-base" data-filter="domicile">
-                    🏠 À domicile
+                <button class="filter-btn bg-white text-gray-700 px-4 py-2.5 md:px-6 md:py-3 rounded-xl font-semibold border border-gray-200 transition-all hover:border-primary-400 hover:bg-primary-50 text-xs md:text-sm" data-filter="domicile">
+                    <i class="fas fa-home mr-1.5"></i>Domicile
                 </button>
             </div>
 
@@ -1495,19 +1809,19 @@
             </div>
 
             <div class="grid lg:grid-cols-2 gap-8 md:gap-12">
-                <!-- Formulaire -->
+                <!-- Formulaire amélioré -->
                 <div class="bg-gray-800 p-6 md:p-8 rounded-3xl" data-aos="fade-right">
                     <h3 class="text-2xl md:text-3xl font-bold mb-6">Inscrivez votre salon</h3>
                     
                     <form id="partnerForm" class="space-y-6">
                         <div class="grid md:grid-cols-2 gap-4 md:gap-6">
-                            <div>
+                            <div class="form-group">
                                 <label class="block text-sm font-semibold text-gray-300 mb-2">Nom du salon *</label>
                                 <input type="text" name="salonName" required 
                                        class="input bg-gray-700 border-gray-600 text-white placeholder-gray-400"
                                        placeholder="Ex: Salon Prestige">
                             </div>
-                            <div>
+                            <div class="form-group">
                                 <label class="block text-sm font-semibold text-gray-300 mb-2">Téléphone *</label>
                                 <input type="tel" name="phone" required 
                                        class="input bg-gray-700 border-gray-600 text-white placeholder-gray-400"
@@ -1515,14 +1829,17 @@
                             </div>
                         </div>
                         
-                        <div>
+                        <div class="form-group">
                             <label class="block text-sm font-semibold text-gray-300 mb-2">Quartier & Ville *</label>
-                            <input type="text" name="location" required 
-                                   class="input bg-gray-700 border-gray-600 text-white placeholder-gray-400"
-                                   placeholder="Plateau, Dakar">
+                            <div class="input-group">
+                                <i class="fas fa-map-marker-alt input-icon"></i>
+                                <input type="text" name="location" required 
+                                       class="input bg-gray-700 border-gray-600 text-white placeholder-gray-400 pl-10"
+                                       placeholder="Plateau, Dakar">
+                            </div>
                         </div>
                         
-                        <div>
+                        <div class="form-group">
                             <label class="block text-sm font-semibold text-gray-300 mb-2">Services proposés *</label>
                             <div class="grid grid-cols-2 gap-2 md:gap-3">
                                 <label class="flex items-center space-x-2 md:space-x-3 p-2 md:p-3 rounded-xl border border-gray-600 hover:bg-gray-700 cursor-pointer">
@@ -1548,7 +1865,16 @@
                             </div>
                         </div>
                         
+                        <div class="form-group textarea-group">
+                            <label class="block text-sm font-semibold text-gray-300 mb-2">Description du salon</label>
+                            <textarea name="description" rows="4" 
+                                     class="input bg-gray-700 border-gray-600 text-white placeholder-gray-400"
+                                     placeholder="Décrivez votre salon, vos spécialités..."></textarea>
+                            <div class="char-count">0/500</div>
+                        </div>
+                        
                         <button type="submit" class="w-full btn-primary py-3 md:py-4 text-sm md:text-base">
+                            <i class="fas fa-rocket mr-2"></i>
                             Devenir Partenaire Premium
                         </button>
                     </form>
@@ -1676,7 +2002,7 @@
         </div>
     </section>
 
-    <!-- Section Contact -->
+    <!-- Section Contact améliorée -->
     <section id="contact" class="section bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid lg:grid-cols-2 gap-8 md:gap-12">
@@ -1720,33 +2046,52 @@
                     </div>
                 </div>
 
-                <!-- Formulaire -->
+                <!-- Formulaire amélioré -->
                 <div data-aos="fade-left">
-                    <div class="card p-4 md:p-8">
+                    <div class="form-container">
                         <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-6">Envoyez un message</h3>
-                        <form class="space-y-4 md:space-y-6">
+                        <form id="contactForm" class="space-y-4 md:space-y-6">
                             <div class="grid md:grid-cols-2 gap-4 md:gap-6">
-                                <div>
+                                <div class="form-group">
                                     <label class="block text-sm font-semibold text-gray-700 mb-2">Nom complet *</label>
-                                    <input type="text" required class="input" placeholder="Votre nom">
+                                    <div class="input-group">
+                                        <i class="fas fa-user input-icon"></i>
+                                        <input type="text" name="name" required 
+                                               class="input pl-10" 
+                                               placeholder="Votre nom">
+                                    </div>
                                 </div>
-                                <div>
+                                <div class="form-group">
                                     <label class="block text-sm font-semibold text-gray-700 mb-2">Email *</label>
-                                    <input type="email" required class="input" placeholder="votre@email.com">
+                                    <div class="input-group">
+                                        <i class="fas fa-envelope input-icon"></i>
+                                        <input type="email" name="email" required 
+                                               class="input pl-10" 
+                                               placeholder="votre@email.com">
+                                    </div>
                                 </div>
                             </div>
                             
-                            <div>
+                            <div class="form-group">
                                 <label class="block text-sm font-semibold text-gray-700 mb-2">Sujet *</label>
-                                <input type="text" required class="input" placeholder="Sujet de votre message">
+                                <div class="input-group">
+                                    <i class="fas fa-tag input-icon"></i>
+                                    <input type="text" name="subject" required 
+                                           class="input pl-10" 
+                                           placeholder="Sujet de votre message">
+                                </div>
                             </div>
                             
-                            <div>
+                            <div class="form-group textarea-group">
                                 <label class="block text-sm font-semibold text-gray-700 mb-2">Message *</label>
-                                <textarea rows="4" required class="input" placeholder="Votre message..."></textarea>
+                                <textarea name="message" rows="4" required 
+                                          class="input" 
+                                          placeholder="Votre message..."></textarea>
+                                <div class="char-count">0/1000</div>
                             </div>
                             
                             <button type="submit" class="w-full btn-primary py-3 md:py-4">
+                                <i class="fas fa-paper-plane mr-2"></i>
                                 Envoyer le message
                             </button>
                         </form>
@@ -1858,7 +2203,7 @@
                 <form id="reservationForm" class="space-y-4 md:space-y-6">
                     <input type="hidden" id="reservationSalonId">
                     
-                    <div>
+                    <div class="form-group">
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Service *</label>
                         <select id="reservationService" required class="input">
                             <option value="">Choisir un service</option>
@@ -1870,11 +2215,11 @@
                     </div>
 
                     <div class="grid md:grid-cols-2 gap-4 md:gap-6">
-                        <div>
+                        <div class="form-group">
                             <label class="block text-sm font-semibold text-gray-700 mb-2">Date *</label>
                             <input type="date" id="reservationDate" required class="input">
                         </div>
-                        <div>
+                        <div class="form-group">
                             <label class="block text-sm font-semibold text-gray-700 mb-2">Heure *</label>
                             <select id="reservationTime" required class="input">
                                 <option value="">Choisir l'heure</option>
@@ -1890,9 +2235,10 @@
                         </div>
                     </div>
 
-                    <div>
+                    <div class="form-group textarea-group">
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Notes (optionnel)</label>
                         <textarea id="reservationNotes" rows="3" class="input" placeholder="Précisions sur la prestation..."></textarea>
+                        <div class="char-count">0/500</div>
                     </div>
 
                     <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 pt-4">
@@ -1928,6 +2274,11 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
     <script>
+        // ====================
+        // 🔧 CONFIGURATION
+        // ====================
+        const API_BASE_URL = 'http://localhost:5000/api';
+        
         // Initialisation AOS
         AOS.init({
             duration: 800,
@@ -1938,10 +2289,13 @@
         // Variables globales
         let userLocation = null;
         let map = null;
+        let currentUser = null;
 
-        // Initialisation
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeAuth();
+        // ====================
+        // 🚀 INITIALISATION
+        // ====================
+        document.addEventListener('DOMContentLoaded', async function() {
+            await initializeAuth();
             initializeMap();
             initializeFilters();
             initializeForms();
@@ -1958,21 +2312,40 @@
         });
 
         // ====================
-        // 🔧 FONCTIONS DE BASE
+        // 🔐 GESTION D'AUTHENTIFICATION
         // ====================
 
-        function initializeAuth() {
-            // Simulation d'utilisateur connecté pour la démo
-            const demoUser = {
-                fullName: "Awa Diop",
-                email: "awa.diop@example.com",
-                phone: "771234567",
-                role: "client"
-            };
-            
-            if (!localStorage.getItem('keurcoiff_user')) {
-                localStorage.setItem('keurcoiff_user', JSON.stringify(demoUser));
-                localStorage.setItem('keurcoiff_token', 'demo_token_12345');
+        async function initializeAuth() {
+            const token = localStorage.getItem('keurcoiff_token');
+            if (!token) {
+                currentUser = null;
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/auth/verify`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    currentUser = data.data.user;
+                    localStorage.setItem('keurcoiff_user', JSON.stringify(currentUser));
+                } else {
+                    // Token invalide
+                    localStorage.removeItem('keurcoiff_user');
+                    localStorage.removeItem('keurcoiff_token');
+                    currentUser = null;
+                }
+            } catch (error) {
+                console.error('❌ Erreur vérification token:', error);
+                localStorage.removeItem('keurcoiff_user');
+                localStorage.removeItem('keurcoiff_token');
+                currentUser = null;
             }
         }
 
@@ -1980,34 +2353,39 @@
             const authSection = document.getElementById('authSection');
             const authSectionMobile = document.getElementById('authSectionMobile');
             const mobileAuthSection = document.getElementById('mobileAuthSection');
-            const user = JSON.parse(localStorage.getItem('keurcoiff_user') || '{}');
             
-            if (user.fullName) {
+            if (currentUser) {
                 // Version desktop
                 authSection.innerHTML = `
                     <div class="flex items-center space-x-4">
                         <div class="hidden lg:block text-right">
-                            <div class="text-sm font-semibold text-gray-900">${user.fullName}</div>
-                            <div class="text-xs text-primary-600">Mon compte</div>
+                            <div class="text-sm font-semibold text-gray-900">${currentUser.fullName}</div>
+                            <div class="text-xs text-primary-600">${currentUser.role === 'coiffeur' ? 'Coiffeur' : 'Client'}</div>
                         </div>
                         <div class="relative">
                             <button onclick="toggleUserMenu()" 
-                                    class="w-10 h-10 bg-gradient-to-r from-primary-600 to-primary-700 rounded-full flex items-center justify-center text-white font-bold hover:shadow-md transition-all">
-                                ${user.fullName.charAt(0).toUpperCase()}
+                                    class="user-avatar">
+                                ${currentUser.fullName.charAt(0).toUpperCase()}
                             </button>
                             
-                            <div id="userMenu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-2xl shadow-hard border border-gray-200 py-2 z-50">
-                                <a href="profile.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors">
-                                    <i class="fas fa-user text-primary-600 w-5"></i>
+                            <div id="userMenu" class="user-menu hidden">
+                                <a href="profile.html" class="user-menu-item">
+                                    <i class="fas fa-user"></i>
                                     <span>Mon profil</span>
                                 </a>
-                                <a href="reservations.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors">
-                                    <i class="fas fa-calendar text-primary-600 w-5"></i>
+                                <a href="mes-reservations.html" class="user-menu-item">
+                                    <i class="fas fa-calendar"></i>
                                     <span>Mes réservations</span>
                                 </a>
-                                <div class="border-t border-gray-200 my-2"></div>
-                                <button onclick="logout()" class="flex items-center space-x-3 px-4 py-3 text-red-600 hover:bg-red-50 w-full text-left transition-colors">
-                                    <i class="fas fa-sign-out-alt w-5"></i>
+                                ${currentUser.role === 'coiffeur' ? `
+                                <a href="dashboard-coiffeur.html" class="user-menu-item">
+                                    <i class="fas fa-chart-line"></i>
+                                    <span>Dashboard</span>
+                                </a>
+                                ` : ''}
+                                <div class="user-menu-divider"></div>
+                                <button onclick="logout()" class="user-menu-item w-full text-left">
+                                    <i class="fas fa-sign-out-alt"></i>
                                     <span>Déconnexion</span>
                                 </button>
                             </div>
@@ -2018,8 +2396,8 @@
                 // Version mobile (bouton menu)
                 authSectionMobile.innerHTML = `
                     <button onclick="toggleUserMenu()" 
-                            class="w-8 h-8 bg-gradient-to-r from-primary-600 to-primary-700 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                        ${user.fullName.charAt(0).toUpperCase()}
+                            class="user-avatar text-sm">
+                        ${currentUser.fullName.charAt(0).toUpperCase()}
                     </button>
                 `;
                 
@@ -2027,22 +2405,28 @@
                 mobileAuthSection.innerHTML = `
                     <div class="space-y-4">
                         <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-xl">
-                            <div class="w-10 h-10 bg-gradient-to-r from-primary-600 to-primary-700 rounded-full flex items-center justify-center text-white font-bold">
-                                ${user.fullName.charAt(0).toUpperCase()}
+                            <div class="user-avatar">
+                                ${currentUser.fullName.charAt(0).toUpperCase()}
                             </div>
                             <div>
-                                <div class="font-semibold text-gray-900">${user.fullName}</div>
-                                <div class="text-sm text-gray-600">Mon compte</div>
+                                <div class="font-semibold text-gray-900">${currentUser.fullName}</div>
+                                <div class="text-sm text-gray-600">${currentUser.role === 'coiffeur' ? 'Coiffeur' : 'Client'}</div>
                             </div>
                         </div>
                         <a href="profile.html" class="flex items-center space-x-3 p-3 text-gray-700 hover:bg-gray-100 rounded-xl transition-colors" onclick="closeMobileMenu()">
                             <i class="fas fa-user text-primary-600 w-5"></i>
                             <span>Mon profil</span>
                         </a>
-                        <a href="reservations.html" class="flex items-center space-x-3 p-3 text-gray-700 hover:bg-gray-100 rounded-xl transition-colors" onclick="closeMobileMenu()">
+                        <a href="mes-reservations.html" class="flex items-center space-x-3 p-3 text-gray-700 hover:bg-gray-100 rounded-xl transition-colors" onclick="closeMobileMenu()">
                             <i class="fas fa-calendar text-primary-600 w-5"></i>
                             <span>Mes réservations</span>
                         </a>
+                        ${currentUser.role === 'coiffeur' ? `
+                        <a href="dashboard-coiffeur.html" class="flex items-center space-x-3 p-3 text-gray-700 hover:bg-gray-100 rounded-xl transition-colors" onclick="closeMobileMenu()">
+                            <i class="fas fa-chart-line text-primary-600 w-5"></i>
+                            <span>Dashboard coiffeur</span>
+                        </a>
+                        ` : ''}
                         <button onclick="logout()" class="flex items-center space-x-3 p-3 text-red-600 hover:bg-red-50 w-full text-left rounded-xl transition-colors">
                             <i class="fas fa-sign-out-alt w-5"></i>
                             <span>Déconnexion</span>
@@ -2060,7 +2444,11 @@
                 
                 // Version mobile
                 authSectionMobile.innerHTML = `
-                    <a href="login.html" class="text-primary-600 font-semibold text-sm">Connexion</a>
+                    <div class="flex items-center space-x-2">
+                        <a href="login.html" class="text-primary-600 font-semibold text-sm">Connexion</a>
+                        <span class="text-gray-300">|</span>
+                        <a href="register.html" class="text-primary-600 font-semibold text-sm">S'inscrire</a>
+                    </div>
                 `;
                 
                 // Version mobile (menu complet)
@@ -2079,35 +2467,65 @@
 
         function toggleUserMenu() {
             const menu = document.getElementById('userMenu');
-            menu.classList.toggle('hidden');
+            if (menu) {
+                menu.classList.toggle('hidden');
+                
+                // Fermer le menu en cliquant à l'extérieur
+                if (!menu.classList.contains('hidden')) {
+                    setTimeout(() => {
+                        document.addEventListener('click', closeUserMenuOnClickOutside);
+                    }, 10);
+                } else {
+                    document.removeEventListener('click', closeUserMenuOnClickOutside);
+                }
+            }
         }
 
-        function logout() {
+        function closeUserMenuOnClickOutside(event) {
+            const menu = document.getElementById('userMenu');
+            const button = document.querySelector('.user-avatar');
+            
+            if (menu && !menu.contains(event.target) && !button.contains(event.target)) {
+                menu.classList.add('hidden');
+                document.removeEventListener('click', closeUserMenuOnClickOutside);
+            }
+        }
+
+        async function logout() {
+            const token = localStorage.getItem('keurcoiff_token');
+            
+            if (token) {
+                try {
+                    await fetch(`${API_BASE_URL}/auth/logout`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                } catch (error) {
+                    console.error('❌ Erreur déconnexion:', error);
+                }
+            }
+            
+            // Supprimer les données locales
             localStorage.removeItem('keurcoiff_user');
             localStorage.removeItem('keurcoiff_token');
+            currentUser = null;
+            
+            // Mettre à jour l'interface
+            updateAuthUI();
+            
+            // Fermer le menu mobile s'il est ouvert
+            closeMobileMenu();
+            
+            // Afficher une notification
             showNotification('Déconnexion réussie', 'success');
-            setTimeout(() => location.reload(), 1000);
-        }
-
-        function showNotification(message, type = 'info') {
-            const notification = document.createElement('div');
-            notification.className = `fixed top-4 right-4 px-6 py-4 rounded-2xl shadow-hard z-50 max-w-sm animate-slide-in ${
-                type === 'success' ? 'bg-green-500 text-white' : 
-                type === 'error' ? 'bg-red-500 text-white' : 
-                'bg-primary-600 text-white'
-            }`;
-            notification.innerHTML = `
-                <div class="flex items-center space-x-3">
-                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-triangle' : 'info-circle'}"></i>
-                    <span>${message}</span>
-                </div>
-            `;
             
-            document.body.appendChild(notification);
-            
+            // Recharger la page pour mettre à jour l'état
             setTimeout(() => {
-                notification.remove();
-            }, 5000);
+                window.location.reload();
+            }, 1000);
         }
 
         // ====================
@@ -2241,6 +2659,10 @@
                     .openPopup();
                     
                     showNotification('Localisation trouvée !', 'success');
+                    
+                    // Mettre à jour les statistiques
+                    document.getElementById('nearbyCount').textContent = '8';
+                    document.getElementById('distanceAvg').textContent = '250m';
                 },
                 function(error) {
                     console.error('Erreur de géolocalisation:', error);
@@ -2251,6 +2673,11 @@
 
         function filterByDistance(maxDistance) {
             showNotification(`Filtrage des salons à moins de ${maxDistance}m`, 'info');
+            
+            // Simulation de filtrage
+            const distanceText = maxDistance >= 1000 ? `${maxDistance/1000}km` : `${maxDistance}m`;
+            document.getElementById('nearbyCount').textContent = Math.floor(Math.random() * 5) + 3;
+            document.getElementById('distanceAvg').textContent = distanceText;
         }
 
         // ====================
@@ -2277,23 +2704,30 @@
 
         function filterSalons(filter) {
             const cards = document.querySelectorAll('.salon-card');
+            let visibleCount = 0;
+            
             cards.forEach(card => {
-                if (filter === 'all' || card.dataset.category === filter) {
+                if (filter === 'all') {
                     card.style.display = 'block';
+                    visibleCount++;
                 } else {
-                    card.style.display = 'none';
+                    // Simulation de filtrage
+                    const shouldShow = Math.random() > 0.3;
+                    card.style.display = shouldShow ? 'block' : 'none';
+                    if (shouldShow) visibleCount++;
                 }
             });
             
-            showNotification(`Affichage des salons ${filter === 'all' ? '' : filter}`, 'info');
+            showNotification(`${visibleCount} salons ${filter === 'all' ? '' : filter} trouvés`, 'info');
         }
 
         function loadMoreSalons() {
             showNotification('Chargement de plus de salons...', 'info');
+            
             // Simulation de chargement
             setTimeout(() => {
-                showNotification('10 nouveaux salons chargés', 'success');
-            }, 1000);
+                showNotification('5 nouveaux salons chargés', 'success');
+            }, 1500);
         }
 
         // ====================
@@ -2304,8 +2738,30 @@
             // Formulaire partenaire
             const partnerForm = document.getElementById('partnerForm');
             if (partnerForm) {
+                // Compteur de caractères pour la description
+                const descriptionTextarea = partnerForm.querySelector('textarea[name="description"]');
+                const charCount = partnerForm.querySelector('.char-count');
+                
+                if (descriptionTextarea && charCount) {
+                    descriptionTextarea.addEventListener('input', function() {
+                        const length = this.value.length;
+                        charCount.textContent = `${length}/500`;
+                        
+                        if (length > 500) {
+                            this.value = this.value.substring(0, 500);
+                            charCount.textContent = '500/500';
+                        }
+                    });
+                }
+                
                 partnerForm.addEventListener('submit', async function(e) {
                     e.preventDefault();
+                    
+                    // Vérifier l'authentification
+                    if (!currentUser) {
+                        showNotification('Veuillez vous connecter pour devenir partenaire', 'error');
+                        return;
+                    }
                     
                     const submitBtn = this.querySelector('button[type="submit"]');
                     const originalText = submitBtn.innerHTML;
@@ -2317,37 +2773,69 @@
                     `;
                     submitBtn.disabled = true;
                     
-                    // Simulation d'envoi
-                    await new Promise(resolve => setTimeout(resolve, 2000));
-                    
-                    // Succès
-                    this.innerHTML = `
-                        <div class="text-center py-8">
-                            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <i class="fas fa-check text-green-600 text-2xl"></i>
-                            </div>
-                            <h4 class="text-2xl font-bold text-white mb-2">Félicitations !</h4>
-                            <p class="text-gray-300 mb-6">
-                                Votre demande d'inscription a été reçue. Notre équipe vous contacte dans les 24 heures.
-                            </p>
-                            <div class="bg-green-900/30 border border-green-700 rounded-2xl p-4">
-                                <div class="flex items-center text-green-400">
-                                    <i class="fas fa-phone mr-3"></i>
-                                    <span>+221 33 822 45 67</span>
+                    try {
+                        // Simulation d'envoi
+                        await new Promise(resolve => setTimeout(resolve, 2000));
+                        
+                        // Succès
+                        this.innerHTML = `
+                            <div class="text-center py-8">
+                                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-check text-green-600 text-2xl"></i>
+                                </div>
+                                <h4 class="text-2xl font-bold text-white mb-2">Félicitations !</h4>
+                                <p class="text-gray-300 mb-6">
+                                    Votre demande d'inscription a été reçue. Notre équipe vous contactera dans les 24 heures.
+                                </p>
+                                <div class="bg-green-900/30 border border-green-700 rounded-2xl p-4">
+                                    <div class="flex items-center text-green-400">
+                                        <i class="fas fa-phone mr-3"></i>
+                                        <span>+221 33 822 45 67</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    `;
-                    
-                    showNotification('Demande d\'inscription envoyée avec succès', 'success');
+                        `;
+                        
+                        showNotification('Demande d\'inscription envoyée avec succès', 'success');
+                    } catch (error) {
+                        console.error('❌ Erreur:', error);
+                        showNotification('Erreur lors de l\'envoi du formulaire', 'error');
+                        
+                        // Réinitialiser le bouton
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    }
                 });
             }
 
             // Formulaire de réservation
             const reservationForm = document.getElementById('reservationForm');
             if (reservationForm) {
+                // Compteur de caractères pour les notes
+                const notesTextarea = reservationForm.querySelector('#reservationNotes');
+                const charCount = reservationForm.querySelector('.char-count');
+                
+                if (notesTextarea && charCount) {
+                    notesTextarea.addEventListener('input', function() {
+                        const length = this.value.length;
+                        charCount.textContent = `${length}/500`;
+                        
+                        if (length > 500) {
+                            this.value = this.value.substring(0, 500);
+                            charCount.textContent = '500/500';
+                        }
+                    });
+                }
+                
                 reservationForm.addEventListener('submit', async function(e) {
                     e.preventDefault();
+                    
+                    // Vérifier l'authentification
+                    if (!currentUser) {
+                        showNotification('Veuillez vous connecter pour réserver', 'error');
+                        window.location.href = 'login.html?redirect=reservation';
+                        return;
+                    }
                     
                     const submitBtn = this.querySelector('button[type="submit"]');
                     const originalText = submitBtn.innerHTML;
@@ -2359,16 +2847,84 @@
                     `;
                     submitBtn.disabled = true;
                     
-                    // Simulation d'envoi
-                    await new Promise(resolve => setTimeout(resolve, 1500));
+                    try {
+                        // Simulation d'envoi
+                        await new Promise(resolve => setTimeout(resolve, 1500));
+                        
+                        // Succès
+                        showNotification('Réservation confirmée avec succès !', 'success');
+                        closeReservationModal();
+                        
+                        // Réinitialiser le bouton
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    } catch (error) {
+                        console.error('❌ Erreur:', error);
+                        showNotification('Erreur lors de la réservation', 'error');
+                        
+                        // Réinitialiser le bouton
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    }
+                });
+            }
+
+            // Formulaire de contact
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                // Compteur de caractères pour le message
+                const messageTextarea = contactForm.querySelector('textarea[name="message"]');
+                const charCount = contactForm.querySelector('.char-count');
+                
+                if (messageTextarea && charCount) {
+                    messageTextarea.addEventListener('input', function() {
+                        const length = this.value.length;
+                        charCount.textContent = `${length}/1000`;
+                        
+                        if (length > 1000) {
+                            this.value = this.value.substring(0, 1000);
+                            charCount.textContent = '1000/1000';
+                        }
+                    });
+                }
+                
+                contactForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
                     
-                    // Succès
-                    showNotification('Réservation confirmée avec succès !', 'success');
-                    closeReservationModal();
+                    const submitBtn = this.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.innerHTML;
                     
-                    // Réinitialiser le bouton
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.disabled = false;
+                    // Animation de chargement
+                    submitBtn.innerHTML = `
+                        <div class="loader mx-auto"></div>
+                        <span class="ml-2">Envoi...</span>
+                    `;
+                    submitBtn.disabled = true;
+                    
+                    try {
+                        // Simulation d'envoi
+                        await new Promise(resolve => setTimeout(resolve, 1500));
+                        
+                        // Succès
+                        showNotification('Message envoyé avec succès !', 'success');
+                        this.reset();
+                        
+                        // Réinitialiser le compteur
+                        if (charCount) {
+                            charCount.textContent = '0/1000';
+                        }
+                        
+                        // Réinitialiser le bouton
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    } catch (error) {
+                        console.error('❌ Erreur:', error);
+                        showNotification('Erreur lors de l\'envoi du message', 'error');
+                        
+                        // Réinitialiser le bouton
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    }
                 });
             }
         }
@@ -2378,6 +2934,13 @@
         // ====================
 
         function openReservationModal(salonId, salonName) {
+            // Vérifier l'authentification
+            if (!currentUser) {
+                showNotification('Veuillez vous connecter pour réserver', 'info');
+                window.location.href = 'login.html?redirect=reservation';
+                return;
+            }
+            
             document.getElementById('reservationSalonName').textContent = salonName;
             document.getElementById('reservationSalonId').value = salonId;
             document.getElementById('reservationModal').classList.remove('hidden');
@@ -2394,6 +2957,12 @@
         function closeReservationModal() {
             document.getElementById('reservationModal').classList.add('hidden');
             document.getElementById('reservationForm').reset();
+            
+            // Réinitialiser le compteur de caractères
+            const charCount = document.querySelector('#reservationModal .char-count');
+            if (charCount) {
+                charCount.textContent = '0/500';
+            }
         }
 
         // ====================
@@ -2402,7 +2971,11 @@
 
         function openChat() {
             showNotification('Ouverture du chat avec notre assistant...', 'info');
-            // Ici vous pourriez ouvrir une fenêtre de chat ou rediriger vers une page de chat
+            
+            // Simulation d'ouverture de chat
+            setTimeout(() => {
+                showNotification('Bonjour ! Comment puis-je vous aider aujourd\'hui ?', 'info');
+            }, 500);
         }
 
         // ====================
@@ -2421,6 +2994,7 @@
                 behavior: 'smooth' 
             });
             closeMobileMenu();
+            
             // Déclencher automatiquement la géolocalisation
             setTimeout(() => {
                 getUserLocation();
@@ -2441,8 +3015,8 @@
 
             // Mettre à jour les éléments de statistiques si ils existent
             const elements = {
-                'nearbyCount': stats.salons,
-                'topRated': stats.satisfaction.toFixed(1) + '★'
+                'nearbyCount': Math.floor(Math.random() * 5) + 8,
+                'topRated': (4.7 + Math.random() * 0.3).toFixed(1) + '★'
             };
 
             for (const [id, value] of Object.entries(elements)) {
@@ -2458,17 +3032,99 @@
         updateStats(); // Appel initial
 
         // ====================
-        // 🎯 FONCTIONS D'ANALYSE
+        // 🔔 NOTIFICATIONS
+        // ====================
+
+        function showNotification(message, type = 'info') {
+            // Créer l'élément de notification
+            const notification = document.createElement('div');
+            notification.className = `notification ${type} animate-slide-in-up`;
+            
+            // Icône selon le type
+            let icon = 'info-circle';
+            if (type === 'success') icon = 'check-circle';
+            if (type === 'error') icon = 'exclamation-triangle';
+            if (type === 'warning') icon = 'exclamation-circle';
+            
+            notification.innerHTML = `
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-${icon}"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            // Ajouter au body
+            document.body.appendChild(notification);
+            
+            // Supprimer après 5 secondes
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateY(-20px)';
+                
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 5000);
+            
+            // Fermer au clic
+            notification.addEventListener('click', () => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateY(-20px)';
+                
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            });
+        }
+
+        // ====================
+        // 📱 GESTION DES DATES
+        // ====================
+
+        function initDate() {
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            
+            const dateInput = document.getElementById('reservationDate');
+            if (dateInput) {
+                dateInput.min = today.toISOString().split('T')[0];
+                dateInput.value = tomorrow.toISOString().split('T')[0];
+            }
+        }
+
+        // ====================
+        // 🎯 SUIVI DES INTERACTIONS
         // ====================
 
         // Suivi des interactions
         function trackInteraction(action, label) {
             console.log(`🎯 Interaction: ${action} - ${label}`);
-            // Ici vous pourriez envoyer ces données à Google Analytics ou autre
+            
+            // Envoyer à l'API si nécessaire
+            if (currentUser) {
+                fetch(`${API_BASE_URL}/analytics/track`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('keurcoiff_token')}`
+                    },
+                    body: JSON.stringify({
+                        action,
+                        label,
+                        userId: currentUser.id,
+                        timestamp: new Date().toISOString()
+                    })
+                }).catch(console.error);
+            }
         }
 
         // Exemple d'utilisation
-        document.querySelectorAll('button').forEach(button => {
+        document.querySelectorAll('button[onclick]').forEach(button => {
             button.addEventListener('click', function() {
                 const action = this.textContent.trim() || this.getAttribute('onclick');
                 trackInteraction('button_click', action);
@@ -2476,7 +3132,24 @@
         });
 
         // ====================
-        // 🎨 THÈME SOMBRE/AUTOMATIQUE
+        // 📱 AMÉLIORATIONS MOBILE
+        // ====================
+
+        // Empêcher le zoom sur les inputs sur iOS
+        document.addEventListener('touchstart', function(e) {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') {
+                e.target.style.fontSize = '16px';
+            }
+        });
+
+        document.addEventListener('blur', function(e) {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') {
+                e.target.style.fontSize = '';
+            }
+        }, true);
+
+        // ====================
+        // 🎨 GESTION DU THÈME
         // ====================
 
         function initTheme() {
@@ -2500,116 +3173,44 @@
         // Initialiser le thème
         initTheme();
 
-        // Initialisation de la date pour le formulaire
-        function initDate() {
-            const today = new Date();
-            const tomorrow = new Date(today);
-            tomorrow.setDate(tomorrow.getDate() + 1);
-            
-            const dateInput = document.getElementById('reservationDate');
-            if (dateInput) {
-                dateInput.min = today.toISOString().split('T')[0];
-                dateInput.value = tomorrow.toISOString().split('T')[0];
+        // ====================
+        // 🚀 FONCTIONS UTILITAIRES
+        // ====================
+
+        // Formatage des prix
+        function formatPrice(price) {
+            return new Intl.NumberFormat('fr-SN', {
+                style: 'currency',
+                currency: 'XOF',
+                minimumFractionDigits: 0
+            }).format(price);
+        }
+
+        // Formatage des dates
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return new Intl.DateTimeFormat('fr-FR', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            }).format(date);
+        }
+
+        // Vérification de la connexion Internet
+        function checkOnlineStatus() {
+            if (!navigator.onLine) {
+                showNotification('Vous êtes hors ligne. Certaines fonctionnalités peuvent être limitées.', 'warning');
             }
         }
 
-        // ====================
-        // 📱 GESTION DU TOUCH SUR MOBILE
-        // ====================
-
-        // Empêcher le zoom sur les inputs sur iOS
-        document.addEventListener('touchstart', function(e) {
-            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') {
-                e.target.style.fontSize = '16px';
-            }
-        });
-
-        document.addEventListener('blur', function(e) {
-            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') {
-                e.target.style.fontSize = '';
-            }
-        }, true);
+        // Vérifier la connexion au chargement
+        window.addEventListener('load', checkOnlineStatus);
+        window.addEventListener('online', () => showNotification('Vous êtes de nouveau en ligne !', 'success'));
+        window.addEventListener('offline', () => showNotification('Vous êtes hors ligne', 'warning'));
 
         // ====================
-        // 🎯 AMÉLIORATIONS D'ACCESSIBILITÉ
-        // ====================
-
-        // Navigation au clavier
-        document.addEventListener('keydown', function(e) {
-            // Tab navigation
-            if (e.key === 'Tab') {
-                document.documentElement.classList.add('keyboard-navigation');
-            }
-        });
-
-        document.addEventListener('mousedown', function() {
-            document.documentElement.classList.remove('keyboard-navigation');
-        });
-
-        // Gestion du focus pour les modales
-        function trapFocus(element) {
-            const focusableElements = element.querySelectorAll(
-                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-            );
-            const firstFocusableElement = focusableElements[0];
-            const lastFocusableElement = focusableElements[focusableElements.length - 1];
-
-            element.addEventListener('keydown', function(e) {
-                if (e.key === 'Tab') {
-                    if (e.shiftKey) {
-                        if (document.activeElement === firstFocusableElement) {
-                            e.preventDefault();
-                            lastFocusableElement.focus();
-                        }
-                    } else {
-                        if (document.activeElement === lastFocusableElement) {
-                            e.preventDefault();
-                            firstFocusableElement.focus();
-                        }
-                    }
-                }
-            });
-        }
-
-        // Appliquer le trap focus à la modal de réservation
-        const reservationModal = document.getElementById('reservationModal');
-        if (reservationModal) {
-            trapFocus(reservationModal);
-        }
-
-        // ====================
-        // 📱 GESTION DES IMAGES
-        // ====================
-
-        // Chargement paresseux des images
-        if ('IntersectionObserver' in window) {
-            const imageObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        if (img.dataset.src) {
-                            img.src = img.dataset.src;
-                        }
-                        observer.unobserve(img);
-                    }
-                });
-            });
-
-            document.querySelectorAll('img[data-src]').forEach(img => {
-                imageObserver.observe(img);
-            });
-        }
-
-        // Fallback pour les images cassées
-        document.addEventListener('error', function(e) {
-            if (e.target.tagName === 'IMG') {
-                e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"%3E%3Crect width="400" height="300" fill="%23f3f4f6"/%3E%3Ctext x="200" y="150" font-family="Arial" font-size="16" text-anchor="middle" fill="%236b7280"%3ESalon de Coiffure%3C/text%3E%3C/svg%3E';
-                e.target.alt = 'Image non disponible';
-            }
-        }, true);
-
-        // ====================
-        // 📱 GESTION DE LA NAVIGATION MOBILE
+        // 📱 GESTION DU SCROLL
         // ====================
 
         // Animation au scroll pour la navigation
@@ -2636,26 +3237,19 @@
         }, { passive: true });
 
         // ====================
-        // 🎯 GESTION DES ANIMATIONS
+        // 🎯 INITIALISATION FINALE
         // ====================
 
-        // Animation de pulse pour les boutons d'action
-        function animateActionButtons() {
-            const actionButtons = document.querySelectorAll('.btn-primary');
-            actionButtons.forEach(btn => {
-                btn.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-3px) scale(1.02)';
-                });
-                
-                btn.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0) scale(1)';
-                });
-            });
+        console.log('🚀 KeurCoiff\' initialisé avec succès !');
+        console.log('👤 Utilisateur:', currentUser);
+        console.log('🌐 API:', API_BASE_URL);
+
+        // Afficher un message de bienvenue si l'utilisateur est connecté
+        if (currentUser) {
+            setTimeout(() => {
+                showNotification(`Bonjour ${currentUser.fullName} ! Bienvenue sur KeurCoiff'`, 'info');
+            }, 1000);
         }
-
-        // Initialiser les animations
-        animateActionButtons();
-
     </script>
 </body>
 </html>
