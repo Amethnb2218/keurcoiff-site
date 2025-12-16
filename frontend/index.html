@@ -266,7 +266,7 @@
             color: white;
         }
         
-        /* Inputs */
+        /* INPUTS AMÉLIORÉS */
         .input {
             width: 100%;
             padding: 1rem 1.5rem;
@@ -275,12 +275,77 @@
             font-size: 1rem;
             transition: all 0.3s ease;
             background: white;
+            color: var(--gray-900);
+            font-weight: 500;
+        }
+        
+        .input::placeholder {
+            color: var(--gray-500);
+            opacity: 0.8;
+            font-weight: 400;
         }
         
         .input:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+            background: white;
+        }
+        
+        /* Champs dans sections sombres */
+        .bg-gray-800 .input,
+        .bg-gradient-dark .input {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.15);
+            color: white;
+        }
+        
+        .bg-gray-800 .input::placeholder,
+        .bg-gradient-dark .input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .bg-gray-800 .input:focus,
+        .bg-gradient-dark .input:focus {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--primary-400);
+            color: white;
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+        }
+        
+        /* Style pour les selects */
+        select.input {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.5em;
+            padding-right: 3rem;
+        }
+        
+        .bg-gray-800 select.input,
+        .bg-gradient-dark select.input {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23ffffff'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+        }
+        
+        /* Textarea amélioré */
+        textarea.input {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        /* Checkbox amélioré */
+        input[type="checkbox"] {
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: 0.375rem;
+            border: 2px solid var(--gray-300);
+            transition: all 0.2s ease;
+        }
+        
+        input[type="checkbox"]:checked {
+            background-color: var(--primary);
+            border-color: var(--primary);
         }
         
         /* Section spacing */
@@ -432,12 +497,15 @@
             border: 1px solid rgba(229, 231, 235, 0.8);
         }
         
-        /* Responsive adjustments */
+        /* ========== AMÉLIORATIONS MOBILE ========== */
         @media (max-width: 768px) {
-            #map {
-                height: 300px;
+            /* Navigation mobile */
+            .nav-link {
+                font-size: 1.125rem;
+                padding: 0.75rem 0;
             }
             
+            /* Hero section mobile */
             .hero-title {
                 font-size: 2.5rem !important;
                 line-height: 1.2 !important;
@@ -445,7 +513,225 @@
             
             .section-title {
                 font-size: 2rem !important;
+                line-height: 1.3 !important;
             }
+            
+            /* Cartes mobile */
+            .card {
+                padding: 1.5rem;
+                border-radius: 1.25rem;
+            }
+            
+            /* Inputs mobile */
+            .input {
+                padding: 0.875rem 1.25rem;
+                font-size: 16px; /* Empêcher le zoom sur iOS */
+                border-radius: 0.875rem;
+            }
+            
+            /* Boutons mobile */
+            .btn-primary, .btn-secondary {
+                padding: 0.875rem 1.5rem;
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+            
+            /* Grilles mobile */
+            .grid {
+                gap: 1.5rem;
+            }
+            
+            /* Map mobile */
+            #map {
+                height: 350px;
+                border-radius: 1rem;
+            }
+            
+            /* Formulaire mobile */
+            .form-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1rem !important;
+            }
+            
+            /* Filtres mobile */
+            .filter-btn {
+                padding: 0.75rem 1rem;
+                font-size: 0.875rem;
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+            
+            /* Modal mobile */
+            #reservationModal > div {
+                margin: 1rem;
+                max-height: 85vh;
+            }
+            
+            /* Stat cards mobile */
+            .stat-card {
+                padding: 1.5rem;
+            }
+            
+            /* Témoignages mobile */
+            .testimonial-card {
+                padding: 1.5rem;
+            }
+            
+            /* Footer mobile */
+            footer .grid {
+                gap: 2rem;
+            }
+            
+            /* Ajustement des marges */
+            .mb-8 {
+                margin-bottom: 1.5rem;
+            }
+            
+            .mb-6 {
+                margin-bottom: 1.25rem;
+            }
+            
+            .mb-4 {
+                margin-bottom: 1rem;
+            }
+            
+            /* Ajustement du texte */
+            .text-xl {
+                font-size: 1.125rem;
+            }
+            
+            .text-lg {
+                font-size: 1rem;
+            }
+            
+            /* Espacement sections */
+            .section {
+                padding-top: 3rem;
+                padding-bottom: 3rem;
+            }
+        }
+        
+        /* Très petits écrans */
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem !important;
+            }
+            
+            .section-title {
+                font-size: 1.75rem !important;
+            }
+            
+            #map {
+                height: 300px;
+            }
+            
+            .btn-primary, .btn-secondary {
+                padding: 0.75rem 1rem;
+                font-size: 0.875rem;
+            }
+        }
+        
+        /* Correction du menu mobile */
+        @media (max-width: 1024px) {
+            .lg\\:flex {
+                display: none !important;
+            }
+        }
+        
+        /* Menu mobile */
+        #mobileMenu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 85%;
+            max-width: 320px;
+            height: 100vh;
+            background: white;
+            z-index: 60;
+            transition: right 0.3s ease;
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+        }
+        
+        #mobileMenu.active {
+            right: 0;
+        }
+        
+        #mobileMenuOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 55;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        #mobileMenuOverlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Correction du contraste pour accessibilité */
+        .text-gray-600 {
+            color: #4b5563;
+        }
+        
+        .text-gray-700 {
+            color: #374151;
+        }
+        
+        .bg-gray-100 {
+            background-color: #f3f4f6;
+        }
+        
+        /* Focus visible pour accessibilité */
+        *:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+        
+        *:focus:not(.focus-visible) {
+            outline: none;
+        }
+        
+        /* Correction du contraste dans le footer */
+        footer .text-gray-400 {
+            color: #9ca3af;
+        }
+        
+        footer a:hover {
+            color: white;
+        }
+        
+        /* Amélioration des cartes de salon sur mobile */
+        @media (max-width: 768px) {
+            .salon-card {
+                margin-bottom: 1.5rem;
+            }
+            
+            .salon-card img {
+                height: 200px;
+            }
+        }
+        
+        /* Animation d'entrée pour mobile */
+        @keyframes slideInUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .animate-slide-in-up {
+            animation: slideInUp 0.5s ease-out;
         }
     </style>
 </head>
@@ -485,7 +771,10 @@
                 </div>
 
                 <!-- Mobile Menu Button -->
-                <div class="lg:hidden">
+                <div class="lg:hidden flex items-center space-x-4">
+                    <div id="authSectionMobile">
+                        <!-- Sera rempli par JavaScript -->
+                    </div>
                     <button id="menuBtn" class="text-gray-700 p-2 rounded-xl hover:bg-gray-100 transition-colors">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
@@ -493,6 +782,38 @@
             </div>
         </div>
     </nav>
+
+    <!-- Menu Mobile -->
+    <div id="mobileMenuOverlay" class=""></div>
+    <div id="mobileMenu" class="p-6">
+        <div class="flex justify-between items-center mb-8">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-gradient-to-r from-primary-600 to-primary-700 rounded-xl flex items-center justify-center">
+                    <i class="fas fa-scissors text-white"></i>
+                </div>
+                <span class="text-xl font-bold gradient-text">KeurCoiff'</span>
+            </div>
+            <button id="closeMenuBtn" class="text-gray-700 p-2 rounded-lg hover:bg-gray-100">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+        
+        <div class="space-y-4 mb-8">
+            <a href="#accueil" class="block nav-link text-lg py-3" onclick="closeMobileMenu()">Accueil</a>
+            <a href="#salons" class="block nav-link text-lg py-3" onclick="closeMobileMenu()">Nos Salons</a>
+            <a href="#services" class="block nav-link text-lg py-3" onclick="closeMobileMenu()">Services</a>
+            <a href="#coiffeurs" class="block nav-link text-lg py-3" onclick="closeMobileMenu()">Nos Coiffeurs</a>
+            <a href="#localisation" class="block nav-link text-lg py-3" onclick="closeMobileMenu()">📍 Proche de moi</a>
+            <a href="#partenariat" class="block nav-link text-lg py-3" onclick="closeMobileMenu()">Devenir Partenaire</a>
+            <a href="#contact" class="block nav-link text-lg py-3" onclick="closeMobileMenu()">Contact</a>
+        </div>
+        
+        <div class="pt-6 border-t border-gray-200">
+            <div id="mobileAuthSection" class="space-y-4">
+                <!-- Sera rempli par JavaScript -->
+            </div>
+        </div>
+    </div>
 
     <!-- Hero Section Premium -->
     <section id="accueil" class="pt-32 pb-20 relative overflow-hidden">
@@ -516,7 +837,7 @@
                     </div>
                     
                     <!-- Titre Principal -->
-                    <h1 class="hero-title text-5xl lg:text-6xl xl:text-7xl font-black mb-6 leading-tight">
+                    <h1 class="hero-title text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mb-6 leading-tight">
                         Votre Style,
                         <span class="gradient-text block typewriter mt-2">
                             Notre Passion
@@ -524,23 +845,23 @@
                     </h1>
                     
                     <!-- Sous-titre -->
-                    <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                    <p class="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
                         Découvrez l'excellence de la coiffure sénégalaise. Réservez les meilleurs coiffeurs de Dakar en quelques clics. 
                         <span class="font-semibold text-primary-600">Paiement 100% sécurisé avec Orange Money et Wave.</span>
                     </p>
                     
                     <!-- Statistiques de confiance -->
-                    <div class="flex flex-wrap gap-8 mb-8">
+                    <div class="flex flex-wrap gap-6 mb-8">
                         <div class="flex items-center">
-                            <div class="text-3xl font-bold text-primary-600 mr-3">150+</div>
+                            <div class="text-2xl md:text-3xl font-bold text-primary-600 mr-3">150+</div>
                             <div class="text-gray-600">Salons Experts</div>
                         </div>
                         <div class="flex items-center">
-                            <div class="text-3xl font-bold text-primary-600 mr-3">4.9<span class="text-yellow-400">★</span></div>
+                            <div class="text-2xl md:text-3xl font-bold text-primary-600 mr-3">4.9<span class="text-yellow-400">★</span></div>
                             <div class="text-gray-600">Satisfaction</div>
                         </div>
                         <div class="flex items-center">
-                            <div class="text-3xl font-bold text-primary-600 mr-3">24/7</div>
+                            <div class="text-2xl md:text-3xl font-bold text-primary-600 mr-3">24/7</div>
                             <div class="text-gray-600">Disponibilité</div>
                         </div>
                     </div>
@@ -559,30 +880,30 @@
                 </div>
 
                 <!-- Right Content - Image Hero -->
-                <div class="relative" data-aos="fade-left">
+                <div class="relative mt-12 lg:mt-0" data-aos="fade-left">
                     <div class="relative">
                         <!-- Image principale du salon -->
                         <div class="rounded-3xl overflow-hidden shadow-hard">
                             <img src="https://coiffurealimage.fr/wp-content/uploads/2018/03/img-salon-10.jpg" 
                                  alt="Salon de coiffure premium à Dakar"
                                  class="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700"
-                                 style="height: 500px;">
+                                 style="height: 400px; min-height: 400px;">
                         </div>
                         
                         <!-- Carte flottante -->
-                        <div class="absolute -bottom-6 -right-6 bg-white rounded-2xl p-6 shadow-hard w-64">
-                            <div class="flex items-center space-x-4 mb-3">
-                                <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center">
-                                    <i class="fas fa-calendar-check text-primary-600"></i>
+                        <div class="absolute -bottom-6 -right-6 bg-white rounded-2xl p-4 md:p-6 shadow-hard w-56 md:w-64">
+                            <div class="flex items-center space-x-3 md:space-x-4 mb-3">
+                                <div class="w-10 h-10 md:w-12 md:h-12 bg-primary-100 rounded-xl flex items-center justify-center">
+                                    <i class="fas fa-calendar-check text-primary-600 text-sm md:text-base"></i>
                                 </div>
                                 <div>
-                                    <div class="font-bold text-gray-900">+500 réservations</div>
-                                    <div class="text-sm text-gray-500">Cette semaine</div>
+                                    <div class="font-bold text-gray-900 text-sm md:text-base">+500 réservations</div>
+                                    <div class="text-xs md:text-sm text-gray-500">Cette semaine</div>
                                 </div>
                             </div>
                             <div class="flex items-center justify-between">
-                                <span class="text-sm text-gray-600">Taux de satisfaction</span>
-                                <span class="font-bold text-success">98%</span>
+                                <span class="text-xs md:text-sm text-gray-600">Taux de satisfaction</span>
+                                <span class="font-bold text-success text-sm md:text-base">98%</span>
                             </div>
                         </div>
                     </div>
@@ -594,75 +915,75 @@
     <!-- Section Services Premium -->
     <section id="services" class="section bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="section-title text-4xl lg:text-5xl font-black text-gray-900 mb-4">
+            <div class="text-center mb-12 md:mb-16" data-aos="fade-up">
+                <h2 class="section-title text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 mb-4">
                     Nos Services
                     <span class="gradient-text">d'Excellence</span>
                 </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4">
                     Découvrez une gamme complète de services réalisés par des professionnels certifiés
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                 <!-- Service 1 -->
-                <div class="card p-8 text-center" data-aos="fade-up" data-aos-delay="100">
-                    <div class="w-20 h-20 bg-gradient-to-br from-primary-100 to-primary-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-female text-primary-600 text-3xl"></i>
+                <div class="card p-6 md:p-8 text-center" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-primary-100 to-primary-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-female text-primary-600 text-2xl md:text-3xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Coiffure Femme</h3>
-                    <ul class="space-y-2 text-gray-600 mb-6">
+                    <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-4">Coiffure Femme</h3>
+                    <ul class="space-y-2 text-gray-600 mb-6 text-sm md:text-base">
                         <li>• Tresses traditionnelles</li>
                         <li>• Pose de mèches</li>
                         <li>• Coupes modernes</li>
                         <li>• Soins capillaires</li>
                     </ul>
-                    <div class="text-primary-600 font-bold text-lg">À partir de 3 000 FCFA</div>
+                    <div class="text-primary-600 font-bold text-base md:text-lg">À partir de 3 000 FCFA</div>
                 </div>
 
                 <!-- Service 2 -->
-                <div class="card p-8 text-center" data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-20 h-20 bg-gradient-to-br from-primary-100 to-primary-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-male text-primary-600 text-3xl"></i>
+                <div class="card p-6 md:p-8 text-center" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-primary-100 to-primary-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-male text-primary-600 text-2xl md:text-3xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Coiffure Homme</h3>
-                    <ul class="space-y-2 text-gray-600 mb-6">
+                    <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-4">Coiffure Homme</h3>
+                    <ul class="space-y-2 text-gray-600 mb-6 text-sm md:text-base">
                         <li>• Coupes précises</li>
                         <li>• Dégradés artistiques</li>
                         <li>• Tresses homme</li>
                         <li>• Barbe & soins</li>
                     </ul>
-                    <div class="text-primary-600 font-bold text-lg">À partir de 2 000 FCFA</div>
+                    <div class="text-primary-600 font-bold text-base md:text-lg">À partir de 2 000 FCFA</div>
                 </div>
 
                 <!-- Service 3 -->
-                <div class="card p-8 text-center" data-aos="fade-up" data-aos-delay="300">
-                    <div class="w-20 h-20 bg-gradient-to-br from-primary-100 to-primary-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-home text-primary-600 text-3xl"></i>
+                <div class="card p-6 md:p-8 text-center" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-primary-100 to-primary-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-home text-primary-600 text-2xl md:text-3xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">À Domicile</h3>
-                    <ul class="space-y-2 text-gray-600 mb-6">
+                    <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-4">À Domicile</h3>
+                    <ul class="space-y-2 text-gray-600 mb-6 text-sm md:text-base">
                         <li>• Service mobile</li>
                         <li>• Équipement complet</li>
                         <li>• Disponibilité 7j/7</li>
                         <li>• Professionnels certifiés</li>
                     </ul>
-                    <div class="text-primary-600 font-bold text-lg">Sur devis</div>
+                    <div class="text-primary-600 font-bold text-base md:text-lg">Sur devis</div>
                 </div>
 
                 <!-- Service 4 -->
-                <div class="card p-8 text-center" data-aos="fade-up" data-aos-delay="400">
-                    <div class="w-20 h-20 bg-gradient-to-br from-primary-100 to-primary-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-spa text-primary-600 text-3xl"></i>
+                <div class="card p-6 md:p-8 text-center" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-primary-100 to-primary-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-spa text-primary-600 text-2xl md:text-3xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Beauté & Bien-être</h3>
-                    <ul class="space-y-2 text-gray-600 mb-6">
+                    <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-4">Beauté & Bien-être</h3>
+                    <ul class="space-y-2 text-gray-600 mb-6 text-sm md:text-base">
                         <li>• Soins du visage</li>
                         <li>• Massages relaxants</li>
                         <li>• Maquillage</li>
                         <li>• Épilations</li>
                     </ul>
-                    <div class="text-primary-600 font-bold text-lg">À partir de 5 000 FCFA</div>
+                    <div class="text-primary-600 font-bold text-base md:text-lg">À partir de 5 000 FCFA</div>
                 </div>
             </div>
         </div>
@@ -671,73 +992,73 @@
     <!-- Section Salons en Vedette -->
     <section id="salons" class="section bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="section-title text-4xl lg:text-5xl font-black text-gray-900 mb-4">
+            <div class="text-center mb-12 md:mb-16" data-aos="fade-up">
+                <h2 class="section-title text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 mb-4">
                     Nos Salons
                     <span class="gradient-text">Partenaire</span>
                 </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4">
                     Découvrez les meilleurs salons de Dakar, sélectionnés pour leur expertise et leur professionnalisme
                 </p>
             </div>
 
             <!-- Filtres -->
-            <div class="flex flex-wrap gap-4 justify-center mb-12" data-aos="fade-up">
-                <button class="filter-btn active bg-primary-600 text-white px-6 py-3 rounded-xl font-semibold transition-all hover:shadow-md" data-filter="all">
+            <div class="flex flex-col sm:flex-row flex-wrap gap-3 md:gap-4 justify-center mb-8 md:mb-12" data-aos="fade-up">
+                <button class="filter-btn active bg-primary-600 text-white px-4 py-3 md:px-6 md:py-3 rounded-xl font-semibold transition-all hover:shadow-md text-sm md:text-base" data-filter="all">
                     Tous les salons
                 </button>
-                <button class="filter-btn bg-white text-gray-700 px-6 py-3 rounded-xl font-semibold border border-gray-200 transition-all hover:border-primary-400" data-filter="femme">
+                <button class="filter-btn bg-white text-gray-700 px-4 py-3 md:px-6 md:py-3 rounded-xl font-semibold border border-gray-200 transition-all hover:border-primary-400 text-sm md:text-base" data-filter="femme">
                     👩 Spécialiste femme
                 </button>
-                <button class="filter-btn bg-white text-gray-700 px-6 py-3 rounded-xl font-semibold border border-gray-200 transition-all hover:border-primary-400" data-filter="homme">
+                <button class="filter-btn bg-white text-gray-700 px-4 py-3 md:px-6 md:py-3 rounded-xl font-semibold border border-gray-200 transition-all hover:border-primary-400 text-sm md:text-base" data-filter="homme">
                     👨 Spécialiste homme
                 </button>
-                <button class="filter-btn bg-white text-gray-700 px-6 py-3 rounded-xl font-semibold border border-gray-200 transition-all hover:border-primary-400" data-filter="domicile">
+                <button class="filter-btn bg-white text-gray-700 px-4 py-3 md:px-6 md:py-3 rounded-xl font-semibold border border-gray-200 transition-all hover:border-primary-400 text-sm md:text-base" data-filter="domicile">
                     🏠 À domicile
                 </button>
             </div>
 
             <!-- Grille des salons -->
-            <div id="salonsGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div id="salonsGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 <!-- Salon 1 -->
                 <div class="salon-card card overflow-hidden" data-aos="fade-up">
-                    <div class="relative h-64 overflow-hidden">
+                    <div class="relative h-56 md:h-64 overflow-hidden">
                         <img src="https://coiffurealimage.fr/wp-content/uploads/2018/03/img-salon-10.jpg" 
                              alt="Salon Prestige Dakar"
                              class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
                         <div class="absolute top-4 right-4">
-                            <span class="badge badge-success">Ouvert</span>
+                            <span class="badge badge-success text-xs">Ouvert</span>
                         </div>
                         <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                            <div class="text-white font-bold text-xl">Prestige Dakar</div>
-                            <div class="text-white/80 flex items-center">
-                                <i class="fas fa-map-marker-alt mr-2"></i>
+                            <div class="text-white font-bold text-lg md:text-xl">Prestige Dakar</div>
+                            <div class="text-white/80 flex items-center text-sm md:text-base">
+                                <i class="fas fa-map-marker-alt mr-2 text-xs"></i>
                                 <span>Plateau, Dakar</span>
                             </div>
                         </div>
                     </div>
-                    <div class="p-6">
+                    <div class="p-4 md:p-6">
                         <div class="flex justify-between items-start mb-4">
                             <div class="flex items-center">
-                                <div class="text-yellow-400 mr-2">
+                                <div class="text-yellow-400 mr-2 text-sm md:text-base">
                                     ★★★★★
                                 </div>
-                                <span class="text-gray-600">4.9 (128 avis)</span>
+                                <span class="text-gray-600 text-sm">4.9 (128 avis)</span>
                             </div>
-                            <div class="text-primary-600 font-bold text-lg">
+                            <div class="text-primary-600 font-bold text-base md:text-lg">
                                 3 500 FCFA
                             </div>
                         </div>
-                        <p class="text-gray-600 mb-4">
+                        <p class="text-gray-600 mb-4 text-sm md:text-base">
                             Salon premium spécialisé dans les tresses africaines et soins capillaires haut de gamme.
                         </p>
                         <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Tresses</span>
-                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Soins</span>
-                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">À domicile</span>
+                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs md:text-sm">Tresses</span>
+                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs md:text-sm">Soins</span>
+                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs md:text-sm">À domicile</span>
                         </div>
                         <button onclick="openReservationModal('1', 'Prestige Dakar')" 
-                                class="w-full btn-primary">
+                                class="w-full btn-primary text-sm md:text-base py-3">
                             <i class="fas fa-calendar-plus mr-2"></i>
                             Réserver maintenant
                         </button>
@@ -746,43 +1067,43 @@
 
                 <!-- Salon 2 -->
                 <div class="salon-card card overflow-hidden" data-aos="fade-up" data-aos-delay="100">
-                    <div class="relative h-64 overflow-hidden">
+                    <div class="relative h-56 md:h-64 overflow-hidden">
                         <img src="https://th.bing.com/th/id/R.7135b0e2b4d81a4e891ad9ed67bf3680?rik=cB4PjLrggXJICQ&pid=ImgRaw&r=0" 
                              alt="Salon Elégance"
                              class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
                         <div class="absolute top-4 right-4">
-                            <span class="badge badge-warning">Fermeture à 19h</span>
+                            <span class="badge badge-warning text-xs">Fermeture à 19h</span>
                         </div>
                         <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                            <div class="text-white font-bold text-xl">Elégance Coiffure</div>
-                            <div class="text-white/80 flex items-center">
-                                <i class="fas fa-map-marker-alt mr-2"></i>
+                            <div class="text-white font-bold text-lg md:text-xl">Elégance Coiffure</div>
+                            <div class="text-white/80 flex items-center text-sm md:text-base">
+                                <i class="fas fa-map-marker-alt mr-2 text-xs"></i>
                                 <span>Almadies, Dakar</span>
                             </div>
                         </div>
                     </div>
-                    <div class="p-6">
+                    <div class="p-4 md:p-6">
                         <div class="flex justify-between items-start mb-4">
                             <div class="flex items-center">
-                                <div class="text-yellow-400 mr-2">
+                                <div class="text-yellow-400 mr-2 text-sm md:text-base">
                                     ★★★★★
                                 </div>
-                                <span class="text-gray-600">4.8 (96 avis)</span>
+                                <span class="text-gray-600 text-sm">4.8 (96 avis)</span>
                             </div>
-                            <div class="text-primary-600 font-bold text-lg">
+                            <div class="text-primary-600 font-bold text-base md:text-lg">
                                 4 000 FCFA
                             </div>
                         </div>
-                        <p class="text-gray-600 mb-4">
+                        <p class="text-gray-600 mb-4 text-sm md:text-base">
                             Spécialiste de la coiffure moderne et des coupes tendance. Expertise en coloration.
                         </p>
                         <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Coupes</span>
-                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Coloration</span>
-                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Brushing</span>
+                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs md:text-sm">Coupes</span>
+                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs md:text-sm">Coloration</span>
+                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs md:text-sm">Brushing</span>
                         </div>
                         <button onclick="openReservationModal('2', 'Elégance Coiffure')" 
-                                class="w-full btn-primary">
+                                class="w-full btn-primary text-sm md:text-base py-3">
                             <i class="fas fa-calendar-plus mr-2"></i>
                             Réserver maintenant
                         </button>
@@ -791,43 +1112,43 @@
 
                 <!-- Salon 3 -->
                 <div class="salon-card card overflow-hidden" data-aos="fade-up" data-aos-delay="200">
-                    <div class="relative h-64 overflow-hidden">
+                    <div class="relative h-56 md:h-64 overflow-hidden">
                         <img src="https://www.mobiliercoiffure.com/wp-content/uploads/2021/01/pack-quir.jpg" 
                              alt="Salon Tradition"
                              class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
                         <div class="absolute top-4 right-4">
-                            <span class="badge badge-primary">VIP</span>
+                            <span class="badge badge-primary text-xs">VIP</span>
                         </div>
                         <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                            <div class="text-white font-bold text-xl">Tradition Hair</div>
-                            <div class="text-white/80 flex items-center">
-                                <i class="fas fa-map-marker-alt mr-2"></i>
+                            <div class="text-white font-bold text-lg md:text-xl">Tradition Hair</div>
+                            <div class="text-white/80 flex items-center text-sm md:text-base">
+                                <i class="fas fa-map-marker-alt mr-2 text-xs"></i>
                                 <span>Ouakam, Dakar</span>
                             </div>
                         </div>
                     </div>
-                    <div class="p-6">
+                    <div class="p-4 md:p-6">
                         <div class="flex justify-between items-start mb-4">
                             <div class="flex items-center">
-                                <div class="text-yellow-400 mr-2">
+                                <div class="text-yellow-400 mr-2 text-sm md:text-base">
                                     ★★★★★
                                 </div>
-                                <span class="text-gray-600">4.9 (217 avis)</span>
+                                <span class="text-gray-600 text-sm">4.9 (217 avis)</span>
                             </div>
-                            <div class="text-primary-600 font-bold text-lg">
+                            <div class="text-primary-600 font-bold text-base md:text-lg">
                                 2 500 FCFA
                             </div>
                         </div>
-                        <p class="text-gray-600 mb-4">
+                        <p class="text-gray-600 mb-4 text-sm md:text-base">
                             Maîtres dans l'art des tresses traditionnelles africaines et coiffures cérémonielles.
                         </p>
                         <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Tradition</span>
-                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Cérémonie</span>
-                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Tresses</span>
+                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs md:text-sm">Tradition</span>
+                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs md:text-sm">Cérémonie</span>
+                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs md:text-sm">Tresses</span>
                         </div>
                         <button onclick="openReservationModal('3', 'Tradition Hair')" 
-                                class="w-full btn-primary">
+                                class="w-full btn-primary text-sm md:text-base py-3">
                             <i class="fas fa-calendar-plus mr-2"></i>
                             Réserver maintenant
                         </button>
@@ -836,8 +1157,8 @@
             </div>
 
             <!-- Bouton Voir Plus -->
-            <div class="text-center mt-12" data-aos="fade-up">
-                <button onclick="loadMoreSalons()" class="btn-secondary px-8">
+            <div class="text-center mt-8 md:mt-12" data-aos="fade-up">
+                <button onclick="loadMoreSalons()" class="btn-secondary px-6 md:px-8 py-3">
                     <i class="fas fa-plus mr-2"></i>
                     Voir plus de salons
                 </button>
@@ -848,106 +1169,106 @@
     <!-- Section Nos Coiffeurs -->
     <section id="coiffeurs" class="section bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="section-title text-4xl lg:text-5xl font-black text-gray-900 mb-4">
+            <div class="text-center mb-12 md:mb-16" data-aos="fade-up">
+                <h2 class="section-title text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 mb-4">
                     Nos Coiffeurs
                     <span class="gradient-text">Experts</span>
                 </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4">
                     Rencontrez nos artistes coiffeurs, sélectionnés pour leur talent et leur expertise
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                 <!-- Coiffeur 1 -->
-                <div class="card p-6 text-center" data-aos="fade-up">
-                    <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-primary-100">
+                <div class="card p-4 md:p-6 text-center" data-aos="fade-up">
+                    <div class="w-24 h-24 md:w-32 md:h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-primary-100">
                         <img src="https://randomuser.me/api/portraits/women/44.jpg" 
                              alt="Awa Diop"
                              class="w-full h-full object-cover">
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Awa Diop</h3>
-                    <div class="text-primary-600 font-semibold mb-3">Spécialiste Tresses</div>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-900 mb-2">Awa Diop</h3>
+                    <div class="text-primary-600 font-semibold mb-3 text-sm md:text-base">Spécialiste Tresses</div>
                     <div class="flex justify-center mb-4">
-                        <div class="text-yellow-400">
+                        <div class="text-yellow-400 text-sm md:text-base">
                             ★★★★★
                         </div>
                     </div>
-                    <p class="text-gray-600 text-sm mb-4">
+                    <p class="text-gray-600 text-xs md:text-sm mb-4">
                         12 ans d'expérience. Maîtresse dans l'art des tresses africaines traditionnelles.
                     </p>
                     <div class="flex justify-center space-x-2">
-                        <span class="badge bg-primary-50 text-primary-700">Tresses</span>
-                        <span class="badge bg-primary-50 text-primary-700">Soins</span>
+                        <span class="badge bg-primary-50 text-primary-700 text-xs">Tresses</span>
+                        <span class="badge bg-primary-50 text-primary-700 text-xs">Soins</span>
                     </div>
                 </div>
 
                 <!-- Coiffeur 2 -->
-                <div class="card p-6 text-center" data-aos="fade-up" data-aos-delay="100">
-                    <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-primary-100">
+                <div class="card p-4 md:p-6 text-center" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-24 h-24 md:w-32 md:h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-primary-100">
                         <img src="https://randomuser.me/api/portraits/men/32.jpg" 
                              alt="Ibrahima Ndiaye"
                              class="w-full h-full object-cover">
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Ibrahima Ndiaye</h3>
-                    <div class="text-primary-600 font-semibold mb-3">Barbier Expert</div>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-900 mb-2">Ibrahima Ndiaye</h3>
+                    <div class="text-primary-600 font-semibold mb-3 text-sm md:text-base">Barbier Expert</div>
                     <div class="flex justify-center mb-4">
-                        <div class="text-yellow-400">
+                        <div class="text-yellow-400 text-sm md:text-base">
                             ★★★★★
                         </div>
                     </div>
-                    <p class="text-gray-600 text-sm mb-4">
+                    <p class="text-gray-600 text-xs md:text-sm mb-4">
                         Spécialiste des coupes modernes et dégradés. 8 ans d'expérience.
                     </p>
                     <div class="flex justify-center space-x-2">
-                        <span class="badge bg-primary-50 text-primary-700">Dégradés</span>
-                        <span class="badge bg-primary-50 text-primary-700">Barbe</span>
+                        <span class="badge bg-primary-50 text-primary-700 text-xs">Dégradés</span>
+                        <span class="badge bg-primary-50 text-primary-700 text-xs">Barbe</span>
                     </div>
                 </div>
 
                 <!-- Coiffeur 3 -->
-                <div class="card p-6 text-center" data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-primary-100">
+                <div class="card p-4 md:p-6 text-center" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-24 h-24 md:w-32 md:h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-primary-100">
                         <img src="https://randomuser.me/api/portraits/women/68.jpg" 
                              alt="Fatou Sall"
                              class="w-full h-full object-cover">
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Fatou Sall</h3>
-                    <div class="text-primary-600 font-semibold mb-3">Coloriste Certifiée</div>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-900 mb-2">Fatou Sall</h3>
+                    <div class="text-primary-600 font-semibold mb-3 text-sm md:text-base">Coloriste Certifiée</div>
                     <div class="flex justify-center mb-4">
-                        <div class="text-yellow-400">
+                        <div class="text-yellow-400 text-sm md:text-base">
                             ★★★★★
                         </div>
                     </div>
-                    <p class="text-gray-600 text-sm mb-4">
+                    <p class="text-gray-600 text-xs md:text-sm mb-4">
                         Expert en coloration et soins capillaires. Formée à Paris et Dakar.
                     </p>
                     <div class="flex justify-center space-x-2">
-                        <span class="badge bg-primary-50 text-primary-700">Coloration</span>
-                        <span class="badge bg-primary-50 text-primary-700">Soins</span>
+                        <span class="badge bg-primary-50 text-primary-700 text-xs">Coloration</span>
+                        <span class="badge bg-primary-50 text-primary-700 text-xs">Soins</span>
                     </div>
                 </div>
 
                 <!-- Coiffeur 4 -->
-                <div class="card p-6 text-center" data-aos="fade-up" data-aos-delay="300">
-                    <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-primary-100">
+                <div class="card p-4 md:p-6 text-center" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-24 h-24 md:w-32 md:h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-primary-100">
                         <img src="https://randomuser.me/api/portraits/men/75.jpg" 
                              alt="Mamadou Diallo"
                              class="w-full h-full object-cover">
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Mamadou Diallo</h3>
-                    <div class="text-primary-600 font-semibold mb-3">Coiffeur à Domicile</div>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-900 mb-2">Mamadou Diallo</h3>
+                    <div class="text-primary-600 font-semibold mb-3 text-sm md:text-base">Coiffeur à Domicile</div>
                     <div class="flex justify-center mb-4">
-                        <div class="text-yellow-400">
+                        <div class="text-yellow-400 text-sm md:text-base">
                             ★★★★★
                         </div>
                     </div>
-                    <p class="text-gray-600 text-sm mb-4">
+                    <p class="text-gray-600 text-xs md:text-sm mb-4">
                         Service mobile professionnel. Équipement complet pour prestations à domicile.
                     </p>
                     <div class="flex justify-center space-x-2">
-                        <span class="badge bg-primary-50 text-primary-700">Domicile</span>
-                        <span class="badge bg-primary-50 text-primary-700">Mobile</span>
+                        <span class="badge bg-primary-50 text-primary-700 text-xs">Domicile</span>
+                        <span class="badge bg-primary-50 text-primary-700 text-xs">Mobile</span>
                     </div>
                 </div>
             </div>
@@ -957,23 +1278,23 @@
     <!-- Section Géolocalisation -->
     <section id="localisation" class="section bg-gradient-to-b from-gray-50 to-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="section-title text-4xl lg:text-5xl font-black text-gray-900 mb-4">
+            <div class="text-center mb-12 md:mb-16" data-aos="fade-up">
+                <h2 class="section-title text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 mb-4">
                     Trouvez les salons
                     <span class="gradient-text">près de vous</span>
                 </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4">
                     Notre technologie de géolocalisation vous montre les meilleurs salons dans votre quartier en temps réel
                 </p>
             </div>
 
-            <div class="grid lg:grid-cols-2 gap-12">
+            <div class="grid lg:grid-cols-2 gap-8 md:gap-12">
                 <!-- Carte -->
                 <div class="space-y-6" data-aos="fade-right">
-                    <div class="card p-6">
-                        <div class="flex justify-between items-center mb-6">
-                            <h3 class="text-2xl font-bold text-gray-900">Carte Interactive</h3>
-                            <button onclick="getUserLocation()" class="btn-primary">
+                    <div class="card p-4 md:p-6">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+                            <h3 class="text-xl md:text-2xl font-bold text-gray-900">Carte Interactive</h3>
+                            <button onclick="getUserLocation()" class="btn-primary w-full md:w-auto">
                                 <i class="fas fa-location-arrow mr-2"></i>
                                 Me localiser
                             </button>
@@ -983,18 +1304,18 @@
                         <div id="map" class="w-full"></div>
                         
                         <!-- Statistiques -->
-                        <div class="grid grid-cols-3 gap-4 mt-6">
-                            <div class="bg-primary-50 p-4 rounded-2xl text-center">
-                                <div class="text-2xl font-bold text-primary-600" id="nearbyCount">12</div>
-                                <div class="text-sm text-primary-700">À proximité</div>
+                        <div class="grid grid-cols-3 gap-3 md:gap-4 mt-6">
+                            <div class="bg-primary-50 p-3 md:p-4 rounded-2xl text-center">
+                                <div class="text-xl md:text-2xl font-bold text-primary-600" id="nearbyCount">12</div>
+                                <div class="text-xs md:text-sm text-primary-700">À proximité</div>
                             </div>
-                            <div class="bg-green-50 p-4 rounded-2xl text-center">
-                                <div class="text-2xl font-bold text-green-600" id="distanceAvg">350m</div>
-                                <div class="text-sm text-green-700">Distance moyenne</div>
+                            <div class="bg-green-50 p-3 md:p-4 rounded-2xl text-center">
+                                <div class="text-xl md:text-2xl font-bold text-green-600" id="distanceAvg">350m</div>
+                                <div class="text-xs md:text-sm text-green-700">Distance moyenne</div>
                             </div>
-                            <div class="bg-purple-50 p-4 rounded-2xl text-center">
-                                <div class="text-2xl font-bold text-purple-600" id="topRated">4.9★</div>
-                                <div class="text-sm text-purple-700">Meilleure note</div>
+                            <div class="bg-purple-50 p-3 md:p-4 rounded-2xl text-center">
+                                <div class="text-xl md:text-2xl font-bold text-purple-600" id="topRated">4.9★</div>
+                                <div class="text-xs md:text-sm text-purple-700">Meilleure note</div>
                             </div>
                         </div>
                     </div>
@@ -1002,89 +1323,89 @@
 
                 <!-- Salons proches -->
                 <div class="space-y-6" data-aos="fade-left">
-                    <div class="card p-6">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                    <div class="card p-4 md:p-6">
+                        <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-6 flex items-center">
                             <i class="fas fa-map-marker-alt text-primary-600 mr-3"></i>
                             Salons les plus proches
                         </h3>
                         
                         <div class="space-y-4 max-h-96 overflow-y-auto">
                             <!-- Salon 1 -->
-                            <div class="flex items-center p-4 bg-gray-50 rounded-2xl hover:bg-primary-50 transition-colors cursor-pointer" onclick="openReservationModal('4', 'Salon Proximité')">
-                                <div class="w-16 h-16 rounded-xl overflow-hidden mr-4">
+                            <div class="flex items-center p-3 md:p-4 bg-gray-50 rounded-2xl hover:bg-primary-50 transition-colors cursor-pointer" onclick="openReservationModal('4', 'Salon Proximité')">
+                                <div class="w-12 h-12 md:w-16 md:h-16 rounded-xl overflow-hidden mr-3 md:mr-4">
                                     <img src="https://coiffurealimage.fr/wp-content/uploads/2018/03/img-salon-10.jpg" 
                                          alt="Salon Proximité"
                                          class="w-full h-full object-cover">
                                 </div>
                                 <div class="flex-1">
-                                    <div class="font-bold text-gray-900">Salon Proximité</div>
-                                    <div class="text-sm text-gray-600 flex items-center">
-                                        <i class="fas fa-map-marker-alt mr-1 text-primary-600"></i>
+                                    <div class="font-bold text-gray-900 text-sm md:text-base">Salon Proximité</div>
+                                    <div class="text-xs md:text-sm text-gray-600 flex items-center">
+                                        <i class="fas fa-map-marker-alt mr-1 text-primary-600 text-xs"></i>
                                         <span>150m • Plateau</span>
                                     </div>
                                 </div>
                                 <div class="text-right">
-                                    <div class="text-yellow-400 text-sm">★★★★★</div>
-                                    <div class="text-primary-600 font-bold">3 500 FCFA</div>
+                                    <div class="text-yellow-400 text-xs md:text-sm">★★★★★</div>
+                                    <div class="text-primary-600 font-bold text-sm md:text-base">3 500 FCFA</div>
                                 </div>
                             </div>
 
                             <!-- Salon 2 -->
-                            <div class="flex items-center p-4 bg-gray-50 rounded-2xl hover:bg-primary-50 transition-colors cursor-pointer" onclick="openReservationModal('5', 'Beauty Corner')">
-                                <div class="w-16 h-16 rounded-xl overflow-hidden mr-4">
+                            <div class="flex items-center p-3 md:p-4 bg-gray-50 rounded-2xl hover:bg-primary-50 transition-colors cursor-pointer" onclick="openReservationModal('5', 'Beauty Corner')">
+                                <div class="w-12 h-12 md:w-16 md:h-16 rounded-xl overflow-hidden mr-3 md:mr-4">
                                     <img src="https://th.bing.com/th/id/R.7135b0e2b4d81a4e891ad9ed67bf3680?rik=cB4PjLrggXJICQ&pid=ImgRaw&r=0" 
                                          alt="Beauty Corner"
                                          class="w-full h-full object-cover">
                                 </div>
                                 <div class="flex-1">
-                                    <div class="font-bold text-gray-900">Beauty Corner</div>
-                                    <div class="text-sm text-gray-600 flex items-center">
-                                        <i class="fas fa-map-marker-alt mr-1 text-primary-600"></i>
+                                    <div class="font-bold text-gray-900 text-sm md:text-base">Beauty Corner</div>
+                                    <div class="text-xs md:text-sm text-gray-600 flex items-center">
+                                        <i class="fas fa-map-marker-alt mr-1 text-primary-600 text-xs"></i>
                                         <span>280m • Almadies</span>
                                     </div>
                                 </div>
                                 <div class="text-right">
-                                    <div class="text-yellow-400 text-sm">★★★★★</div>
-                                    <div class="text-primary-600 font-bold">4 200 FCFA</div>
+                                    <div class="text-yellow-400 text-xs md:text-sm">★★★★★</div>
+                                    <div class="text-primary-600 font-bold text-sm md:text-base">4 200 FCFA</div>
                                 </div>
                             </div>
 
                             <!-- Salon 3 -->
-                            <div class="flex items-center p-4 bg-gray-50 rounded-2xl hover:bg-primary-50 transition-colors cursor-pointer" onclick="openReservationModal('6', 'Hair Express')">
-                                <div class="w-16 h-16 rounded-xl overflow-hidden mr-4">
+                            <div class="flex items-center p-3 md:p-4 bg-gray-50 rounded-2xl hover:bg-primary-50 transition-colors cursor-pointer" onclick="openReservationModal('6', 'Hair Express')">
+                                <div class="w-12 h-12 md:w-16 md:h-16 rounded-xl overflow-hidden mr-3 md:mr-4">
                                     <img src="https://www.mobiliercoiffure.com/wp-content/uploads/2021/01/pack-quir.jpg" 
                                          alt="Hair Express"
                                          class="w-full h-full object-cover">
                                 </div>
                                 <div class="flex-1">
-                                    <div class="font-bold text-gray-900">Hair Express</div>
-                                    <div class="text-sm text-gray-600 flex items-center">
-                                        <i class="fas fa-map-marker-alt mr-1 text-primary-600"></i>
+                                    <div class="font-bold text-gray-900 text-sm md:text-base">Hair Express</div>
+                                    <div class="text-xs md:text-sm text-gray-600 flex items-center">
+                                        <i class="fas fa-map-marker-alt mr-1 text-primary-600 text-xs"></i>
                                         <span>420m • Ouakam</span>
                                     </div>
                                 </div>
                                 <div class="text-right">
-                                    <div class="text-yellow-400 text-sm">★★★★☆</div>
-                                    <div class="text-primary-600 font-bold">2 800 FCFA</div>
+                                    <div class="text-yellow-400 text-xs md:text-sm">★★★★☆</div>
+                                    <div class="text-primary-600 font-bold text-sm md:text-base">2 800 FCFA</div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Filtres de distance -->
-                    <div class="card p-6">
-                        <h4 class="font-semibold text-gray-900 mb-4">Filtrer par distance</h4>
-                        <div class="grid grid-cols-3 gap-3">
+                    <div class="card p-4 md:p-6">
+                        <h4 class="font-semibold text-gray-900 mb-4 text-base md:text-lg">Filtrer par distance</h4>
+                        <div class="grid grid-cols-3 gap-2 md:gap-3">
                             <button onclick="filterByDistance(500)" class="p-3 text-center border border-gray-200 rounded-xl hover:border-primary-400 hover:bg-primary-50 transition-all">
-                                <div class="font-semibold text-gray-900">500m</div>
+                                <div class="font-semibold text-gray-900 text-sm md:text-base">500m</div>
                                 <div class="text-xs text-gray-500">Très proche</div>
                             </button>
                             <button onclick="filterByDistance(1000)" class="p-3 text-center border border-gray-200 rounded-xl hover:border-primary-400 hover:bg-primary-50 transition-all">
-                                <div class="font-semibold text-gray-900">1km</div>
+                                <div class="font-semibold text-gray-900 text-sm md:text-base">1km</div>
                                 <div class="text-xs text-gray-500">Proche</div>
                             </button>
                             <button onclick="filterByDistance(5000)" class="p-3 text-center border border-gray-200 rounded-xl hover:border-primary-400 hover:bg-primary-50 transition-all">
-                                <div class="font-semibold text-gray-900">5km</div>
+                                <div class="font-semibold text-gray-900 text-sm md:text-base">5km</div>
                                 <div class="text-xs text-gray-500">Secteur</div>
                             </button>
                         </div>
@@ -1097,62 +1418,62 @@
     <!-- Section Processus de Réservation -->
     <section class="section bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="section-title text-4xl lg:text-5xl font-black text-gray-900 mb-4">
+            <div class="text-center mb-12 md:mb-16" data-aos="fade-up">
+                <h2 class="section-title text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 mb-4">
                     Réservez en
                     <span class="gradient-text">4 étapes simples</span>
                 </h2>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                 <!-- Étape 1 -->
                 <div class="text-center" data-aos="fade-up">
-                    <div class="w-20 h-20 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                        <div class="w-12 h-12 bg-primary-600 rounded-xl flex items-center justify-center text-white font-bold text-xl">
+                    <div class="w-16 h-16 md:w-20 md:h-20 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-primary-600 rounded-xl flex items-center justify-center text-white font-bold text-lg md:text-xl">
                             1
                         </div>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Choisissez</h3>
-                    <p class="text-gray-600">
+                    <h3 class="text-lg md:text-xl font-bold text-gray-900 mb-3">Choisissez</h3>
+                    <p class="text-gray-600 text-sm md:text-base">
                         Sélectionnez votre salon préféré parmi notre sélection premium
                     </p>
                 </div>
 
                 <!-- Étape 2 -->
                 <div class="text-center" data-aos="fade-up" data-aos-delay="100">
-                    <div class="w-20 h-20 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                        <div class="w-12 h-12 bg-primary-600 rounded-xl flex items-center justify-center text-white font-bold text-xl">
+                    <div class="w-16 h-16 md:w-20 md:h-20 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-primary-600 rounded-xl flex items-center justify-center text-white font-bold text-lg md:text-xl">
                             2
                         </div>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Sélectionnez</h3>
-                    <p class="text-gray-600">
+                    <h3 class="text-lg md:text-xl font-bold text-gray-900 mb-3">Sélectionnez</h3>
+                    <p class="text-gray-600 text-sm md:text-base">
                         Choisissez le service et l'horaire qui vous conviennent
                     </p>
                 </div>
 
                 <!-- Étape 3 -->
                 <div class="text-center" data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-20 h-20 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                        <div class="w-12 h-12 bg-primary-600 rounded-xl flex items-center justify-center text-white font-bold text-xl">
+                    <div class="w-16 h-16 md:w-20 md:h-20 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-primary-600 rounded-xl flex items-center justify-center text-white font-bold text-lg md:text-xl">
                             3
                         </div>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Payez</h3>
-                    <p class="text-gray-600">
+                    <h3 class="text-lg md:text-xl font-bold text-gray-900 mb-3">Payez</h3>
+                    <p class="text-gray-600 text-sm md:text-base">
                         Réglez en toute sécurité avec Orange Money, Wave ou carte bancaire
                     </p>
                 </div>
 
                 <!-- Étape 4 -->
                 <div class="text-center" data-aos="fade-up" data-aos-delay="300">
-                    <div class="w-20 h-20 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                        <div class="w-12 h-12 bg-primary-600 rounded-xl flex items-center justify-center text-white font-bold text-xl">
+                    <div class="w-16 h-16 md:w-20 md:h-20 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-primary-600 rounded-xl flex items-center justify-center text-white font-bold text-lg md:text-xl">
                             4
                         </div>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Profitez</h3>
-                    <p class="text-gray-600">
+                    <h3 class="text-lg md:text-xl font-bold text-gray-900 mb-3">Profitez</h3>
+                    <p class="text-gray-600 text-sm md:text-base">
                         Recevez votre confirmation et profitez de votre prestation
                     </p>
                 </div>
@@ -1163,27 +1484,28 @@
     <!-- Section Devenir Partenaire -->
     <section id="partenariat" class="section bg-gradient-dark text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="section-title text-4xl lg:text-5xl font-black mb-4">
+            <div class="text-center mb-12 md:mb-16" data-aos="fade-up">
+                <h2 class="section-title text-3xl md:text-4xl lg:text-5xl font-black mb-4">
                     Devenez partenaire
                     <span class="text-primary-400">KeurCoiff'</span>
                 </h2>
-                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto px-4">
                     Rejoignez la première plateforme premium de réservation de coiffure au Sénégal
                 </p>
             </div>
 
-            <div class="grid lg:grid-cols-2 gap-12">
+            <div class="grid lg:grid-cols-2 gap-8 md:gap-12">
                 <!-- Formulaire -->
-                <div class="bg-gray-800 p-8 rounded-3xl" data-aos="fade-right">
-                    <h3 class="text-3xl font-bold mb-6">Inscrivez votre salon</h3>
+                <div class="bg-gray-800 p-6 md:p-8 rounded-3xl" data-aos="fade-right">
+                    <h3 class="text-2xl md:text-3xl font-bold mb-6">Inscrivez votre salon</h3>
                     
                     <form id="partnerForm" class="space-y-6">
-                        <div class="grid md:grid-cols-2 gap-6">
+                        <div class="grid md:grid-cols-2 gap-4 md:gap-6">
                             <div>
                                 <label class="block text-sm font-semibold text-gray-300 mb-2">Nom du salon *</label>
                                 <input type="text" name="salonName" required 
-                                       class="input bg-gray-700 border-gray-600 text-white placeholder-gray-400">
+                                       class="input bg-gray-700 border-gray-600 text-white placeholder-gray-400"
+                                       placeholder="Ex: Salon Prestige">
                             </div>
                             <div>
                                 <label class="block text-sm font-semibold text-gray-300 mb-2">Téléphone *</label>
@@ -1202,31 +1524,31 @@
                         
                         <div>
                             <label class="block text-sm font-semibold text-gray-300 mb-2">Services proposés *</label>
-                            <div class="grid grid-cols-2 gap-3">
-                                <label class="flex items-center space-x-3 p-3 rounded-xl border border-gray-600 hover:bg-gray-700 cursor-pointer">
+                            <div class="grid grid-cols-2 gap-2 md:gap-3">
+                                <label class="flex items-center space-x-2 md:space-x-3 p-2 md:p-3 rounded-xl border border-gray-600 hover:bg-gray-700 cursor-pointer">
                                     <input type="checkbox" name="services" value="tresses" 
-                                           class="rounded text-primary-600 focus:ring-primary-500 bg-gray-700">
-                                    <span>Tresses</span>
+                                           class="rounded text-primary-600 focus:ring-primary-500 bg-gray-700 w-4 h-4 md:w-5 md:h-5">
+                                    <span class="text-sm md:text-base">Tresses</span>
                                 </label>
-                                <label class="flex items-center space-x-3 p-3 rounded-xl border border-gray-600 hover:bg-gray-700 cursor-pointer">
+                                <label class="flex items-center space-x-2 md:space-x-3 p-2 md:p-3 rounded-xl border border-gray-600 hover:bg-gray-700 cursor-pointer">
                                     <input type="checkbox" name="services" value="coupe-femme" 
-                                           class="rounded text-primary-600 focus:ring-primary-500 bg-gray-700">
-                                    <span>Coupe femme</span>
+                                           class="rounded text-primary-600 focus:ring-primary-500 bg-gray-700 w-4 h-4 md:w-5 md:h-5">
+                                    <span class="text-sm md:text-base">Coupe femme</span>
                                 </label>
-                                <label class="flex items-center space-x-3 p-3 rounded-xl border border-gray-600 hover:bg-gray-700 cursor-pointer">
+                                <label class="flex items-center space-x-2 md:space-x-3 p-2 md:p-3 rounded-xl border border-gray-600 hover:bg-gray-700 cursor-pointer">
                                     <input type="checkbox" name="services" value="coupe-homme" 
-                                           class="rounded text-primary-600 focus:ring-primary-500 bg-gray-700">
-                                    <span>Coupe homme</span>
+                                           class="rounded text-primary-600 focus:ring-primary-500 bg-gray-700 w-4 h-4 md:w-5 md:h-5">
+                                    <span class="text-sm md:text-base">Coupe homme</span>
                                 </label>
-                                <label class="flex items-center space-x-3 p-3 rounded-xl border border-gray-600 hover:bg-gray-700 cursor-pointer">
+                                <label class="flex items-center space-x-2 md:space-x-3 p-2 md:p-3 rounded-xl border border-gray-600 hover:bg-gray-700 cursor-pointer">
                                     <input type="checkbox" name="services" value="domicile" 
-                                           class="rounded text-primary-600 focus:ring-primary-500 bg-gray-700">
-                                    <span>À domicile</span>
+                                           class="rounded text-primary-600 focus:ring-primary-500 bg-gray-700 w-4 h-4 md:w-5 md:h-5">
+                                    <span class="text-sm md:text-base">À domicile</span>
                                 </label>
                             </div>
                         </div>
                         
-                        <button type="submit" class="w-full btn-primary">
+                        <button type="submit" class="w-full btn-primary py-3 md:py-4 text-sm md:text-base">
                             Devenir Partenaire Premium
                         </button>
                     </form>
@@ -1234,31 +1556,31 @@
 
                 <!-- Avantages -->
                 <div class="space-y-6" data-aos="fade-left">
-                    <div class="bg-gradient-to-r from-primary-600 to-primary-700 p-8 rounded-3xl">
-                        <h4 class="text-2xl font-bold mb-4">Avantages Premium</h4>
-                        <ul class="space-y-4">
+                    <div class="bg-gradient-to-r from-primary-600 to-primary-700 p-6 md:p-8 rounded-3xl">
+                        <h4 class="text-xl md:text-2xl font-bold mb-4">Avantages Premium</h4>
+                        <ul class="space-y-3 md:space-y-4">
                             <li class="flex items-center">
-                                <i class="fas fa-rocket text-primary-200 mr-4 text-xl"></i>
-                                <span>Augmentation du chiffre d'affaires jusqu'à 60%</span>
+                                <i class="fas fa-rocket text-primary-200 mr-3 md:mr-4 text-lg md:text-xl"></i>
+                                <span class="text-sm md:text-base">Augmentation du chiffre d'affaires jusqu'à 60%</span>
                             </li>
                             <li class="flex items-center">
-                                <i class="fas fa-users text-primary-200 mr-4 text-xl"></i>
-                                <span>Accès à notre base de clients premium</span>
+                                <i class="fas fa-users text-primary-200 mr-3 md:mr-4 text-lg md:text-xl"></i>
+                                <span class="text-sm md:text-base">Accès à notre base de clients premium</span>
                             </li>
                             <li class="flex items-center">
-                                <i class="fas fa-chart-line text-primary-200 mr-4 text-xl"></i>
-                                <span>Tableau de bord analytique avancé</span>
+                                <i class="fas fa-chart-line text-primary-200 mr-3 md:mr-4 text-lg md:text-xl"></i>
+                                <span class="text-sm md:text-base">Tableau de bord analytique avancé</span>
                             </li>
                         </ul>
                     </div>
                     
-                    <div class="bg-gray-800 p-8 rounded-3xl">
-                        <h4 class="text-2xl font-bold mb-4">Statistiques Partenaires</h4>
-                        <div class="space-y-4">
+                    <div class="bg-gray-800 p-6 md:p-8 rounded-3xl">
+                        <h4 class="text-xl md:text-2xl font-bold mb-4">Statistiques Partenaires</h4>
+                        <div class="space-y-3 md:space-y-4">
                             <div>
                                 <div class="flex justify-between mb-1">
-                                    <span class="text-gray-300">Taux de remplissage</span>
-                                    <span class="font-bold text-primary-400">82%</span>
+                                    <span class="text-gray-300 text-sm md:text-base">Taux de remplissage</span>
+                                    <span class="font-bold text-primary-400 text-sm md:text-base">82%</span>
                                 </div>
                                 <div class="w-full bg-gray-700 rounded-full h-2">
                                     <div class="bg-primary-500 h-2 rounded-full" style="width: 82%"></div>
@@ -1266,8 +1588,8 @@
                             </div>
                             <div>
                                 <div class="flex justify-between mb-1">
-                                    <span class="text-gray-300">Clients fidèles</span>
-                                    <span class="font-bold text-primary-400">71%</span>
+                                    <span class="text-gray-300 text-sm md:text-base">Clients fidèles</span>
+                                    <span class="font-bold text-primary-400 text-sm md:text-base">71%</span>
                                 </div>
                                 <div class="w-full bg-gray-700 rounded-full h-2">
                                     <div class="bg-primary-500 h-2 rounded-full" style="width: 71%"></div>
@@ -1283,69 +1605,69 @@
     <!-- Section Témoignages -->
     <section class="section bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="section-title text-4xl lg:text-5xl font-black text-gray-900 mb-4">
+            <div class="text-center mb-12 md:mb-16" data-aos="fade-up">
+                <h2 class="section-title text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 mb-4">
                     Ils nous font
                     <span class="gradient-text">confiance</span>
                 </h2>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 <!-- Témoignage 1 -->
-                <div class="testimonial-card" data-aos="fade-up">
+                <div class="testimonial-card p-4 md:p-6" data-aos="fade-up">
                     <div class="flex items-center mb-4">
                         <img src="https://randomuser.me/api/portraits/women/32.jpg" 
                              alt="Aminata Diagne"
-                             class="w-12 h-12 rounded-full mr-4">
+                             class="w-10 h-10 md:w-12 md:h-12 rounded-full mr-3 md:mr-4">
                         <div>
-                            <div class="font-bold text-gray-900">Aminata Diagne</div>
-                            <div class="text-yellow-400 text-sm">★★★★★</div>
+                            <div class="font-bold text-gray-900 text-sm md:text-base">Aminata Diagne</div>
+                            <div class="text-yellow-400 text-xs md:text-sm">★★★★★</div>
                         </div>
                     </div>
-                    <p class="text-gray-600 italic mb-4">
+                    <p class="text-gray-600 italic mb-4 text-sm md:text-base">
                         "Excellente expérience ! Le salon était magnifique et le service impeccable. Je recommande vivement KeurCoiff'."
                     </p>
-                    <div class="text-sm text-gray-500">
+                    <div class="text-xs md:text-sm text-gray-500">
                         <i class="fas fa-scissors mr-2"></i>
                         Tresses vanilles
                     </div>
                 </div>
 
                 <!-- Témoignage 2 -->
-                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="testimonial-card p-4 md:p-6" data-aos="fade-up" data-aos-delay="100">
                     <div class="flex items-center mb-4">
                         <img src="https://randomuser.me/api/portraits/men/54.jpg" 
                              alt="Moussa Diallo"
-                             class="w-12 h-12 rounded-full mr-4">
+                             class="w-10 h-10 md:w-12 md:h-12 rounded-full mr-3 md:mr-4">
                         <div>
-                            <div class="font-bold text-gray-900">Moussa Diallo</div>
-                            <div class="text-yellow-400 text-sm">★★★★★</div>
+                            <div class="font-bold text-gray-900 text-sm md:text-base">Moussa Diallo</div>
+                            <div class="text-yellow-400 text-xs md:text-sm">★★★★★</div>
                         </div>
                     </div>
-                    <p class="text-gray-600 italic mb-4">
+                    <p class="text-gray-600 italic mb-4 text-sm md:text-base">
                         "Service à domicile exceptionnel. Le coiffeur est arrivé à l'heure avec tout son matériel. Très professionnel !"
                     </p>
-                    <div class="text-sm text-gray-500">
+                    <div class="text-xs md:text-sm text-gray-500">
                         <i class="fas fa-home mr-2"></i>
                         Service à domicile
                     </div>
                 </div>
 
                 <!-- Témoignage 3 -->
-                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="testimonial-card p-4 md:p-6" data-aos="fade-up" data-aos-delay="200">
                     <div class="flex items-center mb-4">
                         <img src="https://randomuser.me/api/portraits/women/67.jpg" 
                              alt="Sophie Ndiaye"
-                             class="w-12 h-12 rounded-full mr-4">
+                             class="w-10 h-10 md:w-12 md:h-12 rounded-full mr-3 md:mr-4">
                         <div>
-                            <div class="font-bold text-gray-900">Sophie Ndiaye</div>
-                            <div class="text-yellow-400 text-sm">★★★★★</div>
+                            <div class="font-bold text-gray-900 text-sm md:text-base">Sophie Ndiaye</div>
+                            <div class="text-yellow-400 text-xs md:text-sm">★★★★★</div>
                         </div>
                     </div>
-                    <p class="text-gray-600 italic mb-4">
+                    <p class="text-gray-600 italic mb-4 text-sm md:text-base">
                         "La réservation en ligne est ultra simple. J'ai trouvé le salon parfait près de chez moi en quelques clics."
                     </p>
-                    <div class="text-sm text-gray-500">
+                    <div class="text-xs md:text-sm text-gray-500">
                         <i class="fas fa-calendar-alt mr-2"></i>
                         Réservation en ligne
                     </div>
@@ -1357,42 +1679,42 @@
     <!-- Section Contact -->
     <section id="contact" class="section bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-12">
+            <div class="grid lg:grid-cols-2 gap-8 md:gap-12">
                 <!-- Informations -->
                 <div data-aos="fade-right">
-                    <h2 class="text-4xl font-black text-gray-900 mb-6">Contactez-nous</h2>
-                    <p class="text-gray-600 mb-8">
+                    <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-6">Contactez-nous</h2>
+                    <p class="text-gray-600 mb-8 text-base md:text-lg">
                         Notre équipe est disponible pour répondre à toutes vos questions et vous accompagner dans votre expérience KeurCoiff'.
                     </p>
                     
                     <div class="space-y-6">
                         <div class="flex items-center">
-                            <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mr-4">
-                                <i class="fas fa-phone text-primary-600"></i>
+                            <div class="w-10 h-10 md:w-12 md:h-12 bg-primary-100 rounded-xl flex items-center justify-center mr-3 md:mr-4">
+                                <i class="fas fa-phone text-primary-600 text-sm md:text-base"></i>
                             </div>
                             <div>
-                                <div class="font-semibold text-gray-900">Appelez-nous</div>
-                                <div class="text-gray-600">+221 33 822 45 67</div>
+                                <div class="font-semibold text-gray-900 text-sm md:text-base">Appelez-nous</div>
+                                <div class="text-gray-600 text-sm md:text-base">+221 33 822 45 67</div>
                             </div>
                         </div>
                         
                         <div class="flex items-center">
-                            <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mr-4">
-                                <i class="fas fa-envelope text-primary-600"></i>
+                            <div class="w-10 h-10 md:w-12 md:h-12 bg-primary-100 rounded-xl flex items-center justify-center mr-3 md:mr-4">
+                                <i class="fas fa-envelope text-primary-600 text-sm md:text-base"></i>
                             </div>
                             <div>
-                                <div class="font-semibold text-gray-900">Écrivez-nous</div>
-                                <div class="text-gray-600">contact@keurcoiff.sn</div>
+                                <div class="font-semibold text-gray-900 text-sm md:text-base">Écrivez-nous</div>
+                                <div class="text-gray-600 text-sm md:text-base">contact@keurcoiff.sn</div>
                             </div>
                         </div>
                         
                         <div class="flex items-center">
-                            <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mr-4">
-                                <i class="fas fa-map-marker-alt text-primary-600"></i>
+                            <div class="w-10 h-10 md:w-12 md:h-12 bg-primary-100 rounded-xl flex items-center justify-center mr-3 md:mr-4">
+                                <i class="fas fa-map-marker-alt text-primary-600 text-sm md:text-base"></i>
                             </div>
                             <div>
-                                <div class="font-semibold text-gray-900">Visitez-nous</div>
-                                <div class="text-gray-600">Immeuble KeurCoiff', Plateau, Dakar</div>
+                                <div class="font-semibold text-gray-900 text-sm md:text-base">Visitez-nous</div>
+                                <div class="text-gray-600 text-sm md:text-base">Immeuble KeurCoiff', Plateau, Dakar</div>
                             </div>
                         </div>
                     </div>
@@ -1400,31 +1722,31 @@
 
                 <!-- Formulaire -->
                 <div data-aos="fade-left">
-                    <div class="card p-8">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Envoyez un message</h3>
-                        <form class="space-y-6">
-                            <div class="grid md:grid-cols-2 gap-6">
+                    <div class="card p-4 md:p-8">
+                        <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-6">Envoyez un message</h3>
+                        <form class="space-y-4 md:space-y-6">
+                            <div class="grid md:grid-cols-2 gap-4 md:gap-6">
                                 <div>
                                     <label class="block text-sm font-semibold text-gray-700 mb-2">Nom complet *</label>
-                                    <input type="text" required class="input">
+                                    <input type="text" required class="input" placeholder="Votre nom">
                                 </div>
                                 <div>
                                     <label class="block text-sm font-semibold text-gray-700 mb-2">Email *</label>
-                                    <input type="email" required class="input">
+                                    <input type="email" required class="input" placeholder="votre@email.com">
                                 </div>
                             </div>
                             
                             <div>
                                 <label class="block text-sm font-semibold text-gray-700 mb-2">Sujet *</label>
-                                <input type="text" required class="input">
+                                <input type="text" required class="input" placeholder="Sujet de votre message">
                             </div>
                             
                             <div>
                                 <label class="block text-sm font-semibold text-gray-700 mb-2">Message *</label>
-                                <textarea rows="4" required class="input"></textarea>
+                                <textarea rows="4" required class="input" placeholder="Votre message..."></textarea>
                             </div>
                             
-                            <button type="submit" class="w-full btn-primary">
+                            <button type="submit" class="w-full btn-primary py-3 md:py-4">
                                 Envoyer le message
                             </button>
                         </form>
@@ -1435,83 +1757,83 @@
     </section>
 
     <!-- Footer Premium -->
-    <footer class="bg-gray-900 text-white py-16">
+    <footer class="bg-gray-900 text-white py-12 md:py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-4 gap-8 mb-12">
+            <div class="grid lg:grid-cols-4 gap-8 mb-8 md:mb-12">
                 <!-- Brand -->
                 <div>
                     <div class="flex items-center space-x-3 mb-6">
-                        <div class="w-12 h-12 bg-gradient-to-r from-primary-600 to-primary-700 rounded-2xl flex items-center justify-center">
-                            <i class="fas fa-scissors text-white text-lg"></i>
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-primary-600 to-primary-700 rounded-2xl flex items-center justify-center">
+                            <i class="fas fa-scissors text-white text-sm md:text-lg"></i>
                         </div>
                         <div>
-                            <span class="text-2xl font-bold">KeurCoiff'</span>
-                            <div class="text-gray-400 text-sm">Premium Hair Experience</div>
+                            <span class="text-xl md:text-2xl font-bold">KeurCoiff'</span>
+                            <div class="text-gray-400 text-xs md:text-sm">Premium Hair Experience</div>
                         </div>
                     </div>
-                    <p class="text-gray-400 mb-6 leading-relaxed">
+                    <p class="text-gray-400 mb-6 leading-relaxed text-sm md:text-base">
                         La plateforme premium de réservation de coiffure au Sénégal. Innovation, excellence et passion au service de votre beauté.
                     </p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-xl flex items-center justify-center hover:bg-primary-600 transition-colors">
-                            <i class="fab fa-facebook-f"></i>
+                    <div class="flex space-x-3 md:space-x-4">
+                        <a href="#" class="w-8 h-8 md:w-10 md:h-10 bg-gray-800 rounded-xl flex items-center justify-center hover:bg-primary-600 transition-colors">
+                            <i class="fab fa-facebook-f text-xs md:text-sm"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-xl flex items-center justify-center hover:bg-primary-600 transition-colors">
-                            <i class="fab fa-instagram"></i>
+                        <a href="#" class="w-8 h-8 md:w-10 md:h-10 bg-gray-800 rounded-xl flex items-center justify-center hover:bg-primary-600 transition-colors">
+                            <i class="fab fa-instagram text-xs md:text-sm"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-xl flex items-center justify-center hover:bg-primary-600 transition-colors">
-                            <i class="fab fa-whatsapp"></i>
+                        <a href="#" class="w-8 h-8 md:w-10 md:h-10 bg-gray-800 rounded-xl flex items-center justify-center hover:bg-primary-600 transition-colors">
+                            <i class="fab fa-whatsapp text-xs md:text-sm"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-xl flex items-center justify-center hover:bg-primary-600 transition-colors">
-                            <i class="fab fa-tiktok"></i>
+                        <a href="#" class="w-8 h-8 md:w-10 md:h-10 bg-gray-800 rounded-xl flex items-center justify-center hover:bg-primary-600 transition-colors">
+                            <i class="fab fa-tiktok text-xs md:text-sm"></i>
                         </a>
                     </div>
                 </div>
 
                 <!-- Liens rapides -->
                 <div>
-                    <h4 class="font-semibold text-lg mb-6">Liens rapides</h4>
+                    <h4 class="font-semibold text-base md:text-lg mb-6">Liens rapides</h4>
                     <div class="space-y-3">
-                        <a href="#accueil" class="block text-gray-400 hover:text-white transition-colors">Accueil</a>
-                        <a href="#salons" class="block text-gray-400 hover:text-white transition-colors">Nos Salons</a>
-                        <a href="#services" class="block text-gray-400 hover:text-white transition-colors">Services</a>
-                        <a href="#coiffeurs" class="block text-gray-400 hover:text-white transition-colors">Nos Coiffeurs</a>
-                        <a href="#partenariat" class="block text-gray-400 hover:text-white transition-colors">Devenir Partenaire</a>
+                        <a href="#accueil" class="block text-gray-400 hover:text-white transition-colors text-sm md:text-base">Accueil</a>
+                        <a href="#salons" class="block text-gray-400 hover:text-white transition-colors text-sm md:text-base">Nos Salons</a>
+                        <a href="#services" class="block text-gray-400 hover:text-white transition-colors text-sm md:text-base">Services</a>
+                        <a href="#coiffeurs" class="block text-gray-400 hover:text-white transition-colors text-sm md:text-base">Nos Coiffeurs</a>
+                        <a href="#partenariat" class="block text-gray-400 hover:text-white transition-colors text-sm md:text-base">Devenir Partenaire</a>
                     </div>
                 </div>
 
                 <!-- Services -->
                 <div>
-                    <h4 class="font-semibold text-lg mb-6">Services</h4>
+                    <h4 class="font-semibold text-base md:text-lg mb-6">Services</h4>
                     <div class="space-y-3 text-gray-400">
-                        <a href="#" class="block hover:text-white transition-colors">Coiffure Femme</a>
-                        <a href="#" class="block hover:text-white transition-colors">Coiffure Homme</a>
-                        <a href="#" class="block hover:text-white transition-colors">Services à Domicile</a>
-                        <a href="#" class="block hover:text-white transition-colors">Soins Capillaires</a>
-                        <a href="#" class="block hover:text-white transition-colors">Beauté & Bien-être</a>
+                        <a href="#" class="block hover:text-white transition-colors text-sm md:text-base">Coiffure Femme</a>
+                        <a href="#" class="block hover:text-white transition-colors text-sm md:text-base">Coiffure Homme</a>
+                        <a href="#" class="block hover:text-white transition-colors text-sm md:text-base">Services à Domicile</a>
+                        <a href="#" class="block hover:text-white transition-colors text-sm md:text-base">Soins Capillaires</a>
+                        <a href="#" class="block hover:text-white transition-colors text-sm md:text-base">Beauté & Bien-être</a>
                     </div>
                 </div>
 
                 <!-- Newsletter -->
                 <div>
-                    <h4 class="font-semibold text-lg mb-6">Newsletter</h4>
-                    <p class="text-gray-400 mb-4">Restez informé des nouveautés et promotions.</p>
+                    <h4 class="font-semibold text-base md:text-lg mb-6">Newsletter</h4>
+                    <p class="text-gray-400 mb-4 text-sm md:text-base">Restez informé des nouveautés et promotions.</p>
                     <div class="flex">
                         <input type="email" placeholder="Votre email" 
-                               class="flex-1 bg-gray-800 text-white px-4 py-3 rounded-l-xl focus:outline-none focus:ring-2 focus:ring-primary-500">
-                        <button class="bg-primary-600 px-6 py-3 rounded-r-xl font-semibold hover:bg-primary-700 transition-colors">
+                               class="flex-1 bg-gray-800 text-white px-3 md:px-4 py-2 md:py-3 rounded-l-xl focus:outline-none focus:ring-2 focus:ring-primary-500 text-sm md:text-base">
+                        <button class="bg-primary-600 px-4 md:px-6 py-2 md:py-3 rounded-r-xl font-semibold hover:bg-primary-700 transition-colors text-sm md:text-base">
                             <i class="fas fa-paper-plane"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
-            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-400">&copy; 2024 KeurCoiff'. Tous droits réservés.</p>
-                <div class="flex space-x-6 mt-4 md:mt-0">
-                    <a href="#" class="text-gray-400 hover:text-white transition-colors">Mentions légales</a>
-                    <a href="#" class="text-gray-400 hover:text-white transition-colors">Politique de confidentialité</a>
-                    <a href="#" class="text-gray-400 hover:text-white transition-colors">Conditions d'utilisation</a>
+            <div class="border-t border-gray-800 pt-6 md:pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm md:text-base text-center md:text-left mb-4 md:mb-0">&copy; 2024 KeurCoiff'. Tous droits réservés.</p>
+                <div class="flex space-x-4 md:space-x-6 flex-wrap justify-center">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors text-sm md:text-base">Mentions légales</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors text-sm md:text-base">Politique de confidentialité</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors text-sm md:text-base">Conditions d'utilisation</a>
                 </div>
             </div>
         </div>
@@ -1521,19 +1843,19 @@
     <div id="reservationModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden p-4">
         <div class="bg-white rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
             <!-- Header -->
-            <div class="bg-gradient-to-r from-primary-600 to-primary-700 text-white p-8 rounded-t-3xl">
+            <div class="bg-gradient-to-r from-primary-600 to-primary-700 text-white p-6 md:p-8 rounded-t-3xl">
                 <div class="flex justify-between items-center">
-                    <h3 class="text-2xl font-bold">Réserver une prestation</h3>
+                    <h3 class="text-xl md:text-2xl font-bold">Réserver une prestation</h3>
                     <button onclick="closeReservationModal()" class="text-white hover:text-gray-200">
-                        <i class="fas fa-times text-2xl"></i>
+                        <i class="fas fa-times text-xl md:text-2xl"></i>
                     </button>
                 </div>
-                <div id="reservationSalonName" class="text-white/90 mt-2 text-lg"></div>
+                <div id="reservationSalonName" class="text-white/90 mt-2 text-base md:text-lg"></div>
             </div>
 
             <!-- Form -->
-            <div class="p-8">
-                <form id="reservationForm" class="space-y-6">
+            <div class="p-4 md:p-8">
+                <form id="reservationForm" class="space-y-4 md:space-y-6">
                     <input type="hidden" id="reservationSalonId">
                     
                     <div>
@@ -1547,7 +1869,7 @@
                         </select>
                     </div>
 
-                    <div class="grid md:grid-cols-2 gap-6">
+                    <div class="grid md:grid-cols-2 gap-4 md:gap-6">
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-2">Date *</label>
                             <input type="date" id="reservationDate" required class="input">
@@ -1573,13 +1895,13 @@
                         <textarea id="reservationNotes" rows="3" class="input" placeholder="Précisions sur la prestation..."></textarea>
                     </div>
 
-                    <div class="flex space-x-4 pt-4">
+                    <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 pt-4">
                         <button type="button" onclick="closeReservationModal()" 
-                                class="flex-1 btn-secondary">
+                                class="flex-1 btn-secondary py-3">
                             Annuler
                         </button>
                         <button type="submit" 
-                                class="flex-1 btn-primary">
+                                class="flex-1 btn-primary py-3">
                             <i class="fas fa-calendar-check mr-2"></i>
                             Confirmer
                         </button>
@@ -1590,11 +1912,11 @@
     </div>
 
     <!-- Bouton Chat -->
-    <div class="fixed bottom-8 right-8 z-40">
+    <div class="fixed bottom-6 right-6 z-40">
         <button onclick="openChat()" 
-                class="w-16 h-16 bg-gradient-to-r from-primary-600 to-primary-700 rounded-2xl shadow-hard flex items-center justify-center hover:scale-110 transition-transform duration-300 group">
-            <i class="fas fa-comment-dots text-white text-2xl group-hover:scale-110 transition-transform"></i>
-            <div class="absolute -top-2 -right-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center animate-pulse">
+                class="w-14 h-14 md:w-16 md:h-16 bg-gradient-to-r from-primary-600 to-primary-700 rounded-2xl shadow-hard flex items-center justify-center hover:scale-110 transition-transform duration-300 group">
+            <i class="fas fa-comment-dots text-white text-xl md:text-2xl group-hover:scale-110 transition-transform"></i>
+            <div class="absolute -top-2 -right-2 w-5 h-5 md:w-6 md:h-6 bg-red-500 rounded-full flex items-center justify-center animate-pulse">
                 <span class="text-white text-xs font-bold">3</span>
             </div>
         </button>
@@ -1623,9 +1945,16 @@
             initializeMap();
             initializeFilters();
             initializeForms();
+            initMobileMenu();
             
             // Mettre à jour l'interface utilisateur
             updateAuthUI();
+            
+            // Initialiser la date pour les réservations
+            initDate();
+            
+            // Mettre à jour les statistiques
+            updateStats();
         });
 
         // ====================
@@ -1649,9 +1978,12 @@
 
         function updateAuthUI() {
             const authSection = document.getElementById('authSection');
+            const authSectionMobile = document.getElementById('authSectionMobile');
+            const mobileAuthSection = document.getElementById('mobileAuthSection');
             const user = JSON.parse(localStorage.getItem('keurcoiff_user') || '{}');
             
             if (user.fullName) {
+                // Version desktop
                 authSection.innerHTML = `
                     <div class="flex items-center space-x-4">
                         <div class="hidden lg:block text-right">
@@ -1682,11 +2014,64 @@
                         </div>
                     </div>
                 `;
+                
+                // Version mobile (bouton menu)
+                authSectionMobile.innerHTML = `
+                    <button onclick="toggleUserMenu()" 
+                            class="w-8 h-8 bg-gradient-to-r from-primary-600 to-primary-700 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                        ${user.fullName.charAt(0).toUpperCase()}
+                    </button>
+                `;
+                
+                // Version mobile (menu complet)
+                mobileAuthSection.innerHTML = `
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-xl">
+                            <div class="w-10 h-10 bg-gradient-to-r from-primary-600 to-primary-700 rounded-full flex items-center justify-center text-white font-bold">
+                                ${user.fullName.charAt(0).toUpperCase()}
+                            </div>
+                            <div>
+                                <div class="font-semibold text-gray-900">${user.fullName}</div>
+                                <div class="text-sm text-gray-600">Mon compte</div>
+                            </div>
+                        </div>
+                        <a href="profile.html" class="flex items-center space-x-3 p-3 text-gray-700 hover:bg-gray-100 rounded-xl transition-colors" onclick="closeMobileMenu()">
+                            <i class="fas fa-user text-primary-600 w-5"></i>
+                            <span>Mon profil</span>
+                        </a>
+                        <a href="reservations.html" class="flex items-center space-x-3 p-3 text-gray-700 hover:bg-gray-100 rounded-xl transition-colors" onclick="closeMobileMenu()">
+                            <i class="fas fa-calendar text-primary-600 w-5"></i>
+                            <span>Mes réservations</span>
+                        </a>
+                        <button onclick="logout()" class="flex items-center space-x-3 p-3 text-red-600 hover:bg-red-50 w-full text-left rounded-xl transition-colors">
+                            <i class="fas fa-sign-out-alt w-5"></i>
+                            <span>Déconnexion</span>
+                        </button>
+                    </div>
+                `;
             } else {
+                // Version desktop
                 authSection.innerHTML = `
                     <div class="flex items-center space-x-4">
                         <a href="login.html" class="nav-link">Connexion</a>
                         <a href="register.html" class="btn-primary">S'inscrire</a>
+                    </div>
+                `;
+                
+                // Version mobile
+                authSectionMobile.innerHTML = `
+                    <a href="login.html" class="text-primary-600 font-semibold text-sm">Connexion</a>
+                `;
+                
+                // Version mobile (menu complet)
+                mobileAuthSection.innerHTML = `
+                    <div class="space-y-3">
+                        <a href="login.html" class="btn-primary w-full text-center" onclick="closeMobileMenu()">
+                            Se connecter
+                        </a>
+                        <a href="register.html" class="btn-secondary w-full text-center" onclick="closeMobileMenu()">
+                            S'inscrire
+                        </a>
                     </div>
                 `;
             }
@@ -1726,6 +2111,46 @@
         }
 
         // ====================
+        // 📱 MENU MOBILE
+        // ====================
+
+        function initMobileMenu() {
+            const menuBtn = document.getElementById('menuBtn');
+            const closeMenuBtn = document.getElementById('closeMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+            
+            menuBtn.addEventListener('click', openMobileMenu);
+            closeMenuBtn.addEventListener('click', closeMobileMenu);
+            mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+            
+            // Fermer le menu en appuyant sur Echap
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeMobileMenu();
+                }
+            });
+        }
+
+        function openMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+            
+            mobileMenu.classList.add('active');
+            mobileMenuOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+            
+            mobileMenu.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // ====================
         // 🗺️ GÉOLOCALISATION
         // ====================
 
@@ -1737,6 +2162,11 @@
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '© OpenStreetMap contributors'
             }).addTo(map);
+            
+            // Ajuster la carte sur mobile
+            if (window.innerWidth < 768) {
+                map.setView([14.6928, -17.4467], 12);
+            }
             
             // Ajouter des marqueurs de démo
             addDemoMarkers();
@@ -1769,10 +2199,10 @@
                 L.marker([salon.lat, salon.lng]).addTo(map)
                     .bindPopup(`
                         <div class="p-2">
-                            <h4 class="font-bold">${salon.name}</h4>
-                            <p class="text-sm text-gray-600">${salon.address}</p>
+                            <h4 class="font-bold text-sm md:text-base">${salon.name}</h4>
+                            <p class="text-xs md:text-sm text-gray-600">${salon.address}</p>
                             <button onclick="openReservationModal('${salon.name.toLowerCase().replace(' ', '-')}', '${salon.name}')" 
-                                    class="w-full mt-2 bg-primary-600 text-white py-2 px-4 rounded-lg text-sm hover:bg-primary-700 transition-colors">
+                                    class="w-full mt-2 bg-primary-600 text-white py-1 md:py-2 px-3 md:px-4 rounded-lg text-xs md:text-sm hover:bg-primary-700 transition-colors">
                                 Réserver
                             </button>
                         </div>
@@ -1801,10 +2231,10 @@
                     // Ajouter le marqueur utilisateur
                     L.marker([lat, lng], {
                         icon: L.divIcon({
-                            html: '<div class="bg-primary-600 text-white w-8 h-8 rounded-full flex items-center justify-center shadow-lg"><i class="fas fa-user"></i></div>',
+                            html: '<div class="bg-primary-600 text-white w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center shadow-lg"><i class="fas fa-user text-xs md:text-sm"></i></div>',
                             className: 'user-location-marker',
-                            iconSize: [32, 32],
-                            iconAnchor: [16, 16]
+                            iconSize: [24, 24],
+                            iconAnchor: [12, 12]
                         })
                     }).addTo(map)
                     .bindPopup('Votre position actuelle')
@@ -1956,6 +2386,9 @@
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('reservationDate').min = today;
             document.getElementById('reservationDate').value = today;
+            
+            // Fermer le menu mobile si ouvert
+            closeMobileMenu();
         }
 
         function closeReservationModal() {
@@ -1980,110 +2413,19 @@
             document.getElementById('salons').scrollIntoView({ 
                 behavior: 'smooth' 
             });
+            closeMobileMenu();
         }
 
         function scrollToLocalisation() {
             document.getElementById('localisation').scrollIntoView({ 
                 behavior: 'smooth' 
             });
+            closeMobileMenu();
             // Déclencher automatiquement la géolocalisation
             setTimeout(() => {
                 getUserLocation();
             }, 1000);
         }
-
-        // ====================
-        // 📱 MENU MOBILE
-        // ====================
-
-        document.getElementById('menuBtn').addEventListener('click', function() {
-            // Vous pourriez ajouter un menu mobile ici
-            showNotification('Ouverture du menu mobile', 'info');
-        });
-
-        // Fermer les menus si on clique ailleurs
-        document.addEventListener('click', function(event) {
-            const userMenu = document.getElementById('userMenu');
-            if (userMenu && !userMenu.contains(event.target) && !event.target.closest('[onclick="toggleUserMenu()"]')) {
-                userMenu.classList.add('hidden');
-            }
-        });
-
-        // ====================
-        // 🎯 ANIMATIONS DE SCROLL
-        // ====================
-
-        // Animation pour les liens de navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // ====================
-        // 🎯 FONCTIONS SUPPLEMENTAIRES
-        // ====================
-
-        // Gestion des images (chargement paresseux)
-        document.addEventListener('DOMContentLoaded', function() {
-            const images = document.querySelectorAll('img');
-            
-            const imageObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        img.src = img.dataset.src;
-                        observer.unobserve(img);
-                    }
-                });
-            });
-
-            images.forEach(img => {
-                if (img.dataset.src) {
-                    imageObserver.observe(img);
-                }
-            });
-        });
-
-        // Gestion des erreurs d'images
-        document.addEventListener('error', function(e) {
-            if (e.target.tagName === 'IMG') {
-                e.target.src = 'https://via.placeholder.com/400x300?text=Salon+de+Coiffure';
-            }
-        }, true);
-
-        // Animation au scroll
-        window.addEventListener('scroll', function() {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 100) {
-                nav.classList.add('shadow-hard');
-            } else {
-                nav.classList.remove('shadow-hard');
-            }
-        });
-
-        // Initialisation de la date pour le formulaire
-        function initDate() {
-            const today = new Date();
-            const tomorrow = new Date(today);
-            tomorrow.setDate(tomorrow.getDate() + 1);
-            
-            const dateInput = document.getElementById('reservationDate');
-            if (dateInput) {
-                dateInput.min = today.toISOString().split('T')[0];
-                dateInput.value = tomorrow.toISOString().split('T')[0];
-            }
-        }
-
-        // Appeler l'initialisation de la date
-        initDate();
 
         // ====================
         // 📊 STATISTIQUES EN TEMPS RÉEL
@@ -2157,6 +2499,162 @@
 
         // Initialiser le thème
         initTheme();
+
+        // Initialisation de la date pour le formulaire
+        function initDate() {
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            
+            const dateInput = document.getElementById('reservationDate');
+            if (dateInput) {
+                dateInput.min = today.toISOString().split('T')[0];
+                dateInput.value = tomorrow.toISOString().split('T')[0];
+            }
+        }
+
+        // ====================
+        // 📱 GESTION DU TOUCH SUR MOBILE
+        // ====================
+
+        // Empêcher le zoom sur les inputs sur iOS
+        document.addEventListener('touchstart', function(e) {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') {
+                e.target.style.fontSize = '16px';
+            }
+        });
+
+        document.addEventListener('blur', function(e) {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') {
+                e.target.style.fontSize = '';
+            }
+        }, true);
+
+        // ====================
+        // 🎯 AMÉLIORATIONS D'ACCESSIBILITÉ
+        // ====================
+
+        // Navigation au clavier
+        document.addEventListener('keydown', function(e) {
+            // Tab navigation
+            if (e.key === 'Tab') {
+                document.documentElement.classList.add('keyboard-navigation');
+            }
+        });
+
+        document.addEventListener('mousedown', function() {
+            document.documentElement.classList.remove('keyboard-navigation');
+        });
+
+        // Gestion du focus pour les modales
+        function trapFocus(element) {
+            const focusableElements = element.querySelectorAll(
+                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+            const firstFocusableElement = focusableElements[0];
+            const lastFocusableElement = focusableElements[focusableElements.length - 1];
+
+            element.addEventListener('keydown', function(e) {
+                if (e.key === 'Tab') {
+                    if (e.shiftKey) {
+                        if (document.activeElement === firstFocusableElement) {
+                            e.preventDefault();
+                            lastFocusableElement.focus();
+                        }
+                    } else {
+                        if (document.activeElement === lastFocusableElement) {
+                            e.preventDefault();
+                            firstFocusableElement.focus();
+                        }
+                    }
+                }
+            });
+        }
+
+        // Appliquer le trap focus à la modal de réservation
+        const reservationModal = document.getElementById('reservationModal');
+        if (reservationModal) {
+            trapFocus(reservationModal);
+        }
+
+        // ====================
+        // 📱 GESTION DES IMAGES
+        // ====================
+
+        // Chargement paresseux des images
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        if (img.dataset.src) {
+                            img.src = img.dataset.src;
+                        }
+                        observer.unobserve(img);
+                    }
+                });
+            });
+
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+
+        // Fallback pour les images cassées
+        document.addEventListener('error', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"%3E%3Crect width="400" height="300" fill="%23f3f4f6"/%3E%3Ctext x="200" y="150" font-family="Arial" font-size="16" text-anchor="middle" fill="%236b7280"%3ESalon de Coiffure%3C/text%3E%3C/svg%3E';
+                e.target.alt = 'Image non disponible';
+            }
+        }, true);
+
+        // ====================
+        // 📱 GESTION DE LA NAVIGATION MOBILE
+        // ====================
+
+        // Animation au scroll pour la navigation
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > 100) {
+                nav.classList.add('shadow-hard', 'bg-white/95');
+                if (scrollTop > lastScrollTop) {
+                    // Scroll down
+                    nav.style.transform = 'translateY(-100%)';
+                } else {
+                    // Scroll up
+                    nav.style.transform = 'translateY(0)';
+                }
+            } else {
+                nav.classList.remove('shadow-hard');
+                nav.style.transform = 'translateY(0)';
+            }
+            
+            lastScrollTop = scrollTop;
+        }, { passive: true });
+
+        // ====================
+        // 🎯 GESTION DES ANIMATIONS
+        // ====================
+
+        // Animation de pulse pour les boutons d'action
+        function animateActionButtons() {
+            const actionButtons = document.querySelectorAll('.btn-primary');
+            actionButtons.forEach(btn => {
+                btn.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px) scale(1.02)';
+                });
+                
+                btn.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        }
+
+        // Initialiser les animations
+        animateActionButtons();
 
     </script>
 </body>
