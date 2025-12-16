@@ -246,67 +246,87 @@
         </div>
     </section>
 
-    <script>
-        // Toggle visibilité mot de passe
-        function togglePassword() {
-            const passwordInput = document.getElementById('passwordInput');
-            const passwordToggle = document.getElementById('passwordToggle');
-            
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                passwordToggle.classList.remove('fa-eye');
-                passwordToggle.classList.add('fa-eye-slash');
-            } else {
-                passwordInput.type = 'password';
-                passwordToggle.classList.remove('fa-eye-slash');
-                passwordToggle.classList.add('fa-eye');
-            }
+   <script>
+    // Toggle visibilité mot de passe
+    function togglePassword() {
+        const passwordInput = document.getElementById('passwordInput');
+        const passwordToggle = document.getElementById('passwordToggle');
+        
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            passwordToggle.classList.remove('fa-eye');
+            passwordToggle.classList.add('fa-eye-slash');
+        } else {
+            passwordInput.type = 'password';
+            passwordToggle.classList.remove('fa-eye-slash');
+            passwordToggle.classList.add('fa-eye');
         }
+    }
 
-        // Gestion du formulaire
-        document.getElementById('loginForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
+    // Gestion du formulaire - VERSION CORRIGÉE
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const submitText = document.getElementById('submitText');
+        const submitLoader = document.getElementById('submitLoader');
+        
+        // Récupération des données
+        const formData = new FormData(this);
+        const data = Object.fromEntries(formData);
+        const userType = document.querySelector('input[name="userType"]:checked').value;
+        
+        // Validation
+        if (!data.phone || !data.password) {
+            showNotification('Veuillez remplir tous les champs', 'error');
+            return;
+        }
+        
+        // Format téléphone (supprimer espaces)
+        const phone = data.phone.replace(/\s/g, '');
+        
+        // Animation chargement
+        submitText.classList.add('hidden');
+        submitLoader.classList.remove('hidden');
+        submitBtn.disabled = true;
+        
+        try {
+            // ⚠️ IMPORTANT : Appel RÉEL à l'API
+            const API_URL = 'http://localhost:5000/api/auth/login';
+            console.log('🔐 Tentative connexion API:', API_URL);
             
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const submitText = document.getElementById('submitText');
-            const submitLoader = document.getElementById('submitLoader');
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    phone: phone,
+                    password: data.password
+                })
+            });
             
-            // Récupération des données
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
-            const userType = document.querySelector('input[name="userType"]:checked').value;
+            console.log('📡 Réponse API:', response.status);
             
-            // Animation chargement
-            submitText.classList.add('hidden');
-            submitLoader.classList.remove('hidden');
-            submitBtn.disabled = true;
+            if (!response.ok) {
+                // Si l'API retourne une erreur
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Identifiants incorrects');
+            }
             
-            try {
-                // Simulation appel API
-                await new Promise(resolve => setTimeout(resolve, 1500));
+            const result = await response.json();
+            
+            if (result.success) {
+                // ⚠️ VÉRIFIER que l'utilisateur a le bon userType
+                if (result.data.user.userType !== userType) {
+                    throw new Error(`Ce compte est un ${result.data.user.userType}, pas un ${userType}`);
+                }
                 
-                // Données de démo selon le type d'utilisateur
-                const userData = userType === 'coiffeur' ? {
-                    fullName: "Salon Awa Beauty",
-                    phone: data.phone,
-                    email: "awa@salon.sn",
-                    quarter: "Plateau",
-                    userType: "coiffeur",
-                    role: "coiffeur",
-                    salonName: "Salon Awa Beauty"
-                } : {
-                    fullName: "Awa Diop",
-                    phone: data.phone,
-                    email: "awa@client.sn",
-                    quarter: "Plateau",
-                    userType: "client",
-                    role: "client"
-                };
+                // Stocker les données réelles de l'API
+                localStorage.setItem('keurcoiff_user', JSON.stringify(result.data.user));
+                localStorage.setItem('keurcoiff_token', result.data.token);
                 
-                localStorage.setItem('keurcoiff_user', JSON.stringify(userData));
-                localStorage.setItem('keurcoiff_token', 'demo_token_' + userType + '_' + Date.now());
-                
-                showNotification(`Connexion réussie - ${userType === 'coiffeur' ? 'Mode Coiffeur' : 'Mode Client'}`, 'success');
+                showNotification('Connexion réussie !', 'success');
                 
                 // Redirection selon le type d'utilisateur
                 setTimeout(() => {
@@ -317,49 +337,55 @@
                     }
                 }, 1000);
                 
-            } catch (error) {
-                showNotification('Identifiants incorrects', 'error');
-                submitText.classList.remove('hidden');
-                submitLoader.classList.add('hidden');
-                submitBtn.disabled = false;
+            } else {
+                throw new Error(result.message || 'Connexion échouée');
             }
-        });
-
-        // Fonction de notification
-        function showNotification(message, type = 'info') {
-            const notification = document.createElement('div');
-            const bgColor = type === 'success' ? 'bg-green-500' : 
-                           type === 'error' ? 'bg-red-500' : 'bg-blue-500';
             
-            notification.innerHTML = `
-                <div class="fixed top-4 right-4 ${bgColor} text-white px-6 py-4 rounded-2xl shadow-2xl z-50 max-w-sm animate-slideIn">
-                    <div class="flex items-center space-x-3">
-                        <i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'exclamation-triangle' : 'info'}"></i>
-                        <div class="font-medium">${message}</div>
-                    </div>
-                </div>
-            `;
+        } catch (error) {
+            console.error('❌ Erreur connexion:', error);
             
-            document.body.appendChild(notification);
+            // ⚠️ NE PAS AUTORISER LE MODE DÉMO
+            showNotification(error.message || 'Service indisponible. Vérifiez votre connexion.', 'error');
             
-            setTimeout(() => {
-                notification.remove();
-            }, 5000);
+            submitText.classList.remove('hidden');
+            submitLoader.classList.add('hidden');
+            submitBtn.disabled = false;
         }
+    });
 
-        // Style d'animation pour la notification
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideIn {
-                from { transform: translateX(100%); opacity: 0; }
-                to { transform: translateX(0); opacity: 1; }
-            }
-            
-            .animate-slideIn {
-                animation: slideIn 0.3s ease-out;
-            }
+    // Fonction de notification
+    function showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        const bgColor = type === 'success' ? 'bg-green-500' : 
+                       type === 'error' ? 'bg-red-500' : 'bg-blue-500';
+        
+        notification.innerHTML = `
+            <div class="fixed top-4 right-4 ${bgColor} text-white px-6 py-4 rounded-2xl shadow-2xl z-50 max-w-sm animate-slideIn">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'exclamation-triangle' : 'info'}"></i>
+                    <div class="font-medium">${message}</div>
+                </div>
+            </div>
         `;
-        document.head.appendChild(style);
-    </script>
-</body>
-</html>
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.remove();
+        }, 5000);
+    }
+
+    // Style d'animation pour la notification
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .animate-slideIn {
+            animation: slideIn 0.3s ease-out;
+        }
+    `;
+    document.head.appendChild(style);
+</script>
