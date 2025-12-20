@@ -1,4 +1,4 @@
-// server.js - VERSION CORRIGÉE ET AMÉLIORÉE
+// server.js - VERSION COMPLÈTE CORRIGÉE
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
@@ -86,7 +86,6 @@ const upload = multer({
 // ====================
 // 🛡️ MIDDLEWARE D'AUTHENTIFICATION
 // ====================
-
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
@@ -492,7 +491,6 @@ const Reservation = mongoose.model('Reservation', reservationSchema);
 // ====================
 // 📊 CRÉATION DE DONNÉES DE DÉMO
 // ====================
-
 async function createDemoData() {
   try {
     // Vérifier si des utilisateurs existent déjà
@@ -764,8 +762,6 @@ app.get('/api/status', (req, res) => {
 // ====================
 
 // Route d'inscription améliorée
-
-
 app.post('/api/auth/register', async (req, res) => {
   try {
     const { phone, fullName, password, email, quarter, role } = req.body;
@@ -906,61 +902,25 @@ app.post('/api/auth/login', async (req, res) => {
       });
     }
 
-
- // Middleware pour valider les données utilisateur
-const validateUserData = (req, res, next) => {
-  if (!req.user || !req.user.userId) {
-    return res.status(401).json({
-      success: false,
-      message: 'Données utilisateur invalides'
-    });
-  }
-  
-  // Vérifier le format du userId
-  if (!mongoose.Types.ObjectId.isValid(req.user.userId)) {
-    return res.status(400).json({
-      success: false,
-      message: 'ID utilisateur invalide'
-    });
-  }
-  
-  next();
-};
-
-// Appliquer ce middleware aux routes authentifiées
-app.get('/api/auth/verify', authenticateToken, validateUserData, async (req, res) => {
-  // ... le reste du code
-});   
-
-// Recherche de l'utilisateur avec le mot de passe
-const user = await User.findOne({ phone });
-if (!user) {
-  console.log('❌ Utilisateur non trouvé:', phone);
-  return res.status(401).json({
-    success: false,
-    message: 'Identifiants incorrects'
-  });
-}
-
-    // Vérification du mot de passe
-const isPasswordCorrect = await bcrypt.compare(password, user.password);      
-      // Suivi des tentatives échouées
-      await User.findByIdAndUpdate(user._id, {
-        $inc: { loginAttempts: 1 },
-        $set: { lastAttempt: new Date() }
-      });
-      
+    // Recherche de l'utilisateur avec le mot de passe
+    const user = await User.findOne({ phone }).select('+password');
+    if (!user) {
+      console.log('❌ Utilisateur non trouvé:', phone);
       return res.status(401).json({
         success: false,
         message: 'Identifiants incorrects'
       });
     }
 
-    // Réinitialisation des tentatives de connexion
-    await User.findByIdAndUpdate(user._id, {
-      loginAttempts: 0,
-      lastLogin: new Date()
-    });
+    // Vérification du mot de passe
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
+    if (!isPasswordCorrect) {
+      console.log('❌ Mot de passe incorrect pour:', phone);
+      return res.status(401).json({
+        success: false,
+        message: 'Identifiants incorrects'
+      });
+    }
 
     // Génération du token JWT
     const token = jwt.sign(
@@ -1003,15 +963,10 @@ const isPasswordCorrect = await bcrypt.compare(password, user.password);
   }
 });
 
-// Route de déconnexion - CORRIGÉE
+// Route de déconnexion
 app.post('/api/auth/logout', authenticateToken, async (req, res) => {
   try {
     console.log('👤 Déconnexion utilisateur:', req.user.fullName);
-    
-    // Mettre à jour le lastLogout
-    await User.findByIdAndUpdate(req.user.userId, {
-      lastLogout: new Date()
-    });
     
     res.json({
       success: true,
@@ -1027,7 +982,6 @@ app.post('/api/auth/logout', authenticateToken, async (req, res) => {
 });
 
 // Route pour vérifier le token
-// Route pour vérifier le token - CORRIGÉE
 app.get('/api/auth/verify', authenticateToken, async (req, res) => {
   try {
     const user = await User.findById(req.user.userId).select('-password');
@@ -1928,7 +1882,6 @@ app.get('/api/coiffeur/stats', authenticateToken, async (req, res) => {
 // ====================
 // 🔍 ROUTES RECHERCHE
 // ====================
-
 app.get('/api/search/salons', async (req, res) => {
   try {
     const { q, quarter, service, minRating, maxPrice, homeService } = req.query;
@@ -1987,7 +1940,6 @@ app.get('/api/search/salons', async (req, res) => {
 // ====================
 // 🚀 WEB SOCKETS POUR NOTIFICATIONS
 // ====================
-
 io.on('connection', (socket) => {
   console.log('👤 Nouvel utilisateur connecté:', socket.id);
   
