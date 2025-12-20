@@ -266,6 +266,16 @@
             color: white;
         }
         
+        .badge-info {
+            background-color: #3b82f6;
+            color: white;
+        }
+        
+        .badge-danger {
+            background-color: #ef4444;
+            color: white;
+        }
+        
         /* INPUTS AMÉLIORÉS */
         .input {
             width: 100%;
@@ -680,6 +690,83 @@
             color: white;
         }
         
+        /* Styles pour les offres d'emploi */
+        .job-card {
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        .job-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+        }
+        
+        .job-type-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .job-type-fulltime {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        
+        .job-type-parttime {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        
+        .job-type-freelance {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        /* Styles pour les statuts de recrutement */
+        .recruitment-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .status-open {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        
+        .status-closed {
+            background: #f3f4f6;
+            color: #6b7280;
+        }
+        
+        .status-urgent {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        
+        /* Styles pour les applications */
+        .application-card {
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s;
+        }
+        
+        .application-card:hover {
+            border-color: var(--primary);
+            background: #faf5ff;
+        }
+        
+        /* Animation pour les nouveaux éléments */
+        @keyframes highlight {
+            0% { background-color: rgba(124, 58, 237, 0.1); }
+            100% { background-color: transparent; }
+        }
+        
+        .highlight-new {
+            animation: highlight 2s ease;
+        }
+        
         /* ========== AMÉLIORATIONS MOBILE ========== */
         @media (max-width: 768px) {
             /* Navigation mobile */
@@ -1047,6 +1134,71 @@
             color: #1e40af;
             border: 1px solid #bfdbfe;
         }
+        
+        /* Styles pour le dashboard coiffeur */
+        .dashboard-stat {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+        }
+        
+        .dashboard-stat:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        /* Styles pour les demandes de recrutement */
+        .application-item {
+            padding: 1rem;
+            border-radius: 1rem;
+            border: 1px solid #e5e7eb;
+            margin-bottom: 0.75rem;
+            transition: all 0.3s;
+        }
+        
+        .application-item:hover {
+            border-color: var(--primary);
+            background: #faf5ff;
+        }
+        
+        .application-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .status-pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .status-reviewed {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        
+        .status-accepted {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        
+        .status-rejected {
+            background: #fee2e2;
+            color: #991b1b;
+        }
     </style>
 </head>
 
@@ -1075,6 +1227,7 @@
                     <a href="#services" class="nav-link">Services</a>
                     <a href="#coiffeurs" class="nav-link">Nos Coiffeurs</a>
                     <a href="#localisation" class="nav-link">📍 Proche de moi</a>
+                    <a href="#recrutement" class="nav-link">Recrutement</a>
                     <a href="#partenariat" class="nav-link">Devenir Partenaire</a>
                     <a href="#contact" class="nav-link">Contact</a>
                     
@@ -1118,6 +1271,7 @@
             <a href="#services" class="block nav-link text-lg py-3" onclick="closeMobileMenu()">Services</a>
             <a href="#coiffeurs" class="block nav-link text-lg py-3" onclick="closeMobileMenu()">Nos Coiffeurs</a>
             <a href="#localisation" class="block nav-link text-lg py-3" onclick="closeMobileMenu()">📍 Proche de moi</a>
+            <a href="#recrutement" class="block nav-link text-lg py-3" onclick="closeMobileMenu()">Recrutement</a>
             <a href="#partenariat" class="block nav-link text-lg py-3" onclick="closeMobileMenu()">Devenir Partenaire</a>
             <a href="#contact" class="block nav-link text-lg py-3" onclick="closeMobileMenu()">Contact</a>
         </div>
@@ -1589,8 +1743,185 @@
         </div>
     </section>
 
+    <!-- Section Recrutement et Emplois -->
+    <section id="recrutement" class="section bg-gradient-to-b from-gray-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 md:mb-16" data-aos="fade-up">
+                <h2 class="section-title text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 mb-4">
+                    Opportunités
+                    <span class="gradient-text">d'Emploi</span>
+                </h2>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4">
+                    Trouvez votre prochain emploi ou recrutez des talents dans l'industrie de la coiffure
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8 md:gap-12">
+                <!-- Liste des offres d'emploi -->
+                <div class="lg:col-span-2 space-y-6" data-aos="fade-right">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+                        <h3 class="text-2xl md:text-3xl font-bold text-gray-900">Offres d'emploi récentes</h3>
+                        <button onclick="openJobPostingModal()" class="btn-primary">
+                            <i class="fas fa-plus mr-2"></i>
+                            Poster une offre
+                        </button>
+                    </div>
+
+                    <!-- Offre 1 -->
+                    <div class="job-card card p-6" data-aos="fade-up">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
+                            <div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-2">Coiffeur(euse) spécialisé(e) en tresses</h4>
+                                <div class="flex items-center gap-4 flex-wrap">
+                                    <span class="flex items-center text-gray-600">
+                                        <i class="fas fa-building mr-2 text-primary-600"></i>
+                                        Prestige Dakar
+                                    </span>
+                                    <span class="flex items-center text-gray-600">
+                                        <i class="fas fa-map-marker-alt mr-2 text-primary-600"></i>
+                                        Plateau, Dakar
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-end gap-2">
+                                <span class="job-type-badge job-type-fulltime">Temps plein</span>
+                                <span class="recruitment-status status-open">Recrutement actif</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            Recherche d'un(e) coiffeur(euse) spécialisé(e) dans les tresses africaines traditionnelles et modernes. 
+                            Expérience minimale de 3 ans requise.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs">Tresses</span>
+                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs">Soins capillaires</span>
+                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs">Relation client</span>
+                        </div>
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                            <div class="text-primary-600 font-bold text-lg">Salaire: 250 000 - 350 000 FCFA/mois</div>
+                            <button onclick="applyForJob('1')" class="btn-primary text-sm">
+                                <i class="fas fa-paper-plane mr-2"></i>
+                                Postuler maintenant
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Offre 2 -->
+                    <div class="job-card card p-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
+                            <div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-2">Barbier expert dégradés</h4>
+                                <div class="flex items-center gap-4 flex-wrap">
+                                    <span class="flex items-center text-gray-600">
+                                        <i class="fas fa-building mr-2 text-primary-600"></i>
+                                        Elégance Coiffure
+                                    </span>
+                                    <span class="flex items-center text-gray-600">
+                                        <i class="fas fa-map-marker-alt mr-2 text-primary-600"></i>
+                                        Almadies, Dakar
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-end gap-2">
+                                <span class="job-type-badge job-type-parttime">Temps partiel</span>
+                                <span class="recruitment-status status-urgent">Urgent</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            Barbier expérimenté recherché pour des coupes modernes et dégradés artistiques. 
+                            Maîtrise des techniques de barbe et de soins requis.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs">Dégradés</span>
+                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs">Barbe</span>
+                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs">Coupes modernes</span>
+                        </div>
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                            <div class="text-primary-600 font-bold text-lg">Salaire: 180 000 - 250 000 FCFA/mois</div>
+                            <button onclick="applyForJob('2')" class="btn-primary text-sm">
+                                <i class="fas fa-paper-plane mr-2"></i>
+                                Postuler maintenant
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Statistiques recrutement -->
+                <div class="space-y-6" data-aos="fade-left">
+                    <div class="card p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-6">Statistiques recrutement</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-700">Taux de remplissage</span>
+                                    <span class="font-bold text-primary-600">85%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-primary-500 h-2 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-700">Délai moyen de recrutement</span>
+                                    <span class="font-bold text-primary-600">7 jours</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-green-500 h-2 rounded-full" style="width: 70%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-700">Satisfaction employeurs</span>
+                                    <span class="font-bold text-primary-600">92%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-yellow-500 h-2 rounded-full" style="width: 92%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Avantages pour coiffeurs -->
+                    <div class="card p-6 bg-gradient-to-r from-primary-50 to-primary-100 border border-primary-200">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Pourquoi postuler ici ?</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-primary-600 mr-3"></i>
+                                <span class="text-gray-700">Salaire compétitif</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-primary-600 mr-3"></i>
+                                <span class="text-gray-700">Formation continue</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-primary-600 mr-3"></i>
+                                <span class="text-gray-700">Ambiance de travail positive</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-primary-600 mr-3"></i>
+                                <span class="text-gray-700">Opportunités d'évolution</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- CTA pour les salons -->
+                    <div class="card p-6 bg-gradient-dark text-white">
+                        <h3 class="text-xl font-bold mb-4">Vous êtes un salon ?</h3>
+                        <p class="text-gray-300 mb-4">
+                            Recrutez les meilleurs talents de la coiffure directement sur notre plateforme.
+                        </p>
+                        <button onclick="openJobPostingModal()" class="w-full btn-primary">
+                            <i class="fas fa-bullhorn mr-2"></i>
+                            Publier une annonce
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Section Géolocalisation -->
-    <section id="localisation" class="section bg-gradient-to-b from-gray-50 to-white">
+    <section id="localisation" class="section bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 md:mb-16" data-aos="fade-up">
                 <h2 class="section-title text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 mb-4">
@@ -1730,7 +2061,7 @@
     </section>
 
     <!-- Section Processus de Réservation -->
-    <section class="section bg-white">
+    <section class="section bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 md:mb-16" data-aos="fade-up">
                 <h2 class="section-title text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 mb-4">
@@ -2143,6 +2474,7 @@
                         <a href="#salons" class="block text-gray-400 hover:text-white transition-colors text-sm md:text-base">Nos Salons</a>
                         <a href="#services" class="block text-gray-400 hover:text-white transition-colors text-sm md:text-base">Services</a>
                         <a href="#coiffeurs" class="block text-gray-400 hover:text-white transition-colors text-sm md:text-base">Nos Coiffeurs</a>
+                        <a href="#recrutement" class="block text-gray-400 hover:text-white transition-colors text-sm md:text-base">Recrutement</a>
                         <a href="#partenariat" class="block text-gray-400 hover:text-white transition-colors text-sm md:text-base">Devenir Partenaire</a>
                     </div>
                 </div>
@@ -2257,6 +2589,91 @@
         </div>
     </div>
 
+    <!-- Modal de Publication d'Offre d'Emploi -->
+    <div id="jobPostingModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden p-4">
+        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-primary-600 to-primary-700 text-white p-6 md:p-8 rounded-t-3xl">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-xl md:text-2xl font-bold">Publier une offre d'emploi</h3>
+                    <button onclick="closeJobPostingModal()" class="text-white hover:text-gray-200">
+                        <i class="fas fa-times text-xl md:text-2xl"></i>
+                    </button>
+                </div>
+                <p class="text-white/90 mt-2">Recrutez les meilleurs talents de la coiffure</p>
+            </div>
+
+            <!-- Form -->
+            <div class="p-4 md:p-8">
+                <form id="jobPostingForm" class="space-y-4 md:space-y-6">
+                    <div class="form-group">
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Titre du poste *</label>
+                        <input type="text" id="jobTitle" required class="input" placeholder="Ex: Coiffeur(euse) spécialisé(e) en tresses">
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-4 md:gap-6">
+                        <div class="form-group">
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Type de contrat *</label>
+                            <select id="jobType" required class="input">
+                                <option value="">Choisir le type de contrat</option>
+                                <option value="fulltime">Temps plein</option>
+                                <option value="parttime">Temps partiel</option>
+                                <option value="freelance">Freelance</option>
+                                <option value="internship">Stage</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Salaire proposé *</label>
+                            <input type="text" id="jobSalary" required class="input" placeholder="Ex: 250 000 - 350 000 FCFA/mois">
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-4 md:gap-6">
+                        <div class="form-group">
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Lieu de travail *</label>
+                            <input type="text" id="jobLocation" required class="input" placeholder="Ex: Plateau, Dakar">
+                        </div>
+                        <div class="form-group">
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Date limite *</label>
+                            <input type="date" id="jobDeadline" required class="input">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Compétences requises *</label>
+                        <div class="flex flex-wrap gap-2">
+                            <input type="text" id="jobSkillsInput" class="input flex-1" placeholder="Ajouter une compétence">
+                            <button type="button" onclick="addSkill()" class="btn-primary text-sm">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <div id="jobSkills" class="mt-3 flex flex-wrap gap-2">
+                            <!-- Les compétences seront ajoutées ici -->
+                        </div>
+                    </div>
+
+                    <div class="form-group textarea-group">
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Description du poste *</label>
+                        <textarea id="jobDescription" rows="6" required class="input" placeholder="Décrivez les responsabilités, exigences, avantages..."></textarea>
+                        <div class="char-count">0/2000</div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 pt-4">
+                        <button type="button" onclick="closeJobPostingModal()" 
+                                class="flex-1 btn-secondary py-3">
+                            Annuler
+                        </button>
+                        <button type="submit" 
+                                class="flex-1 btn-primary py-3">
+                            <i class="fas fa-paper-plane mr-2"></i>
+                            Publier l'offre
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- Bouton Chat -->
     <div class="fixed bottom-6 right-6 z-40">
         <button onclick="openChat()" 
@@ -2290,6 +2707,7 @@
         let userLocation = null;
         let map = null;
         let currentUser = null;
+        let jobSkills = [];
 
         // ====================
         // 🚀 INITIALISATION
@@ -2312,17 +2730,23 @@
         });
 
         // ====================
-        // 🔐 GESTION D'AUTHENTIFICATION
+        // 🔐 GESTION D'AUTHENTIFICATION CORRIGÉE
         // ====================
 
         async function initializeAuth() {
+            console.log('🔐 Initialisation de l\'authentification...');
+            
             const token = localStorage.getItem('keurcoiff_token');
-            if (!token) {
+            const storedUser = localStorage.getItem('keurcoiff_user');
+            
+            if (!token || !storedUser) {
+                console.log('❌ Aucun token ou utilisateur trouvé');
                 currentUser = null;
                 return;
             }
 
             try {
+                console.log('🔄 Vérification du token...');
                 const response = await fetch(`${API_BASE_URL}/auth/verify`, {
                     method: 'GET',
                     headers: {
@@ -2333,28 +2757,77 @@
                 
                 if (response.ok) {
                     const data = await response.json();
-                    currentUser = data.data.user;
-                    localStorage.setItem('keurcoiff_user', JSON.stringify(currentUser));
+                    console.log('✅ Token valide:', data);
+                    
+                    if (data.success && data.data && data.data.user) {
+                        currentUser = data.data.user;
+                        
+                        // Normaliser l'objet utilisateur
+                        normalizeUserObject();
+                        
+                        console.log('👤 Utilisateur chargé:', currentUser);
+                    } else {
+                        throw new Error('Format de réponse invalide');
+                    }
                 } else {
-                    // Token invalide
-                    localStorage.removeItem('keurcoiff_user');
-                    localStorage.removeItem('keurcoiff_token');
-                    currentUser = null;
+                    console.warn('⚠️ Token invalide, déconnexion...');
+                    await logoutSilently();
                 }
             } catch (error) {
                 console.error('❌ Erreur vérification token:', error);
-                localStorage.removeItem('keurcoiff_user');
-                localStorage.removeItem('keurcoiff_token');
-                currentUser = null;
+                await logoutSilently();
             }
         }
 
+        function normalizeUserObject() {
+            // S'assurer que l'ID est correctement défini
+            if (!currentUser.id && currentUser._id) {
+                currentUser.id = currentUser._id;
+            }
+            
+            // S'assurer que le rôle est défini (client par défaut)
+            if (!currentUser.role) {
+                currentUser.role = 'client';
+            }
+            
+            // S'assurer que le nom complet est défini
+            if (!currentUser.fullName) {
+                if (currentUser.firstName && currentUser.lastName) {
+                    currentUser.fullName = `${currentUser.firstName} ${currentUser.lastName}`;
+                } else if (currentUser.name) {
+                    currentUser.fullName = currentUser.name;
+                } else if (currentUser.email) {
+                    currentUser.fullName = currentUser.email.split('@')[0];
+                } else {
+                    currentUser.fullName = 'Utilisateur';
+                }
+            }
+            
+            // Sauvegarder l'utilisateur normalisé
+            localStorage.setItem('keurcoiff_user', JSON.stringify(currentUser));
+        }
+
         function updateAuthUI() {
+            console.log('🔄 Mise à jour de l\'interface utilisateur...');
+            
             const authSection = document.getElementById('authSection');
             const authSectionMobile = document.getElementById('authSectionMobile');
             const mobileAuthSection = document.getElementById('mobileAuthSection');
             
-            if (currentUser) {
+            if (!authSection || !authSectionMobile || !mobileAuthSection) {
+                console.error('❌ Éléments d\'authentification non trouvés');
+                return;
+            }
+            
+            // Vérifier que currentUser est complet avec toutes les propriétés nécessaires
+            const isUserValid = currentUser && 
+                               currentUser.id && 
+                               currentUser.fullName && 
+                               currentUser.role;
+            
+            if (isUserValid) {
+                console.log('✅ Utilisateur connecté:', currentUser.fullName);
+                
                 // Version desktop
                 authSection.innerHTML = `
                     <div class="flex items-center space-x-4">
@@ -2381,6 +2854,16 @@
                                 <a href="dashboard-coiffeur.html" class="user-menu-item">
                                     <i class="fas fa-chart-line"></i>
                                     <span>Dashboard</span>
+                                </a>
+                                <a href="mes-offres.html" class="user-menu-item">
+                                    <i class="fas fa-briefcase"></i>
+                                    <span>Mes offres</span>
+                                </a>
+                                ` : ''}
+                                ${currentUser.role === 'client' ? `
+                                <a href="mes-demandes.html" class="user-menu-item">
+                                    <i class="fas fa-file-alt"></i>
+                                    <span>Mes demandes</span>
                                 </a>
                                 ` : ''}
                                 <div class="user-menu-divider"></div>
@@ -2426,6 +2909,16 @@
                             <i class="fas fa-chart-line text-primary-600 w-5"></i>
                             <span>Dashboard coiffeur</span>
                         </a>
+                        <a href="mes-offres.html" class="flex items-center space-x-3 p-3 text-gray-700 hover:bg-gray-100 rounded-xl transition-colors" onclick="closeMobileMenu()">
+                            <i class="fas fa-briefcase text-primary-600 w-5"></i>
+                            <span>Mes offres d'emploi</span>
+                        </a>
+                        ` : ''}
+                        ${currentUser.role === 'client' ? `
+                        <a href="mes-demandes.html" class="flex items-center space-x-3 p-3 text-gray-700 hover:bg-gray-100 rounded-xl transition-colors" onclick="closeMobileMenu()">
+                            <i class="fas fa-file-alt text-primary-600 w-5"></i>
+                            <span>Mes demandes d'emploi</span>
+                        </a>
                         ` : ''}
                         <button onclick="logout()" class="flex items-center space-x-3 p-3 text-red-600 hover:bg-red-50 w-full text-left rounded-xl transition-colors">
                             <i class="fas fa-sign-out-alt w-5"></i>
@@ -2434,6 +2927,9 @@
                     </div>
                 `;
             } else {
+                console.log('❌ Utilisateur non connecté');
+                currentUser = null;
+                
                 // Version desktop
                 authSection.innerHTML = `
                     <div class="flex items-center space-x-4">
@@ -2442,7 +2938,7 @@
                     </div>
                 `;
                 
-                // Version mobile
+                // Version mobile (bouton menu)
                 authSectionMobile.innerHTML = `
                     <div class="flex items-center space-x-2">
                         <a href="login.html" class="text-primary-600 font-semibold text-sm">Connexion</a>
@@ -2463,32 +2959,19 @@
                     </div>
                 `;
             }
-        }
-
-        function toggleUserMenu() {
-            const menu = document.getElementById('userMenu');
-            if (menu) {
-                menu.classList.toggle('hidden');
-                
-                // Fermer le menu en cliquant à l'extérieur
-                if (!menu.classList.contains('hidden')) {
-                    setTimeout(() => {
-                        document.addEventListener('click', closeUserMenuOnClickOutside);
-                    }, 10);
-                } else {
-                    document.removeEventListener('click', closeUserMenuOnClickOutside);
-                }
-            }
-        }
-
-        function closeUserMenuOnClickOutside(event) {
-            const menu = document.getElementById('userMenu');
-            const button = document.querySelector('.user-avatar');
             
-            if (menu && !menu.contains(event.target) && !button.contains(event.target)) {
-                menu.classList.add('hidden');
-                document.removeEventListener('click', closeUserMenuOnClickOutside);
-            }
+            console.log('✅ Interface utilisateur mise à jour');
+        }
+
+        async function logoutSilently() {
+            localStorage.removeItem('keurcoiff_user');
+            localStorage.removeItem('keurcoiff_token');
+            currentUser = null;
+            
+            // Recharger la page pour rafraîchir l'état
+            setTimeout(() => {
+                location.reload();
+            }, 100);
         }
 
         async function logout() {
@@ -2516,7 +2999,7 @@
             // Mettre à jour l'interface
             updateAuthUI();
             
-            // Fermer le menu mobile s'il est ouvert
+            // Fermer le menu mobile si ouvert
             closeMobileMenu();
             
             // Afficher une notification
@@ -2526,6 +3009,32 @@
             setTimeout(() => {
                 window.location.reload();
             }, 1000);
+        }
+
+        function toggleUserMenu() {
+            const menu = document.getElementById('userMenu');
+            if (menu) {
+                menu.classList.toggle('hidden');
+                
+                // Fermer le menu en cliquant à l'extérieur
+                if (!menu.classList.contains('hidden')) {
+                    setTimeout(() => {
+                        document.addEventListener('click', closeUserMenuOnClickOutside);
+                    }, 10);
+                } else {
+                    document.removeEventListener('click', closeUserMenuOnClickOutside);
+                }
+            }
+        }
+
+        function closeUserMenuOnClickOutside(event) {
+            const menu = document.getElementById('userMenu');
+            const button = document.querySelector('.user-avatar');
+            
+            if (menu && !menu.contains(event.target) && button && !button.contains(event.target)) {
+                menu.classList.add('hidden');
+                document.removeEventListener('click', closeUserMenuOnClickOutside);
+            }
         }
 
         // ====================
@@ -2760,6 +3269,7 @@
                     // Vérifier l'authentification
                     if (!currentUser) {
                         showNotification('Veuillez vous connecter pour devenir partenaire', 'error');
+                        window.location.href = 'login.html?redirect=partenariat';
                         return;
                     }
                     
@@ -2927,6 +3437,77 @@
                     }
                 });
             }
+
+            // Formulaire de publication d'offre d'emploi
+            const jobPostingForm = document.getElementById('jobPostingForm');
+            if (jobPostingForm) {
+                // Compteur de caractères pour la description
+                const descriptionTextarea = jobPostingForm.querySelector('#jobDescription');
+                const charCount = jobPostingForm.querySelector('.char-count');
+                
+                if (descriptionTextarea && charCount) {
+                    descriptionTextarea.addEventListener('input', function() {
+                        const length = this.value.length;
+                        charCount.textContent = `${length}/2000`;
+                        
+                        if (length > 2000) {
+                            this.value = this.value.substring(0, 2000);
+                            charCount.textContent = '2000/2000';
+                        }
+                    });
+                }
+                
+                jobPostingForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    // Vérifier l'authentification et le rôle
+                    if (!currentUser) {
+                        showNotification('Veuillez vous connecter pour publier une offre', 'error');
+                        window.location.href = 'login.html?redirect=jobposting';
+                        return;
+                    }
+                    
+                    if (currentUser.role !== 'coiffeur') {
+                        showNotification('Cette fonctionnalité est réservée aux coiffeurs/salons', 'error');
+                        return;
+                    }
+                    
+                    const submitBtn = this.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.innerHTML;
+                    
+                    // Animation de chargement
+                    submitBtn.innerHTML = `
+                        <div class="loader mx-auto"></div>
+                        <span class="ml-2">Publication...</span>
+                    `;
+                    submitBtn.disabled = true;
+                    
+                    try {
+                        // Simulation d'envoi
+                        await new Promise(resolve => setTimeout(resolve, 2000));
+                        
+                        // Succès
+                        showNotification('Offre d\'emploi publiée avec succès !', 'success');
+                        closeJobPostingModal();
+                        
+                        // Réinitialiser le formulaire
+                        this.reset();
+                        jobSkills = [];
+                        updateJobSkillsDisplay();
+                        
+                        // Réinitialiser le bouton
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    } catch (error) {
+                        console.error('❌ Erreur:', error);
+                        showNotification('Erreur lors de la publication de l\'offre', 'error');
+                        
+                        // Réinitialiser le bouton
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    }
+                });
+            }
         }
 
         // ====================
@@ -2966,6 +3547,95 @@
         }
 
         // ====================
+        // 💼 FONCTIONS DE RECRUTEMENT
+        // ====================
+
+        function openJobPostingModal() {
+            // Vérifier l'authentification et le rôle
+            if (!currentUser) {
+                showNotification('Veuillez vous connecter pour publier une offre', 'info');
+                window.location.href = 'login.html?redirect=jobposting';
+                return;
+            }
+            
+            if (currentUser.role !== 'coiffeur') {
+                showNotification('Cette fonctionnalité est réservée aux coiffeurs/salons', 'error');
+                return;
+            }
+            
+            document.getElementById('jobPostingModal').classList.remove('hidden');
+            
+            // Mettre à jour la date minimum (aujourd'hui)
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('jobDeadline').min = today;
+            
+            // Réinitialiser les compétences
+            jobSkills = [];
+            updateJobSkillsDisplay();
+            
+            // Fermer le menu mobile si ouvert
+            closeMobileMenu();
+        }
+
+        function closeJobPostingModal() {
+            document.getElementById('jobPostingModal').classList.add('hidden');
+            document.getElementById('jobPostingForm').reset();
+            
+            // Réinitialiser les compétences
+            jobSkills = [];
+            updateJobSkillsDisplay();
+            
+            // Réinitialiser le compteur de caractères
+            const charCount = document.querySelector('#jobPostingModal .char-count');
+            if (charCount) {
+                charCount.textContent = '0/2000';
+            }
+        }
+
+        function addSkill() {
+            const input = document.getElementById('jobSkillsInput');
+            const skill = input.value.trim();
+            
+            if (skill && !jobSkills.includes(skill)) {
+                jobSkills.push(skill);
+                updateJobSkillsDisplay();
+                input.value = '';
+            }
+        }
+
+        function updateJobSkillsDisplay() {
+            const container = document.getElementById('jobSkills');
+            container.innerHTML = '';
+            
+            jobSkills.forEach(skill => {
+                const skillElement = document.createElement('div');
+                skillElement.className = 'inline-flex items-center bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-xs';
+                skillElement.innerHTML = `
+                    ${skill}
+                    <button type="button" onclick="removeSkill('${skill}')" class="ml-2 text-primary-600 hover:text-primary-800">
+                        <i class="fas fa-times text-xs"></i>
+                    </button>
+                `;
+                container.appendChild(skillElement);
+            });
+        }
+
+        function removeSkill(skill) {
+            jobSkills = jobSkills.filter(s => s !== skill);
+            updateJobSkillsDisplay();
+        }
+
+        function applyForJob(jobId) {
+            if (!currentUser) {
+                showNotification('Veuillez vous connecter pour postuler', 'info');
+                window.location.href = 'login.html?redirect=jobapplication';
+                return;
+            }
+            
+            showNotification('Votre candidature a été envoyée avec succès !', 'success');
+        }
+
+        // ====================
         // 💬 CHATBOT
         // ====================
 
@@ -2999,6 +3669,13 @@
             setTimeout(() => {
                 getUserLocation();
             }, 1000);
+        }
+
+        function scrollToRecruitment() {
+            document.getElementById('recrutement').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+            closeMobileMenu();
         }
 
         // ====================
@@ -3090,10 +3767,20 @@
             const tomorrow = new Date(today);
             tomorrow.setDate(tomorrow.getDate() + 1);
             
+            // Date de réservation
             const dateInput = document.getElementById('reservationDate');
             if (dateInput) {
                 dateInput.min = today.toISOString().split('T')[0];
                 dateInput.value = tomorrow.toISOString().split('T')[0];
+            }
+            
+            // Date limite d'offre d'emploi
+            const jobDeadline = document.getElementById('jobDeadline');
+            if (jobDeadline) {
+                const nextWeek = new Date(today);
+                nextWeek.setDate(nextWeek.getDate() + 7);
+                jobDeadline.min = today.toISOString().split('T')[0];
+                jobDeadline.value = nextWeek.toISOString().split('T')[0];
             }
         }
 
@@ -3147,31 +3834,6 @@
                 e.target.style.fontSize = '';
             }
         }, true);
-
-        // ====================
-        // 🎨 GESTION DU THÈME
-        // ====================
-
-        function initTheme() {
-            const theme = localStorage.getItem('theme') || 'light';
-            if (theme === 'dark') {
-                document.documentElement.classList.add('dark');
-            }
-        }
-
-        function toggleTheme() {
-            const html = document.documentElement;
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-            } else {
-                html.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-            }
-        }
-
-        // Initialiser le thème
-        initTheme();
 
         // ====================
         // 🚀 FONCTIONS UTILITAIRES
