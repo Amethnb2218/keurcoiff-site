@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion • KeurCoiff'</title>
+    <title>Connexion • FlashRV'</title>
     
     <!-- Styles -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -122,7 +122,7 @@
                         <div class="w-10 h-10 bg-gradient-to-r from-primary to-purple-600 rounded-xl flex items-center justify-center">
                             <i class="fas fa-crown text-white"></i>
                         </div>
-                        <span class="text-xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">KeurCoiff'</span>
+                        <span class="text-xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">FlashRV'</span>
                     </a>
                 </div>
 
@@ -143,7 +143,7 @@
             <div class="bg-white rounded-3xl shadow-xl p-8">
                 <div class="text-center mb-8">
                     <h1 class="text-3xl font-bold text-gray-900 mb-2">Content de vous revoir !</h1>
-                    <p class="text-gray-600">Connectez-vous à votre compte KeurCoiff'</p>
+                    <p class="text-gray-600">Connectez-vous à votre compte FlashRV'</p>
                 </div>
 
                 <!-- Section Sélection du Profil -->
@@ -449,8 +449,8 @@
                     user.role = userRole;
                     
                     // Stocker les données
-                    localStorage.setItem('keurcoiff_user', JSON.stringify(user));
-                    localStorage.setItem('keurcoiff_token', result.data.token);
+                    localStorage.setItem('flashrv_user', JSON.stringify(user));
+                    localStorage.setItem('flashrv_token', result.data.token);
                     
                     showNotification('Connexion réussie !', 'success');
                     
@@ -512,8 +512,8 @@
             loadDemoData();
             
             // Vérifier si l'utilisateur est déjà connecté
-            const token = localStorage.getItem('keurcoiff_token');
-            const user = localStorage.getItem('keurcoiff_user');
+            const token = localStorage.getItem('flashrv_token');
+            const user = localStorage.getItem('flashrv_user');
             
             if (token && user) {
                 try {

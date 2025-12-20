@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription • KeurCoiff'</title>
+    <title>Inscription • FlashRV'</title>
     
     <!-- Styles -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -80,7 +80,7 @@
                         <div class="w-10 h-10 bg-gradient-to-r from-primary to-purple-600 rounded-xl flex items-center justify-center">
                             <i class="fas fa-crown text-white"></i>
                         </div>
-                        <span class="text-xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">KeurCoiff'</span>
+                        <span class="text-xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">FlashRV'</span>
                     </a>
                 </div>
 
@@ -101,7 +101,7 @@
             <div class="bg-white rounded-3xl shadow-xl p-8">
                 <div class="text-center mb-8">
                     <h1 class="text-3xl font-bold text-gray-900 mb-2">Créez votre compte</h1>
-                    <p class="text-gray-600">Rejoignez la communauté KeurCoiff'</p>
+                    <p class="text-gray-600">Rejoignez la communauté FlashRV'</p>
                 </div>
 
                 <form id="registerForm" class="space-y-6">
@@ -441,8 +441,8 @@
 
                 if (result.success) {
                     // Stocker les informations utilisateur
-                    localStorage.setItem('keurcoiff_user', JSON.stringify(result.data.user));
-                    localStorage.setItem('keurcoiff_token', result.data.token);
+                    localStorage.setItem('flashrv_user', JSON.stringify(result.data.user));
+                    localStorage.setItem('flashrv_token', result.data.token);
                     
                     showNotification('Compte créé avec succès !', 'success');
                     
@@ -474,8 +474,8 @@
                     createdAt: new Date().toISOString()
                 };
                 
-                localStorage.setItem('keurcoiff_user', JSON.stringify(userData));
-                localStorage.setItem('keurcoiff_token', 'demo_token_' + data.userType + '_' + Date.now());
+                localStorage.setItem('flashrv_user', JSON.stringify(userData));
+                localStorage.setItem('flashrv_token', 'demo_token_' + data.userType + '_' + Date.now());
                 
                 showNotification('Compte créé avec succès ! (Mode démo)', 'success');
                 
