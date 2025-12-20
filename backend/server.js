@@ -747,7 +747,7 @@ async function createDemoData() {
 app.get('/api/status', (req, res) => {
   res.json({
     success: true,
-    status: '🚀 API KeurCoiff en ligne',
+    status: '🚀 API FlashRV en ligne',
     version: '2.1.0',
     timestamp: new Date().toISOString(),
     environment: process.env.NODE_ENV || 'development',
@@ -2059,7 +2059,7 @@ app.use((error, req, res, next) => {
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, '0.0.0.0', () => {
   console.log('\n✨ ======================================');
-  console.log(`🚀 Serveur KeurCoiff' démarré sur le port ${PORT}`);
+  console.log(`🚀 Serveur FlashRV démarré sur le port ${PORT}`);
   console.log(`📊 Environnement: ${process.env.NODE_ENV || 'development'}`);
   console.log(`🌐 API: http://localhost:${PORT}/api`);
   console.log(`🏠 Frontend: http://localhost:${PORT}`);
