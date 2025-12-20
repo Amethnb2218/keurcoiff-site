@@ -60,6 +60,15 @@
             background: rgba(124, 58, 237, 0.05);
             box-shadow: 0 4px 12px rgba(124, 58, 237, 0.15);
         }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .animate-slideIn {
+            animation: slideIn 0.3s ease-out;
+        }
     </style>
 </head>
 
@@ -197,6 +206,7 @@
                     <button 
                         type="submit" 
                         class="w-full bg-gradient-to-r from-primary to-purple-600 text-white py-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105 flex items-center justify-center"
+                        id="submitBtn"
                     >
                         <span id="submitText">Se connecter</span>
                         <div id="submitLoader" class="hidden">
@@ -263,78 +273,18 @@
             }
         }
 
-        // Gestion du formulaire
-        document.getElementById('loginForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const submitText = document.getElementById('submitText');
-            const submitLoader = document.getElementById('submitLoader');
-            
-            // Récupération des données
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
-            const userType = document.querySelector('input[name="userType"]:checked').value;
-            
-            // Animation chargement
-            submitText.classList.add('hidden');
-            submitLoader.classList.remove('hidden');
-            submitBtn.disabled = true;
-            
-            try {
-                // Simulation appel API
-                await new Promise(resolve => setTimeout(resolve, 1500));
-                
-                // Données de démo selon le type d'utilisateur
-                const userData = userType === 'coiffeur' ? {
-                    fullName: "Salon Awa Beauty",
-                    phone: data.phone,
-                    email: "awa@salon.sn",
-                    quarter: "Plateau",
-                    userType: "coiffeur",
-                    role: "coiffeur",
-                    salonName: "Salon Awa Beauty"
-                } : {
-                    fullName: "Awa Diop",
-                    phone: data.phone,
-                    email: "awa@client.sn",
-                    quarter: "Plateau",
-                    userType: "client",
-                    role: "client"
-                };
-                
-                localStorage.setItem('keurcoiff_user', JSON.stringify(userData));
-                localStorage.setItem('keurcoiff_token', 'demo_token_' + userType + '_' + Date.now());
-                
-                showNotification(`Connexion réussie - ${userType === 'coiffeur' ? 'Mode Coiffeur' : 'Mode Client'}`, 'success');
-                
-                // Redirection selon le type d'utilisateur
-                setTimeout(() => {
-                    if (userType === 'coiffeur') {
-                        window.location.href = 'dashboard-coiffeur.html';
-                    } else {
-                        window.location.href = 'index.html';
-                    }
-                }, 1000);
-                
-            } catch (error) {
-                showNotification('Identifiants incorrects', 'error');
-                submitText.classList.remove('hidden');
-                submitLoader.classList.add('hidden');
-                submitBtn.disabled = false;
-            }
-        });
-
         // Fonction de notification
         function showNotification(message, type = 'info') {
             const notification = document.createElement('div');
             const bgColor = type === 'success' ? 'bg-green-500' : 
                            type === 'error' ? 'bg-red-500' : 'bg-blue-500';
+            const icon = type === 'success' ? 'check' : 
+                        type === 'error' ? 'exclamation-triangle' : 'info';
             
             notification.innerHTML = `
                 <div class="fixed top-4 right-4 ${bgColor} text-white px-6 py-4 rounded-2xl shadow-2xl z-50 max-w-sm animate-slideIn">
                     <div class="flex items-center space-x-3">
-                        <i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'exclamation-triangle' : 'info'}"></i>
+                        <i class="fas fa-${icon}"></i>
                         <div class="font-medium">${message}</div>
                     </div>
                 </div>
@@ -347,19 +297,142 @@
             }, 5000);
         }
 
-        // Style d'animation pour la notification
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideIn {
-                from { transform: translateX(100%); opacity: 0; }
-                to { transform: translateX(0); opacity: 1; }
+        // Gestion du formulaire - VERSION CORRIGÉE
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const submitText = document.getElementById('submitText');
+            const submitLoader = document.getElementById('submitLoader');
+            
+            // Récupération des données
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            const userType = document.querySelector('input[name="userType"]:checked').value;
+            
+            // Validation
+            if (!data.phone || !data.password) {
+                showNotification('Veuillez remplir tous les champs', 'error');
+                return;
             }
             
-            .animate-slideIn {
-                animation: slideIn 0.3s ease-out;
+            // Format téléphone (supprimer espaces et caractères non numériques)
+            const phone = data.phone.replace(/\D/g, '');
+            
+            // Animation chargement
+            submitText.classList.add('hidden');
+            submitLoader.classList.remove('hidden');
+            submitBtn.disabled = true;
+            
+            try {
+                // API URL
+                const API_URL = 'http://localhost:5000/api/auth/login';
+                console.log('🔐 Tentative connexion API:', { phone, userType });
+                
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        phone: phone,
+                        password: data.password
+                    })
+                });
+                
+                console.log('📡 Réponse API:', response.status);
+                
+                if (!response.ok) {
+                    // Si l'API retourne une erreur
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || 'Identifiants incorrects');
+                }
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // VÉRIFIER que l'utilisateur a le bon userType
+                    if (result.data.user.userType !== userType) {
+                        throw new Error(`Vous êtes un ${result.data.user.userType}. Veuillez sélectionner "${result.data.user.userType === 'client' ? 'Client' : 'Coiffeur'}"`);
+                    }
+                    
+                    // Stocker les données réelles de l'API
+                    localStorage.setItem('keurcoiff_user', JSON.stringify(result.data.user));
+                    localStorage.setItem('keurcoiff_token', result.data.token);
+                    
+                    showNotification('Connexion réussie !', 'success');
+                    
+                    // Redirection selon le type d'utilisateur
+                    setTimeout(() => {
+                        if (userType === 'coiffeur') {
+                            window.location.href = 'dashboard-coiffeur.html';
+                        } else {
+                            window.location.href = 'index.html';
+                        }
+                    }, 1000);
+                    
+                } else {
+                    throw new Error(result.message || 'Connexion échouée');
+                }
+                
+            } catch (error) {
+                console.error('❌ Erreur connexion:', error);
+                
+                // Mode démo si l'API n'est pas disponible
+                if (error.message.includes('fetch') || error.message.includes('Network')) {
+                    console.log('🌐 Mode démo activé (API non disponible)');
+                    
+                    // Vérifier les identifiants de démo
+                    const demoUsers = {
+                        '771234567': { password: 'password123', userType: 'client' },
+                        '772345678': { password: 'password123', userType: 'coiffeur' },
+                        '773456789': { password: 'password123', userType: 'client' },
+                        '774567890': { password: 'password123', userType: 'coiffeur' }
+                    };
+                    
+                    if (demoUsers[phone] && demoUsers[phone].password === data.password) {
+                        if (demoUsers[phone].userType !== userType) {
+                            showNotification(`Mode démo: Vous êtes un ${demoUsers[phone].userType}. Sélectionnez "${demoUsers[phone].userType === 'client' ? 'Client' : 'Coiffeur'}"`, 'error');
+                        } else {
+                            const userData = {
+                                id: 'demo_' + Date.now(),
+                                phone: phone,
+                                fullName: phone === '771234567' ? 'Awa Diop' : 
+                                        phone === '772345678' ? 'Ibrahima Ndiaye' :
+                                        phone === '773456789' ? 'Fatou Sall' : 'Mamadou Diallo',
+                                email: 'demo@example.com',
+                                quarter: 'Dakar',
+                                userType: userType,
+                                role: userType,
+                                avatar: '',
+                                createdAt: new Date().toISOString()
+                            };
+                            
+                            localStorage.setItem('keurcoiff_user', JSON.stringify(userData));
+                            localStorage.setItem('keurcoiff_token', 'demo_token_' + userType + '_' + Date.now());
+                            
+                            showNotification('Connexion réussie en mode démo !', 'success');
+                            
+                            setTimeout(() => {
+                                if (userType === 'coiffeur') {
+                                    window.location.href = 'dashboard-coiffeur.html';
+                                } else {
+                                    window.location.href = 'index.html';
+                                }
+                            }, 1000);
+                        }
+                    } else {
+                        showNotification('Identifiants incorrects (mode démo)', 'error');
+                    }
+                } else {
+                    showNotification(error.message || 'Erreur de connexion', 'error');
+                }
+                
+                submitText.classList.remove('hidden');
+                submitLoader.classList.add('hidden');
+                submitBtn.disabled = false;
             }
-        `;
-        document.head.appendChild(style);
+        });
     </script>
 </body>
 </html>
