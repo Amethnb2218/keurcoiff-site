@@ -6,7 +6,8 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Le numéro de téléphone est obligatoire'],
     unique: true,
-    match: [/^[0-9]{9}$/, 'Format de téléphone invalide. 9 chiffres requis.']
+    match: [/^[0-9]{9}$/, 'Format de téléphone invalide. 9 chiffres requis.'],
+    trim: true
   },
   fullName: {
     type: String,
@@ -23,7 +24,8 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, 'Le mot de passe est obligatoire'],
-    minlength: [6, 'Le mot de passe doit contenir au moins 6 caractères']
+    minlength: [6, 'Le mot de passe doit contenir au moins 6 caractères'],
+    select: false
   },
   quarter: {
     type: String,
@@ -46,7 +48,17 @@ const userSchema = new mongoose.Schema({
   },
   lastLogin: {
     type: Date
-  }
+  },
+  favorites: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Salon'
+  }],
+  avatar: {
+    type: String,
+    default: ''
+  },
+  verificationCode: String,
+  verificationExpires: Date
 }, {
   timestamps: true
 });
@@ -73,6 +85,8 @@ userSchema.methods.correctPassword = async function(candidatePassword) {
 userSchema.methods.toJSON = function() {
   const userObject = this.toObject();
   delete userObject.password;
+  delete userObject.verificationCode;
+  delete userObject.verificationExpires;
   return userObject;
 };
 
