@@ -60,6 +60,54 @@
             background: rgba(124, 58, 237, 0.05);
             box-shadow: 0 4px 12px rgba(124, 58, 237, 0.15);
         }
+        
+        /* Styles pour les notifications */
+        .notification {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            padding: 1rem 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            max-width: 350px;
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        .notification.success {
+            background: #10b981;
+            color: white;
+        }
+        
+        .notification.error {
+            background: #ef4444;
+            color: white;
+        }
+        
+        .notification.info {
+            background: #7C3AED;
+            color: white;
+        }
+        
+        .notification.warning {
+            background: #f59e0b;
+            color: white;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .animate-slide-in-up {
+            animation: slideIn 0.5s ease-out;
+        }
     </style>
 </head>
 
@@ -246,146 +294,279 @@
         </div>
     </section>
 
-   <script>
-    // Toggle visibilité mot de passe
-    function togglePassword() {
-        const passwordInput = document.getElementById('passwordInput');
-        const passwordToggle = document.getElementById('passwordToggle');
+    <script>
+        // Configuration
+        const API_BASE_URL = 'http://localhost:5000/api';
         
-        if (passwordInput.type === 'password') {
-            passwordInput.type = 'text';
-            passwordToggle.classList.remove('fa-eye');
-            passwordToggle.classList.add('fa-eye-slash');
-        } else {
-            passwordInput.type = 'password';
-            passwordToggle.classList.remove('fa-eye-slash');
-            passwordToggle.classList.add('fa-eye');
+        // Toggle visibilité mot de passe
+        function togglePassword() {
+            const passwordInput = document.getElementById('passwordInput');
+            const passwordToggle = document.getElementById('passwordToggle');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                passwordToggle.classList.remove('fa-eye');
+                passwordToggle.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                passwordToggle.classList.remove('fa-eye-slash');
+                passwordToggle.classList.add('fa-eye');
+            }
         }
-    }
 
-    // Gestion du formulaire - VERSION CORRIGÉE
-    document.getElementById('loginForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
-        const submitBtn = this.querySelector('button[type="submit"]');
-        const submitText = document.getElementById('submitText');
-        const submitLoader = document.getElementById('submitLoader');
-        
-        // Récupération des données
-        const formData = new FormData(this);
-        const data = Object.fromEntries(formData);
-        const userType = document.querySelector('input[name="userType"]:checked').value;
-        
-        // Validation
-        if (!data.phone || !data.password) {
-            showNotification('Veuillez remplir tous les champs', 'error');
-            return;
-        }
-        
-        // Format téléphone (supprimer espaces)
-        const phone = data.phone.replace(/\s/g, '');
-        
-        // Animation chargement
-        submitText.classList.add('hidden');
-        submitLoader.classList.remove('hidden');
-        submitBtn.disabled = true;
-        
-        try {
-            // ⚠️ IMPORTANT : Appel RÉEL à l'API
-            const API_URL = 'http://localhost:5000/api/auth/login';
-            console.log('🔐 Tentative connexion API:', API_URL);
+        // Fonction de notification
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type} animate-slide-in-up`;
             
-            const response = await fetch(API_URL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    phone: phone,
-                    password: data.password
-                })
+            let icon = 'info-circle';
+            if (type === 'success') icon = 'check-circle';
+            if (type === 'error') icon = 'exclamation-triangle';
+            if (type === 'warning') icon = 'exclamation-circle';
+            
+            notification.innerHTML = `
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-${icon}"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateY(-20px)';
+                
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 5000);
+            
+            notification.addEventListener('click', () => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateY(-20px)';
+                
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
             });
+        }
+
+        // Gestion du formulaire de connexion - VERSION CORRIGÉE
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
             
-            console.log('📡 Réponse API:', response.status);
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const submitText = document.getElementById('submitText');
+            const submitLoader = document.getElementById('submitLoader');
             
-            if (!response.ok) {
-                // Si l'API retourne une erreur
-                const errorData = await response.json();
-                throw new Error(errorData.message || 'Identifiants incorrects');
+            // Récupération des données
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            const selectedUserType = document.querySelector('input[name="userType"]:checked').value;
+            
+            // Validation
+            if (!data.phone || !data.password) {
+                showNotification('Veuillez remplir tous les champs', 'error');
+                return;
             }
             
-            const result = await response.json();
+            // Format téléphone
+            const phone = data.phone.replace(/\s/g, '');
             
-            if (result.success) {
-                // ⚠️ VÉRIFIER que l'utilisateur a le bon userType
-                if (result.data.user.userType !== userType) {
-                    throw new Error(`Ce compte est un ${result.data.user.userType}, pas un ${userType}`);
+            // Animation chargement
+            submitText.classList.add('hidden');
+            submitLoader.classList.remove('hidden');
+            submitBtn.disabled = true;
+            
+            try {
+                console.log('🔐 Tentative connexion API:', `${API_BASE_URL}/auth/login`);
+                
+                const response = await fetch(`${API_BASE_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        phone: phone,
+                        password: data.password
+                    })
+                });
+                
+                console.log('📡 Réponse API:', response.status);
+                
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || 'Identifiants incorrects');
                 }
                 
-                // Stocker les données réelles de l'API
-                localStorage.setItem('keurcoiff_user', JSON.stringify(result.data.user));
-                localStorage.setItem('keurcoiff_token', result.data.token);
+                const result = await response.json();
                 
-                showNotification('Connexion réussie !', 'success');
-                
-                // Redirection selon le type d'utilisateur
-                setTimeout(() => {
-                    if (userType === 'coiffeur') {
-                        window.location.href = 'dashboard-coiffeur.html';
-                    } else {
-                        window.location.href = 'index.html';
+                if (result.success && result.data && result.data.user) {
+                    // Normaliser l'objet utilisateur
+                    const user = result.data.user;
+                    
+                    // Déterminer le rôle de l'utilisateur
+                    // IMPORTANT: Vérifier le champ qui contient le rôle dans la réponse API
+                    // Selon vos logs, le serveur retourne un champ 'userType' ou 'role'
+                    let userRole = 'client'; // Par défaut
+                    
+                    if (user.userType) {
+                        userRole = user.userType;
+                    } else if (user.role) {
+                        userRole = user.role;
+                    } else if (user.isCoiffeur !== undefined) {
+                        userRole = user.isCoiffeur ? 'coiffeur' : 'client';
                     }
-                }, 1000);
+                    
+                    // Vérifier que l'utilisateur a le bon rôle
+                    if (userRole !== selectedUserType) {
+                        throw new Error(`Ce compte est un ${userRole}, pas un ${selectedUserType}`);
+                    }
+                    
+                    // S'assurer que l'utilisateur a toutes les propriétés nécessaires
+                    if (!user.id && user._id) {
+                        user.id = user._id;
+                    }
+                    
+                    if (!user.fullName) {
+                        if (user.firstName && user.lastName) {
+                            user.fullName = `${user.firstName} ${user.lastName}`;
+                        } else if (user.name) {
+                            user.fullName = user.name;
+                        } else if (user.email) {
+                            user.fullName = user.email.split('@')[0];
+                        } else {
+                            user.fullName = 'Utilisateur';
+                        }
+                    }
+                    
+                    // Ajouter le rôle normalisé
+                    user.role = userRole;
+                    
+                    // Stocker les données
+                    localStorage.setItem('keurcoiff_user', JSON.stringify(user));
+                    localStorage.setItem('keurcoiff_token', result.data.token);
+                    
+                    showNotification('Connexion réussie !', 'success');
+                    
+                    // Redirection selon le type d'utilisateur
+                    setTimeout(() => {
+                        if (userRole === 'coiffeur') {
+                            window.location.href = 'dashboard-coiffeur.html';
+                        } else {
+                            window.location.href = 'index.html';
+                        }
+                    }, 1000);
+                    
+                } else {
+                    throw new Error(result.message || 'Connexion échouée');
+                }
                 
-            } else {
-                throw new Error(result.message || 'Connexion échouée');
+            } catch (error) {
+                console.error('❌ Erreur connexion:', error);
+                
+                // Afficher le message d'erreur
+                let errorMessage = error.message || 'Service indisponible. Vérifiez votre connexion.';
+                
+                // Messages d'erreur plus conviviaux
+                if (errorMessage.includes('undefined')) {
+                    errorMessage = 'Type de compte non reconnu. Veuillez réessayer.';
+                }
+                
+                showNotification(errorMessage, 'error');
+                
+                submitText.classList.remove('hidden');
+                submitLoader.classList.add('hidden');
+                submitBtn.disabled = false;
             }
-            
-        } catch (error) {
-            console.error('❌ Erreur connexion:', error);
-            
-            // ⚠️ NE PAS AUTORISER LE MODE DÉMO
-            showNotification(error.message || 'Service indisponible. Vérifiez votre connexion.', 'error');
-            
-            submitText.classList.remove('hidden');
-            submitLoader.classList.add('hidden');
-            submitBtn.disabled = false;
-        }
-    });
+        });
 
-    // Fonction de notification
-    function showNotification(message, type = 'info') {
-        const notification = document.createElement('div');
-        const bgColor = type === 'success' ? 'bg-green-500' : 
-                       type === 'error' ? 'bg-red-500' : 'bg-blue-500';
-        
-        notification.innerHTML = `
-            <div class="fixed top-4 right-4 ${bgColor} text-white px-6 py-4 rounded-2xl shadow-2xl z-50 max-w-sm animate-slideIn">
-                <div class="flex items-center space-x-3">
-                    <i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'exclamation-triangle' : 'info'}"></i>
-                    <div class="font-medium">${message}</div>
-                </div>
-            </div>
-        `;
-        
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-            notification.remove();
-        }, 5000);
-    }
+        // Vérifier s'il y a un paramètre de redirection dans l'URL
+        function checkRedirectParam() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const redirect = urlParams.get('redirect');
+            
+            if (redirect) {
+                showNotification(`Veuillez vous connecter pour accéder à ${redirect}`, 'info');
+            }
+        }
 
-    // Style d'animation pour la notification
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+        // Charger les données de test si en mode développement
+        function loadDemoData() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('demo') === 'true') {
+                document.querySelector('input[name="phone"]').value = "776762784";
+                document.querySelector('input[name="password"]').value = "password123";
+                showNotification('Données de démo chargées', 'info');
+            }
         }
-        
-        .animate-slideIn {
-            animation: slideIn 0.3s ease-out;
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            checkRedirectParam();
+            loadDemoData();
+            
+            // Vérifier si l'utilisateur est déjà connecté
+            const token = localStorage.getItem('keurcoiff_token');
+            const user = localStorage.getItem('keurcoiff_user');
+            
+            if (token && user) {
+                try {
+                    const userData = JSON.parse(user);
+                    showNotification(`Bonjour ${userData.fullName || 'Utilisateur'} ! Vous êtes déjà connecté.`, 'info');
+                    
+                    // Redirection automatique après 2 secondes
+                    setTimeout(() => {
+                        if (userData.role === 'coiffeur') {
+                            window.location.href = 'dashboard-coiffeur.html';
+                        } else {
+                            window.location.href = 'index.html';
+                        }
+                    }, 2000);
+                } catch (e) {
+                    console.error('Erreur parsing user data:', e);
+                }
+            }
+        });
+
+        // Gestion du "Se souvenir de moi"
+        function loadRememberedCredentials() {
+            try {
+                const remembered = localStorage.getItem('remember_credentials');
+                if (remembered) {
+                    const credentials = JSON.parse(remembered);
+                    document.querySelector('input[name="phone"]').value = credentials.phone || '';
+                    document.querySelector('input[name="password"]').value = credentials.password || '';
+                    document.querySelector('input[name="remember"]').checked = true;
+                }
+            } catch (e) {
+                console.error('Erreur chargement credentials:', e);
+            }
         }
-    `;
-    document.head.appendChild(style);
-</script>
+
+        function saveRememberedCredentials() {
+            const remember = document.querySelector('input[name="remember"]').checked;
+            if (remember) {
+                const phone = document.querySelector('input[name="phone"]').value;
+                const password = document.querySelector('input[name="password"]').value;
+                localStorage.setItem('remember_credentials', JSON.stringify({ phone, password }));
+            } else {
+                localStorage.removeItem('remember_credentials');
+            }
+        }
+
+        // Charger les credentials au chargement
+        loadRememberedCredentials();
+
+        // Sauvegarder au submit
+        document.getElementById('loginForm').addEventListener('submit', function() {
+            saveRememberedCredentials();
+        });
+    </script>
+</body>
+</html>
